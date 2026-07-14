@@ -80,12 +80,12 @@
     "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1028 (Ballast Weight \u2014 Aft)",
     "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1085 (Thermal Sensor \u2014 Battery)",
     "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1111 (Servo Cable Harness)",
-    "WIKI-017 (Airframe Materials Review Meeting \u2014 2023) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
-    "WIKI-042 (Decision Record: datalink frequency sele) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "DOC-449 (K-200 Payload System Interface Control D) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
     "WIKI-038 (Payload Gimbal Design Review \u2014 2024-06-1) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
-    "ECR-207 (Wing skin material change: CFRP \u2192 hybrid) -AFFECTS-> DOC-407 (K-200 Battery Environmental Test Report)",
-    "DOC-409 (K-200 Structural Specification v2.0) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
-    "ECN-307 (Approved Change \u2014 ECR-207: Wing skin mat) -UPDATES-> DOC-407 (K-200 Battery Environmental Test Report)"
+    "WIKI-017 (Airframe Materials Review Meeting \u2014 2023) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "REV-636 (Review of DOC-407: REV-636) -REVIEWS-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "WIKI-042 (Decision Record: datalink frequency sele) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "WIKI-044 (Risk Review Meeting \u2014 2023-09-26) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)"
   ],
   "sources": [
     {
@@ -230,9 +230,10 @@
       ]
     }
   ],
-  "latency_ms": 5,
+  "latency_ms": 7,
   "backend": "mock/mock",
   "retrieval": {
+    "exact_hits": 0,
     "fts_hits": 15,
     "vector_hits": 20,
     "graph_hits": 51,

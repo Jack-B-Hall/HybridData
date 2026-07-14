@@ -36,10 +36,8 @@ import re
 import sqlite3
 from dataclasses import dataclass, field
 
+from .ids import ID_RE, explicit_ids
 from .retrieval import RetrievedChunk
-
-# Record-id shape: a letter-ish prefix, a hyphen, and digits (P-1092, ECR-214, ...).
-ID_RE = re.compile(r"\b[A-Z]{1,6}-\d+\b")
 
 _STOP = {
     "the", "and", "for", "with", "of", "in", "to", "a", "an", "is", "are", "was",
@@ -85,14 +83,6 @@ def _content_terms(question: str) -> list[str]:
             continue
         seen.add(t)
         out.append(t)
-    return out
-
-
-def explicit_ids(question: str) -> list[str]:
-    out: list[str] = []
-    for m in ID_RE.findall(question):
-        if m not in out:
-            out.append(m)
     return out
 
 

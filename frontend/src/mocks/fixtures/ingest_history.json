@@ -2,8 +2,8 @@
   "runs": [
     {
       "id": 1,
-      "started_at": "2026-07-14T09:26:57+00:00",
-      "finished_at": "2026-07-14T09:26:58+00:00",
+      "started_at": "2026-07-14T09:43:58+00:00",
+      "finished_at": "2026-07-14T09:43:58+00:00",
       "adapter": "JsonCorpusAdapter",
       "source_path": "data/hde.db",
       "n_records": 774,

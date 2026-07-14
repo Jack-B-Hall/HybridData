@@ -2,58 +2,10 @@
   "center": "P-1062",
   "nodes": [
     {
-      "id": "DOC-441",
-      "kind": "document",
-      "label": "K-200 Airframe Interface Control Document",
-      "subsystem": "Airframe",
-      "source": "PLM",
-      "prov_tier": 1
-    },
-    {
-      "id": "P-1062",
-      "kind": "entity",
-      "label": "Battery Cell Assembly \u2014 LiFePO4",
-      "subsystem": "Battery",
-      "source": "PLM",
-      "prov_tier": 1
-    },
-    {
-      "id": "KES-208",
-      "kind": "document",
-      "label": "[Bug] LiPo thermal runaway on P-1062 during hot-day endurance test",
-      "subsystem": null,
-      "source": "Jira",
-      "prov_tier": 3
-    },
-    {
       "id": "ECN-309",
       "kind": "document",
       "label": "Approved Change Notice for ECR-209",
       "subsystem": null,
-      "source": "PLM",
-      "prov_tier": 1
-    },
-    {
-      "id": "ECN-312",
-      "kind": "document",
-      "label": "Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4",
-      "subsystem": null,
-      "source": "PLM",
-      "prov_tier": 1
-    },
-    {
-      "id": "ECR-214",
-      "kind": "document",
-      "label": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
-      "subsystem": null,
-      "source": "PLM",
-      "prov_tier": 1
-    },
-    {
-      "id": "DOC-421",
-      "kind": "document",
-      "label": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
-      "subsystem": "Battery",
       "source": "PLM",
       "prov_tier": 1
     },
@@ -66,9 +18,25 @@
       "prov_tier": 1
     },
     {
-      "id": "DOC-416",
+      "id": "ECR-214",
       "kind": "document",
-      "label": "K-200 Battery Subsystem Specification",
+      "label": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "KES-208",
+      "kind": "document",
+      "label": "[Bug] LiPo thermal runaway on P-1062 during hot-day endurance test",
+      "subsystem": null,
+      "source": "Jira",
+      "prov_tier": 3
+    },
+    {
+      "id": "DOC-421",
+      "kind": "document",
+      "label": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
       "subsystem": "Battery",
       "source": "PLM",
       "prov_tier": 1
@@ -78,6 +46,30 @@
       "kind": "document",
       "label": "DRW MD-DRW-540: System Integration General Arrangement",
       "subsystem": "Systems",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "ECN-312",
+      "kind": "document",
+      "label": "Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1062",
+      "kind": "entity",
+      "label": "Battery Cell Assembly \u2014 LiFePO4",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "DOC-416",
+      "kind": "document",
+      "label": "K-200 Battery Subsystem Specification",
+      "subsystem": "Battery",
       "source": "PLM",
       "prov_tier": 1
     },
@@ -96,39 +88,17 @@
       "subsystem": null,
       "source": "Confluence",
       "prov_tier": 2
+    },
+    {
+      "id": "DOC-441",
+      "kind": "document",
+      "label": "K-200 Airframe Interface Control Document",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
     }
   ],
   "edges": [
-    {
-      "src": "DOC-441",
-      "dst": "P-1062",
-      "rel": "DESCRIBES"
-    },
-    {
-      "src": "DRW-540",
-      "dst": "P-1062",
-      "rel": "DEPICTS"
-    },
-    {
-      "src": "ECN-309",
-      "dst": "P-1062",
-      "rel": "MODIFIES"
-    },
-    {
-      "src": "ECR-214",
-      "dst": "P-1062",
-      "rel": "AFFECTS"
-    },
-    {
-      "src": "ECN-312",
-      "dst": "P-1062",
-      "rel": "MODIFIES"
-    },
-    {
-      "src": "DOC-421",
-      "dst": "P-1062",
-      "rel": "DESCRIBES"
-    },
     {
       "src": "KES-208",
       "dst": "P-1062",
@@ -140,9 +110,14 @@
       "rel": "AFFECTS"
     },
     {
-      "src": "DOC-475",
+      "src": "DOC-416",
       "dst": "P-1062",
       "rel": "DESCRIBES"
+    },
+    {
+      "src": "ECR-214",
+      "dst": "P-1062",
+      "rel": "AFFECTS"
     },
     {
       "src": "WIKI-052",
@@ -150,9 +125,34 @@
       "rel": "REFERENCES"
     },
     {
-      "src": "DOC-416",
+      "src": "DOC-421",
       "dst": "P-1062",
       "rel": "DESCRIBES"
+    },
+    {
+      "src": "DRW-540",
+      "dst": "P-1062",
+      "rel": "DEPICTS"
+    },
+    {
+      "src": "DOC-441",
+      "dst": "P-1062",
+      "rel": "DESCRIBES"
+    },
+    {
+      "src": "ECN-312",
+      "dst": "P-1062",
+      "rel": "MODIFIES"
+    },
+    {
+      "src": "DOC-475",
+      "dst": "P-1062",
+      "rel": "DESCRIBES"
+    },
+    {
+      "src": "ECN-309",
+      "dst": "P-1062",
+      "rel": "MODIFIES"
     }
   ]
 }

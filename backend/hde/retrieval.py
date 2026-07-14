@@ -24,6 +24,7 @@ from . import provenance
 from .config import Settings
 from .embeddings import Embedder
 from .graph import KnowledgeGraph
+from .ids import explicit_ids
 
 RRF_K = 60
 CANDIDATES = 20        # per-leg candidate depth
@@ -126,6 +127,26 @@ def _rows_for(conn: sqlite3.Connection, rowids: list[int]) -> dict[int, sqlite3.
     return {r[0]: r for r in rows}
 
 
+def _exact_id_hits(conn: sqlite3.Connection, query: str) -> list[int]:
+    """Representative chunk rowids for record ids named verbatim in the query.
+
+    An exact-match leg so a lookup like "what does ECR-214 say" always retrieves
+    the named record, which dense and lexical search can otherwise rank below
+    documents that merely mention it.
+    """
+    ids = explicit_ids(query)
+    if not ids:
+        return []
+    ph = ",".join("?" * len(ids))
+    rows = conn.execute(
+        f"SELECT artifact_id, MIN(id) AS rowid FROM chunks WHERE artifact_id IN ({ph}) "
+        f"GROUP BY artifact_id",
+        ids,
+    ).fetchall()
+    best = {r[0]: r[1] for r in rows}
+    return [best[i] for i in ids if i in best]
+
+
 def _graph_hop(conn, kg: KnowledgeGraph, anchor_ids: list[str]) -> list[int]:
     """Representative chunk rowids for documents one graph hop from the anchors."""
     neighbour_ids: list[str] = []
@@ -157,11 +178,12 @@ def retrieve(
     settings: Settings,
 ) -> tuple[list[RetrievedChunk], dict]:
     """Return the top fused chunks (one per artifact) and a debug breakdown."""
+    exact_ids = _exact_id_hits(conn, query)
     fts_ids = _fts(conn, query, CANDIDATES)
     vec_ids = _vector(conn, embedder, query, CANDIDATES)
 
-    # First fusion (lexical + semantic) picks the entities to hop from.
-    base = _rrf(fts_ids, vec_ids)
+    # First fusion (exact + lexical + semantic) picks the entities to hop from.
+    base = _rrf(exact_ids, fts_ids, vec_ids)
     base_rowids = sorted(base, key=lambda r: base[r], reverse=True)
     base_rows = _rows_for(conn, base_rowids)
     anchor_ids: list[str] = []
@@ -174,11 +196,14 @@ def retrieve(
 
     graph_ids = _graph_hop(conn, kg, anchor_ids)
 
-    # Final three-way fusion.
-    fused = _rrf(fts_ids, vec_ids, graph_ids)
+    # Final fusion across all legs.
+    fused = _rrf(exact_ids, fts_ids, vec_ids, graph_ids)
     all_rows = _rows_for(conn, list(fused))
 
-    legs = {"fts": set(fts_ids), "vector": set(vec_ids), "graph": set(graph_ids)}
+    legs = {
+        "exact": set(exact_ids), "fts": set(fts_ids),
+        "vector": set(vec_ids), "graph": set(graph_ids),
+    }
     chunks: list[RetrievedChunk] = []
     for rid, raw in fused.items():
         r = all_rows.get(rid)
@@ -208,6 +233,7 @@ def retrieve(
             break
 
     debug = {
+        "exact_hits": len(exact_ids),
         "fts_hits": len(fts_ids),
         "vector_hits": len(vec_ids),
         "graph_hits": len(graph_ids),

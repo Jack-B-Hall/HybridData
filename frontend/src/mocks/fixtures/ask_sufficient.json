@@ -86,8 +86,8 @@
     "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1075 (BMS Module)",
     "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1079 (Battery Wiring Harness)",
     "ECR-214 (Battery cell chemistry change: P-1062 Li) -REFERENCES-> WIKI-052 (Battery Chemistry Design Review \u2014 2023-1)",
-    "WIKI-052 (Battery Chemistry Design Review \u2014 2023-1) -REFERENCES-> ECR-214 (Battery cell chemistry change: P-1062 Li)",
-    "DOC-421 (K-200 Battery System Specification v2.0 ) -REFERENCES-> ECR-214 (Battery cell chemistry change: P-1062 Li)"
+    "ECN-312 (Approved Change \u2014 ECR-214: Battery cell ) -IMPLEMENTS-> ECR-214 (Battery cell chemistry change: P-1062 Li)",
+    "DOC-430 (K-200 Systems Maintenance Procedure) -REFERENCES-> ECR-214 (Battery cell chemistry change: P-1062 Li)"
   ],
   "sources": [
     {
@@ -238,6 +238,7 @@
   "latency_ms": 8,
   "backend": "mock/mock",
   "retrieval": {
+    "exact_hits": 0,
     "fts_hits": 20,
     "vector_hits": 20,
     "graph_hits": 25,
