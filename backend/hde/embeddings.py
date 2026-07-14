@@ -9,9 +9,10 @@ swap freely, so we ship three implementations and pick one from configuration:
   is modest (it captures lexical overlap, not semantics), but it makes tests and
   the offline demo completely reproducible with no model download or GPU. BM25
   and the knowledge graph carry retrieval quality in this mode.
-* :class:`OllamaEmbedder` — calls a local Ollama server (default model bge-m3).
-  This is the recommended production embedder: strong multilingual semantics,
-  runs on the same box as the answer model, and text never leaves the host.
+* :class:`OllamaEmbedder` — calls a local Ollama server (e.g. nomic-embed-text).
+  This is the recommended production embedder: strong semantics, runs on the same
+  box as the answer model, and text never leaves the host. It discovers its output
+  dimension from the server, so any embed model works without configuring a size.
 * :class:`SentenceTransformerEmbedder` — a local sentence-transformers model, for
   deployments that prefer an in-process embedder over a sidecar service.
 
@@ -81,10 +82,12 @@ class HashEmbedder:
 class OllamaEmbedder:
     """Embeds via a local Ollama server's ``/api/embed`` endpoint."""
 
-    def __init__(self, host: str, model: str, dim: int) -> None:
+    def __init__(self, host: str, model: str, dim: int | None = None) -> None:
         self.host = host.rstrip("/")
         self.model = model
-        self.dim = dim
+        # Discover the true output dimension from the server (a single probe), so
+        # the store is sized correctly for whatever embed model is configured.
+        self.dim = dim or len(self.embed(["dimension probe"])[0])
 
     def embed(self, texts: Sequence[str]) -> list[list[float]]:
         payload = json.dumps({"model": self.model, "input": list(texts)}).encode()
@@ -118,11 +121,8 @@ def build_embedder(settings: Settings) -> Embedder:
     if kind == "hash":
         return HashEmbedder(dim=settings.embed_dim)
     if kind == "ollama":
-        return OllamaEmbedder(
-            host=settings.ollama_embed_host,
-            model=settings.embed_model,
-            dim=settings.embed_dim,
-        )
+        # dim=None -> discovered from the server, so any embed model just works.
+        return OllamaEmbedder(host=settings.ollama_embed_host, model=settings.embed_model)
     if kind == "sbert":
         return SentenceTransformerEmbedder(settings.sbert_model)
     raise ValueError(f"unknown embedder {settings.embedder!r} (use hash|ollama|sbert)")

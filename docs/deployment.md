@@ -14,13 +14,19 @@ to get started.
 | value | what it is | when to use |
 |---|---|---|
 | `hash` (default) | deterministic hashing embedder, no deps | tests, CI, offline demo |
-| `ollama` | bge-m3 (or any embed model) via a local Ollama server | **recommended for production** |
-| `sbert` | an in-process sentence-transformers model | in-process, no sidecar |
+| `ollama` | nomic-embed-text (or any embed model) via a local Ollama server | **recommended for production** |
+| `sbert` | an in-process sentence-transformers model (default all-MiniLM-L6-v2) | in-process, no sidecar |
 
-For `ollama`: `HDE_OLLAMA_EMBED_HOST` (default `http://127.0.0.1:11434`),
-`HDE_EMBED_MODEL` (default `bge-m3`), `HDE_EMBED_DIM` (default `1024`). Keep the
-embedder identical between ingest and query. Embeddings never leave the host, so
-document content stays on-site.
+For `ollama`: `HDE_OLLAMA_EMBED_HOST` (default `http://127.0.0.1:11434`) and
+`HDE_EMBED_MODEL` (default `nomic-embed-text`). The output dimension is discovered
+from the server automatically, so no size needs configuring. Keep the embedder
+identical between ingest and query. Embeddings never leave the host, so document
+content stays on-site.
+
+The reference stack is intentionally **western-origin** (Google gemma answer model,
+Nomic AI / US sentence-transformers embedders, optional Anthropic API) so it is
+deployable in restricted and sovereign environments with model-provenance
+requirements. Any Ollama- or SDK-served model works if your environment permits it.
 
 ### Answer model (`HDE_LLM_BACKEND`)
 
@@ -40,12 +46,12 @@ answer model. The architecture targets a **single 16-32 GB GPU** running a
 gemma-class model:
 
 - **16 GB** (e.g. a 16 GB consumer card): a ~12B model quantised, or a
-  fast mixture-of-experts variant, plus bge-m3 embeddings. Good throughput.
+  fast mixture-of-experts variant, plus nomic-embed-text embeddings. Good throughput.
 - **24-32 GB**: a ~27-31B model with partial offload for the best answer quality
   short of a frontier API.
 
-Embeddings (bge-m3) need ~1-2 GB and can share the card or run on CPU. If you use
-the `anthropic` answer backend, no local GPU is needed at all.
+Embeddings (nomic-embed-text) need well under 1 GB and can share the card or run on
+CPU. If you use the `anthropic` answer backend, no local GPU is needed at all.
 
 ## Running the API
 
@@ -55,6 +61,18 @@ HDE_DB_PATH=/srv/hde/hde.db hde ingest --demo        # or your own adapters
 HDE_EMBEDDER=ollama HDE_LLM_BACKEND=ollama HDE_LLM_MODEL=gemma3:12b \
   hde serve --host 0.0.0.0 --port 8000
 ```
+
+For a ready-made "live" config (nomic-embed-text embeddings + a gemma-class answer
+model), copy `.env.live.example` to `.env.live`, edit the host/model, and use the
+convenience targets:
+
+```bash
+cp .env.live.example .env.live        # then edit HDE_OLLAMA_LLM_HOST / HDE_LLM_MODEL
+make demo-live                        # ingest with nomic-embed-text + serve the live model + frontend
+```
+
+`make demo-live` keeps its store separate (`data/hde-live.db`) so the offline
+`make demo` stays reproducible.
 
 The API opens the SQLite store once and shares it across the request threadpool
 under a lock (the serving workload is read-only). Put it behind your usual reverse

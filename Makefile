@@ -9,8 +9,13 @@ HDE := $(VENV)/bin/hde
 export HDE_DB_PATH := $(CURDIR)/data/hde.db
 
 .DEFAULT_GOAL := help
+# Live config (nomic-embed-text embeddings + a real local answer model). Copy
+# .env.live.example -> .env.live and edit host/model; the *-live targets load it.
+LIVE_ENV := .env.live
+
 .PHONY: help venv install demo ingest serve api-only frontend-install frontend dev \
-        test test-backend test-frontend e2e eval calibrate clean audit
+        test test-backend test-frontend e2e eval calibrate clean audit \
+        ingest-live serve-live demo-live
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -41,6 +46,19 @@ frontend-install: ## Install frontend dependencies
 
 frontend: frontend-install ## Run the frontend dev server on :5173
 	cd frontend && npm run dev
+
+# ── Live backends (real nomic-embed-text embeddings + a real answer model) ──────────────
+ingest-live: install ## Ingest the demo corpus using the live config (.env.live)
+	@test -f $(LIVE_ENV) || (echo "Missing $(LIVE_ENV) — copy .env.live.example and edit it"; exit 1)
+	set -a; . ./$(LIVE_ENV); set +a; $(HDE) ingest --demo
+
+serve-live: ## Run the API against the live config (.env.live)
+	@test -f $(LIVE_ENV) || (echo "Missing $(LIVE_ENV) — copy .env.live.example and edit it"; exit 1)
+	set -a; . ./$(LIVE_ENV); set +a; $(HDE) serve --host 127.0.0.1 --port 8000
+
+demo-live: ingest-live ## Ingest (live config) then launch the live API + frontend
+	@echo "\nLive store built. Starting live API (:8000) and frontend (:5173)..."
+	@$(MAKE) -j2 serve-live frontend
 
 test: test-backend test-frontend ## Run all unit tests
 

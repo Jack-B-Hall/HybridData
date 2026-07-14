@@ -29,13 +29,14 @@ class Settings:
 
     # ── Embeddings ─────────────────────────────────────────────────────────
     # "hash"   deterministic, dependency-free (default; great for tests/CI)
-    # "ollama" bge-m3 (or any embed model) over the Ollama HTTP API
+    # "ollama" nomic-embed-text (or any embed model) over the Ollama HTTP API;
+    #          the dimension is discovered from the server automatically
     # "sbert"  a local sentence-transformers model
     embedder: str = "hash"
-    embed_dim: int = 1024
-    embed_model: str = "bge-m3"
+    embed_dim: int = 1024                       # used by the hash embedder only
+    embed_model: str = "nomic-embed-text"       # Nomic AI (US); ollama embedder
     ollama_embed_host: str = "http://127.0.0.1:11434"
-    sbert_model: str = "BAAI/bge-small-en-v1.5"
+    sbert_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # ── Answer model ───────────────────────────────────────────────────────
     # "mock"      deterministic, grounded, offline (default; used by tests + demo)
@@ -46,6 +47,8 @@ class Settings:
     ollama_llm_host: str = "http://127.0.0.1:11434"
     llm_timeout_s: int = 300
     llm_num_ctx: int = 16384
+    llm_think: bool = False        # enable reasoning-model chain-of-thought (slow)
+    llm_num_predict: int = 1500    # max answer tokens for ollama
 
     # ── Retrieval / gate tuning ────────────────────────────────────────────
     top_chunks: int = 8
@@ -69,6 +72,8 @@ class Settings:
             ollama_llm_host=_env("HDE_OLLAMA_LLM_HOST", cls.ollama_llm_host),
             llm_timeout_s=int(_env("HDE_LLM_TIMEOUT_S", str(cls.llm_timeout_s))),
             llm_num_ctx=int(_env("HDE_LLM_NUM_CTX", str(cls.llm_num_ctx))),
+            llm_think=_env("HDE_LLM_THINK", "1" if cls.llm_think else "0") not in ("0", "false", ""),
+            llm_num_predict=int(_env("HDE_LLM_NUM_PREDICT", str(cls.llm_num_predict))),
             top_chunks=int(_env("HDE_TOP_CHUNKS", str(cls.top_chunks))),
             rrf_k=int(_env("HDE_RRF_K", str(cls.rrf_k))),
             graph_hops=int(_env("HDE_GRAPH_HOPS", str(cls.graph_hops))),

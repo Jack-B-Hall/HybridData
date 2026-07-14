@@ -61,9 +61,35 @@ attribute that was never recorded — and are deliberately undetectable from
 retrieval alone; catching them relies on the grounded-refusal instruction in
 synthesis, which requires a real answer model.
 
-The hash embedder captures lexical overlap, not semantics; swapping in `bge-m3`
-(`HDE_EMBEDDER=ollama`) or a sentence-transformers model raises retrieval recall,
-especially on the semantically-phrased dependency and impact questions.
+The hash embedder captures lexical overlap, not semantics. Swapping in
+`nomic-embed-text` (`HDE_EMBEDDER=ollama`) helps the semantically-phrased
+dependency and impact questions (dependency recall 0.47 → 0.54, impact 0.56 →
+0.62) but is roughly **neutral on aggregate** (0.62 → 0.62) on this corpus:
+record ids and exact terms are so dense that the exact-id and BM25 legs already
+surface most evidence, and semantic matching can even displace an exact
+provenance hit (provenance 0.79 → 0.65). The embedder matters more on prose-heavy
+corpora with less lexical overlap.
+
+## Live-model validation
+
+The pipeline was exercised end-to-end against a real western-origin stack —
+**gemma4:26b-a4b-it-qat** (Google) as the answer model with **nomic-embed-text**
+(Nomic AI) embeddings — through the UI across provenance, impact, lookup, and
+off-corpus (refusal) questions. Answers were fluent and correctly grounded, with
+citations resolving to the exact passages and the gate declining the off-corpus
+probe. Real models emit markdown, LaTeX, and inconsistent citation formats; the
+synthesis layer normalises all of these (see `hde/synthesis.py`) so the answer
+renders as clean prose with numeric citation chips regardless of model. Latency
+was ~8-14 s per answer on a single 16 GB GPU. See the live screenshots in
+`docs/screenshots/chat-live.png`, `citation-popover-live.png`, and
+`chat-live-impact.png`.
+
+On a 10-question live slice (`python eval/run_eval.py --limit 10`) with this
+stack, **citation recall rose to 0.67** — up from the deterministic mock's 0.35 on
+the same store, and now closely tracking retrieval recall (0.69). In other words,
+the real answer model cites nearly everything the retriever surfaces; the mock's
+low citation recall was a floor of the stand-in, not a limitation of the pipeline.
+The gate held (no false refusals on answerable questions).
 
 ## Reference architecture benchmarks
 

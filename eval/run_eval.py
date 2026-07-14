@@ -47,10 +47,21 @@ def _prf(retrieved: set[str], required: set[str]) -> tuple[float | None, float |
     return (tp / len(retrieved), tp / len(required))
 
 
-def run(judge_backend: str | None, judge_model: str | None) -> dict:
+def run(judge_backend: str | None, judge_model: str | None, limit: int | None = None) -> dict:
     settings = get_settings()
     engine = Engine(settings)
     qa = json.loads((REPO / "eval" / "gold-qa.json").read_text())
+    if limit:
+        # Keep a representative spread across categories for a quick slice.
+        seen: dict[str, int] = {}
+        sliced = []
+        per = max(1, limit // 5)
+        for q in qa:
+            c = q["category"]
+            if seen.get(c, 0) < per:
+                sliced.append(q)
+                seen[c] = seen.get(c, 0) + 1
+        qa = sliced
 
     judge = None
     if judge_backend:
@@ -179,8 +190,9 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--judge", choices=["anthropic", "ollama"], help="enable the LLM judge")
     ap.add_argument("--judge-model", help="judge model id")
+    ap.add_argument("--limit", type=int, help="run a small slice (spread across categories)")
     args = ap.parse_args()
-    summary = run(args.judge, args.judge_model)
+    summary = run(args.judge, args.judge_model, args.limit)
     write_reports(summary, judged=args.judge is not None)
 
 

@@ -83,3 +83,39 @@ def test_api_corpus_stats(client):
     stats = client.get("/api/corpus/stats").json()
     assert stats["totals"]["artifacts"] > 0
     assert set(stats["by_tier"]) <= {"formal", "unverified", "informal"}
+
+
+def test_inline_id_citations_rewritten_to_markers():
+    """A live model that writes '[ECN-312]' inline should render as numeric chips."""
+    from hde.synthesis import _rewrite_inline_citations
+
+    prose = "Voss approved the change [ECN-312, ECR-214]. It affected P-1062 [P-1062]."
+    out = _rewrite_inline_citations(prose, {"ECN-312": 1, "ECR-214": 2, "P-1062": 3})
+    assert "[1][2]" in out and "[3]" in out
+    assert "ECN-312" not in out  # bracketed ids replaced by markers
+
+
+def test_inline_rewrite_leaves_valid_numeric_markers():
+    from hde.synthesis import _rewrite_inline_citations
+
+    prose = "See [1] and [2]."
+    assert _rewrite_inline_citations(prose, {"a": 1, "b": 2}, n_citations=2) == prose
+
+
+def test_inline_rewrite_splits_numeric_groups_and_clamps():
+    from hde.synthesis import _rewrite_inline_citations
+
+    # "[1, 4]" -> "[1]" ([4] is out of range for 2 citations).
+    out = _rewrite_inline_citations("Approved [1, 4].", {"a": 1, "b": 2}, n_citations=2)
+    assert "[1]" in out and "[4]" not in out
+
+
+def test_clean_markup_strips_markdown_and_latex():
+    from hde.synthesis import _clean_markup
+
+    raw = "## Summary\n**ECR-214** changes chemistry `LiFePO4` $\\rightarrow$ done.\n* item one\n* item two"
+    out = _clean_markup(raw)
+    assert "**" not in out and "`" not in out and "##" not in out
+    assert "$" not in out and "→" in out
+    assert "ECR-214" in out and "LiFePO4" in out
+    assert "• item one" in out

@@ -31,3 +31,9 @@ frontend/e2e/.artifacts/
 
 # TypeScript incremental build info
 *.tsbuildinfo
+
+# live store (rebuild with make ingest-live) + local live env
+data/hde-live.db
+data/hde-live.db-wal
+data/hde-live.db-shm
+.env.live

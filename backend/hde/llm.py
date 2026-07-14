@@ -121,27 +121,31 @@ def _first_sentence(body: str, title: str) -> str:
 class OllamaLLM:
     """A local model served by Ollama's ``/api/chat`` endpoint."""
 
-    def __init__(self, host: str, model: str, timeout_s: int, num_ctx: int) -> None:
+    def __init__(self, host: str, model: str, timeout_s: int, num_ctx: int,
+                 think: bool = False, num_predict: int = 1500) -> None:
         self.host = host.rstrip("/")
         self.model = model
         self.timeout_s = timeout_s
         self.num_ctx = num_ctx
+        self.think = think
+        self.num_predict = num_predict
         self.name = f"ollama/{model}"
 
     def synthesize(self, request: SynthesisRequest) -> str:
-        payload = json.dumps(
-            {
-                "model": self.model,
-                "messages": [
-                    {"role": "system", "content": request.system_prompt},
-                    {"role": "user", "content": request.user_prompt},
-                ],
-                "stream": False,
-                # Reasoning-tuned models route chain-of-thought into the same
-                # budget; give generous headroom so the answer is not truncated.
-                "options": {"temperature": 0.1, "num_predict": 4000, "num_ctx": self.num_ctx},
-            }
-        ).encode()
+        body = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": request.system_prompt},
+                {"role": "user", "content": request.user_prompt},
+            ],
+            "stream": False,
+            "options": {"temperature": 0.1, "num_predict": self.num_predict, "num_ctx": self.num_ctx},
+            # Disable chain-of-thought for reasoning-tuned models by default: it
+            # multiplies latency for no citation-grounding benefit here. Ignored
+            # by models without a thinking mode.
+            "think": self.think,
+        }
+        payload = json.dumps(body).encode()
         req = urllib.request.Request(
             f"{self.host}/api/chat",
             data=payload,
@@ -183,6 +187,8 @@ def build_llm(settings: Settings) -> LLMClient:
             model=settings.llm_model,
             timeout_s=settings.llm_timeout_s,
             num_ctx=settings.llm_num_ctx,
+            think=settings.llm_think,
+            num_predict=settings.llm_num_predict,
         )
     if backend == "anthropic":
         return AnthropicLLM(model=settings.llm_model, timeout_s=settings.llm_timeout_s)

@@ -79,6 +79,12 @@ three areas:
 - **Data Explorer** — an interactive knowledge-graph visualisation, a filterable
   document table with provenance tiers, a part-tree browser, and corpus analytics.
 
+The screenshots above use the offline deterministic stack. The system has also
+been validated live against a real western-origin model stack (Google gemma4:26b
+answers + Nomic AI nomic-embed-text embeddings) — see
+[`docs/screenshots/chat-live.png`](docs/screenshots/chat-live.png) and
+[`citation-popover-live.png`](docs/screenshots/citation-popover-live.png).
+
 ## Bring your own data
 
 Teaching the system a new source is one small adapter — usually under 50 lines:
@@ -123,11 +129,13 @@ Everything is environment-driven with offline defaults. The two pluggable seams:
 
 | variable | default | options |
 |---|---|---|
-| `HDE_EMBEDDER` | `hash` | `hash`, `ollama` (bge-m3), `sbert` |
+| `HDE_EMBEDDER` | `hash` | `hash`, `ollama` (nomic-embed-text), `sbert` |
 | `HDE_LLM_BACKEND` | `mock` | `mock`, `ollama`, `anthropic` |
 
 For production, point both at real backends (a single 16-32 GB GPU running a
-gemma-class model is the target). See [`docs/deployment.md`](docs/deployment.md)
+gemma-class model is the target). The reference stack is western-origin (Google
+gemma, Nomic AI / US embedders, optional Anthropic) for restricted environments.
+See [`docs/deployment.md`](docs/deployment.md)
 and the API reference in [`docs/api.md`](docs/api.md).
 
 ## Repository layout

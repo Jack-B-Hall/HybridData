@@ -10,8 +10,10 @@ declared by the model and verified against what was actually retrieved.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 
+from .ids import ID_RE
 from .llm import LLMClient, SynthesisRequest
 from .retrieval import RetrievedChunk
 
@@ -22,11 +24,14 @@ knowledge-graph relationships, and precomputed impact/dependency closures.
 
 Rules:
 1. Use ONLY the provided context. Never invent ids, dates, names, or facts.
-2. Cite the record ids you rely on inline as [1], [2], ... in first-use order.
+2. Cite inline using the bracketed record id, e.g. [ECR-214] or [ECN-312]. Put
+   each id in its own brackets. In the JSON block use BARE ids only (e.g.
+   "ECR-214"), never the bracketed header form.
 3. For provenance or decision questions, lay out the chain of events step by step.
 4. For impact or dependency questions, prefer the closures and graph relationships.
 5. Prefer formal-tier sources; if a claim rests on an unverified source, say so.
-6. Be concise and factual. Lead with the answer.
+6. Be concise and factual. Lead with the answer. Write in plain prose sentences —
+   do NOT use markdown headings, bold, bullet lists, tables, or LaTeX.
 
 End your response with a JSON block, on its own lines, fenced as ```json:
 {"claims": [{"text": "<one claim>", "citations": ["ID", ...]}, ...],
@@ -99,7 +104,9 @@ def build_context(chunks: list[RetrievedChunk], graph_paths: list[str], closures
     if chunks:
         parts.append("## Retrieved document chunks (with provenance tier)\n")
         for c in chunks:
-            parts.append(f"### [{c.artifact_id}] {c.title}  <provenance: {c.tier_label}>\n{c.body}\n")
+            parts.append(
+                f"### {c.artifact_id} — {c.title}  (provenance: {c.tier_label})\n{c.body}\n"
+            )
     if closures:
         parts.append("\n## Impact / dependency closures\n")
         for cl in closures:
@@ -110,62 +117,100 @@ def build_context(chunks: list[RetrievedChunk], graph_paths: list[str], closures
     return "\n".join(parts)
 
 
-def _parse_json_block(raw: str) -> dict:
-    """Extract the trailing ```json ...``` block (or a bare trailing object).
+_THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL | re.IGNORECASE)
 
-    The block is the *outermost* object after the fence, so we scan forward from
-    the first ``{`` and balance braces — scanning backwards would wrongly latch
-    onto a nested claim object.
+# Markers that introduce the trailing metadata block. Small models are
+# inconsistent about fencing it, so we split on the earliest of any of these.
+_META_MARKERS = ("```json", "```", '{"claims"', '"claims"', "claims\"", '{"citations"', '"citations"')
+
+# citations/claims arrays, tolerant of missing fences/braces from small models.
+_CITATIONS_ARR = re.compile(r'"?citations"?\s*:\s*\[(.*?)\]', re.DOTALL)
+_PATHS_ARR = re.compile(r'"?graph_paths"?\s*:\s*\[(.*?)\]', re.DOTALL)
+
+
+def _strip_reasoning(raw: str) -> str:
+    """Drop reasoning-model scratchpad blocks (``<think>...</think>``) so they
+    never leak into the displayed answer."""
+    return _THINK_RE.sub("", raw)
+
+
+def _clean_markup(text: str) -> str:
+    """Normalise a model's markdown/LaTeX into clean plain text.
+
+    The answer view renders plain prose, but real models emit markdown headings,
+    bold, code spans and the odd LaTeX arrow regardless of instructions. Strip the
+    markup (keeping the words) so nothing renders as literal ``**`` or ``$\\to$``.
+    Record ids like ``P-1062`` are untouched — only paired/leading markers go.
     """
-    text = raw
-    if "```" in raw:
-        fence = raw.rfind("```json")
-        if fence == -1:
-            fence = raw.rfind("```")
-        segment = raw[fence:].lstrip("`")
-        if segment.startswith("json"):
-            segment = segment[4:]
-        end = segment.find("```")
-        text = segment[:end] if end != -1 else segment
+    for a, b in (("$\\rightarrow$", "→"), ("\\rightarrow", "→"),
+                 ("$\\to$", "→"), ("\\to", "→"), ("$\\times$", "×")):
+        text = text.replace(a, b)
+    text = re.sub(r"`([^`]*)`", r"\1", text)              # inline code spans
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)        # **bold**
+    text = re.sub(r"__([^_]+)__", r"\1", text)            # __bold__
+    text = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", text)     # # headings
+    text = re.sub(r"(?m)^(\s*)[*\-]\s+", r"\1• ", text)   # bullets -> •
+    text = re.sub(r"\$([^$\n]*)\$", r"\1", text)          # stray inline math
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def _normalize_id(token: str) -> str:
+    """Extract a bare record id from whatever a model emitted for a citation.
+
+    Models often echo the context header form ``[ECN-312] Approved Change ...``
+    or ``ECN-312 — Approved Change``; we want just ``ECN-312``."""
+    m = ID_RE.search(token)
+    return m.group(0) if m else token.strip().strip("[]").strip()
+
+
+def _split_meta(raw: str) -> tuple[str, str]:
+    """Split the model output into (displayed prose, trailing metadata text).
+
+    Robust to an unfenced or malformed metadata block: we cut at the earliest
+    metadata marker so the JSON never leaks into the answer shown to the user.
+    """
+    cut = len(raw)
+    for marker in _META_MARKERS:
+        i = raw.find(marker)
+        if i != -1:
+            cut = min(cut, i)
+    return raw[:cut].rstrip().rstrip("`").rstrip(), raw[cut:]
+
+
+def _ids_from_array(body: str) -> list[str]:
+    ids: list[str] = []
+    for token in re.findall(r'"([^"]+)"', body):
+        norm = _normalize_id(token)
+        if norm and norm not in ids:
+            ids.append(norm)
+    return ids
+
+
+def _parse_meta(tail: str) -> dict:
+    """Best-effort structured metadata from the (possibly malformed) tail.
+
+    Tries strict JSON first; falls back to regex extraction of the citations and
+    graph_paths arrays, which survives missing fences and unbalanced braces."""
+    text = tail.strip().strip("`")
+    if text.startswith("json"):
+        text = text[4:]
+    # Strict parse if it happens to be well-formed.
     start = text.find("{")
-    if start == -1:
-        return {}
-    depth = 0
-    in_str = False
-    esc = False
-    for i in range(start, len(text)):
-        c = text[i]
-        if esc:
-            esc = False
-            continue
-        if c == "\\":
-            esc = True
-            continue
-        if c == '"':
-            in_str = not in_str
-            continue
-        if in_str:
-            continue
-        if c == "{":
-            depth += 1
-        elif c == "}":
-            depth -= 1
-            if depth == 0:
-                try:
-                    return json.loads(text[start : i + 1])
-                except json.JSONDecodeError:
-                    return {}
-    return {}
-
-
-def _strip_json_block(raw: str) -> str:
-    if "```" in raw:
-        fence = raw.rfind("```json")
-        if fence == -1:
-            fence = raw.rfind("```")
-        if fence > 0:
-            return raw[:fence].rstrip()
-    return raw.strip()
+    if start != -1:
+        try:
+            return json.loads(text[start : text.rfind("}") + 1])
+        except (json.JSONDecodeError, ValueError):
+            pass
+    # Lenient fallback.
+    meta: dict = {}
+    cm = _CITATIONS_ARR.search(text)
+    if cm:
+        meta["citations"] = _ids_from_array(cm.group(1))
+    pm = _PATHS_ARR.search(text)
+    if pm:
+        meta["graph_paths"] = [p.strip() for p in re.findall(r'"([^"]+)"', pm.group(1))]
+    return meta
 
 
 def synthesize(
@@ -193,12 +238,17 @@ def synthesize(
         )
     )
 
-    meta = _parse_json_block(raw)
-    prose = _strip_json_block(raw)
+    raw = _strip_reasoning(raw)
+    prose, tail = _split_meta(raw)
+    prose = _clean_markup(prose)
+    meta = _parse_meta(tail)
 
-    cited_ids: list[str] = [str(c) for c in meta.get("citations", []) if c]
+    cited_ids: list[str] = [_normalize_id(str(c)) for c in meta.get("citations", []) if c]
     claims = [
-        Claim(text=str(c.get("text", "")), citations=[str(x) for x in c.get("citations", [])])
+        Claim(
+            text=str(c.get("text", "")),
+            citations=[_normalize_id(str(x)) for x in c.get("citations", [])],
+        )
         for c in meta.get("claims", [])
         if isinstance(c, dict)
     ]
@@ -209,8 +259,19 @@ def synthesize(
         cited_ids = [c.artifact_id for c in chunks[:5]]
 
     by_artifact = {c.artifact_id: c for c in chunks}
+
+    # Promote any ids referenced inline in the prose (models often write
+    # "[ECR-214]" instead of a numeric marker) into the ordered citation list.
+    ordered_ids = _dedupe(cited_ids)
+    for group in _INLINE_REF.findall(prose):
+        for norm in ID_RE.findall(group):
+            if norm in by_artifact and norm not in ordered_ids:
+                ordered_ids.append(norm)
+
     citations: list[Citation] = []
-    for i, aid in enumerate(_dedupe(cited_ids), start=1):
+    marker_of: dict[str, int] = {}
+    for i, aid in enumerate(ordered_ids, start=1):
+        marker_of[aid] = i
         chunk = by_artifact.get(aid)
         if chunk:
             citations.append(
@@ -224,7 +285,41 @@ def synthesize(
         else:
             citations.append(Citation(marker=i, artifact_id=aid, grounded=False))
 
+    # Rewrite inline bracketed id references (e.g. "[ECN-312, ECR-214]") into the
+    # numeric markers the UI renders as citation chips ("[1][2]").
+    prose = _rewrite_inline_citations(prose, marker_of, n_citations=len(citations))
+
     return Answer(text=prose, claims=claims, citations=citations, graph_paths=paths)
+
+
+# A bracketed group that contains at least one record id (not a pure-numeric [1]).
+_INLINE_REF = re.compile(r"\[([^\[\]]*?[A-Z]{1,6}-\d+[^\[\]]*?)\]")
+# A bracketed group of one or more comma/space-separated numbers, e.g. [1, 4].
+_NUMERIC_GROUP = re.compile(r"\[(\d+(?:\s*[,;]\s*\d+)*)\]")
+
+
+def _rewrite_inline_citations(prose: str, marker_of: dict[str, int], n_citations: int = 0) -> str:
+    """Normalise whatever inline citation form a model produced into single
+    ``[n]`` markers the UI renders as chips.
+
+    Handles ``[ECR-214]`` and ``[ECN-312, ECR-214]`` (mapped by id) and stray
+    numeric groups like ``[1, 4]`` (split into ``[1][4]``, dropping any number
+    outside the citation range)."""
+    def repl_ids(match: re.Match) -> str:
+        ids = ID_RE.findall(match.group(1))
+        markers = [f"[{marker_of[i]}]" for i in ids if i in marker_of]
+        return "".join(markers) if markers else match.group(0)
+
+    prose = _INLINE_REF.sub(repl_ids, prose)
+
+    limit = n_citations or (max(marker_of.values()) if marker_of else 0)
+
+    def repl_nums(match: re.Match) -> str:
+        nums = [int(n) for n in re.split(r"[,;]\s*", match.group(1))]
+        keep = [f"[{n}]" for n in nums if 1 <= n <= limit]
+        return "".join(keep) if keep else ""
+
+    return _NUMERIC_GROUP.sub(repl_nums, prose)
 
 
 def _dedupe(ids: list[str]) -> list[str]:
