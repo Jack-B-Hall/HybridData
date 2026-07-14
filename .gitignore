@@ -28,3 +28,6 @@ frontend/e2e/.artifacts/
 *.swp
 .idea/
 .vscode/
+
+# TypeScript incremental build info
+*.tsbuildinfo

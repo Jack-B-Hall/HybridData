@@ -1,0 +1,170 @@
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600-italic.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+
+  --color-canvas: #faf9f6;
+  --color-canvas-raised: #ffffff;
+  --color-canvas-sunken: #f2f1ec;
+  --color-canvas-overlay: #ffffff;
+
+  --color-border: #e4e2da;
+  --color-border-strong: #cfccc0;
+
+  --color-ink: #1b1a17;
+  --color-ink-muted: #6b6a62;
+  --color-ink-faint: #a3a196;
+
+  --color-accent: #0891a8;
+  --color-accent-strong: #066a7d;
+  --color-accent-soft: #e2f4f6;
+  --color-accent-ink: #054855;
+
+  --color-tier-formal: #0f7a52;
+  --color-tier-formal-soft: #e3f3ea;
+  --color-tier-unverified: #a3690a;
+  --color-tier-unverified-soft: #faf0dc;
+  --color-tier-informal: #6c5f9e;
+  --color-tier-informal-soft: #ece8f7;
+
+  --color-confidence-high: #0f7a52;
+  --color-confidence-medium: #a3690a;
+  --color-confidence-low: #b3432f;
+
+  --grain-opacity: 0.03;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-canvas: #131311;
+  --color-canvas-raised: #1a1a17;
+  --color-canvas-sunken: #0d0d0b;
+  --color-canvas-overlay: #201f1c;
+
+  --color-border: #2c2b26;
+  --color-border-strong: #3e3d35;
+
+  --color-ink: #f1efe7;
+  --color-ink-muted: #a7a599;
+  --color-ink-faint: #6e6c62;
+
+  --color-accent: #3fc3d6;
+  --color-accent-strong: #6bd4e3;
+  --color-accent-soft: #16333a;
+  --color-accent-ink: #b6ecf3;
+
+  --color-tier-formal: #3fb489;
+  --color-tier-formal-soft: #16302a;
+  --color-tier-unverified: #d6a24a;
+  --color-tier-unverified-soft: #332a17;
+  --color-tier-informal: #a495d9;
+  --color-tier-informal-soft: #262138;
+
+  --color-confidence-high: #3fb489;
+  --color-confidence-medium: #d6a24a;
+  --color-confidence-low: #e2705c;
+
+  --grain-opacity: 0.05;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-canvas: #131311;
+    --color-canvas-raised: #1a1a17;
+    --color-canvas-sunken: #0d0d0b;
+    --color-canvas-overlay: #201f1c;
+    --color-border: #2c2b26;
+    --color-border-strong: #3e3d35;
+    --color-ink: #f1efe7;
+    --color-ink-muted: #a7a599;
+    --color-ink-faint: #6e6c62;
+    --color-accent: #3fc3d6;
+    --color-accent-strong: #6bd4e3;
+    --color-accent-soft: #16333a;
+    --color-accent-ink: #b6ecf3;
+    --color-tier-formal: #3fb489;
+    --color-tier-formal-soft: #16302a;
+    --color-tier-unverified: #d6a24a;
+    --color-tier-unverified-soft: #332a17;
+    --color-tier-informal: #a495d9;
+    --color-tier-informal-soft: #262138;
+    --color-confidence-high: #3fb489;
+    --color-confidence-medium: #d6a24a;
+    --color-confidence-low: #e2705c;
+    --grain-opacity: 0.05;
+  }
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+/* Subtle grain overlay for atmosphere, fixed to viewport, non-interactive. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-ink);
+}
+
+/* Scrollbars — thin, unobtrusive, theme-aware */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.font-feature-tnum {
+  font-feature-settings: "tnum" 1, "ss01" 1;
+}

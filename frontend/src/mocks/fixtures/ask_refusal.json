@@ -1,0 +1,176 @@
+{
+    "question": "What is the capital of France?",
+    "answered": false,
+    "verdict": "insufficient",
+    "confidence": "low",
+    "answer": "This question does not appear to be covered by the current corpus, so I will not answer it rather than risk inventing details. The most related records found are listed below.",
+    "signals": {
+        "question_ids": [],
+        "named_known": [],
+        "named_retrieved": [],
+        "id_anchor": false,
+        "n_terms": 2,
+        "term_coverage": 0.0,
+        "top_score": 0.01639,
+        "n_strong": 8,
+        "n_chunks": 8
+    },
+    "claims": [],
+    "citations": [],
+    "graph_paths": [],
+    "sources": [
+        {
+            "rowid": 4,
+            "artifact_id": "E04",
+            "source": "PLM",
+            "art_kind": "person",
+            "title": "Sam Dreher",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 35,
+            "body": "E04 | Sam Dreher\n\nSam Dreher \u2014 Nav/GNC Software Lead.",
+            "score": 0.016393,
+            "legs": [
+                "graph"
+            ]
+        },
+        {
+            "rowid": 258,
+            "artifact_id": "ECN-325",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "Approved Change Notice for ECR-225",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 169,
+            "body": "ECN-325 | Approved Change Notice for ECR-225\n\nEngineering Change Notice ECN-325. Implements ECR-225. Approved by Sam Dreher on 2024-04-24. Affected parts: P-1163, P-1040, P-1100. Updated documents: DOC-447, DOC-414.",
+            "score": 0.016129,
+            "legs": [
+                "vector"
+            ]
+        },
+        {
+            "rowid": 13,
+            "artifact_id": "E13",
+            "source": "PLM",
+            "art_kind": "person",
+            "title": "Rowan Ellery",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 43,
+            "body": "E13 | Rowan Ellery\n\nRowan Ellery \u2014 Electrical Systems Engineer.",
+            "score": 0.016129,
+            "legs": [
+                "graph"
+            ]
+        },
+        {
+            "rowid": 286,
+            "artifact_id": "DOC-417",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "K-200 Nav/GNC Interface Control Document",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 361,
+            "body": "DOC-417 | K-200 Nav/GNC Interface Control Document\n\n# K-200 Nav/GNC Interface Control Document\n\nDocument number: MD-DOC-417-B. Revision: B. Type: ICD. Author: Sam Dreher. Created: 2024-09-11. Last modified: 2025-04-25. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1048, P-1125, P-1163, P-1138.",
+            "score": 0.015873,
+            "legs": [
+                "vector"
+            ]
+        },
+        {
+            "rowid": 201,
+            "artifact_id": "ECR-207",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "Wing skin material change: CFRP \u2192 hybrid carbon-aramid composite (P-1008, P-1009)",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 1519,
+            "body": "ECR-207 | Wing skin material change: CFRP \u2192 hybrid carbon-aramid composite (P-1008, P-1009)\n\nEngineering Change Request ECR-207.\n\nRaised by: Tobias Wren (Structural/Airframe Engineer), 2023-08-29.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-09-05.\n\nSummary: Change wing skin material for P-1008 (port) and P-1009 (starboard) from CFRP (0\u00b0/90\u00b0 layup) to hybrid carbon-aramid composite (CFRP weave + Kevlar\u00ae \u00b145\u00b0 interlayer).\n\nRationale: Ground vibration testing (June 2023) identified delamination at the wing root bond line of both CFRP wing skins (P-1008, P-1009) after 12 hours at the motor vibration spectrum, documented in KES-045 (delamination bug) under the KES-042 wing skin trade study epic.\n\nMaterial coupon tests in KES-042 evaluated three options: CFRP (failed at 12h), quasi-isotropic CFRP (passes 50h estimate), and hybrid carbon-aramid (no delamination at 100h). The aramid \u00b145\u00b0 interlayer provides crack arrest and dramatically increases impact resistance. This was agreed at WIKI-017 (Airframe Materials Review, 2023-08-22). The mass penalty is +25g per skin (+50g total), which is within the 340g system mass margin documented in REV-631.\n\nImpact:\n- P-1008: Material updated to hybrid carbon-aramid composite, Rev C\n- P-1009: Material updated to hybrid carbon-aramid composite, Rev C\n- DOC-409: Structural Specification to be updated\n- DOC-407: Airframe Loads Analysis to be re-run for stiffness change (Tobias Wren)\n- DRW-502: Wing Skin & Spar Assembly drawing to be updated with new layup schedule\n- P-1017 (wiring harness bracket): No change \u2014 bracket bonded to airframe, not wing skin",
+            "score": 0.015625,
+            "legs": [
+                "graph"
+            ]
+        },
+        {
+            "rowid": 344,
+            "artifact_id": "DOC-473",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "K-200 Payload Interface Control Document",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 361,
+            "body": "DOC-473 | K-200 Payload Interface Control Document\n\n# K-200 Payload Interface Control Document\n\nDocument number: MD-DOC-473-H. Revision: H. Type: ICD. Author: Tyler Moss. Created: 2024-02-03. Last modified: 2024-11-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1089, P-1145, P-1129, P-1083.",
+            "score": 0.015385,
+            "legs": [
+                "vector"
+            ]
+        },
+        {
+            "rowid": 240,
+            "artifact_id": "ECN-307",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "Approved Change \u2014 ECR-207: Wing skin material change to hybrid carbon-aramid composite",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 957,
+            "body": "ECN-307 | Approved Change \u2014 ECR-207: Wing skin material change to hybrid carbon-aramid composite\n\nEngineering Change Notice ECN-307. Implements ECR-207.\nApproved by: Dr. Rhea Voss, 2023-09-05.\n\nAuthorised changes:\n1. P-1008 (Wing Skin Port): Updated to Rev C. Material changed to hybrid carbon-aramid composite (CFRP weave + Kevlar\u00ae \u00b145\u00b0 interlayer). Mass increase: +25g.\n2. P-1009 (Wing Skin Starboard): Updated to Rev C. Same material change. Mass increase: +25g.\n3. DOC-409 (Structural Specification): Updated to include hybrid composite material specification and bonding requirements.\n4. DOC-407 (Airframe Loads Analysis): Re-run for modified stiffness characteristics of hybrid composite. Stiffness reduction of 8% vs straight CFRP confirmed acceptable against flutter margins. Tobias Wren, completed 2023-10-05.\n5. DRW-502 (Wing Skin & Spar Assembly): Updated with hybrid composite layup schedule (0\u00b0/90\u00b0 CFRP + \u00b145\u00b0 aramid interlayer + 0\u00b0/90\u00b0 CFRP).\n6. Mass impact: +50g total. System mass margin remains at 290g (340g - 50g), per updated DOC-401.",
+            "score": 0.015385,
+            "legs": [
+                "graph"
+            ]
+        },
+        {
+            "rowid": 278,
+            "artifact_id": "DOC-409",
+            "source": "PLM",
+            "art_kind": "document",
+            "title": "K-200 Structural Specification v2.0",
+            "prov_tier": 1,
+            "tier_label": "formal",
+            "chunk_idx": 0,
+            "char_start": 0,
+            "char_end": 1478,
+            "body": "DOC-409 | K-200 Structural Specification v2.0\n\n# K-200 Structural Specification\n\nDocument number: MD-DOC-409-B. Revision: B. Type: specification. Author: Tobias Wren. Created: 2023-04-10. Last modified: 2023-10-15. Status: Released.\n\n## Change History\n- Rev A: Initial structural spec, CFRP wing skins (2023-04-01)\n- Rev B: Wing skin material change to hybrid carbon-aramid composite per ECN-307 / ECR-207 (2023-10-15)\n\n## \u00a73 Wing Skin (P-1008, P-1009)\n\nMaterial: Hybrid carbon-aramid composite \u2014 CFRP weave (0\u00b0/90\u00b0) + Kevlar\u00ae \u00b145\u00b0 interlayer + CFRP weave (0\u00b0/90\u00b0). Total thickness: 1.4mm nominal.\n\nRationale for material change: Straight CFRP (0\u00b0/90\u00b0) wing skins (P-1008/P-1009 Rev B) delaminated at the wing root bond line after 12 hours of simulated motor vibration loading during ground vibration test (KES-045). Material coupon tests in KES-042 confirmed hybrid carbon-aramid has no delamination at 100 hours (vs CFRP failure at 12 hours). The aramid interlayer provides crack arrest. Mass penalty: +25g per skin. Design review: WIKI-017. Change authority: ECN-307.\n\nThe stiffness of the hybrid composite is approximately 8% lower than straight CFRP. Loads analysis re-run in DOC-407 confirmed this reduction is acceptable against flutter margins, with flutter onset at 52m/s (requirement: >45m/s at maximum dive speed).\n\n## \u00a74 Motor Mounts (P-1012\u2013P-1015)\n\nAluminium 6061-T6. Stiffness requirement: natural frequency of motor mount assembly >200Hz (to avoid coupling with motor vibration spectrum). Verified in DRW-507.",
+            "score": 0.015152,
+            "legs": [
+                "graph"
+            ]
+        }
+    ],
+    "latency_ms": 6,
+    "backend": "mock/mock",
+    "retrieval": {
+        "exact_hits": 0,
+        "fts_hits": 0,
+        "vector_hits": 20,
+        "graph_hits": 44,
+        "anchors": [
+            "KES-042",
+            "ECN-325",
+            "DOC-417",
+            "WIKI-072",
+            "DOC-473",
+            "WIKI-009"
+        ],
+        "fused_candidates": 64
+    }
+}
