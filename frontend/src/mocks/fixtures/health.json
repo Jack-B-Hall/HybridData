@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "llm_backend": "mock/mock",
+  "embedder": "hash",
+  "db": "data/hde.db"
+}

@@ -1,0 +1,254 @@
+{
+  "question": "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
+  "answered": true,
+  "verdict": "sufficient",
+  "confidence": "high",
+  "answer": "Engineering Change Request ECR-214. [1] Engineering Change Notice ECN-312. [2] # K-200 Battery System Specification [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
+  "signals": {
+    "question_ids": [
+      "K-200"
+    ],
+    "named_known": [],
+    "named_retrieved": [],
+    "id_anchor": false,
+    "n_terms": 4,
+    "term_coverage": 1.0,
+    "top_score": 0.03252,
+    "n_strong": 8,
+    "n_chunks": 8
+  },
+  "claims": [
+    {
+      "text": "Engineering Change Request ECR-214. [1]",
+      "citations": [
+        "ECR-214"
+      ]
+    },
+    {
+      "text": "Engineering Change Notice ECN-312. [2]",
+      "citations": [
+        "ECN-312"
+      ]
+    },
+    {
+      "text": "# K-200 Battery System Specification [3]",
+      "citations": [
+        "DOC-421"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "marker": 1,
+      "artifact_id": "ECR-214",
+      "title": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+      "source": "PLM",
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1723,
+      "passage": "ECR-214 | Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4\n\nEngineering Change Request ECR-214.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-10-12.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-10-19.\n\nSummary: Change the battery cell assembly (P-1062) from LiPo (6S2P 22.2V 20Ah) to LiFePO4 chemistry.\n\nRationale: The K-200 experienced a LiPo thermal runaway event on 8 September 2023 during a hot-day endurance test (KES-208). This was the second thermal anomaly on P-1062 cells (the first was a cell swelling event in March 2023). LiPo cells present an unacceptable risk under IEC 62133-2 compliance requirements for BVLOS maritime operations, particularly given the salt-water submersion risk profile. The customer contract (ref KES-208) explicitly prohibits LiPo chemistry for BVLOS maritime operations.\n\nLiFePO4 chemistry offers superior thermal stability (stable to 270\u00b0C vs LiPo thermal runaway at ~150\u00b0C) at a cost of approximately 12% lower energy density. The endurance reduction from 75 minutes projected to 66 minutes is within the 60-minute minimum requirement. Trade study presented at WIKI-052 (Battery Chemistry Design Review, 2023-10-05).\n\nImpact:\n- P-1062: New LiFePO4 cell assembly (CellCore Technologies, 6S2P 22.2V 20Ah LiFePO4)\n- P-1075: BMS module charge/discharge profile must be updated for LiFePO4 voltage curves (3.2V nominal vs 3.7V LiPo)\n- P-1064: Battery connector to remain AS150 \u2014 no change\n- DOC-421: Battery System Specification to be updated to Rev C\n- P-1079: Battery wiring harness \u2014 no change required\n- Qualification testing: Full cell-level and pack-level qualification per IEC 62133-2 required before ECN issue\n\nRelated: KES-208 (thermal runaway bug), WIKI-052 (design review meeting), DOC-421 (battery spec update).",
+      "grounded": true
+    },
+    {
+      "marker": 2,
+      "artifact_id": "ECN-312",
+      "title": "Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4",
+      "source": "PLM",
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 979,
+      "passage": "ECN-312 | Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4\n\nEngineering Change Notice ECN-312. Implements ECR-214.\nApproved by: Dr. Rhea Voss, 2023-10-19.\n\nThis ECN formally authorises the implementation of ECR-214 (battery chemistry change). The change baseline is effective from ECN-312 approval date.\n\nAuthorised changes:\n1. P-1062 (Battery Cell Assembly) updated to Rev C: LiFePO4 chemistry, 6S2P 22.2V 20Ah, supplier CellCore Technologies. Nominal cell voltage 3.2V (vs 3.7V LiPo). LiPo Rev B stock to be quarantined.\n2. P-1075 (BMS Module) updated to Rev C: charge/discharge profiles updated for LiFePO4 voltage curves (3.2V nominal, 3.65V max, 2.5V min per cell). Hardware SOC limits remain per ECR-209 (18% floor / 82% ceiling).\n3. DOC-421 (Battery System Specification) updated to Rev C: reflects LiFePO4 chemistry, updated energy density, updated BMS profiles.\n\nQualification status: Cell-level qualification per IEC 62133-2 completed (Aisha Mbeki, test report DOC-421 Rev C appendix). Pack-level qualification passed 2023-12-14.",
+      "grounded": true
+    },
+    {
+      "marker": 3,
+      "artifact_id": "DOC-421",
+      "title": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
+      "source": "PLM",
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1721,
+      "passage": "DOC-421 | K-200 Battery System Specification v2.0 (post LiFePO4 transition)\n\n# K-200 Battery System Specification\n\nDocument number: MD-DOC-421-C. Revision: C. Type: specification. Author: Lena Okafor. Created: 2023-04-01. Last modified: 2023-12-14. Status: Released.\n\nSubsystem: Battery.\n\n## Change History\n\n- Rev A: Initial LiPo baseline (2023-04-01)\n- Rev B: BMS SOC limits updated per ECR-209 (2023-07-18)\n- Rev C: LiFePO4 chemistry transition per ECN-312 / ECR-214 (2023-12-14)\n\n## \u00a71 Scope\n\nThis specification defines the battery system for the Kestrel K-200, covering cell chemistry, BMS requirements, safety limits, and qualification requirements.\n\n## \u00a72 Battery Cell Assembly \u2014 P-1062 Rev C\n\nChemistry: LiFePO4 (lithium iron phosphate). Configuration: 6S2P. Nominal voltage: 22.2V (3.7V/cell nominal). Capacity: 20Ah. Supplier: CellCore Technologies. Energy density: approximately 140 Wh/kg.\n\nThe transition from LiPo to LiFePO4 was driven by the thermal runaway event KES-208 (September 2023) and IEC 62133-2 compliance requirements for BVLOS maritime operations. Design review decision: WIKI-052 (2023-10-05). Change authority: ECN-312.\n\n## \u00a73 BMS Module \u2014 P-1075 Rev C\n\nThe BMS module manages cell balancing, SOC estimation, and safety protection. SOC limits (per ECR-209 and confirmed in REV-623 review commentary):\n- SOC floor: 18% (hardware lockout \u2014 prevents cell reversal under 3C discharge)\n- SOC ceiling: 82% (hardware lockout \u2014 prevents lithium plating at low temperature)\n\nThese limits are implemented in hardware independent of firmware to prevent single-point software fault bypass. See DOC-431 (BMS Safety Specification) for detailed rationale.\n\n## \u00a74 Electrical Interface\n\nMain connector: P-1064 (AS150 gold 150A). Battery wiring harness: P-1079. Power distribution: P-1076.",
+      "grounded": true
+    }
+  ],
+  "graph_paths": [
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> DOC-421 (K-200 Battery System Specification v2.0 )",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -APPROVED_BY-> E01 (Dr. Rhea Voss)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -RAISED_BY-> E03 (Lena Okafor)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -TRIGGERED_BY-> KES-208 ([Bug] LiPo thermal runaway on P-1062 dur)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -TRIGGERED_BY-> KES-210 ([Bug] Mission file import validation err)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1062 (Battery Cell Assembly \u2014 LiFePO4)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1064 (Battery Connector \u2014 Main)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1075 (BMS Module)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -AFFECTS-> P-1079 (Battery Wiring Harness)",
+    "ECR-214 (Battery cell chemistry change: P-1062 Li) -REFERENCES-> WIKI-052 (Battery Chemistry Design Review \u2014 2023-1)",
+    "WIKI-052 (Battery Chemistry Design Review \u2014 2023-1) -REFERENCES-> ECR-214 (Battery cell chemistry change: P-1062 Li)",
+    "DOC-421 (K-200 Battery System Specification v2.0 ) -REFERENCES-> ECR-214 (Battery cell chemistry change: P-1062 Li)"
+  ],
+  "sources": [
+    {
+      "rowid": 209,
+      "artifact_id": "ECR-214",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1723,
+      "body": "ECR-214 | Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4\n\nEngineering Change Request ECR-214.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-10-12.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-10-19.\n\nSummary: Change the battery cell assembly (P-1062) from LiPo (6S2P 22.2V 20Ah) to LiFePO4 chemistry.\n\nRationale: The K-200 experienced a LiPo thermal runaway event on 8 September 2023 during a hot-day endurance test (KES-208). This was the second thermal anomaly on P-1062 cells (the first was a cell swelling event in March 2023). LiPo cells present an unacceptable risk under IEC 62133-2 compliance requirements for BVLOS maritime operations, particularly given the salt-water submersion risk profile. The customer contract (ref KES-208) explicitly prohibits LiPo chemistry for BVLOS maritime operations.\n\nLiFePO4 chemistry offers superior thermal stability (stable to 270\u00b0C vs LiPo thermal runaway at ~150\u00b0C) at a cost of approximately 12% lower energy density. The endurance reduction from 75 minutes projected to 66 minutes is within the 60-minute minimum requirement. Trade study presented at WIKI-052 (Battery Chemistry Design Review, 2023-10-05).\n\nImpact:\n- P-1062: New LiFePO4 cell assembly (CellCore Technologies, 6S2P 22.2V 20Ah LiFePO4)\n- P-1075: BMS module charge/discharge profile must be updated for LiFePO4 voltage curves (3.2V nominal vs 3.7V LiPo)\n- P-1064: Battery connector to remain AS150 \u2014 no change\n- DOC-421: Battery System Specification to be updated to Rev C\n- P-1079: Battery wiring harness \u2014 no change required\n- Qualification testing: Full cell-level and pack-level qualification per IEC 62133-2 required before ECN issue\n\nRelated: KES-208 (thermal runaway bug), WIKI-052 (design review meeting), DOC-421 (battery spec update).",
+      "score": 0.032522,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 245,
+      "artifact_id": "ECN-312",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 979,
+      "body": "ECN-312 | Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4\n\nEngineering Change Notice ECN-312. Implements ECR-214.\nApproved by: Dr. Rhea Voss, 2023-10-19.\n\nThis ECN formally authorises the implementation of ECR-214 (battery chemistry change). The change baseline is effective from ECN-312 approval date.\n\nAuthorised changes:\n1. P-1062 (Battery Cell Assembly) updated to Rev C: LiFePO4 chemistry, 6S2P 22.2V 20Ah, supplier CellCore Technologies. Nominal cell voltage 3.2V (vs 3.7V LiPo). LiPo Rev B stock to be quarantined.\n2. P-1075 (BMS Module) updated to Rev C: charge/discharge profiles updated for LiFePO4 voltage curves (3.2V nominal, 3.65V max, 2.5V min per cell). Hardware SOC limits remain per ECR-209 (18% floor / 82% ceiling).\n3. DOC-421 (Battery System Specification) updated to Rev C: reflects LiFePO4 chemistry, updated energy density, updated BMS profiles.\n\nQualification status: Cell-level qualification per IEC 62133-2 completed (Aisha Mbeki, test report DOC-421 Rev C appendix). Pack-level qualification passed 2023-12-14.",
+      "score": 0.031754,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 290,
+      "artifact_id": "DOC-421",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1721,
+      "body": "DOC-421 | K-200 Battery System Specification v2.0 (post LiFePO4 transition)\n\n# K-200 Battery System Specification\n\nDocument number: MD-DOC-421-C. Revision: C. Type: specification. Author: Lena Okafor. Created: 2023-04-01. Last modified: 2023-12-14. Status: Released.\n\nSubsystem: Battery.\n\n## Change History\n\n- Rev A: Initial LiPo baseline (2023-04-01)\n- Rev B: BMS SOC limits updated per ECR-209 (2023-07-18)\n- Rev C: LiFePO4 chemistry transition per ECN-312 / ECR-214 (2023-12-14)\n\n## \u00a71 Scope\n\nThis specification defines the battery system for the Kestrel K-200, covering cell chemistry, BMS requirements, safety limits, and qualification requirements.\n\n## \u00a72 Battery Cell Assembly \u2014 P-1062 Rev C\n\nChemistry: LiFePO4 (lithium iron phosphate). Configuration: 6S2P. Nominal voltage: 22.2V (3.7V/cell nominal). Capacity: 20Ah. Supplier: CellCore Technologies. Energy density: approximately 140 Wh/kg.\n\nThe transition from LiPo to LiFePO4 was driven by the thermal runaway event KES-208 (September 2023) and IEC 62133-2 compliance requirements for BVLOS maritime operations. Design review decision: WIKI-052 (2023-10-05). Change authority: ECN-312.\n\n## \u00a73 BMS Module \u2014 P-1075 Rev C\n\nThe BMS module manages cell balancing, SOC estimation, and safety protection. SOC limits (per ECR-209 and confirmed in REV-623 review commentary):\n- SOC floor: 18% (hardware lockout \u2014 prevents cell reversal under 3C discharge)\n- SOC ceiling: 82% (hardware lockout \u2014 prevents lithium plating at low temperature)\n\nThese limits are implemented in hardware independent of firmware to prevent single-point software fault bypass. See DOC-431 (BMS Safety Specification) for detailed rationale.\n\n## \u00a74 Electrical Interface\n\nMain connector: P-1064 (AS150 gold 150A). Battery wiring harness: P-1079. Power distribution: P-1076.",
+      "score": 0.031498,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 76,
+      "artifact_id": "P-1062",
+      "source": "PLM",
+      "art_kind": "entity",
+      "title": "Battery Cell Assembly \u2014 LiFePO4",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 172,
+      "body": "P-1062 | Battery Cell Assembly \u2014 LiFePO4\n\nBattery Cell Assembly \u2014 LiFePO4. Subsystem: Battery. Material: LiFePO4, 6S2P 22.2V 20Ah. Mass: 1820g. Manufactured by CellCore Technologies. Revision C. Part class: custom.",
+      "score": 0.030777,
+      "legs": [
+        "fts",
+        "graph"
+      ]
+    },
+    {
+      "rowid": 640,
+      "artifact_id": "WIKI-052",
+      "source": "Confluence",
+      "art_kind": "document",
+      "title": "Battery Chemistry Design Review \u2014 2023-10-05",
+      "prov_tier": 2,
+      "tier_label": "unverified",
+      "chunk_idx": 1,
+      "char_start": 1744,
+      "char_end": 3220,
+      "body": "WIKI-052 | Battery Chemistry Design Review \u2014 2023-10-05\n\nFelix Herrera confirmed that the ~12% reduction in energy density from switching to LiFePO4 would reduce endurance from a projected 75 minutes to approximately 66 minutes at cruise \u2014 within the 60-minute minimum requirement.\n\nAisha Mbeki asked about the re-qualification test burden. Lena Okafor confirmed ECR-214 will capture the full impact including new qualification testing per DOC-421 Rev C.\n\nLTO was ruled out: the energy density is too low to meet the 60-minute endurance requirement without exceeding the 8kg MTOW.\n\n## Decision\n\n**AGREED:** Transition the K-200 battery cell assembly (P-1062) from LiPo to LiFePO4 chemistry.\n\n- Decision maker: Dr. Rhea Voss (Chief Systems Engineer)\n- Rationale: IEC 62133-2 compliance requirement, two observed thermal events on P-1062 (KES-208 and March 2023 lab anomaly), acceptable energy density penalty\n- ECR to be raised: ECR-214 (Lena Okafor to raise by 2023-10-12)\n- Updated specification: DOC-421 (Battery System Specification) to be updated to Rev C\n- BMS impact: P-1075 charge/discharge profiles must be updated for LiFePO4 voltage curves\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-214 for battery chemistry change | Lena Okafor | 2023-10-12 |\n| A2 | Update DOC-421 to Rev C covering LiFePO4 spec | Lena Okafor | 2023-11-15 |\n| A3 | Update P-1075 BMS charge profiles for LiFePO4 | Rowan Ellery | 2023-11-30 |\n| A4 | Plan cell-level qualification test campaign | Aisha Mbeki | 2023-11-01 |",
+      "score": 0.029685,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 234,
+      "artifact_id": "ECN-301",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "Configuration Baseline \u2014 K-200 System Architecture v1.0 (per DOC-401)",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1025,
+      "body": "ECN-301 | Configuration Baseline \u2014 K-200 System Architecture v1.0 (per DOC-401)\n\nEngineering Change Notice ECN-301. Programme configuration baseline.\nApproved by: Dr. Rhea Voss, 2023-04-15.\n\nThis ECN formally establishes the K-200 System Architecture configuration baseline as defined in DOC-401 (System Architecture Document v1.0).\n\nKey baseline parameters:\n1. Autonomy level: SAE Level 3 conditional automation (per customer RFT-K200-002 requirement, recorded in WIKI-003 kick-off meeting and REV-631 review comments)\n2. MTOW: 8kg\n3. Endurance target: 60 minutes minimum at cruise\n4. Battery chemistry baseline: LiPo (subject to thermal risk note in WIKI-003) \u2014 subsequently changed by ECN-312\n5. Propulsion: quad-pusher, 4x motors (subsequently P-1031, changed by ECN-318 to P-1041)\n6. Comms: 900MHz FHSS, 15km range (P-1125, subsequently upgraded by ECN-322 to P-1126 with encryption)\n7. GNC: single-string FCU (P-1091), BVLOS open-water operations only\n8. Redundancy: hardware fail-safe RTL if datalink lost >10s\n\nThis baseline is the reference against which all subsequent ECRs and ECNs are compared.",
+      "score": 0.027651,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 285,
+      "artifact_id": "DOC-416",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Battery Subsystem Specification",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 361,
+      "body": "DOC-416 | K-200 Battery Subsystem Specification\n\n# K-200 Battery Subsystem Specification\n\nDocument number: MD-DOC-416-B. Revision: B. Type: specification. Author: Nina Schulz. Created: 2023-04-28. Last modified: 2023-08-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1031, P-1062, P-1079.",
+      "score": 0.027072,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 313,
+      "artifact_id": "DOC-443",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Battery Design Analysis",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 343,
+      "body": "DOC-443 | K-200 Battery Design Analysis\n\n# K-200 Battery Design Analysis\n\nDocument number: MD-DOC-443-E. Revision: E. Type: design-note. Author: Nina Schulz. Created: 2024-04-06. Last modified: 2024-11-09. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1121, P-1019.",
+      "score": 0.026491,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    }
+  ],
+  "latency_ms": 8,
+  "backend": "mock/mock",
+  "retrieval": {
+    "fts_hits": 20,
+    "vector_hits": 20,
+    "graph_hits": 25,
+    "anchors": [
+      "ECR-214",
+      "WIKI-052",
+      "ECN-312",
+      "DOC-421",
+      "KES-208",
+      "ECN-301"
+    ],
+    "fused_candidates": 52
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "count": 40,
+  "documents": [
+    {
+      "id": "DOC-401",
+      "kind": "document",
+      "title": "K-200 System Architecture Document v1.0",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Systems"
+    },
+    {
+      "id": "DOC-402",
+      "kind": "document",
+      "title": "K-200 GCS Qualification Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "GCS"
+    },
+    {
+      "id": "DOC-403",
+      "kind": "document",
+      "title": "K-200 Systems Design Analysis",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Systems"
+    },
+    {
+      "id": "DOC-404",
+      "kind": "document",
+      "title": "K-200 Integration Acceptance Test Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Integration"
+    },
+    {
+      "id": "DOC-405",
+      "kind": "document",
+      "title": "K-200 Airframe Risk Register",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Airframe"
+    },
+    {
+      "id": "DOC-406",
+      "kind": "document",
+      "title": "K-200 Propulsion Maintenance Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Propulsion"
+    },
+    {
+      "id": "DOC-407",
+      "kind": "document",
+      "title": "K-200 Battery Environmental Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-408",
+      "kind": "document",
+      "title": "K-200 Nav/GNC Subsystem Specification",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Nav/GNC"
+    },
+    {
+      "id": "DOC-409",
+      "kind": "document",
+      "title": "K-200 Structural Specification v2.0",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Airframe"
+    },
+    {
+      "id": "DOC-410",
+      "kind": "document",
+      "title": "K-200 Payload Qualification Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Payload"
+    },
+    {
+      "id": "DOC-411",
+      "kind": "document",
+      "title": "K-200 GCS Design Analysis",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "GCS"
+    },
+    {
+      "id": "DOC-412",
+      "kind": "document",
+      "title": "K-200 Systems Acceptance Test Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Systems"
+    },
+    {
+      "id": "DOC-413",
+      "kind": "document",
+      "title": "K-200 Integration Risk Register",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Integration"
+    },
+    {
+      "id": "DOC-414",
+      "kind": "document",
+      "title": "K-200 Airframe Maintenance Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Airframe"
+    },
+    {
+      "id": "DOC-415",
+      "kind": "document",
+      "title": "K-200 Propulsion Environmental Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Propulsion"
+    },
+    {
+      "id": "DOC-416",
+      "kind": "document",
+      "title": "K-200 Battery Subsystem Specification",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-417",
+      "kind": "document",
+      "title": "K-200 Nav/GNC Interface Control Document",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Nav/GNC"
+    },
+    {
+      "id": "DOC-418",
+      "kind": "document",
+      "title": "K-200 Comms/Datalink Qualification Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Comms/Datalink"
+    },
+    {
+      "id": "DOC-419",
+      "kind": "document",
+      "title": "K-200 Payload Design Analysis",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Payload"
+    },
+    {
+      "id": "DOC-420",
+      "kind": "document",
+      "title": "K-200 GCS Acceptance Test Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "GCS"
+    },
+    {
+      "id": "DOC-421",
+      "kind": "document",
+      "title": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-422",
+      "kind": "document",
+      "title": "K-200 Integration Maintenance Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Integration"
+    },
+    {
+      "id": "DOC-423",
+      "kind": "document",
+      "title": "K-200 Airframe Environmental Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Airframe"
+    },
+    {
+      "id": "DOC-424",
+      "kind": "document",
+      "title": "K-200 Propulsion Subsystem Specification",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Propulsion"
+    },
+    {
+      "id": "DOC-425",
+      "kind": "document",
+      "title": "K-200 Battery Interface Control Document",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-426",
+      "kind": "document",
+      "title": "K-200 Nav/GNC Qualification Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Nav/GNC"
+    },
+    {
+      "id": "DOC-427",
+      "kind": "document",
+      "title": "K-200 Comms/Datalink Design Analysis",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Comms/Datalink"
+    },
+    {
+      "id": "DOC-428",
+      "kind": "document",
+      "title": "K-200 Payload Acceptance Test Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Payload"
+    },
+    {
+      "id": "DOC-429",
+      "kind": "document",
+      "title": "K-200 GCS Risk Register",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "GCS"
+    },
+    {
+      "id": "DOC-430",
+      "kind": "document",
+      "title": "K-200 Systems Maintenance Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Systems"
+    },
+    {
+      "id": "DOC-431",
+      "kind": "document",
+      "title": "K-200 BMS Safety Specification v1.3",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-432",
+      "kind": "document",
+      "title": "K-200 Airframe Subsystem Specification",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Airframe"
+    },
+    {
+      "id": "DOC-433",
+      "kind": "document",
+      "title": "K-200 Propulsion Interface Control Document",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Propulsion"
+    },
+    {
+      "id": "DOC-434",
+      "kind": "document",
+      "title": "K-200 Battery Qualification Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Battery"
+    },
+    {
+      "id": "DOC-435",
+      "kind": "document",
+      "title": "K-200 Nav/GNC Design Analysis",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Nav/GNC"
+    },
+    {
+      "id": "DOC-436",
+      "kind": "document",
+      "title": "K-200 Comms/Datalink Acceptance Test Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Comms/Datalink"
+    },
+    {
+      "id": "DOC-437",
+      "kind": "document",
+      "title": "K-200 Payload Risk Register",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Payload"
+    },
+    {
+      "id": "DOC-438",
+      "kind": "document",
+      "title": "K-200 GCS Maintenance Procedure",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "GCS"
+    },
+    {
+      "id": "DOC-439",
+      "kind": "document",
+      "title": "K-200 Systems Environmental Test Report",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Systems"
+    },
+    {
+      "id": "DOC-440",
+      "kind": "document",
+      "title": "K-200 Integration Subsystem Specification",
+      "source": "PLM",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "subsystem": "Integration"
+    }
+  ]
+}

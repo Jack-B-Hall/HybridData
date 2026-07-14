@@ -1,0 +1,17 @@
+{
+  "runs": [
+    {
+      "id": 1,
+      "started_at": "2026-07-14T09:26:57+00:00",
+      "finished_at": "2026-07-14T09:26:58+00:00",
+      "adapter": "JsonCorpusAdapter",
+      "source_path": "data/hde.db",
+      "n_records": 774,
+      "n_chunks": 795,
+      "n_nodes": 774,
+      "n_edges": 3143,
+      "status": "completed",
+      "note": null
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "question": "What is the maximum cruise altitude of the Boeing 747?",
+  "answered": true,
+  "verdict": "sufficient",
+  "confidence": "high",
+  "answer": "# K-200 Battery Environmental Test Report [1] Engineering Change Request ECR-221. [2] # Payload Gimbal Design Review \u2014 2024-06-18 [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
+  "signals": {
+    "question_ids": [],
+    "named_known": [],
+    "named_retrieved": [],
+    "id_anchor": false,
+    "n_terms": 4,
+    "term_coverage": 0.5,
+    "top_score": 0.03009,
+    "n_strong": 8,
+    "n_chunks": 8
+  },
+  "claims": [
+    {
+      "text": "# K-200 Battery Environmental Test Report [1]",
+      "citations": [
+        "DOC-407"
+      ]
+    },
+    {
+      "text": "Engineering Change Request ECR-221. [2]",
+      "citations": [
+        "ECR-221"
+      ]
+    },
+    {
+      "text": "# Payload Gimbal Design Review \u2014 2024-06-18 [3]",
+      "citations": [
+        "WIKI-038"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "marker": 1,
+      "artifact_id": "DOC-407",
+      "title": "K-200 Battery Environmental Test Report",
+      "source": "PLM",
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 371,
+      "passage": "DOC-407 | K-200 Battery Environmental Test Report\n\n# K-200 Battery Environmental Test Report\n\nDocument number: MD-DOC-407-A. Revision: A. Type: risk-register. Author: Nina Schulz. Created: 2023-03-18. Last modified: 2024-01-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1085, P-1111, P-1028, P-1003.",
+      "grounded": true
+    },
+    {
+      "marker": 2,
+      "artifact_id": "ECR-221",
+      "title": "Replace propulsion motors P-1031 and ESCs P-1032 with P-1041/P-1042",
+      "source": "PLM",
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1447,
+      "passage": "ECR-221 | Replace propulsion motors P-1031 and ESCs P-1032 with P-1041/P-1042\n\nEngineering Change Request ECR-221.\n\nRaised by: Marcus Thaine (Propulsion Lead), 2024-04-15.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2024-04-22.\n\nSummary: Replace all four instances of the TorqueDrive 4012 490KV motors (P-1031) and ControlAir 60A ESCs (P-1032) with TorqueDrive 4014 420KV Enhanced motors (P-1041) and ControlAir 80A Enhanced ESCs (P-1042).\n\nRationale: Two thermal events during April 2024 testing demonstrated that P-1031 motors cannot meet the 40\u00b0C ambient temperature operating requirement:\n- KES-187 (2024-04-02): Fwd-port P-1031 motor reached 108\u00b0C winding temperature during 45-min endurance run at 30\u00b0C ambient, triggering thermal cutout. Winding temperature rating is 85\u00b0C maximum continuous.\n- KES-188 (2024-04-08): Fwd-stbd P-1031 motor ESC (P-1032) repeatedly overcurrented due to thermal throttling, causing motor sync loss.\n\nRoot cause (established at WIKI-031 Propulsion Thermal Review, 2024-04-10): The 4012 490KV winding design has insufficient stator-to-case thermal conductivity. The P-1031 motor was selected in 2023 without a hot-day endurance test.\n\nThe TorqueDrive 4014 420KV Enhanced (P-1041) uses an improved winding geometry that reduces stator temperature by approximately 18\u00b0C at the same operating point (per TorqueDrive data sheet DS-4014E rev 2). Paired with the ControlAir 80A Enhanced ESC (P-1042, copper heatsink) and P-1051 heatsink, the thermal margin is restored to 22\u00b0C at 40\u00b0C ambient.",
+      "grounded": true
+    },
+    {
+      "marker": 3,
+      "artifact_id": "WIKI-038",
+      "title": "Payload Gimbal Design Review \u2014 2024-06-18",
+      "source": "Confluence",
+      "tier_label": "unverified",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1769,
+      "passage": "WIKI-038 | Payload Gimbal Design Review \u2014 2024-06-18\n\n# Payload Gimbal Design Review \u2014 2024-06-18\n\n**Space:** K200  \n**Meeting type:** Technical Design Review / Design Rejection  \n**Attendees:** Cass Doyle (Payload), Felix Herrera (Integration), Aisha Mbeki (Test), Tobias Wren (Airframe), Sam Dreher (GNC)  \n**Chair:** Felix Herrera  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nKES-134 (epic: payload gimbal integration) began with the original 2-axis gimbal sourced from GimbalTech Ltd in early 2024. During integration testing the gimbal exhibited structural resonance. KES-137 (bug: gimbal resonance during level flight) documented that the GimbalTech unit had a resonant frequency of 8.2Hz which coincided with the wing flutter mode of the airframe at 8\u20139Hz. At resonance the camera image was unusable \u2014 jitter exceeded \u00b14\u00b0 peak-to-peak when the requirement in DOC-449 (Payload ICD) is \u00b10.5\u00b0.\n\n## Root Cause\n\nCass Doyle presented the vibration analysis. The GimbalTech gimbal (no longer referenced as it is being rejected) had a resonant frequency of 8.2Hz due to the lightweight hollow-tube frame construction. The K-200 airframe wing flutter mode at cruise is 8\u20139Hz per the loads analysis (DOC-407). This was a design oversight \u2014 gimbal resonance was not considered during the original payload bay design.\n\nSam Dreher confirmed that active electronic stabilisation in SRC-021 (gimbal_driver.py) cannot compensate for structural resonance at the same frequency as the control bandwidth limit.\n\n## Replacement Design\n\nCass Doyle proposed the redesigned gimbal assembly (P-1154, now Rev C) using hollow-shaft BLDC motors (P-1155 pitch, P-1156 roll, P-1157 yaw) from GB-Systems with a stiffer carbon fibre frame. The natural frequency of the new assembly is 24Hz, well above the airframe flutter mode.",
+      "grounded": true
+    }
+  ],
+  "graph_paths": [
+    "DOC-407 (K-200 Battery Environmental Test Report) -AUTHORED_BY-> E12 (Nina Schulz)",
+    "DOC-407 (K-200 Battery Environmental Test Report) -REFERENCES-> ECR-233 (Change request: Nav/GNC \u2014 update P-1102 )",
+    "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1003 (Wing Spar \u2014 Starboard)",
+    "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1028 (Ballast Weight \u2014 Aft)",
+    "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1085 (Thermal Sensor \u2014 Battery)",
+    "DOC-407 (K-200 Battery Environmental Test Report) -DESCRIBES-> P-1111 (Servo Cable Harness)",
+    "WIKI-017 (Airframe Materials Review Meeting \u2014 2023) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "WIKI-042 (Decision Record: datalink frequency sele) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "WIKI-038 (Payload Gimbal Design Review \u2014 2024-06-1) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "ECR-207 (Wing skin material change: CFRP \u2192 hybrid) -AFFECTS-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "DOC-409 (K-200 Structural Specification v2.0) -REFERENCES-> DOC-407 (K-200 Battery Environmental Test Report)",
+    "ECN-307 (Approved Change \u2014 ECR-207: Wing skin mat) -UPDATES-> DOC-407 (K-200 Battery Environmental Test Report)"
+  ],
+  "sources": [
+    {
+      "rowid": 276,
+      "artifact_id": "DOC-407",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Battery Environmental Test Report",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 371,
+      "body": "DOC-407 | K-200 Battery Environmental Test Report\n\n# K-200 Battery Environmental Test Report\n\nDocument number: MD-DOC-407-A. Revision: A. Type: risk-register. Author: Nina Schulz. Created: 2023-03-18. Last modified: 2024-01-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1085, P-1111, P-1028, P-1003.",
+      "score": 0.030092,
+      "legs": [
+        "vector",
+        "graph"
+      ]
+    },
+    {
+      "rowid": 217,
+      "artifact_id": "ECR-221",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "Replace propulsion motors P-1031 and ESCs P-1032 with P-1041/P-1042",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1447,
+      "body": "ECR-221 | Replace propulsion motors P-1031 and ESCs P-1032 with P-1041/P-1042\n\nEngineering Change Request ECR-221.\n\nRaised by: Marcus Thaine (Propulsion Lead), 2024-04-15.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2024-04-22.\n\nSummary: Replace all four instances of the TorqueDrive 4012 490KV motors (P-1031) and ControlAir 60A ESCs (P-1032) with TorqueDrive 4014 420KV Enhanced motors (P-1041) and ControlAir 80A Enhanced ESCs (P-1042).\n\nRationale: Two thermal events during April 2024 testing demonstrated that P-1031 motors cannot meet the 40\u00b0C ambient temperature operating requirement:\n- KES-187 (2024-04-02): Fwd-port P-1031 motor reached 108\u00b0C winding temperature during 45-min endurance run at 30\u00b0C ambient, triggering thermal cutout. Winding temperature rating is 85\u00b0C maximum continuous.\n- KES-188 (2024-04-08): Fwd-stbd P-1031 motor ESC (P-1032) repeatedly overcurrented due to thermal throttling, causing motor sync loss.\n\nRoot cause (established at WIKI-031 Propulsion Thermal Review, 2024-04-10): The 4012 490KV winding design has insufficient stator-to-case thermal conductivity. The P-1031 motor was selected in 2023 without a hot-day endurance test.\n\nThe TorqueDrive 4014 420KV Enhanced (P-1041) uses an improved winding geometry that reduces stator temperature by approximately 18\u00b0C at the same operating point (per TorqueDrive data sheet DS-4014E rev 2). Paired with the ControlAir 80A Enhanced ESC (P-1042, copper heatsink) and P-1051 heatsink, the thermal margin is restored to 22\u00b0C at 40\u00b0C ambient.",
+      "score": 0.027273,
+      "legs": [
+        "fts",
+        "graph"
+      ]
+    },
+    {
+      "rowid": 623,
+      "artifact_id": "WIKI-038",
+      "source": "Confluence",
+      "art_kind": "document",
+      "title": "Payload Gimbal Design Review \u2014 2024-06-18",
+      "prov_tier": 2,
+      "tier_label": "unverified",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1769,
+      "body": "WIKI-038 | Payload Gimbal Design Review \u2014 2024-06-18\n\n# Payload Gimbal Design Review \u2014 2024-06-18\n\n**Space:** K200  \n**Meeting type:** Technical Design Review / Design Rejection  \n**Attendees:** Cass Doyle (Payload), Felix Herrera (Integration), Aisha Mbeki (Test), Tobias Wren (Airframe), Sam Dreher (GNC)  \n**Chair:** Felix Herrera  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nKES-134 (epic: payload gimbal integration) began with the original 2-axis gimbal sourced from GimbalTech Ltd in early 2024. During integration testing the gimbal exhibited structural resonance. KES-137 (bug: gimbal resonance during level flight) documented that the GimbalTech unit had a resonant frequency of 8.2Hz which coincided with the wing flutter mode of the airframe at 8\u20139Hz. At resonance the camera image was unusable \u2014 jitter exceeded \u00b14\u00b0 peak-to-peak when the requirement in DOC-449 (Payload ICD) is \u00b10.5\u00b0.\n\n## Root Cause\n\nCass Doyle presented the vibration analysis. The GimbalTech gimbal (no longer referenced as it is being rejected) had a resonant frequency of 8.2Hz due to the lightweight hollow-tube frame construction. The K-200 airframe wing flutter mode at cruise is 8\u20139Hz per the loads analysis (DOC-407). This was a design oversight \u2014 gimbal resonance was not considered during the original payload bay design.\n\nSam Dreher confirmed that active electronic stabilisation in SRC-021 (gimbal_driver.py) cannot compensate for structural resonance at the same frequency as the control bandwidth limit.\n\n## Replacement Design\n\nCass Doyle proposed the redesigned gimbal assembly (P-1154, now Rev C) using hollow-shaft BLDC motors (P-1155 pitch, P-1156 roll, P-1157 yaw) from GB-Systems with a stiffer carbon fibre frame. The natural frequency of the new assembly is 24Hz, well above the airframe flutter mode.",
+      "score": 0.026164,
+      "legs": [
+        "fts",
+        "vector"
+      ]
+    },
+    {
+      "rowid": 234,
+      "artifact_id": "ECN-301",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "Configuration Baseline \u2014 K-200 System Architecture v1.0 (per DOC-401)",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1025,
+      "body": "ECN-301 | Configuration Baseline \u2014 K-200 System Architecture v1.0 (per DOC-401)\n\nEngineering Change Notice ECN-301. Programme configuration baseline.\nApproved by: Dr. Rhea Voss, 2023-04-15.\n\nThis ECN formally establishes the K-200 System Architecture configuration baseline as defined in DOC-401 (System Architecture Document v1.0).\n\nKey baseline parameters:\n1. Autonomy level: SAE Level 3 conditional automation (per customer RFT-K200-002 requirement, recorded in WIKI-003 kick-off meeting and REV-631 review comments)\n2. MTOW: 8kg\n3. Endurance target: 60 minutes minimum at cruise\n4. Battery chemistry baseline: LiPo (subject to thermal risk note in WIKI-003) \u2014 subsequently changed by ECN-312\n5. Propulsion: quad-pusher, 4x motors (subsequently P-1031, changed by ECN-318 to P-1041)\n6. Comms: 900MHz FHSS, 15km range (P-1125, subsequently upgraded by ECN-322 to P-1126 with encryption)\n7. GNC: single-string FCU (P-1091), BVLOS open-water operations only\n8. Redundancy: hardware fail-safe RTL if datalink lost >10s\n\nThis baseline is the reference against which all subsequent ECRs and ECNs are compared.",
+      "score": 0.025385,
+      "legs": [
+        "fts",
+        "graph"
+      ]
+    },
+    {
+      "rowid": 615,
+      "artifact_id": "WIKI-031",
+      "source": "Confluence",
+      "art_kind": "document",
+      "title": "Propulsion Thermal Review Meeting \u2014 2024-04-10",
+      "prov_tier": 2,
+      "tier_label": "unverified",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1734,
+      "body": "WIKI-031 | Propulsion Thermal Review Meeting \u2014 2024-04-10\n\n# Propulsion Thermal Review Meeting \u2014 2024-04-10\n\n**Space:** K200  \n**Meeting type:** Emergency Technical Review  \n**Attendees:** Marcus Thaine (Propulsion Lead), Dr. Rhea Voss (CSE), Aisha Mbeki (Test), Tyler Moss (Firmware), Felix Herrera (Integration), Rowan Ellery (Electrical)  \n**Chair:** Marcus Thaine  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nThis emergency review was convened following two motor thermal events in the same week: KES-187 (fwd-port motor P-1031 thermal cutout during a 45-minute endurance run, 2 April 2024) and KES-188 (repeated ESC overcurrent on fwd-stbd motor P-1031, 8 April 2024). Both events occurred during warm-weather testing at ambient temperatures of 28\u201332\u00b0C. The original TorqueDrive 4012 490KV motors (P-1031) have shown a pattern of thermal issues that the thermal pads (P-1045) and standard heatsinks (P-1040 ESC mounting plate) are not adequately managing.\n\n## Root Cause Summary\n\nMarcus Thaine presented the thermal analysis. Key findings:\n\n1. The P-1031 motor stator winding temperature was reaching 95\u2013105\u00b0C during sustained hover at 28\u00b0C ambient, against a rating of 85\u00b0C maximum continuous.\n2. The ESC (P-1032, ControlAir 60A) was throttling at 35\u00b0C case temperature due to its internal protection \u2014 cutting power to the motor and causing the observed overcurrent oscillation.\n3. The root cause is insufficient thermal mass and poor stator-to-case conductivity in the 4012 490KV winding design. The motor was selected in 2023 without a hot-day endurance test, relying on the manufacturer's datasheet rating.\n\nTyler Moss confirmed the motor controller board (P-1044) thermal logging data showing temperatures up to 108\u00b0C at the motor windings.\n\n## Options Considered",
+      "score": 0.023352,
+      "legs": [
+        "fts",
+        "graph"
+      ]
+    },
+    {
+      "rowid": 315,
+      "artifact_id": "DOC-445",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Motor Qualification Test Report \u2014 P-1041/P-1042",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1540,
+      "body": "DOC-445 | K-200 Motor Qualification Test Report \u2014 P-1041/P-1042\n\n# K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042\n\nDocument number: MD-DOC-445-A. Revision: A. Type: test-report. Author: Aisha Mbeki. Created: 2024-05-30. Last modified: 2024-06-10. Status: Released.\n\nThis report documents the qualification testing of the TorqueDrive 4014 420KV Enhanced motor (P-1041) and ControlAir 80A Enhanced ESC (P-1042) as replacements for P-1031 and P-1032. Change authority: ECN-318 / ECR-221. Background: thermal events KES-187 and KES-188, propulsion thermal review WIKI-031.\n\n## \u00a73 Thermal Test\n\nTest configuration: P-1041 motor on P-1012 motor mount, P-1042 ESC with P-1051 heatsink, P-1044 motor controller board. Ambient temperature: 40\u00b0C (requirement maximum). Duration: 90 minutes at 75% throttle (representative endurance cruise).\n\nResults:\n- Motor winding temperature peak: 79\u00b0C (rated maximum: 85\u00b0C continuous). Margin: 6\u00b0C. PASS.\n- ESC case temperature peak: 31\u00b0C (rated maximum: 70\u00b0C). Margin: 39\u00b0C. PASS.\n- No thermal cutout events during 90-minute test. PASS.\n\nComparison with P-1031 at 40\u00b0C ambient (extrapolated from 30\u00b0C test data): estimated winding temperature would be 120\u00b0C \u2014 35\u00b0C above rated maximum. FAIL expected.\n\n## \u00a74 Endurance Test\n\nDuration: 3 x 90-minute flights at 40\u00b0C ambient. All flights completed without motor or ESC anomalies. Motor connector (P-1059) showed no heating. PASS.\n\n## \u00a75 Conclusion\n\nP-1041 and P-1042 qualify for operational use per ECN-318 at ambient temperatures up to 40\u00b0C. P-1031 and P-1032 are obsolete and shall not be used in operational aircraft.",
+      "score": 0.016393,
+      "legs": [
+        "fts"
+      ]
+    },
+    {
+      "rowid": 356,
+      "artifact_id": "DOC-485",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Integration Risk Register",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 338,
+      "body": "DOC-485 | K-200 Integration Risk Register\n\n# K-200 Integration Risk Register\n\nDocument number: MD-DOC-485-A. Revision: A. Type: analysis. Author: Tobias Wren. Created: 2023-09-03. Last modified: 2024-02-07. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1090.",
+      "score": 0.016393,
+      "legs": [
+        "vector"
+      ]
+    },
+    {
+      "rowid": 303,
+      "artifact_id": "DOC-433",
+      "source": "PLM",
+      "art_kind": "document",
+      "title": "K-200 Propulsion Interface Control Document",
+      "prov_tier": 1,
+      "tier_label": "formal",
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 344,
+      "body": "DOC-433 | K-200 Propulsion Interface Control Document\n\n# K-200 Propulsion Interface Control Document\n\nDocument number: MD-DOC-433-D. Revision: D. Type: ICD. Author: Tobias Wren. Created: 2023-07-13. Last modified: 2023-12-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1168.",
+      "score": 0.016129,
+      "legs": [
+        "vector"
+      ]
+    }
+  ],
+  "latency_ms": 5,
+  "backend": "mock/mock",
+  "retrieval": {
+    "fts_hits": 15,
+    "vector_hits": 20,
+    "graph_hits": 51,
+    "anchors": [
+      "WIKI-038",
+      "DOC-445",
+      "DOC-485",
+      "WIKI-003",
+      "DOC-433",
+      "KES-187"
+    ],
+    "fused_candidates": 81
+  }
+}

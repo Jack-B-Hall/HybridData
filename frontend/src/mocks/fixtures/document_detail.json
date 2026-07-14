@@ -1,0 +1,119 @@
+{
+  "id": "ECR-214",
+  "kind": "document",
+  "title": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+  "text": "Engineering Change Request ECR-214.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-10-12.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-10-19.\n\nSummary: Change the battery cell assembly (P-1062) from LiPo (6S2P 22.2V 20Ah) to LiFePO4 chemistry.\n\nRationale: The K-200 experienced a LiPo thermal runaway event on 8 September 2023 during a hot-day endurance test (KES-208). This was the second thermal anomaly on P-1062 cells (the first was a cell swelling event in March 2023). LiPo cells present an unacceptable risk under IEC 62133-2 compliance requirements for BVLOS maritime operations, particularly given the salt-water submersion risk profile. The customer contract (ref KES-208) explicitly prohibits LiPo chemistry for BVLOS maritime operations.\n\nLiFePO4 chemistry offers superior thermal stability (stable to 270\u00b0C vs LiPo thermal runaway at ~150\u00b0C) at a cost of approximately 12% lower energy density. The endurance reduction from 75 minutes projected to 66 minutes is within the 60-minute minimum requirement. Trade study presented at WIKI-052 (Battery Chemistry Design Review, 2023-10-05).\n\nImpact:\n- P-1062: New LiFePO4 cell assembly (CellCore Technologies, 6S2P 22.2V 20Ah LiFePO4)\n- P-1075: BMS module charge/discharge profile must be updated for LiFePO4 voltage curves (3.2V nominal vs 3.7V LiPo)\n- P-1064: Battery connector to remain AS150 \u2014 no change\n- DOC-421: Battery System Specification to be updated to Rev C\n- P-1079: Battery wiring harness \u2014 no change required\n- Qualification testing: Full cell-level and pack-level qualification per IEC 62133-2 required before ECN issue\n\nRelated: KES-208 (thermal runaway bug), WIKI-052 (design review meeting), DOC-421 (battery spec update).",
+  "source": "PLM",
+  "prov_tier": 1,
+  "tier_label": "formal",
+  "subsystem": null,
+  "parent_id": null,
+  "metadata": {
+    "raised_by": "E03",
+    "raised_date": "2023-10-12",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1062",
+      "P-1075"
+    ],
+    "affected_docs": [
+      "DOC-421"
+    ],
+    "jira_issues": [
+      "KES-208",
+      "KES-210"
+    ],
+    "approver": "E01",
+    "approved_date": "2023-10-19"
+  },
+  "sections": [
+    {
+      "chunk_idx": 0,
+      "char_start": 0,
+      "char_end": 1723,
+      "body": "ECR-214 | Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4\n\nEngineering Change Request ECR-214.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-10-12.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-10-19.\n\nSummary: Change the battery cell assembly (P-1062) from LiPo (6S2P 22.2V 20Ah) to LiFePO4 chemistry.\n\nRationale: The K-200 experienced a LiPo thermal runaway event on 8 September 2023 during a hot-day endurance test (KES-208). This was the second thermal anomaly on P-1062 cells (the first was a cell swelling event in March 2023). LiPo cells present an unacceptable risk under IEC 62133-2 compliance requirements for BVLOS maritime operations, particularly given the salt-water submersion risk profile. The customer contract (ref KES-208) explicitly prohibits LiPo chemistry for BVLOS maritime operations.\n\nLiFePO4 chemistry offers superior thermal stability (stable to 270\u00b0C vs LiPo thermal runaway at ~150\u00b0C) at a cost of approximately 12% lower energy density. The endurance reduction from 75 minutes projected to 66 minutes is within the 60-minute minimum requirement. Trade study presented at WIKI-052 (Battery Chemistry Design Review, 2023-10-05).\n\nImpact:\n- P-1062: New LiFePO4 cell assembly (CellCore Technologies, 6S2P 22.2V 20Ah LiFePO4)\n- P-1075: BMS module charge/discharge profile must be updated for LiFePO4 voltage curves (3.2V nominal vs 3.7V LiPo)\n- P-1064: Battery connector to remain AS150 \u2014 no change\n- DOC-421: Battery System Specification to be updated to Rev C\n- P-1079: Battery wiring harness \u2014 no change required\n- Qualification testing: Full cell-level and pack-level qualification per IEC 62133-2 required before ECN issue\n\nRelated: KES-208 (thermal runaway bug), WIKI-052 (design review meeting), DOC-421 (battery spec update)."
+    }
+  ],
+  "refs": [
+    "DOC-421",
+    "KES-208",
+    "KES-210",
+    "P-1062",
+    "P-1064",
+    "P-1075",
+    "P-1079",
+    "WIKI-052"
+  ],
+  "referenced_by": [
+    "DOC-421",
+    "DOC-430",
+    "ECN-312",
+    "ECN-314",
+    "KES-208",
+    "WIKI-052",
+    "WIKI-062"
+  ],
+  "closure": {
+    "artifact_id": "ECR-214",
+    "title": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+    "prov_tier": 1,
+    "downstream_ids": [
+      "ECN-312",
+      "ECN-314",
+      "DOC-421",
+      "DOC-430",
+      "KES-208",
+      "WIKI-052",
+      "WIKI-062",
+      "REV-650",
+      "KES-002",
+      "WIKI-070",
+      "SRC-003",
+      "KES-137",
+      "KES-070",
+      "KES-088",
+      "KES-093",
+      "KES-109",
+      "KES-162",
+      "KES-180",
+      "KES-218",
+      "ECR-216",
+      "ECN-313",
+      "WIKI-038",
+      "SRC-006"
+    ],
+    "upstream_ids": [
+      "P-1062",
+      "P-1075",
+      "P-1064",
+      "P-1079",
+      "DOC-421",
+      "KES-208",
+      "KES-210",
+      "WIKI-052",
+      "DRW-510",
+      "DRW-532",
+      "DRW-515",
+      "DRW-503",
+      "P-1076",
+      "ECN-312",
+      "ECR-209",
+      "DOC-431",
+      "REV-623",
+      "P-1061",
+      "KES-019",
+      "P-1080",
+      "P-1081",
+      "P-1082",
+      "P-1077",
+      "P-1072",
+      "P-1063",
+      "P-1067",
+      "P-1017",
+      "WIKI-014",
+      "DRW-521",
+      "DOC-434"
+    ],
+    "summary": "Impact/dependency closure for ECR-214 (Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4) [formal].\nImpacted if changed (23 records, <=3 hops): ECN-312 (Approved Change \u2014 ECR-214: Battery cell ), ECN-314 (Approved Change Notice for ECR-214), DOC-421 (K-200 Battery System Specification v2.0 ), DOC-430 (K-200 Systems Maintenance Procedure), KES-208 ([Bug] LiPo thermal runaway on P-1062 dur), WIKI-052 (Battery Chemistry Design Review \u2014 2023-1), WIKI-062 (Action Items: Integration Milestone 4), REV-650 (Review of DOC-421: REV-650), KES-002 ([Epic] Propulsion system integration), WIKI-070 (Action Items: Systems Milestone 4), SRC-003 (power/bms_monitor.py \u2014 Battery), KES-137 ([Story] Create verification matrix), KES-070 ([Bug] Mission file import validation err), KES-088 ([Story] Integrate interface control docu), KES-093 ([Story] Update supplier data package), KES-109 ([Story] Qualify software design document), KES-162 ([Story] Verify ICD rev B), KES-180 ([Story] Implement power budget model), KES-218 ([Story] Integrate maintenance manual sec), ECR-216 (Payload gimbal redesign: reject GimbalTe), ECN-313 (Approved Change \u2014 ECR-216: Payload gimba), WIKI-038 (Payload Gimbal Design Review \u2014 2024-06-1), SRC-006 (gnc/gnc_common.py \u2014 Nav/GNC).\nDepends on (30 records, <=3 hops): P-1062 (Battery Cell Assembly \u2014 LiFePO4), P-1075 (BMS Module), P-1064 (Battery Connector \u2014 Main), P-1079 (Battery Wiring Harness), DOC-421 (K-200 Battery System Specification v2.0 ), KES-208 ([Bug] LiPo thermal runaway on P-1062 dur), KES-210 ([Bug] Mission file import validation err), WIKI-052 (Battery Chemistry Design Review \u2014 2023-1), DRW-510 (DRW MD-DRW-510: BMS Enclosure Assembly), DRW-532 (DRW MD-DRW-532: BMS to Bus Wiring), DRW-515 (DRW MD-DRW-515: Power Distribution Wirin), DRW-503 (DRW MD-DRW-503: Battery Bay Assembly), P-1076 (Power Distribution Board), ECN-312 (Approved Change \u2014 ECR-214: Battery cell ), ECR-209 (BMS P-1075 safety parameter update: SOC ), DOC-431 (K-200 BMS Safety Specification v1.3), REV-623 (Review of DOC-431: BMS Safety Specificat), P-1061 (Battery Enclosure), KES-019 ([Epic] Integration and test environment ), P-1080 (BMS Heatsink), P-1081 (BMS Enclosure), P-1082 (Overvoltage Protection Module), P-1077 (Current Sensor), P-1072 (Main Fuse 50A), P-1063 (Battery Enclosure Lid), P-1067 (Battery Mounting Bracket), P-1017 (Wiring Harness Bracket \u2014 Airframe), WIKI-014 (BMS Safety Architecture Review \u2014 2023-07), DRW-521 (DRW MD-DRW-521: Battery Retention System), DOC-434 (K-200 Battery Qualification Test Report)."
+  }
+}

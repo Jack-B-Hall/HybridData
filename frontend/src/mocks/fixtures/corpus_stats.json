@@ -1,0 +1,71 @@
+{
+  "totals": {
+    "artifacts": 774,
+    "chunks": 795,
+    "refs": 2099
+  },
+  "by_kind": {
+    "document": 580,
+    "entity": 180,
+    "person": 14
+  },
+  "by_source": {
+    "Confluence": 80,
+    "Jira": 220,
+    "PLM": 444,
+    "SCM": 30
+  },
+  "by_tier": {
+    "formal": 444,
+    "unverified": 80,
+    "informal": 250
+  },
+  "by_subsystem": {
+    "unassigned": 434,
+    "Nav/GNC": 54,
+    "Battery": 50,
+    "Propulsion": 48,
+    "Airframe": 47,
+    "Comms/Datalink": 42,
+    "Payload": 41,
+    "GCS": 36,
+    "Systems": 14,
+    "Integration": 8
+  },
+  "graph": {
+    "nodes": 774,
+    "edges": 3143,
+    "nodes_by_kind": {
+      "document": 580,
+      "entity": 180,
+      "person": 14
+    },
+    "edges_by_rel": {
+      "AFFECTS": 181,
+      "APPROVED_BY": 110,
+      "ASSIGNED_TO": 220,
+      "AUTHORED_BY": 200,
+      "CHECKED_BY": 40,
+      "CLOSED_BY": 6,
+      "DEPICTS": 156,
+      "DESCRIBES": 260,
+      "DRAWN_BY": 40,
+      "FIXES": 110,
+      "IMPLEMENTS": 94,
+      "LINKS_TO": 200,
+      "MODIFIED_BY": 80,
+      "MODIFIES": 85,
+      "PART_OF": 49,
+      "RAISED_BY": 35,
+      "REFERENCES": 830,
+      "REPORTED_BY": 220,
+      "REVIEWED_BY": 50,
+      "REVIEWS": 51,
+      "TRIGGERED_BY": 69,
+      "TRIGGERS": 5,
+      "UPDATES": 52
+    }
+  },
+  "embedder": "hash",
+  "snapshot_at": "2026-07-14T09:26:57+00:00"
+}

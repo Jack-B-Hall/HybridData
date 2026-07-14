@@ -1,0 +1,1430 @@
+{
+  "nodes": [
+    {
+      "id": "E01",
+      "kind": "person",
+      "label": "Dr. Rhea Voss",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E02",
+      "kind": "person",
+      "label": "Marcus Thaine",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E03",
+      "kind": "person",
+      "label": "Lena Okafor",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E04",
+      "kind": "person",
+      "label": "Sam Dreher",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E05",
+      "kind": "person",
+      "label": "Priya Nair",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E06",
+      "kind": "person",
+      "label": "Tobias Wren",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E07",
+      "kind": "person",
+      "label": "Cass Doyle",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E08",
+      "kind": "person",
+      "label": "Jordan Kim",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E09",
+      "kind": "person",
+      "label": "Felix Herrera",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E10",
+      "kind": "person",
+      "label": "Aisha Mbeki",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E11",
+      "kind": "person",
+      "label": "Dev Patel",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E12",
+      "kind": "person",
+      "label": "Nina Schulz",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E13",
+      "kind": "person",
+      "label": "Rowan Ellery",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "E14",
+      "kind": "person",
+      "label": "Tyler Moss",
+      "subsystem": null,
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1001",
+      "kind": "entity",
+      "label": "Fuselage Main Body",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1002",
+      "kind": "entity",
+      "label": "Wing Spar \u2014 Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1003",
+      "kind": "entity",
+      "label": "Wing Spar \u2014 Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1004",
+      "kind": "entity",
+      "label": "Nose Cone Assembly",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1005",
+      "kind": "entity",
+      "label": "Tail Boom",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1006",
+      "kind": "entity",
+      "label": "Landing Skid \u2014 Forward",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1007",
+      "kind": "entity",
+      "label": "Landing Skid \u2014 Aft",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1008",
+      "kind": "entity",
+      "label": "Wing Skin \u2014 Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1009",
+      "kind": "entity",
+      "label": "Wing Skin \u2014 Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1010",
+      "kind": "entity",
+      "label": "Aileron \u2014 Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1011",
+      "kind": "entity",
+      "label": "Aileron \u2014 Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1012",
+      "kind": "entity",
+      "label": "Motor Mount \u2014 Aft Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1013",
+      "kind": "entity",
+      "label": "Motor Mount \u2014 Aft Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1014",
+      "kind": "entity",
+      "label": "Motor Mount \u2014 Fwd Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1015",
+      "kind": "entity",
+      "label": "Motor Mount \u2014 Fwd Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1016",
+      "kind": "entity",
+      "label": "Elevator Assembly",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1017",
+      "kind": "entity",
+      "label": "Wiring Harness Bracket \u2014 Airframe",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1018",
+      "kind": "entity",
+      "label": "Rudder Assembly",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1019",
+      "kind": "entity",
+      "label": "Avionics Bay Structure",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1020",
+      "kind": "entity",
+      "label": "Hatch \u2014 Battery Bay",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1021",
+      "kind": "entity",
+      "label": "Hatch \u2014 Payload Bay",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1022",
+      "kind": "entity",
+      "label": "Antenna Fairing \u2014 Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1023",
+      "kind": "entity",
+      "label": "Antenna Fairing \u2014 Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1024",
+      "kind": "entity",
+      "label": "Payload Rail \u2014 Port",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1025",
+      "kind": "entity",
+      "label": "Payload Rail \u2014 Starboard",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1026",
+      "kind": "entity",
+      "label": "Drain Plug",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1027",
+      "kind": "entity",
+      "label": "Ballast Weight \u2014 Forward",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1028",
+      "kind": "entity",
+      "label": "Ballast Weight \u2014 Aft",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1029",
+      "kind": "entity",
+      "label": "Tie-Down Ring \u2014 Forward",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1030",
+      "kind": "entity",
+      "label": "Tie-Down Ring \u2014 Aft",
+      "subsystem": "Airframe",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1031",
+      "kind": "entity",
+      "label": "BLDC Motor v1 (obsolete)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1032",
+      "kind": "entity",
+      "label": "ESC 60A Original",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1033",
+      "kind": "entity",
+      "label": "Propeller Fwd CW 15x5.5",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1034",
+      "kind": "entity",
+      "label": "Propeller Fwd CCW 15x5.5",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1035",
+      "kind": "entity",
+      "label": "Propeller Aft CW 15x5.5",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1036",
+      "kind": "entity",
+      "label": "Propeller Aft CCW 15x5.5",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1037",
+      "kind": "entity",
+      "label": "Motor Cable \u2014 Fwd Port",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1038",
+      "kind": "entity",
+      "label": "Motor Cable \u2014 Fwd Starboard",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1039",
+      "kind": "entity",
+      "label": "Propeller Adapter Set",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1040",
+      "kind": "entity",
+      "label": "ESC Mounting Plate",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1041",
+      "kind": "entity",
+      "label": "BLDC Motor v2 Enhanced",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1042",
+      "kind": "entity",
+      "label": "ESC 80A Enhanced",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1043",
+      "kind": "entity",
+      "label": "Propeller Guard Assembly",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1044",
+      "kind": "entity",
+      "label": "Motor/ESC Controller Board",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1045",
+      "kind": "entity",
+      "label": "Thermal Pad \u2014 ESC (set of 4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1046",
+      "kind": "entity",
+      "label": "RPM Sensor (set of 4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1047",
+      "kind": "entity",
+      "label": "Motor Thermal Sensor (set of 4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1048",
+      "kind": "entity",
+      "label": "Vibration Isolator \u2014 Motor (x4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1049",
+      "kind": "entity",
+      "label": "Propeller Locking Nut (x4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1050",
+      "kind": "entity",
+      "label": "Propeller Washer (x4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1051",
+      "kind": "entity",
+      "label": "ESC Heatsink Enhanced (x4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1052",
+      "kind": "entity",
+      "label": "Motor Mounting Screw Set",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1053",
+      "kind": "entity",
+      "label": "Motor Cable \u2014 Aft Port",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1054",
+      "kind": "entity",
+      "label": "Motor Cable \u2014 Aft Starboard",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1055",
+      "kind": "entity",
+      "label": "Motor Programming Card",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1056",
+      "kind": "entity",
+      "label": "Inrush Limiter \u2014 Motor Bus",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1057",
+      "kind": "entity",
+      "label": "Motor Protection Diode (x4)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1058",
+      "kind": "entity",
+      "label": "Motor Cable Clamp Set",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1059",
+      "kind": "entity",
+      "label": "Motor Connector XT60 (x4 pairs)",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1060",
+      "kind": "entity",
+      "label": "Motor Data Cable Harness",
+      "subsystem": "Propulsion",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1061",
+      "kind": "entity",
+      "label": "Battery Enclosure",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1062",
+      "kind": "entity",
+      "label": "Battery Cell Assembly \u2014 LiFePO4",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1063",
+      "kind": "entity",
+      "label": "Battery Enclosure Lid",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1064",
+      "kind": "entity",
+      "label": "Battery Connector \u2014 Main",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1065",
+      "kind": "entity",
+      "label": "Charge Connector",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1066",
+      "kind": "entity",
+      "label": "Heat Spreader \u2014 Battery",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1067",
+      "kind": "entity",
+      "label": "Battery Mounting Bracket",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1068",
+      "kind": "entity",
+      "label": "Compression Pad \u2014 Battery",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1069",
+      "kind": "entity",
+      "label": "Battery Retention Strap (x2)",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1070",
+      "kind": "entity",
+      "label": "Battery Venting Membrane",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1071",
+      "kind": "entity",
+      "label": "Battery Indicator LED Assembly",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1072",
+      "kind": "entity",
+      "label": "Main Fuse 50A",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1073",
+      "kind": "entity",
+      "label": "Inrush Limiter \u2014 Main Bus",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1074",
+      "kind": "entity",
+      "label": "Fuse Holder",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1075",
+      "kind": "entity",
+      "label": "BMS Module",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1076",
+      "kind": "entity",
+      "label": "Power Distribution Board",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1077",
+      "kind": "entity",
+      "label": "Current Sensor",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1078",
+      "kind": "entity",
+      "label": "Voltage Divider Board",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1079",
+      "kind": "entity",
+      "label": "Battery Wiring Harness",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1080",
+      "kind": "entity",
+      "label": "BMS Heatsink",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1081",
+      "kind": "entity",
+      "label": "BMS Enclosure",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1082",
+      "kind": "entity",
+      "label": "Overvoltage Protection Module",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1083",
+      "kind": "entity",
+      "label": "Battery Bay Fan",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1084",
+      "kind": "entity",
+      "label": "Fan Controller PCB",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1085",
+      "kind": "entity",
+      "label": "Thermal Sensor \u2014 Battery",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1086",
+      "kind": "entity",
+      "label": "Temperature Runaway Detector",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1087",
+      "kind": "entity",
+      "label": "EEPROM Battery Log",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1088",
+      "kind": "entity",
+      "label": "Battery Cell Spacer (x12)",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1089",
+      "kind": "entity",
+      "label": "Pressure Relief Valve",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1090",
+      "kind": "entity",
+      "label": "BMS Programming Cable",
+      "subsystem": "Battery",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1091",
+      "kind": "entity",
+      "label": "Autopilot FCU",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1092",
+      "kind": "entity",
+      "label": "IMU Module \u2014 Original (obsolete)",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1093",
+      "kind": "entity",
+      "label": "IMU Module \u2014 Enhanced",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1094",
+      "kind": "entity",
+      "label": "GPS Receiver Board",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1095",
+      "kind": "entity",
+      "label": "Barometer Module",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1096",
+      "kind": "entity",
+      "label": "Magnetometer",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1097",
+      "kind": "entity",
+      "label": "GPS Antenna Module \u2014 Original",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1098",
+      "kind": "entity",
+      "label": "GPS Antenna Module \u2014 v2",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1099",
+      "kind": "entity",
+      "label": "Pitot-Static Tube",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1100",
+      "kind": "entity",
+      "label": "AHRS Unit",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1101",
+      "kind": "entity",
+      "label": "Air Data Computer",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1102",
+      "kind": "entity",
+      "label": "GPS Antenna Mount",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1103",
+      "kind": "entity",
+      "label": "IMU Vibration Damper (x4)",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1104",
+      "kind": "entity",
+      "label": "FCU Enclosure",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1105",
+      "kind": "entity",
+      "label": "FCU Wiring Harness",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    },
+    {
+      "id": "P-1106",
+      "kind": "entity",
+      "label": "Servo Controller Board",
+      "subsystem": "Nav/GNC",
+      "source": "PLM",
+      "prov_tier": 1
+    }
+  ],
+  "edges": [
+    {
+      "src": "P-1011",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1007",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1006",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1015",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1012",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1095",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1014",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1011",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1027",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1005",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1021",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1017",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1010",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1030",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1068",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1016",
+      "dst": "P-1005",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1013",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1029",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1024",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1028",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1018",
+      "dst": "P-1005",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1096",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1020",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1023",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1019",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1027",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1010",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1063",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1004",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1025",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1029",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1024",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1070",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1023",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1093",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1095",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1014",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1021",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1017",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1030",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1004",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1013",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1066",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1018",
+      "dst": "P-1005",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1096",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1067",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1063",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1025",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1094",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1070",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1002",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1088",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1093",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1092",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1002",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1022",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1066",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1067",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1089",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1008",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1094",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1003",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1069",
+      "dst": "P-1067",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1088",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1007",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1009",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1092",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1003",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1069",
+      "dst": "P-1067",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1006",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1026",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1103",
+      "dst": "P-1091",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1015",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1022",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1012",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1005",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1089",
+      "dst": "P-1061",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1008",
+      "dst": "P-1001",
+      "rel": "PART_OF"
+    },
+    {
+      "src": "P-1009",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1026",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1068",
+      "dst": "P-1061",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1103",
+      "dst": "P-1091",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1016",
+      "dst": "P-1005",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1028",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1020",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    },
+    {
+      "src": "P-1019",
+      "dst": "P-1001",
+      "rel": "REFERENCES"
+    }
+  ],
+  "stats": {
+    "nodes": 774,
+    "edges": 3143,
+    "nodes_by_kind": {
+      "document": 580,
+      "entity": 180,
+      "person": 14
+    },
+    "edges_by_rel": {
+      "AFFECTS": 181,
+      "APPROVED_BY": 110,
+      "ASSIGNED_TO": 220,
+      "AUTHORED_BY": 200,
+      "CHECKED_BY": 40,
+      "CLOSED_BY": 6,
+      "DEPICTS": 156,
+      "DESCRIBES": 260,
+      "DRAWN_BY": 40,
+      "FIXES": 110,
+      "IMPLEMENTS": 94,
+      "LINKS_TO": 200,
+      "MODIFIED_BY": 80,
+      "MODIFIES": 85,
+      "PART_OF": 49,
+      "RAISED_BY": 35,
+      "REFERENCES": 830,
+      "REPORTED_BY": 220,
+      "REVIEWED_BY": 50,
+      "REVIEWS": 51,
+      "TRIGGERED_BY": 69,
+      "TRIGGERS": 5,
+      "UPDATES": 52
+    }
+  }
+}
