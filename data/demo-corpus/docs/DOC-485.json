@@ -1,0 +1,22 @@
+{
+  "id": "DOC-485",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Risk Register",
+  "text": "# K-200 Integration Risk Register\n\nDocument number: MD-DOC-485-A. Revision: A. Type: analysis. Author: Tobias Wren. Created: 2023-09-03. Last modified: 2024-02-07. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1090.",
+  "structured": {
+    "doc_number": "MD-DOC-485-A",
+    "revision": "A",
+    "doc_type": "analysis",
+    "author": "E06",
+    "created": "2023-09-03",
+    "last_modified": "2024-02-07",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1090",
+    "ECR-201",
+    "KES-113"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "DRW-535",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-535: Encryption Module PCB",
+  "text": "Drawing MD-DRW-535 Rev E \u2014 Encryption Module PCB\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1127, P-1128, P-1129.\n4. Drawn by Rowan Ellery, checked by Priya Nair, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-535",
+    "revision": "E",
+    "drawn_by": "E13",
+    "checked_by": "E05",
+    "approved_by": "E09",
+    "date": "2025-06-12",
+    "subsystem": "Comms/Datalink",
+    "referenced_parts": [
+      "P-1127",
+      "P-1128",
+      "P-1129"
+    ]
+  },
+  "refs": [
+    "P-1127",
+    "P-1128",
+    "P-1129"
+  ]
+}

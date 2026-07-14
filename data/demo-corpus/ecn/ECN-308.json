@@ -1,0 +1,29 @@
+{
+  "id": "ECN-308",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-208",
+  "text": "Engineering Change Notice ECN-308. Implements ECR-208. Approved by Tyler Moss on 2024-01-07. Affected parts: P-1074, P-1005, P-1129. Updated documents: DOC-423, DOC-414.",
+  "structured": {
+    "ecr_id": "ECR-208",
+    "approved_by": "E14",
+    "approved_date": "2024-01-07",
+    "affected_parts": [
+      "P-1074",
+      "P-1005",
+      "P-1129"
+    ],
+    "affected_docs": [
+      "DOC-423",
+      "DOC-414"
+    ]
+  },
+  "refs": [
+    "ECR-208",
+    "P-1074",
+    "P-1005",
+    "P-1129",
+    "DOC-423",
+    "DOC-414"
+  ]
+}

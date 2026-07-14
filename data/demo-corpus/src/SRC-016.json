@@ -1,0 +1,52 @@
+{
+  "id": "SRC-016",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/flight_log.py \u2014 Nav/GNC",
+  "text": "# flight_log.py \u2014 Kestrel K-200 Nav/GNC\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "flight_log",
+    "language": "Python",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/flight_log.py",
+    "primary_author": "E04",
+    "commit_log": [
+      {
+        "hash": "475b38c",
+        "author": "E03",
+        "date": "2023-04-29",
+        "message": "Initial flight_log [KES-206]",
+        "kes_ref": "KES-206"
+      },
+      {
+        "hash": "b2b09a0",
+        "author": "E12",
+        "date": "2023-06-04",
+        "message": "Update flight_log [KES-124]",
+        "kes_ref": "KES-124"
+      },
+      {
+        "hash": "3b47f1a",
+        "author": "E06",
+        "date": "2023-06-15",
+        "message": "Update flight_log [KES-016]",
+        "kes_ref": "KES-016"
+      },
+      {
+        "hash": "514e6f8",
+        "author": "E13",
+        "date": "2023-07-28",
+        "message": "Update flight_log [KES-219]",
+        "kes_ref": "KES-219"
+      }
+    ]
+  },
+  "refs": [
+    "KES-206",
+    "KES-124",
+    "KES-016",
+    "KES-219",
+    "DOC-413",
+    "DOC-441"
+  ]
+}

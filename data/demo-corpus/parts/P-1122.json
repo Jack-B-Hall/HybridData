@@ -1,0 +1,21 @@
+{
+  "id": "P-1122",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Antenna \u2014 Main Port",
+  "text": "Antenna \u2014 Main Port. Subsystem: Comms/Datalink. Material: dipole 915MHz, 3dBi. Mass: 18g. Manufactured by LinxTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1122",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "dipole 915MHz, 3dBi",
+    "mass_g": 18,
+    "manufacturer": "LinxTech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-520",
+    "DRW-531"
+  ]
+}

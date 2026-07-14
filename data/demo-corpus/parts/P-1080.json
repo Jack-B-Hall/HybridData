@@ -1,0 +1,20 @@
+{
+  "id": "P-1080",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "BMS Heatsink",
+  "text": "BMS Heatsink. Subsystem: Battery. Material: aluminium extrusion. Mass: 38g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1080",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "aluminium extrusion",
+    "mass_g": 38,
+    "manufacturer": "ThermalTech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-510"
+  ]
+}

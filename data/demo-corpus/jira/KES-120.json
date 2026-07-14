@@ -1,0 +1,29 @@
+{
+  "id": "KES-120",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Jordan Kim. Assignee: Priya Nair. Status: In Progress. Priority: Medium. Created: 2024-02-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E05",
+    "created": "2024-02-13",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-020",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-020"
+      }
+    ]
+  },
+  "refs": [
+    "KES-020"
+  ]
+}

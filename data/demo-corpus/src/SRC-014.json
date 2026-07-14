@@ -1,0 +1,43 @@
+{
+  "id": "SRC-014",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/gimbal_ctrl.c \u2014 Payload",
+  "text": "/* gimbal_controller.c \u2014 Kestrel K-200 Payload\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "gimbal_controller",
+    "language": "C",
+    "subsystem": "Payload",
+    "file_path": "payload/gimbal_ctrl.c",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "30b6798",
+        "author": "E14",
+        "date": "2024-10-20",
+        "message": "Initial gimbal_controller [KES-129]",
+        "kes_ref": "KES-129"
+      },
+      {
+        "hash": "c257b84",
+        "author": "E06",
+        "date": "2024-11-04",
+        "message": "Update gimbal_controller [KES-111]",
+        "kes_ref": "KES-111"
+      },
+      {
+        "hash": "c2287a3",
+        "author": "E09",
+        "date": "2024-11-30",
+        "message": "Update gimbal_controller [KES-129]",
+        "kes_ref": "KES-129"
+      }
+    ]
+  },
+  "refs": [
+    "KES-129",
+    "KES-111",
+    "DOC-479",
+    "DOC-468"
+  ]
+}

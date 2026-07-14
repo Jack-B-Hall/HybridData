@@ -1,0 +1,38 @@
+{
+  "id": "ECR-223",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: GCS \u2014 update P-1097 per KES-035",
+  "text": "Engineering Change Request ECR-223. Subsystem: GCS. Affected parts: P-1097, P-1021, P-1175, P-1170. Linked issues: KES-035, KES-168, KES-090. Raised by: Rowan Ellery on 2024-05-04. Status: Approved.",
+  "structured": {
+    "raised_by": "E13",
+    "raised_date": "2024-05-04",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1097",
+      "P-1021",
+      "P-1175",
+      "P-1170"
+    ],
+    "affected_docs": [
+      "DOC-423"
+    ],
+    "jira_issues": [
+      "KES-035",
+      "KES-168",
+      "KES-090"
+    ],
+    "approver": "E11",
+    "approved_date": "2024-06-03"
+  },
+  "refs": [
+    "P-1097",
+    "P-1021",
+    "P-1175",
+    "P-1170",
+    "KES-035",
+    "KES-168",
+    "KES-090",
+    "DOC-423"
+  ]
+}

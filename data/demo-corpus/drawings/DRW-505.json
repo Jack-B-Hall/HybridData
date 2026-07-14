@@ -1,0 +1,24 @@
+{
+  "id": "DRW-505",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-505: Landing Gear Assembly",
+  "text": "Drawing MD-DRW-505 Rev E \u2014 Landing Gear Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1006, P-1007.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-505",
+    "revision": "E",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-05-18",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1006",
+      "P-1007"
+    ]
+  },
+  "refs": [
+    "P-1006",
+    "P-1007"
+  ]
+}

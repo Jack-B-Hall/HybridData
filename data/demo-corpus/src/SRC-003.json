@@ -1,0 +1,60 @@
+{
+  "id": "SRC-003",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "power/bms_monitor.py \u2014 Battery",
+  "text": "# bms_monitor.py \u2014 Kestrel K-200 Battery\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "bms_monitor",
+    "language": "Python",
+    "subsystem": "Battery",
+    "file_path": "power/bms_monitor.py",
+    "primary_author": "E03",
+    "commit_log": [
+      {
+        "hash": "8bc4896",
+        "author": "E13",
+        "date": "2023-09-29",
+        "message": "Initial bms_monitor [KES-035]",
+        "kes_ref": "KES-035"
+      },
+      {
+        "hash": "34d1b45",
+        "author": "E02",
+        "date": "2023-11-13",
+        "message": "Update bms_monitor [KES-042]",
+        "kes_ref": "KES-042"
+      },
+      {
+        "hash": "565a99a",
+        "author": "E06",
+        "date": "2023-12-19",
+        "message": "Update bms_monitor [KES-208]",
+        "kes_ref": "KES-208"
+      },
+      {
+        "hash": "5a7be64",
+        "author": "E06",
+        "date": "2024-01-23",
+        "message": "Update bms_monitor [KES-045]",
+        "kes_ref": "KES-045"
+      },
+      {
+        "hash": "ae696e1",
+        "author": "E04",
+        "date": "2024-03-04",
+        "message": "Update bms_monitor [KES-038]",
+        "kes_ref": "KES-038"
+      }
+    ]
+  },
+  "refs": [
+    "KES-035",
+    "KES-042",
+    "KES-208",
+    "KES-045",
+    "KES-038",
+    "DOC-444",
+    "DOC-430"
+  ]
+}

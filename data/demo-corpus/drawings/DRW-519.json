@@ -1,0 +1,30 @@
+{
+  "id": "DRW-519",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-519: Gimbal Mount Detail",
+  "text": "Drawing MD-DRW-519 Rev D \u2014 Gimbal Mount Detail\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1154, P-1155, P-1156, P-1157, P-1158.\n4. Drawn by Cass Doyle, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-519",
+    "revision": "D",
+    "drawn_by": "E07",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2024-07-03",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1154",
+      "P-1155",
+      "P-1156",
+      "P-1157",
+      "P-1158"
+    ]
+  },
+  "refs": [
+    "P-1154",
+    "P-1155",
+    "P-1156",
+    "P-1157",
+    "P-1158"
+  ]
+}

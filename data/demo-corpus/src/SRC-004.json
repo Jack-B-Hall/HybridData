@@ -1,0 +1,52 @@
+{
+  "id": "SRC-004",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "power/power_manager.py \u2014 Battery",
+  "text": "# power_manager.py \u2014 Kestrel K-200 Battery\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "power_manager",
+    "language": "Python",
+    "subsystem": "Battery",
+    "file_path": "power/power_manager.py",
+    "primary_author": "E03",
+    "commit_log": [
+      {
+        "hash": "4a47d59",
+        "author": "E14",
+        "date": "2024-02-27",
+        "message": "Initial power_manager [KES-075]",
+        "kes_ref": "KES-075"
+      },
+      {
+        "hash": "20bafb1",
+        "author": "E04",
+        "date": "2024-03-27",
+        "message": "Update power_manager [KES-106]",
+        "kes_ref": "KES-106"
+      },
+      {
+        "hash": "1e70c8f",
+        "author": "E03",
+        "date": "2024-04-07",
+        "message": "Update power_manager [KES-102]",
+        "kes_ref": "KES-102"
+      },
+      {
+        "hash": "2ae434a",
+        "author": "E12",
+        "date": "2024-04-14",
+        "message": "Update power_manager [KES-068]",
+        "kes_ref": "KES-068"
+      }
+    ]
+  },
+  "refs": [
+    "KES-075",
+    "KES-106",
+    "KES-102",
+    "KES-068",
+    "DOC-417",
+    "DOC-468"
+  ]
+}

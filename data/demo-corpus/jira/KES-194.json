@@ -1,0 +1,29 @@
+{
+  "id": "KES-194",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Nina Schulz. Assignee: Felix Herrera. Status: Done. Priority: Low. Created: 2024-08-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E12",
+    "assignee": "E09",
+    "created": "2024-08-04",
+    "resolved": "2024-11-03",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "KES-012"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1117",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Ground Plane",
+  "text": "GPS Ground Plane. Subsystem: Nav/GNC. Material: aluminium, 100x100mm. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1117",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "aluminium, 100x100mm",
+    "mass_g": 35,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-513",
+    "DRW-534"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1090",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "BMS Programming Cable",
+  "text": "BMS Programming Cable. Subsystem: Battery. Material: USB-C to UART bridge. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1090",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "USB-C to UART bridge",
+    "mass_g": 12,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-126",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] GCS map tile loading latency",
+  "text": "Bug: GCS map tile loading latency. Reporter: Aisha Mbeki. Assignee: Marcus Thaine. Status: Open. Priority: High. Created: 2024-11-21.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E02",
+    "created": "2024-11-21",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-037",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Marcus Thaine. Assignee: Aisha Mbeki. Status: Open. Priority: High. Created: 2023-08-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E02",
+    "assignee": "E10",
+    "created": "2023-08-12",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-465",
+    "KES-003"
+  ]
+}

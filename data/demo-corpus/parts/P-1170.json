@@ -1,0 +1,20 @@
+{
+  "id": "P-1170",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Wiring Harness",
+  "text": "GCS Wiring Harness. Subsystem: GCS. Material: mixed, 3m bundle. Mass: 225g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-GCS-1170",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "custom",
+    "material": "mixed, 3m bundle",
+    "mass_g": 225,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-528"
+  ]
+}

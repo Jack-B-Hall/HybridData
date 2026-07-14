@@ -1,0 +1,30 @@
+{
+  "id": "KES-127",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create environmental test report",
+  "text": "Story: Create environmental test report. Reporter: Tyler Moss. Assignee: Tobias Wren. Status: Done. Priority: Low. Created: 2025-05-05.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E14",
+    "assignee": "E06",
+    "created": "2025-05-05",
+    "resolved": "2025-05-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-439",
+    "KES-015"
+  ]
+}

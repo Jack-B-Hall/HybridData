@@ -1,0 +1,30 @@
+{
+  "id": "DRW-503",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-503: Battery Bay Assembly",
+  "text": "Drawing MD-DRW-503 Rev C \u2014 Battery Bay Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1061, P-1063, P-1067, P-1017, P-1079.\n4. Drawn by Rowan Ellery, checked by Tobias Wren, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-503",
+    "revision": "C",
+    "drawn_by": "E13",
+    "checked_by": "E06",
+    "approved_by": "E01",
+    "date": "2023-09-12",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1061",
+      "P-1063",
+      "P-1067",
+      "P-1017",
+      "P-1079"
+    ]
+  },
+  "refs": [
+    "P-1061",
+    "P-1063",
+    "P-1067",
+    "P-1017",
+    "P-1079"
+  ]
+}

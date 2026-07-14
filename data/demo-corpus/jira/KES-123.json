@@ -1,0 +1,30 @@
+{
+  "id": "KES-123",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Tobias Wren. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2024-12-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E14",
+    "created": "2024-12-13",
+    "resolved": "2025-04-04",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-419",
+    "KES-016"
+  ]
+}

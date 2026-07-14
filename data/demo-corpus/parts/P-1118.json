@@ -1,0 +1,21 @@
+{
+  "id": "P-1118",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "IMU Thermal Stabiliser",
+  "text": "IMU Thermal Stabiliser. Subsystem: Nav/GNC. Material: PCB, heater + PID controller. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1118",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "PCB, heater + PID controller",
+    "mass_g": 22,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-526",
+    "DRW-538"
+  ]
+}

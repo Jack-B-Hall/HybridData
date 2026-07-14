@@ -1,0 +1,30 @@
+{
+  "id": "KES-040",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Tyler Moss. Assignee: Dev Patel. Status: In Progress. Priority: Medium. Created: 2023-12-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E11",
+    "created": "2023-12-04",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-004",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-004"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-444",
+    "KES-004"
+  ]
+}

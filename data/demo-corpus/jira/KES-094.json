@@ -1,0 +1,29 @@
+{
+  "id": "KES-094",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Nina Schulz. Assignee: Marcus Thaine. Status: Open. Priority: High. Created: 2025-06-22.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E12",
+    "assignee": "E02",
+    "created": "2025-06-22",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "KES-003"
+  ]
+}

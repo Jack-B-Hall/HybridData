@@ -1,0 +1,29 @@
+{
+  "id": "KES-133",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Ground station GPS position drift",
+  "text": "Bug: Ground station GPS position drift. Reporter: Priya Nair. Assignee: Nina Schulz. Status: In Progress. Priority: High. Created: 2024-04-06.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E12",
+    "created": "2024-04-06",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

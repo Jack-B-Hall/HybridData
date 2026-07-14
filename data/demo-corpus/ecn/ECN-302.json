@@ -1,0 +1,29 @@
+{
+  "id": "ECN-302",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-202",
+  "text": "Engineering Change Notice ECN-302. Implements ECR-202. Approved by Tyler Moss on 2025-01-17. Affected parts: P-1126, P-1118, P-1044. Updated documents: DOC-422, DOC-418.",
+  "structured": {
+    "ecr_id": "ECR-202",
+    "approved_by": "E14",
+    "approved_date": "2025-01-17",
+    "affected_parts": [
+      "P-1126",
+      "P-1118",
+      "P-1044"
+    ],
+    "affected_docs": [
+      "DOC-422",
+      "DOC-418"
+    ]
+  },
+  "refs": [
+    "ECR-202",
+    "P-1126",
+    "P-1118",
+    "P-1044",
+    "DOC-422",
+    "DOC-418"
+  ]
+}

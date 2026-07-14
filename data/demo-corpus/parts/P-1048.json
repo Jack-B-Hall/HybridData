@@ -1,0 +1,20 @@
+{
+  "id": "P-1048",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Vibration Isolator \u2014 Motor (x4)",
+  "text": "Vibration Isolator \u2014 Motor (x4). Subsystem: Propulsion. Material: silicone rubber M4. Mass: 20g. Manufactured by IsolaTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1048",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "silicone rubber M4",
+    "mass_g": 20,
+    "manufacturer": "IsolaTech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-539"
+  ]
+}

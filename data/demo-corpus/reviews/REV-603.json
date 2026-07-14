@@ -1,0 +1,40 @@
+{
+  "id": "REV-603",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-464: REV-603",
+  "text": "# Review Record REV-603\n\nDocument: DOC-464. Reviewer: Marcus Thaine. Date: 2023-05-01. Overall disposition: Rejected.\n\n## Comments\n\n**C01** (Lena Okafor): Section 1.2: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C02** (Felix Herrera): Section 6.4: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table. \u2014 *Action required*\n\n**C03** (Felix Herrera): Section 7.5: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table. \u2014 *Action required*",
+  "structured": {
+    "doc_ref": "DOC-464",
+    "reviewer": "E02",
+    "review_date": "2023-05-01",
+    "status": "Open",
+    "overall_disposition": "Rejected",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E03",
+        "text": "Section 1.2: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C02",
+        "author": "E09",
+        "text": "Section 6.4: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table.",
+        "disposition": "Action required",
+        "refs": []
+      },
+      {
+        "comment_id": "C03",
+        "author": "E09",
+        "text": "Section 7.5: The specification should clarify the interface requirement for DOC-464. Recommend updating the acceptance criteria table.",
+        "disposition": "Action required",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-464"
+  ]
+}

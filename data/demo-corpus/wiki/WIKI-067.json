@@ -1,0 +1,29 @@
+{
+  "id": "WIKI-067",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "GNC Sensor Suite Design Review \u2014 2024-12-03",
+  "text": "# GNC Sensor Suite Design Review \u2014 2024-12-03\n\n**Space:** K200  \n**Meeting type:** Technical Design Review  \n**Attendees:** Sam Dreher (GNC Lead), Dev Patel (Embedded SW), Felix Herrera (Integration), Aisha Mbeki (Test), Rowan Ellery (Electrical), Dr. Rhea Voss (CSE, remote)  \n**Chair:** Sam Dreher  \n**Minutes recorded by:** Dev Patel\n\n---\n\n## Background\n\nDuring flight test campaign phase 1 (documented in DOC-467), the nav/GNC team identified that the ICM-42688-P IMU (P-1092, original) was producing attitude estimation errors of up to 2.1\u00b0 in roll during high-vibration low-speed flight phases. This is above the 0.5\u00b0 attitude accuracy requirement in DOC-455 (GNC ICD). The error pattern was traced to the MEMS resonance frequency of the ICM-42688-P (4.8kHz) coinciding with motor vibration harmonics from the P-1041 motors at mid-throttle settings. This issue was tracked as KES-089 (epic) and KES-091 (sub-story: IMU replacement qualification).\n\nAdditionally, GPS signal dropout events during manoeuvres were correlated with the patch antenna (P-1097) losing sky view during roll angles above 15\u00b0. This was tracked in the context of ECR-233.\n\n## IMU Replacement Discussion\n\nSam Dreher presented the evaluation of the Analog Devices ADIS16505-2 tactical-grade IMU (P-1093) as a replacement. Key differentiators:\n\n- Vibration rectification error: 0.006\u00b0/s/g\u00b2 vs ICM-42688-P 0.05\u00b0/s/g\u00b2 \u2014 8x better\n- Output noise: 0.008\u00b0/s/\u221aHz vs 0.0028\u00b0/s/\u221aHz for ADIS (ADIS is slightly noisier in low-vibration, but dramatically better in vibration)\n- The ADIS16505-2 resonant frequency is 18kHz, well above the motor harmonic range\n\nDev Patel confirmed that the nav_filter.c (SRC-007) EKF can accommodate the ADIS SPI interface with a driver update, and that the attitude estimation accuracy improved to 0.3\u00b0 roll in bench simulation with synthetic vibration injection.\n\n## GPS Antenna Replacement Discussion\n\nRowan Ellery presented the helical antenna option (P-1098, TallysmansAU) which provides near-hemispherical coverage and maintains >20dBHz C/N\u2080 at 30\u00b0 elevation angle, compared to the patch antenna (P-1097) which drops below 20dBHz at 45\u00b0 elevation. The helical antenna also adds L5 band support which improves multi-path rejection.\n\n## Decisions\n\n**AGREED 1:** Replace IMU P-1092 with P-1093 (ADIS16505-2 tactical grade).\n- ECR-228 to be raised by Sam Dreher (target 2024-12-10)\n- SRC-007 nav_filter.c and SRC-009 gps_driver.c to be updated (Dev Patel, Q1 2025)\n- DOC-455 GNC ICD to be updated (Sam Dreher, Q1 2025)\n- New qualification flight test required per DOC-467 Rev B (Aisha Mbeki)\n\n**AGREED 2:** Replace GPS antenna P-1097 with P-1098 (helical, L1/L2/L5).\n- Captured in ECR-233 (same ECR as IMU, per Felix Herrera's suggestion to bundle sensor suite changes)\n- DRW-534 GPS antenna installation drawing to be updated (Rowan Ellery)\n- DOC-456 GPS performance spec to be updated to Rev B\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-228 covering IMU and GPS antenna changes | Sam Dreher | 2024-12-10 |\n| A2 | Update SRC-007 nav_filter.c for ADIS16505-2 | Dev Patel | 2025-01-31 |\n| A3 | Update SRC-009 gps_driver.c for P-1098 interface | Dev Patel | 2025-01-31 |\n| A4 | Update DOC-455 GNC ICD to Rev B | Sam Dreher | 2025-02-15 |\n| A5 | Update DOC-456 GPS performance spec to Rev B | Rowan Ellery | 2025-02-15 |\n| A6 | Plan qualification flight test series | Aisha Mbeki | 2025-01-15 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E11",
+    "created_date": "2024-12-03",
+    "last_modified": "2024-12-04",
+    "last_modified_by": "E11"
+  },
+  "refs": [
+    "KES-089",
+    "KES-091",
+    "ECR-228",
+    "ECR-233",
+    "DOC-455",
+    "DOC-456",
+    "DOC-467",
+    "P-1092",
+    "P-1093",
+    "P-1097",
+    "P-1098",
+    "SRC-007",
+    "SRC-009"
+  ]
+}

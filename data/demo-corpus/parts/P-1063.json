@@ -1,0 +1,21 @@
+{
+  "id": "P-1063",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Enclosure Lid",
+  "text": "Battery Enclosure Lid. Subsystem: Battery. Material: aluminium 6061-T6, IP67 seal. Mass: 95g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1063",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6, IP67 seal",
+    "mass_g": 95,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061",
+    "DRW-503"
+  ]
+}

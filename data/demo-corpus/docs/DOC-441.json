@@ -1,0 +1,23 @@
+{
+  "id": "DOC-441",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Interface Control Document",
+  "text": "# K-200 Airframe Interface Control Document\n\nDocument number: MD-DOC-441-E. Revision: E. Type: ICD. Author: Dev Patel. Created: 2023-08-13. Last modified: 2024-03-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1166, P-1014, P-1062.",
+  "structured": {
+    "doc_number": "MD-DOC-441-E",
+    "revision": "E",
+    "doc_type": "ICD",
+    "author": "E11",
+    "created": "2023-08-13",
+    "last_modified": "2024-03-30",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1166",
+    "P-1014",
+    "P-1062",
+    "ECR-216"
+  ]
+}

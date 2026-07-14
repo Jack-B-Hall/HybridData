@@ -1,0 +1,29 @@
+{
+  "id": "KES-197",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Nina Schulz. Assignee: Sam Dreher. Status: In Progress. Priority: High. Created: 2025-02-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E12",
+    "assignee": "E04",
+    "created": "2025-02-09",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "KES-003"
+  ]
+}

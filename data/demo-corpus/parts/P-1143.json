@@ -1,0 +1,18 @@
+{
+  "id": "P-1143",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "RS-422 Adapter",
+  "text": "RS-422 Adapter. Subsystem: Comms/Datalink. Material: RS-422 to USB, DB9. Mass: 18g. Manufactured by FTDIchip. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1143",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "RS-422 to USB, DB9",
+    "mass_g": 18,
+    "manufacturer": "FTDIchip",
+    "parent_id": null
+  },
+  "refs": []
+}

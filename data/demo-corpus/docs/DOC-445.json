@@ -1,0 +1,32 @@
+{
+  "id": "DOC-445",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Motor Qualification Test Report \u2014 P-1041/P-1042",
+  "text": "# K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042\n\nDocument number: MD-DOC-445-A. Revision: A. Type: test-report. Author: Aisha Mbeki. Created: 2024-05-30. Last modified: 2024-06-10. Status: Released.\n\nThis report documents the qualification testing of the TorqueDrive 4014 420KV Enhanced motor (P-1041) and ControlAir 80A Enhanced ESC (P-1042) as replacements for P-1031 and P-1032. Change authority: ECN-318 / ECR-221. Background: thermal events KES-187 and KES-188, propulsion thermal review WIKI-031.\n\n## \u00a73 Thermal Test\n\nTest configuration: P-1041 motor on P-1012 motor mount, P-1042 ESC with P-1051 heatsink, P-1044 motor controller board. Ambient temperature: 40\u00b0C (requirement maximum). Duration: 90 minutes at 75% throttle (representative endurance cruise).\n\nResults:\n- Motor winding temperature peak: 79\u00b0C (rated maximum: 85\u00b0C continuous). Margin: 6\u00b0C. PASS.\n- ESC case temperature peak: 31\u00b0C (rated maximum: 70\u00b0C). Margin: 39\u00b0C. PASS.\n- No thermal cutout events during 90-minute test. PASS.\n\nComparison with P-1031 at 40\u00b0C ambient (extrapolated from 30\u00b0C test data): estimated winding temperature would be 120\u00b0C \u2014 35\u00b0C above rated maximum. FAIL expected.\n\n## \u00a74 Endurance Test\n\nDuration: 3 x 90-minute flights at 40\u00b0C ambient. All flights completed without motor or ESC anomalies. Motor connector (P-1059) showed no heating. PASS.\n\n## \u00a75 Conclusion\n\nP-1041 and P-1042 qualify for operational use per ECN-318 at ambient temperatures up to 40\u00b0C. P-1031 and P-1032 are obsolete and shall not be used in operational aircraft.",
+  "structured": {
+    "doc_number": "MD-DOC-445-A",
+    "revision": "A",
+    "doc_type": "test-report",
+    "author": "E10",
+    "created": "2024-05-30",
+    "last_modified": "2024-06-10",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1031",
+    "P-1032",
+    "P-1041",
+    "P-1042",
+    "P-1044",
+    "P-1051",
+    "P-1012",
+    "P-1059",
+    "ECR-221",
+    "ECN-318",
+    "KES-187",
+    "KES-188",
+    "WIKI-031"
+  ]
+}

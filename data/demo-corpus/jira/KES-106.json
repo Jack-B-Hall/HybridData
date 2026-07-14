@@ -1,0 +1,29 @@
+{
+  "id": "KES-106",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Dev Patel. Assignee: Aisha Mbeki. Status: Open. Priority: Medium. Created: 2024-12-26.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E10",
+    "created": "2024-12-26",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "KES-015"
+  ]
+}

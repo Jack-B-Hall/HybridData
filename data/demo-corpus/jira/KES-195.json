@@ -1,0 +1,32 @@
+{
+  "id": "KES-195",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Jordan Kim. Assignee: Dev Patel. Status: Done. Priority: Low. Created: 2023-12-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E08",
+    "assignee": "E11",
+    "created": "2023-12-13",
+    "resolved": "2023-12-26",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-013",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-013"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-405",
+    "DOC-417",
+    "WIKI-047",
+    "KES-013"
+  ]
+}

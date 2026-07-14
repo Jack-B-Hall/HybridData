@@ -1,0 +1,18 @@
+{
+  "id": "P-1159",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Payload Rail Clamp \u2014 Port",
+  "text": "Payload Rail Clamp \u2014 Port. Subsystem: Payload. Material: aluminium 6061-T6. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1159",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6",
+    "mass_g": 28,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

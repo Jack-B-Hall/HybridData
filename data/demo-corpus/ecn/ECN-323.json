@@ -1,0 +1,27 @@
+{
+  "id": "ECN-323",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-223",
+  "text": "Engineering Change Notice ECN-323. Implements ECR-223. Approved by Felix Herrera on 2023-10-08. Affected parts: P-1150, P-1170, P-1098. Updated documents: DOC-480.",
+  "structured": {
+    "ecr_id": "ECR-223",
+    "approved_by": "E09",
+    "approved_date": "2023-10-08",
+    "affected_parts": [
+      "P-1150",
+      "P-1170",
+      "P-1098"
+    ],
+    "affected_docs": [
+      "DOC-480"
+    ]
+  },
+  "refs": [
+    "ECR-223",
+    "P-1150",
+    "P-1170",
+    "P-1098",
+    "DOC-480"
+  ]
+}

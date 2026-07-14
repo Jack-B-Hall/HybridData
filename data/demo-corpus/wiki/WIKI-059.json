@@ -1,0 +1,15 @@
+{
+  "id": "WIKI-059",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Payload Technical Note: gimbal stabilisation technology",
+  "text": "# Payload Technical Note: gimbal stabilisation technology\n\n**Attendees:** Dev Patel, Rowan Ellery\n\n## Summary\n\nThis page covers the gimbal stabilisation technology for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E11",
+    "created_date": "2025-02-27",
+    "last_modified": "2025-04-02",
+    "last_modified_by": "E05"
+  },
+  "refs": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "DRW-513",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-513: GPS Antenna Installation",
+  "text": "Drawing MD-DRW-513 Rev C \u2014 GPS Antenna Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1097, P-1102, P-1112, P-1117.\n4. Drawn by Rowan Ellery, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-513",
+    "revision": "C",
+    "drawn_by": "E13",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-08-05",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1097",
+      "P-1102",
+      "P-1112",
+      "P-1117"
+    ]
+  },
+  "refs": [
+    "P-1097",
+    "P-1102",
+    "P-1112",
+    "P-1117"
+  ]
+}

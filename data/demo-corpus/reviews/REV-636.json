@@ -1,0 +1,47 @@
+{
+  "id": "REV-636",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-407: REV-636",
+  "text": "# Review Record REV-636\n\nDocument: DOC-407. Reviewer: Sam Dreher. Date: 2023-12-08. Overall disposition: Rejected.\n\n## Comments\n\n**C01** (Sam Dreher): Section 6.2: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table. \u2014 *Action required*\n\n**C02** (Aisha Mbeki): Section 6.3: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table. \u2014 *Accepted*\n\n**C03** (Priya Nair): Section 3.1: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C04** (Tyler Moss): Section 5.2: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-407",
+    "reviewer": "E04",
+    "review_date": "2023-12-08",
+    "status": "Open",
+    "overall_disposition": "Rejected",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E04",
+        "text": "Section 6.2: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table.",
+        "disposition": "Action required",
+        "refs": []
+      },
+      {
+        "comment_id": "C02",
+        "author": "E10",
+        "text": "Section 6.3: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      },
+      {
+        "comment_id": "C03",
+        "author": "E05",
+        "text": "Section 3.1: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C04",
+        "author": "E14",
+        "text": "Section 5.2: The specification should clarify the interface requirement for DOC-407. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-407"
+  ]
+}

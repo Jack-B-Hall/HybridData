@@ -1,0 +1,43 @@
+{
+  "id": "KES-156",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Sonar transducer integration testing \u2014 frequency stability and mounting validation",
+  "text": "Story KES-156. Reporter: Cass Doyle (Payload Systems Engineer). Assignee: Cass Doyle. Status: Done. Priority: High. Created: 2024-07-10. Resolved: 2024-12-01.\n\nDescription: Integration testing for the sonar transducer (P-1148) covering frequency stability, depth performance, and mounting validation against DOC-462 (Sonar System ICD).\n\nKey findings during this story:\n1. DepthWave transducer frequency drift: 200kHz nominal shifted to 184kHz over 2-hour thermal soak at 35\u00b0C \u2014 documented in KES-158 (frequency drift bug). This triggered ECR-218 (vendor change to AquaSound Corp).\n2. Pool test \u2014 AquaSound unit (November 2024): Testing at 0.5m, 1.0m, and 2.0m depth. At 0\u00b0 cant angle (initial mounting), the transducer near-field null zone at ~0.45m depth coincided with the minimum operational depth of 0.5m, producing non-functional returns at minimum depth. The 7\u00b0 downward cant of DRW-517 and P-1149 mounting bracket was validated as the correct fix (null zone shifts to 1.2m). Cass Doyle review REV-641 documents this rationale.\n3. Frequency stability of AquaSound unit: \u00b11.2kHz over thermal soak \u2014 within spec.\n\nAcceptance: DOC-468 (Sonar Performance Test Report) issued, ECN-315 approved.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E07",
+    "assignee": "E07",
+    "created": "2024-07-10",
+    "resolved": "2024-12-01",
+    "labels": [
+      "payload",
+      "sonar",
+      "testing"
+    ],
+    "parent_id": null,
+    "linked_issues": [
+      {
+        "type": "is-parent-of",
+        "target": "KES-158"
+      },
+      {
+        "type": "triggers",
+        "target": "ECR-218"
+      }
+    ]
+  },
+  "refs": [
+    "P-1148",
+    "P-1149",
+    "DOC-462",
+    "DOC-468",
+    "ECR-218",
+    "ECN-315",
+    "KES-158",
+    "DRW-517",
+    "REV-641"
+  ]
+}

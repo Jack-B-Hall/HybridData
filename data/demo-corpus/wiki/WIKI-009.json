@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-009",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Airframe Weekly Status \u2014 Week 50, 2024",
+  "text": "# Airframe Weekly Status \u2014 Week 50, 2024\n\n**Attendees:** Jordan Kim, Marcus Thaine, Dev Patel, Sam Dreher\n\n## Summary\n\nThis page covers the encryption approach for the Airframe subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tyler Moss on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E06",
+    "created_date": "2024-12-15",
+    "last_modified": "2025-02-07",
+    "last_modified_by": "E14"
+  },
+  "refs": [
+    "DOC-428",
+    "DOC-453"
+  ]
+}

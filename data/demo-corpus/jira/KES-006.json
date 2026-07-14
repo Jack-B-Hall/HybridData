@@ -1,0 +1,22 @@
+{
+  "id": "KES-006",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Payload integration testing",
+  "text": "Epic: Payload integration testing. Reporter: Lena Okafor. Assignee: Dev Patel. Status: In Progress. Priority: High. Created: 2024-09-11.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E11",
+    "created": "2024-09-11",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

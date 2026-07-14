@@ -1,0 +1,21 @@
+{
+  "id": "P-1127",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Encryption Module \u2014 FPGA",
+  "text": "Encryption Module \u2014 FPGA. Subsystem: Comms/Datalink. Material: PCB, Lattice iCE40 FPGA, AES-256-GCM. Mass: 42g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1127",
+    "revision": "B",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "PCB, Lattice iCE40 FPGA, AES-256-GCM",
+    "mass_g": 42,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-511",
+    "DRW-535"
+  ]
+}

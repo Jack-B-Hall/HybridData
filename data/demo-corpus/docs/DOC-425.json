@@ -1,0 +1,23 @@
+{
+  "id": "DOC-425",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Interface Control Document",
+  "text": "# K-200 Battery Interface Control Document\n\nDocument number: MD-DOC-425-C. Revision: C. Type: ICD. Author: Priya Nair. Created: 2025-05-05. Last modified: 2025-07-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1137, P-1072, P-1153.",
+  "structured": {
+    "doc_number": "MD-DOC-425-C",
+    "revision": "C",
+    "doc_type": "ICD",
+    "author": "E05",
+    "created": "2025-05-05",
+    "last_modified": "2025-07-04",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1137",
+    "P-1072",
+    "P-1153",
+    "KES-181"
+  ]
+}

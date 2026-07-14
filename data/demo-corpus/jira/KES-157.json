@@ -1,0 +1,29 @@
+{
+  "id": "KES-157",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Felix Herrera. Assignee: Dev Patel. Status: Done. Priority: High. Created: 2023-06-30.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E11",
+    "created": "2023-06-30",
+    "resolved": "2023-08-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "KES-019"
+  ]
+}

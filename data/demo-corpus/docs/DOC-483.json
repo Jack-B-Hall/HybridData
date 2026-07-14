@@ -1,0 +1,24 @@
+{
+  "id": "DOC-483",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Design Analysis",
+  "text": "# K-200 GCS Design Analysis\n\nDocument number: MD-DOC-483-A. Revision: A. Type: design-note. Author: Tyler Moss. Created: 2023-02-02. Last modified: 2023-12-22. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1146, P-1009, P-1047, P-1155.",
+  "structured": {
+    "doc_number": "MD-DOC-483-A",
+    "revision": "A",
+    "doc_type": "design-note",
+    "author": "E14",
+    "created": "2023-02-02",
+    "last_modified": "2023-12-22",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1146",
+    "P-1009",
+    "P-1047",
+    "P-1155",
+    "ECR-207"
+  ]
+}

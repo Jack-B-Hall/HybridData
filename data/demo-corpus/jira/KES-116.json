@@ -1,0 +1,29 @@
+{
+  "id": "KES-116",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate test coverage matrix",
+  "text": "Story: Validate test coverage matrix. Reporter: Sam Dreher. Assignee: Lena Okafor. Status: Open. Priority: High. Created: 2025-07-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E03",
+    "created": "2025-07-12",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

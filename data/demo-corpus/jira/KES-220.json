@@ -1,0 +1,30 @@
+{
+  "id": "KES-220",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Sam Dreher. Assignee: Priya Nair. Status: In Progress. Priority: Low. Created: 2025-11-27.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E05",
+    "created": "2025-11-27",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-005",
+    "KES-012"
+  ]
+}

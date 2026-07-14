@@ -1,0 +1,21 @@
+{
+  "id": "P-1020",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Hatch \u2014 Battery Bay",
+  "text": "Hatch \u2014 Battery Bay. Subsystem: Airframe. Material: CFRP. Mass: 72g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1020",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "CFRP",
+    "mass_g": 72,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-501"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "KES-005",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Comms datalink verification",
+  "text": "Epic: Comms datalink verification. Reporter: Jordan Kim. Assignee: Jordan Kim. Status: Done. Priority: High. Created: 2024-07-14.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E08",
+    "created": "2024-07-14",
+    "resolved": "2024-11-04",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-469",
+    "DOC-416"
+  ]
+}

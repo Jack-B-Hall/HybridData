@@ -1,0 +1,20 @@
+{
+  "id": "P-1098",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Antenna Module \u2014 v2",
+  "text": "GPS Antenna Module \u2014 v2. Subsystem: Nav/GNC. Material: helical antenna, L1/L2/L5, 40dB LNA, IP68. Mass: 34g. Manufactured by TallysmansAU. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1098",
+    "revision": "B",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "helical antenna, L1/L2/L5, 40dB LNA, IP68",
+    "mass_g": 34,
+    "manufacturer": "TallysmansAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-534"
+  ]
+}

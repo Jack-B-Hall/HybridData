@@ -1,0 +1,29 @@
+{
+  "id": "KES-051",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Priya Nair. Assignee: Tobias Wren. Status: Done. Priority: High. Created: 2023-04-20.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E06",
+    "created": "2023-04-20",
+    "resolved": "2023-07-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "KES-019"
+  ]
+}

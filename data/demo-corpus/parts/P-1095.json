@@ -1,0 +1,22 @@
+{
+  "id": "P-1095",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Barometer Module",
+  "text": "Barometer Module. Subsystem: Nav/GNC. Material: MS5611-01BA03, 10cm resolution. Mass: 5g. Manufactured by TE Connectivity. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1095",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "MS5611-01BA03, 10cm resolution",
+    "mass_g": 5,
+    "manufacturer": "TE Connectivity",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091",
+    "DRW-506",
+    "DRW-526"
+  ]
+}

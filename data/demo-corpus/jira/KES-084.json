@@ -1,0 +1,29 @@
+{
+  "id": "KES-084",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Sonar false echoes near surface",
+  "text": "Bug: Sonar false echoes near surface. Reporter: Tyler Moss. Assignee: Aisha Mbeki. Status: In Progress. Priority: High. Created: 2024-08-08.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E14",
+    "assignee": "E10",
+    "created": "2024-08-08",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-007",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-007"
+      }
+    ]
+  },
+  "refs": [
+    "KES-007"
+  ]
+}

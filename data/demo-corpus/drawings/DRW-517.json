@@ -1,0 +1,28 @@
+{
+  "id": "DRW-517",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-517: Sonar Transducer Mounting",
+  "text": "Drawing MD-DRW-517 Rev B \u2014 Sonar Transducer Mounting\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1148, P-1149, P-1150, P-1151.\n4. Drawn by Cass Doyle, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-517",
+    "revision": "B",
+    "drawn_by": "E07",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2024-10-18",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1148",
+      "P-1149",
+      "P-1150",
+      "P-1151"
+    ]
+  },
+  "refs": [
+    "P-1148",
+    "P-1149",
+    "P-1150",
+    "P-1151"
+  ]
+}

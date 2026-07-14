@@ -1,0 +1,36 @@
+{
+  "id": "ECN-313",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-216: Payload gimbal redesign",
+  "text": "Engineering Change Notice ECN-313. Implements ECR-216.\nApproved by: Felix Herrera, 2024-07-02.\n\nAuthorised changes:\n1. P-1154 (Camera Gimbal Assembly): Updated to Rev C. New CFRP frame design, natural frequency 24Hz. 3-axis (pitch/roll/yaw) vs previous 2-axis.\n2. P-1155 (Gimbal Motor Pitch), P-1156 (Roll), P-1157 (Yaw): Updated to GB-Systems hollow-shaft BLDC.\n3. P-1158 (Gimbal Controller Board): Updated to SimpleBGC 32-bit extended with onboard IMU.\n4. DOC-449 (Payload System ICD): Updated for P-1154 Rev C and P-1158 interface. 3-axis specification included.\n5. SRC-021 (gimbal_driver.py): Updated for P-1158 SimpleBGC 32-bit serial protocol. Cass Doyle, committed 2024-07-31.\n6. DRW-519 (Gimbal Mount Detail): Updated for new frame geometry.\n7. Qualification: Flight test completed 2024-08-22. Jitter \u00b10.09\u00b0 (requirement \u00b10.5\u00b0) \u2014 PASS. Test report appended to DOC-449.",
+  "structured": {
+    "ecr_id": "ECR-216",
+    "approved_by": "E09",
+    "approved_date": "2024-07-02",
+    "affected_parts": [
+      "P-1154",
+      "P-1155",
+      "P-1156",
+      "P-1157",
+      "P-1158"
+    ],
+    "affected_docs": [
+      "DOC-449"
+    ]
+  },
+  "refs": [
+    "ECR-216",
+    "P-1154",
+    "P-1155",
+    "P-1156",
+    "P-1157",
+    "P-1158",
+    "DOC-449",
+    "SRC-021",
+    "DRW-519",
+    "KES-134",
+    "KES-137",
+    "WIKI-038"
+  ]
+}

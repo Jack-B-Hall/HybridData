@@ -1,0 +1,18 @@
+{
+  "id": "P-1087",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "EEPROM Battery Log",
+  "text": "EEPROM Battery Log. Subsystem: Battery. Material: I2C EEPROM 64kB, 1M cycles. Mass: 6g. Manufactured by Atmel. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1087",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "I2C EEPROM 64kB, 1M cycles",
+    "mass_g": 6,
+    "manufacturer": "Atmel",
+    "parent_id": null
+  },
+  "refs": []
+}

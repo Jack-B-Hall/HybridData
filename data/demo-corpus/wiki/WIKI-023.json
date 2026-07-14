@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-023",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Programme Status Gate 3 \u2014 2025-03-11",
+  "text": "# Programme Status Gate 3 \u2014 2025-03-11\n\n**Attendees:** Jordan Kim, Rowan Ellery\n\n## Summary\n\nThis page covers the EMC mitigation strategy for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Sam Dreher on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2025-03-11",
+    "last_modified": "2025-05-02",
+    "last_modified_by": "E04"
+  },
+  "refs": [
+    "ECR-209",
+    "DOC-476"
+  ]
+}

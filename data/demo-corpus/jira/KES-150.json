@@ -1,0 +1,31 @@
+{
+  "id": "KES-150",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement hardware design review",
+  "text": "Story: Implement hardware design review. Reporter: Sam Dreher. Assignee: Nina Schulz. Status: Done. Priority: Medium. Created: 2023-05-01.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E12",
+    "created": "2023-05-01",
+    "resolved": "2023-08-05",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-485",
+    "DOC-455",
+    "KES-005"
+  ]
+}

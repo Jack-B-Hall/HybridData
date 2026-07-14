@@ -1,0 +1,21 @@
+{
+  "id": "P-1072",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Main Fuse 50A",
+  "text": "Main Fuse 50A. Subsystem: Battery. Material: blade fuse 58V 50A. Mass: 10g. Manufactured by LittelfuseAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1072",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "blade fuse 58V 50A",
+    "mass_g": 10,
+    "manufacturer": "LittelfuseAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-515",
+    "DRW-527"
+  ]
+}

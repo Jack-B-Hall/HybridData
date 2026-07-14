@@ -1,0 +1,25 @@
+{
+  "id": "ECN-303",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-203",
+  "text": "Engineering Change Notice ECN-303. Implements ECR-203. Approved by Tyler Moss on 2024-10-11. Affected parts: P-1048, P-1139. Updated documents: DOC-468.",
+  "structured": {
+    "ecr_id": "ECR-203",
+    "approved_by": "E14",
+    "approved_date": "2024-10-11",
+    "affected_parts": [
+      "P-1048",
+      "P-1139"
+    ],
+    "affected_docs": [
+      "DOC-468"
+    ]
+  },
+  "refs": [
+    "ECR-203",
+    "P-1048",
+    "P-1139",
+    "DOC-468"
+  ]
+}

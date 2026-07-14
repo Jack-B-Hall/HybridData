@@ -1,0 +1,18 @@
+{
+  "id": "P-1071",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Indicator LED Assembly",
+  "text": "Battery Indicator LED Assembly. Subsystem: Battery. Material: PCB, 4x RGB LED, waterproof. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1071",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, 4x RGB LED, waterproof",
+    "mass_g": 12,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,26 @@
+{
+  "id": "WIKI-058",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "GCS Software Architecture Review \u2014 2024-10-15",
+  "text": "# GCS Software Architecture Review \u2014 2024-10-15\n\n**Space:** K200  \n**Meeting type:** Architecture Design Review  \n**Attendees:** Jordan Kim (GCS SW), Sam Dreher (GNC), Felix Herrera (Integration), Priya Nair (Comms), Dr. Rhea Voss (CSE, remote)  \n**Chair:** Jordan Kim  \n**Minutes recorded by:** Jordan Kim\n\n---\n\n## Background\n\nKES-173 (epic: GCS software architecture v2) was raised in September 2024 following the identification of several critical deficiencies in the v1 GCS architecture:\n\n1. The original monolithic GCS application (SRC-001 gcs_main.py) had grown to 8,400 lines and was becoming unmanageable. The map rendering, telemetry decoding, command encoding, and mission planning were all in a single event loop.\n2. Integration of the new encryption stack (KES-201, P-1127) revealed that the synchronous command dispatch in v1 blocked the entire UI thread during encryption operations, causing 800ms\u20132s UI freezes.\n3. KES-175 (GCS backend API refactor story) was raised specifically to separate the backend processing from the UI layer so that encryption and protocol changes can be made without touching the display code.\n\n## Architecture Proposal\n\nJordan Kim presented the v2 architecture:\n\n- **Backend service (SRC-024 gcs_ui_backend.py):** Async Python (asyncio), handles all comms with the drone (via P-1167 GCS radio unit), telemetry decoding, command encoding, state machine, and the encryption session (via SRC-018 encryption_handler interface). Exposes a WebSocket API to the frontend.\n- **Frontend (browser-based, served locally):** Vue.js SPA consuming the WebSocket API. Map layer (SRC-025 gcs_map_layer.py replaced by JS), telemetry displays, mission planner UI.\n- **Legacy SRC-001 gcs_main.py:** Archived, replaced by SRC-024 + frontend. SRC-002 (telemetry) refactored into backend service.\n\nSam Dreher confirmed the MAVLink protocol wrapper in the new backend is compatible with the FCU (P-1091) MAVLink dialect.\n\nPriya Nair confirmed the encryption module interface (SRC-018) is a C shared library that SRC-024 calls via ctypes \u2014 this was agreed at the WIKI-071 Comms review.\n\n## Decision\n\n**AGREED:** Proceed with GCS v2 backend/frontend separation as described.\n\n- Decision maker: Jordan Kim (GCS lead), approved by Felix Herrera (Systems Integration)\n- Rationale: Monolithic v1 is unmaintainable at 8,400 lines; encryption integration (KES-201) exposed UI thread blocking; separation is required before M4 delivery\n- ECR to be raised: ECR-225 (Jordan Kim, covering SRC-001 archival and SRC-024 introduction)\n- Architecture document to be created: DOC-479 (GCS Software Architecture Document, Jordan Kim)\n- GCS radio interface: P-1167 (GCS Radio Unit) command channel mapped to SRC-024 async task\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-225 for GCS architecture refactor | Jordan Kim | 2024-10-22 |\n| A2 | Write DOC-479 GCS Software Architecture Document | Jordan Kim | 2024-11-15 |\n| A3 | Implement SRC-024 backend service (asyncio) | Jordan Kim | 2024-12-31 |\n| A4 | Implement frontend Vue.js app | Jordan Kim | 2025-01-31 |\n| A5 | Integration test: SRC-024 + SRC-018 encryption + P-1167 | Jordan Kim + Priya Nair | 2025-02-15 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E08",
+    "created_date": "2024-10-15",
+    "last_modified": "2024-10-16",
+    "last_modified_by": "E08"
+  },
+  "refs": [
+    "KES-173",
+    "KES-175",
+    "KES-201",
+    "ECR-225",
+    "DOC-479",
+    "SRC-001",
+    "SRC-024",
+    "SRC-018",
+    "P-1091",
+    "P-1167"
+  ]
+}

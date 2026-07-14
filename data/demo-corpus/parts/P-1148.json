@@ -1,0 +1,21 @@
+{
+  "id": "P-1148",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Sonar Transducer",
+  "text": "Sonar Transducer. Subsystem: Payload. Material: broadband, 100\u2013400kHz, depth-rated 30m. Mass: 245g. Manufactured by AquaSound Corp. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PAY-1148",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "COTS",
+    "material": "broadband, 100\u2013400kHz, depth-rated 30m",
+    "mass_g": 245,
+    "manufacturer": "AquaSound Corp",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-508",
+    "DRW-517"
+  ]
+}

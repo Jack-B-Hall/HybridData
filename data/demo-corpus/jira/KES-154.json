@@ -1,0 +1,29 @@
+{
+  "id": "KES-154",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Payload bay condensation during sea-level ops",
+  "text": "Bug: Payload bay condensation during sea-level ops. Reporter: Rowan Ellery. Assignee: Jordan Kim. Status: In Progress. Priority: Critical. Created: 2023-06-16.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "In Progress",
+    "priority": "Critical",
+    "reporter": "E13",
+    "assignee": "E08",
+    "created": "2023-06-16",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

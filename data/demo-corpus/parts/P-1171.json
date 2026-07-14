@@ -1,0 +1,18 @@
+{
+  "id": "P-1171",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Joystick Controller",
+  "text": "GCS Joystick Controller. Subsystem: GCS. Material: Logitech Extreme 3D Pro, USB. Mass: 460g. Manufactured by LogitechAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1171",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "Logitech Extreme 3D Pro, USB",
+    "mass_g": 460,
+    "manufacturer": "LogitechAU",
+    "parent_id": null
+  },
+  "refs": []
+}

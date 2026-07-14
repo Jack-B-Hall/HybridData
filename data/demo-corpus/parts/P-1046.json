@@ -1,0 +1,18 @@
+{
+  "id": "P-1046",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "RPM Sensor (set of 4)",
+  "text": "RPM Sensor (set of 4). Subsystem: Propulsion. Material: hall-effect. Mass: 16g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1046",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "hall-effect",
+    "mass_g": 16,
+    "manufacturer": "SenseCo",
+    "parent_id": null
+  },
+  "refs": []
+}

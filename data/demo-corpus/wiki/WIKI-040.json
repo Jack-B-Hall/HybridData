@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-040",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Comms/Datalink Design Review \u2014 2024-05-15",
+  "text": "# Comms/Datalink Design Review \u2014 2024-05-15\n\n**Attendees:** Rowan Ellery, Priya Nair, Tyler Moss, Nina Schulz\n\n## Summary\n\nThis page covers the waterproofing philosophy for the Comms/Datalink subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Felix Herrera on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E04",
+    "created_date": "2024-05-15",
+    "last_modified": "2024-08-01",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "KES-183",
+    "KES-189"
+  ]
+}

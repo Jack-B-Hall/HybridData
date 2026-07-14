@@ -1,0 +1,21 @@
+{
+  "id": "P-1042",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "ESC 80A Enhanced",
+  "text": "ESC 80A Enhanced. Subsystem: Propulsion. Material: MOSFET, copper heatsink. Mass: 108g. Manufactured by ControlAir Ltd. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1042",
+    "revision": "B",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "MOSFET, copper heatsink",
+    "mass_g": 108,
+    "manufacturer": "ControlAir Ltd",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-533",
+    "DRW-539"
+  ]
+}

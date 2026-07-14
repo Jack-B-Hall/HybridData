@@ -1,0 +1,31 @@
+{
+  "id": "KES-001",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] K-200 System Architecture Definition",
+  "text": "Epic KES-001. Reporter: Dr. Rhea Voss (Chief Systems Engineer). Assignee: Dr. Rhea Voss. Status: Done. Priority: High. Created: 2023-02-10. Resolved: 2023-06-30.\n\nDescription: Define and baseline the top-level system architecture for the Kestrel K-200 autonomous maritime survey drone. Covers: autonomy level selection, propulsion configuration, battery chemistry baseline, comms architecture, GNC philosophy, and mass/power budgets.\n\nKey decisions captured:\n- SAE Level 3 autonomy (per customer RFT-K200-002 requirement, WIKI-003 kick-off meeting)\n- Single-string GNC (FCU P-1091), BVLOS open-water ops only, hardware RTL fail-safe\n- LiPo battery baseline (subsequently changed by ECN-312 after KES-341 thermal event)\n- Quad-pusher propulsion, 900MHz comms at 15km range (P-1125, subsequently upgraded by ECN-322)\n\nArchitecture baseline: DOC-401 (System Architecture Document v1.0). Configuration baseline: ECN-301.\nKick-off meeting: WIKI-003. CSE review: REV-631 (Dr. Rhea Voss, contains critical architecture rationale).",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E01",
+    "assignee": "E01",
+    "created": "2023-02-10",
+    "resolved": "2023-06-30",
+    "labels": [
+      "architecture",
+      "systems",
+      "baseline"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-401",
+    "ECN-301",
+    "WIKI-003",
+    "REV-631",
+    "P-1091",
+    "P-1125"
+  ]
+}

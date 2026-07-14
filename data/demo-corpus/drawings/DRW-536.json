@@ -1,0 +1,22 @@
+{
+  "id": "DRW-536",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-536: Gimbal Controller PCB",
+  "text": "Drawing MD-DRW-536 Rev A \u2014 Gimbal Controller PCB\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1158.\n4. Drawn by Rowan Ellery, checked by Cass Doyle, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-536",
+    "revision": "A",
+    "drawn_by": "E13",
+    "checked_by": "E07",
+    "approved_by": "E09",
+    "date": "2025-07-19",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1158"
+    ]
+  },
+  "refs": [
+    "P-1158"
+  ]
+}

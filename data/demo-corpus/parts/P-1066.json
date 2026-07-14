@@ -1,0 +1,20 @@
+{
+  "id": "P-1066",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Heat Spreader \u2014 Battery",
+  "text": "Heat Spreader \u2014 Battery. Subsystem: Battery. Material: copper 2mm. Mass: 145g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1066",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "copper 2mm",
+    "mass_g": 145,
+    "manufacturer": "ThermalTech",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061"
+  ]
+}

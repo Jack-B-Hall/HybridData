@@ -1,0 +1,27 @@
+{
+  "id": "ECN-305",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-205",
+  "text": "Engineering Change Notice ECN-305. Implements ECR-205. Approved by Felix Herrera on 2023-08-19. Affected parts: P-1060, P-1018, P-1039. Updated documents: DOC-428.",
+  "structured": {
+    "ecr_id": "ECR-205",
+    "approved_by": "E09",
+    "approved_date": "2023-08-19",
+    "affected_parts": [
+      "P-1060",
+      "P-1018",
+      "P-1039"
+    ],
+    "affected_docs": [
+      "DOC-428"
+    ]
+  },
+  "refs": [
+    "ECR-205",
+    "P-1060",
+    "P-1018",
+    "P-1039",
+    "DOC-428"
+  ]
+}

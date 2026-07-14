@@ -1,0 +1,25 @@
+{
+  "id": "DOC-468",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Acceptance Test Procedure",
+  "text": "# K-200 Airframe Acceptance Test Procedure\n\nDocument number: MD-DOC-468-G. Revision: G. Type: procedure. Author: Priya Nair. Created: 2023-06-14. Last modified: 2023-10-23. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1096, P-1176, P-1162, P-1166.",
+  "structured": {
+    "doc_number": "MD-DOC-468-G",
+    "revision": "G",
+    "doc_type": "procedure",
+    "author": "E05",
+    "created": "2023-06-14",
+    "last_modified": "2023-10-23",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1096",
+    "P-1176",
+    "P-1162",
+    "P-1166",
+    "ECR-205",
+    "ECR-202"
+  ]
+}

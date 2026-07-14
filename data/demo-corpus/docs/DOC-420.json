@@ -1,0 +1,23 @@
+{
+  "id": "DOC-420",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Acceptance Test Procedure",
+  "text": "# K-200 GCS Acceptance Test Procedure\n\nDocument number: MD-DOC-420-C. Revision: C. Type: procedure. Author: Aisha Mbeki. Created: 2024-03-25. Last modified: 2024-12-31. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1114, P-1126, P-1043, P-1022.",
+  "structured": {
+    "doc_number": "MD-DOC-420-C",
+    "revision": "C",
+    "doc_type": "procedure",
+    "author": "E10",
+    "created": "2024-03-25",
+    "last_modified": "2024-12-31",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1114",
+    "P-1126",
+    "P-1043",
+    "P-1022"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "DOC-460",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Acceptance Test Procedure",
+  "text": "# K-200 Propulsion Acceptance Test Procedure\n\nDocument number: MD-DOC-460-G. Revision: G. Type: procedure. Author: Sam Dreher. Created: 2025-01-29. Last modified: 2025-07-21. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1012.",
+  "structured": {
+    "doc_number": "MD-DOC-460-G",
+    "revision": "G",
+    "doc_type": "procedure",
+    "author": "E04",
+    "created": "2025-01-29",
+    "last_modified": "2025-07-21",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1012"
+  ]
+}

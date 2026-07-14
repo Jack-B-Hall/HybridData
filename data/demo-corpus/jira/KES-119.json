@@ -1,0 +1,29 @@
+{
+  "id": "KES-119",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] GCS joystick dead-zone calibration bug",
+  "text": "Bug: GCS joystick dead-zone calibration bug. Reporter: Tobias Wren. Assignee: Marcus Thaine. Status: Open. Priority: High. Created: 2023-04-30.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E02",
+    "created": "2023-04-30",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-013",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-013"
+      }
+    ]
+  },
+  "refs": [
+    "KES-013"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1076",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Power Distribution Board",
+  "text": "Power Distribution Board. Subsystem: Battery. Material: PCB, 4-layer, copper 2oz. Mass: 72g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1076",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, 4-layer, copper 2oz",
+    "mass_g": 72,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-515",
+    "DRW-532"
+  ]
+}

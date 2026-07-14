@@ -1,0 +1,18 @@
+{
+  "id": "P-1146",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Payload Wiring Harness",
+  "text": "Payload Wiring Harness. Subsystem: Payload. Material: mixed gauge, 500mm bundle. Mass: 85g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1146",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "mixed gauge, 500mm bundle",
+    "mass_g": 85,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

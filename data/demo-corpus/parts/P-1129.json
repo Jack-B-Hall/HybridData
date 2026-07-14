@@ -1,0 +1,20 @@
+{
+  "id": "P-1129",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "RF Amplifier Module",
+  "text": "RF Amplifier Module. Subsystem: Comms/Datalink. Material: LNA 915MHz, 20dB, NF 1.2dB. Mass: 12g. Manufactured by Mini-Circuits. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1129",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "LNA 915MHz, 20dB, NF 1.2dB",
+    "mass_g": 12,
+    "manufacturer": "Mini-Circuits",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-535"
+  ]
+}

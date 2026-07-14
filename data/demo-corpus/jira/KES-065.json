@@ -1,0 +1,29 @@
+{
+  "id": "KES-065",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Aisha Mbeki. Assignee: Marcus Thaine. Status: Done. Priority: Low. Created: 2025-01-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E10",
+    "assignee": "E02",
+    "created": "2025-01-09",
+    "resolved": "2025-02-26",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-013",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-013"
+      }
+    ]
+  },
+  "refs": [
+    "KES-013"
+  ]
+}

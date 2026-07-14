@@ -1,0 +1,46 @@
+{
+  "id": "KES-089",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] GNC sensor suite upgrade \u2014 attitude accuracy and GPS reliability",
+  "text": "Epic KES-089. Reporter: Sam Dreher (Nav/GNC Software Lead). Assignee: Sam Dreher. Status: In Progress. Priority: High. Created: 2024-11-15.\n\nDescription: Flight test campaign phase 1 (DOC-467) identified two GNC sensor deficiencies requiring hardware changes:\n\n1. IMU vibration error: The ICM-42688-P (P-1092) attitude estimation error reaches 2.1\u00b0 roll during high-vibration low-speed flight. This violates the 0.5\u00b0 requirement in DOC-455 (GNC ICD). Root cause: MEMS resonant frequency at 4.8kHz coincides with motor harmonics from P-1041 at mid-throttle. Fix: replace with ADIS16505-2 (P-1093) \u2014 approved in ECR-228/ECN-326.\n\n2. GPS reliability: Patch antenna (P-1097) loses reliable sky view at roll angles >15\u00b0, causing GPS dropout events (see KES-091 for sub-stories). Fix: replace with helical L1/L2/L5 antenna (P-1098).\n\nSub-stories: KES-091 (IMU replacement qualification), KES-098 (GPS performance verification).\n\nDesign review: WIKI-067 (GNC Sensor Suite Design Review, 2024-12-03).",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E04",
+    "created": "2024-11-15",
+    "resolved": null,
+    "labels": [
+      "gnc",
+      "sensor",
+      "imu",
+      "gps"
+    ],
+    "parent_id": null,
+    "linked_issues": [
+      {
+        "type": "is-parent-of",
+        "target": "KES-091"
+      },
+      {
+        "type": "is-parent-of",
+        "target": "KES-098"
+      }
+    ]
+  },
+  "refs": [
+    "P-1092",
+    "P-1093",
+    "P-1097",
+    "P-1098",
+    "DOC-455",
+    "DOC-467",
+    "ECR-228",
+    "ECN-326",
+    "WIKI-067",
+    "KES-091",
+    "KES-098"
+  ]
+}

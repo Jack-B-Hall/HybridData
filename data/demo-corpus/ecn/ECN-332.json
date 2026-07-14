@@ -1,0 +1,25 @@
+{
+  "id": "ECN-332",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-232",
+  "text": "Engineering Change Notice ECN-332. Implements ECR-232. Approved by Tobias Wren on 2024-08-08. Affected parts: P-1093. Updated documents: DOC-432, DOC-481.",
+  "structured": {
+    "ecr_id": "ECR-232",
+    "approved_by": "E06",
+    "approved_date": "2024-08-08",
+    "affected_parts": [
+      "P-1093"
+    ],
+    "affected_docs": [
+      "DOC-432",
+      "DOC-481"
+    ]
+  },
+  "refs": [
+    "ECR-232",
+    "P-1093",
+    "DOC-432",
+    "DOC-481"
+  ]
+}

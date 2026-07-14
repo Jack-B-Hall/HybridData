@@ -1,0 +1,30 @@
+{
+  "id": "KES-168",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] BMS alarm spurious trigger at 35\u00b0C",
+  "text": "Bug: BMS alarm spurious trigger at 35\u00b0C. Reporter: Sam Dreher. Assignee: Jordan Kim. Status: Open. Priority: Medium. Created: 2023-07-05.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E08",
+    "created": "2023-07-05",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-020",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-020"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-045",
+    "KES-020"
+  ]
+}

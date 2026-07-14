@@ -1,0 +1,29 @@
+{
+  "id": "KES-028",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] BMS alarm spurious trigger at 35\u00b0C",
+  "text": "Bug: BMS alarm spurious trigger at 35\u00b0C. Reporter: Marcus Thaine. Assignee: Felix Herrera. Status: Done. Priority: Critical. Created: 2024-12-14.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Critical",
+    "reporter": "E02",
+    "assignee": "E09",
+    "created": "2024-12-14",
+    "resolved": "2025-04-05",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-004",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-004"
+      }
+    ]
+  },
+  "refs": [
+    "KES-004"
+  ]
+}

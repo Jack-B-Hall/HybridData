@@ -1,0 +1,33 @@
+{
+  "id": "DOC-409",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Structural Specification v2.0",
+  "text": "# K-200 Structural Specification\n\nDocument number: MD-DOC-409-B. Revision: B. Type: specification. Author: Tobias Wren. Created: 2023-04-10. Last modified: 2023-10-15. Status: Released.\n\n## Change History\n- Rev A: Initial structural spec, CFRP wing skins (2023-04-01)\n- Rev B: Wing skin material change to hybrid carbon-aramid composite per ECN-307 / ECR-207 (2023-10-15)\n\n## \u00a73 Wing Skin (P-1008, P-1009)\n\nMaterial: Hybrid carbon-aramid composite \u2014 CFRP weave (0\u00b0/90\u00b0) + Kevlar\u00ae \u00b145\u00b0 interlayer + CFRP weave (0\u00b0/90\u00b0). Total thickness: 1.4mm nominal.\n\nRationale for material change: Straight CFRP (0\u00b0/90\u00b0) wing skins (P-1008/P-1009 Rev B) delaminated at the wing root bond line after 12 hours of simulated motor vibration loading during ground vibration test (KES-045). Material coupon tests in KES-042 confirmed hybrid carbon-aramid has no delamination at 100 hours (vs CFRP failure at 12 hours). The aramid interlayer provides crack arrest. Mass penalty: +25g per skin. Design review: WIKI-017. Change authority: ECN-307.\n\nThe stiffness of the hybrid composite is approximately 8% lower than straight CFRP. Loads analysis re-run in DOC-407 confirmed this reduction is acceptable against flutter margins, with flutter onset at 52m/s (requirement: >45m/s at maximum dive speed).\n\n## \u00a74 Motor Mounts (P-1012\u2013P-1015)\n\nAluminium 6061-T6. Stiffness requirement: natural frequency of motor mount assembly >200Hz (to avoid coupling with motor vibration spectrum). Verified in DRW-507.",
+  "structured": {
+    "doc_number": "MD-DOC-409-B",
+    "revision": "B",
+    "doc_type": "specification",
+    "author": "E06",
+    "created": "2023-04-10",
+    "last_modified": "2023-10-15",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1008",
+    "P-1009",
+    "P-1012",
+    "P-1013",
+    "P-1014",
+    "P-1015",
+    "ECR-207",
+    "ECN-307",
+    "DOC-407",
+    "KES-042",
+    "KES-045",
+    "WIKI-017",
+    "DRW-502",
+    "DRW-507"
+  ]
+}

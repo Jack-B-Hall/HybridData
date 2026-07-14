@@ -1,0 +1,22 @@
+{
+  "id": "P-1103",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "IMU Vibration Damper (x4)",
+  "text": "IMU Vibration Damper (x4). Subsystem: Nav/GNC. Material: silicone, M3, 50Hz. Mass: 12g. Manufactured by IsolaTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1103",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "silicone, M3, 50Hz",
+    "mass_g": 12,
+    "manufacturer": "IsolaTech",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091",
+    "DRW-516",
+    "DRW-526"
+  ]
+}

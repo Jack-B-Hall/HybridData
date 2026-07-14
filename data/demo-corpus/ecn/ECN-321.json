@@ -1,0 +1,27 @@
+{
+  "id": "ECN-321",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-221",
+  "text": "Engineering Change Notice ECN-321. Implements ECR-221. Approved by Jordan Kim on 2024-12-10. Affected parts: P-1153, P-1102, P-1084. Updated documents: DOC-482.",
+  "structured": {
+    "ecr_id": "ECR-221",
+    "approved_by": "E08",
+    "approved_date": "2024-12-10",
+    "affected_parts": [
+      "P-1153",
+      "P-1102",
+      "P-1084"
+    ],
+    "affected_docs": [
+      "DOC-482"
+    ]
+  },
+  "refs": [
+    "ECR-221",
+    "P-1153",
+    "P-1102",
+    "P-1084",
+    "DOC-482"
+  ]
+}

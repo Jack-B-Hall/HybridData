@@ -1,0 +1,29 @@
+{
+  "id": "KES-192",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Lena Okafor. Assignee: Felix Herrera. Status: In Progress. Priority: Medium. Created: 2024-01-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E03",
+    "assignee": "E09",
+    "created": "2024-01-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

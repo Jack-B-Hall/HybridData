@@ -1,0 +1,20 @@
+{
+  "id": "P-1026",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Drain Plug",
+  "text": "Drain Plug. Subsystem: Airframe. Material: neoprene/brass. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-AIR-1026",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "COTS",
+    "material": "neoprene/brass",
+    "mass_g": 8,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001"
+  ]
+}

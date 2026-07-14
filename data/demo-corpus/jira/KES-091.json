@@ -1,0 +1,31 @@
+{
+  "id": "KES-091",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] ESC sync loss under rapid throttle change",
+  "text": "Bug: ESC sync loss under rapid throttle change. Reporter: Felix Herrera. Assignee: Aisha Mbeki. Status: Done. Priority: High. Created: 2025-09-08.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E10",
+    "created": "2025-09-08",
+    "resolved": "2025-10-25",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-437",
+    "DOC-490",
+    "KES-001"
+  ]
+}

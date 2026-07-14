@@ -1,0 +1,20 @@
+{
+  "id": "DOC-474",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Qualification Test Report",
+  "text": "# K-200 GCS Qualification Test Report\n\nDocument number: MD-DOC-474-H. Revision: H. Type: test-report. Author: Marcus Thaine. Created: 2025-05-11. Last modified: 2025-10-31. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1121.",
+  "structured": {
+    "doc_number": "MD-DOC-474-H",
+    "revision": "H",
+    "doc_type": "test-report",
+    "author": "E02",
+    "created": "2025-05-11",
+    "last_modified": "2025-10-31",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1121"
+  ]
+}

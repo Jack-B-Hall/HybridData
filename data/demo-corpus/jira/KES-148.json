@@ -1,0 +1,30 @@
+{
+  "id": "KES-148",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate interface control document",
+  "text": "Story: Integrate interface control document. Reporter: Sam Dreher. Assignee: Nina Schulz. Status: In Progress. Priority: Medium. Created: 2025-04-19.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E12",
+    "created": "2025-04-19",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-412",
+    "KES-006"
+  ]
+}

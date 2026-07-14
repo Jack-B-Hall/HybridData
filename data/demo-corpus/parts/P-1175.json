@@ -1,0 +1,21 @@
+{
+  "id": "P-1175",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Case",
+  "text": "GCS Case. Subsystem: GCS. Material: Pelican 1615, foam-cut, with DC distribution. Mass: 4200g. Manufactured by Pelican. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-GCS-1175",
+    "revision": "B",
+    "subsystem": "GCS",
+    "part_class": "custom",
+    "material": "Pelican 1615, foam-cut, with DC distribution",
+    "mass_g": 4200,
+    "manufacturer": "Pelican",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-509",
+    "DRW-528"
+  ]
+}

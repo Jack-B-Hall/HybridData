@@ -1,0 +1,30 @@
+{
+  "id": "KES-121",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Rowan Ellery. Assignee: Rowan Ellery. Status: Done. Priority: Low. Created: 2023-04-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E13",
+    "created": "2023-04-10",
+    "resolved": "2023-05-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-004",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-004"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-047",
+    "KES-004"
+  ]
+}

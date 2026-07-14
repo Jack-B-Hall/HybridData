@@ -1,0 +1,20 @@
+{
+  "id": "DOC-448",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Subsystem Specification",
+  "text": "# K-200 Systems Subsystem Specification\n\nDocument number: MD-DOC-448-E. Revision: E. Type: specification. Author: Rowan Ellery. Created: 2025-02-28. Last modified: 2025-06-27. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1004.",
+  "structured": {
+    "doc_number": "MD-DOC-448-E",
+    "revision": "E",
+    "doc_type": "specification",
+    "author": "E13",
+    "created": "2025-02-28",
+    "last_modified": "2025-06-27",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1004"
+  ]
+}

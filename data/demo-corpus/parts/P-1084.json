@@ -1,0 +1,18 @@
+{
+  "id": "P-1084",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Fan Controller PCB",
+  "text": "Fan Controller PCB. Subsystem: Battery. Material: PCB, PWM temp control. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1084",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, PWM temp control",
+    "mass_g": 14,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

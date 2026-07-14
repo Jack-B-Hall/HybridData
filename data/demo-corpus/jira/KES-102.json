@@ -1,0 +1,29 @@
+{
+  "id": "KES-102",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify ICD rev B",
+  "text": "Story: Verify ICD rev B. Reporter: Lena Okafor. Assignee: Priya Nair. Status: Done. Priority: Low. Created: 2023-09-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E03",
+    "assignee": "E05",
+    "created": "2023-09-09",
+    "resolved": "2023-11-17",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

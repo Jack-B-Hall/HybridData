@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-022",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: Comms/Datalink Milestone 3",
+  "text": "# Action Items: Comms/Datalink Milestone 3\n\n**Attendees:** Nina Schulz, Dev Patel, Jordan Kim, Felix Herrera\n\n## Summary\n\nThis page covers the test coverage approach for the Comms/Datalink subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Sam Dreher on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E06",
+    "created_date": "2025-12-08",
+    "last_modified": "2025-12-22",
+    "last_modified_by": "E04"
+  },
+  "refs": [
+    "ECR-211",
+    "ECR-205",
+    "KES-117",
+    "KES-187"
+  ]
+}

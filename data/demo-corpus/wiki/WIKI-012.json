@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-012",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2023-07-02",
+  "text": "# Risk Review Meeting \u2014 2023-07-02\n\n**Attendees:** Marcus Thaine, Aisha Mbeki, Sam Dreher, Nina Schulz\n\n## Summary\n\nThis page covers the sonar frequency range for the Nav/GNC subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2023-07-02",
+    "last_modified": "2023-09-23",
+    "last_modified_by": "E05"
+  },
+  "refs": [
+    "ECR-218"
+  ]
+}

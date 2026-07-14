@@ -1,0 +1,24 @@
+{
+  "id": "DOC-407",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Environmental Test Report",
+  "text": "# K-200 Battery Environmental Test Report\n\nDocument number: MD-DOC-407-A. Revision: A. Type: risk-register. Author: Nina Schulz. Created: 2023-03-18. Last modified: 2024-01-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1085, P-1111, P-1028, P-1003.",
+  "structured": {
+    "doc_number": "MD-DOC-407-A",
+    "revision": "A",
+    "doc_type": "risk-register",
+    "author": "E12",
+    "created": "2023-03-18",
+    "last_modified": "2024-01-30",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1085",
+    "P-1111",
+    "P-1028",
+    "P-1003",
+    "ECR-233"
+  ]
+}

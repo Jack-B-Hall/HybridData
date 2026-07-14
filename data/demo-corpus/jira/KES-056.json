@@ -1,0 +1,29 @@
+{
+  "id": "KES-056",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Sonar depth rating leak at 25m",
+  "text": "Bug: Sonar depth rating leak at 25m. Reporter: Rowan Ellery. Assignee: Lena Okafor. Status: Done. Priority: Critical. Created: 2024-08-23.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Critical",
+    "reporter": "E13",
+    "assignee": "E03",
+    "created": "2024-08-23",
+    "resolved": "2024-11-06",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "SRC-001",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gcs/gcs_main.py \u2014 GCS",
+  "text": "# gcs_main.py \u2014 Kestrel K-200 GCS\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gcs_main",
+    "language": "Python",
+    "subsystem": "GCS",
+    "file_path": "gcs/gcs_main.py",
+    "primary_author": "E08",
+    "commit_log": [
+      {
+        "hash": "d5c11f7",
+        "author": "E05",
+        "date": "2023-10-11",
+        "message": "Initial gcs_main [KES-214]",
+        "kes_ref": "KES-214"
+      },
+      {
+        "hash": "fd55ee9",
+        "author": "E11",
+        "date": "2023-10-12",
+        "message": "Update gcs_main [KES-196]",
+        "kes_ref": "KES-196"
+      },
+      {
+        "hash": "fe4390c",
+        "author": "E04",
+        "date": "2023-10-30",
+        "message": "Update gcs_main [KES-126]",
+        "kes_ref": "KES-126"
+      }
+    ]
+  },
+  "refs": [
+    "KES-214",
+    "KES-196",
+    "KES-126",
+    "DOC-462",
+    "DOC-470"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "DRW-511",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-511: Comms Rack Layout",
+  "text": "Drawing MD-DRW-511 Rev A \u2014 Comms Rack Layout\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1121, P-1125, P-1127, P-1134.\n4. Drawn by Priya Nair, checked by Rowan Ellery, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-511",
+    "revision": "A",
+    "drawn_by": "E05",
+    "checked_by": "E13",
+    "approved_by": "E09",
+    "date": "2024-02-08",
+    "subsystem": "Comms/Datalink",
+    "referenced_parts": [
+      "P-1121",
+      "P-1125",
+      "P-1127",
+      "P-1134"
+    ]
+  },
+  "refs": [
+    "P-1121",
+    "P-1125",
+    "P-1127",
+    "P-1134"
+  ]
+}

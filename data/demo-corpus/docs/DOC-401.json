@@ -1,0 +1,27 @@
+{
+  "id": "DOC-401",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 System Architecture Document v1.0",
+  "text": "# K-200 System Architecture Document\n\nDocument number: MD-DOC-401-A. Revision: A. Type: specification. Author: Dr. Rhea Voss. Created: 2023-03-31. Last modified: 2023-04-10. Status: Released.\n\nCritical review by: Dr. Rhea Voss (REV-631, 2023-03-28, Approved with comments \u2014 REV-631 contains essential rationale for architecture decisions that must be preserved).\n\n## \u00a72 Programme Overview\n\nProduct: Kestrel K-200 autonomous maritime survey drone. Manufacturer: Meridian Dynamics. MTOW: 8kg. Endurance: 60 minutes minimum. Configuration baseline: ECN-301.\n\n## \u00a73 Autonomy\n\n### \u00a73.2 Autonomy Level\n\nThe K-200 targets SAE Level 3 conditional automation. The selection of Level 3 rather than Level 4 (full autonomy) is driven by customer requirement RFT-K200-002, which explicitly prohibits fully autonomous navigation in mixed-traffic maritime zones without a human supervisory override. This is a contractual constraint, not a cost optimisation. Architecture decisions downstream of this constraint (continuous datalink requirement, GCS human-in-the-loop design) are binding. This was agreed at the WIKI-003 programme kick-off meeting. See REV-631 (Dr. Voss) comment C01 for the full rationale.\n\n## \u00a74 Redundancy and Fail-safes\n\n### \u00a74.1 GNC Redundancy\n\nSingle-string FCU architecture (P-1091, no redundancy). This was a deliberate trade against the 8kg MTOW constraint \u2014 a redundant FCU would add ~300g and exceed MTOW. Approved for BVLOS open-water operations only. Hardware fail-safe: if datalink lost >10 seconds, FCU executes return-to-launch. This constraint is documented in risk register R-GNC-004. Any proposal to extend K-200 operations to urban or littoral zones must revisit this trade. See REV-631 comment C02.\n\n## \u00a75 Comms Architecture\n\n### \u00a75.3 Datalink Range\n\nRequirement: 15km. Implementation: 900MHz FHSS (P-1125, subsequently upgraded to P-1126 with AES-256 encryption per ECN-322). The 15km range requirement is the tightest constraint on comms architecture \u2014 if it changes, the antenna gain, frequency, and power budget must all be re-analysed. See REV-631 comment C03.\n\n## \u00a77 Mass Budget\n\nMTOW: 8kg. Current design mass: 7.66kg. Margin: 340g (subsequently reduced to 290g after wing skin material change ECN-307). Margin tracked as programme risk R-SYS-001.",
+  "structured": {
+    "doc_number": "MD-DOC-401-A",
+    "revision": "A",
+    "doc_type": "specification",
+    "author": "E01",
+    "created": "2023-03-31",
+    "last_modified": "2023-04-10",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1091",
+    "P-1125",
+    "ECN-301",
+    "ECN-322",
+    "ECN-307",
+    "WIKI-003",
+    "REV-631",
+    "KES-001"
+  ]
+}

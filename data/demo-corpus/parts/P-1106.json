@@ -1,0 +1,20 @@
+{
+  "id": "P-1106",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Servo Controller Board",
+  "text": "Servo Controller Board. Subsystem: Nav/GNC. Material: PCB, 8-channel PWM, CAN. Mass: 38g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1106",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "PCB, 8-channel PWM, CAN",
+    "mass_g": 38,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-516"
+  ]
+}

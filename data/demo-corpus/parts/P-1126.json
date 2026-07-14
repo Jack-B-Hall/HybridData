@@ -1,0 +1,20 @@
+{
+  "id": "P-1126",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Radio Transceiver \u2014 Enhanced",
+  "text": "Radio Transceiver \u2014 Enhanced. Subsystem: Comms/Datalink. Material: 900MHz/2.4GHz dual-band FHSS 2Mbps 1W. Mass: 138g. Manufactured by FreeWave Tech. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1126",
+    "revision": "B",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "900MHz/2.4GHz dual-band FHSS 2Mbps 1W",
+    "mass_g": 138,
+    "manufacturer": "FreeWave Tech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-531"
+  ]
+}

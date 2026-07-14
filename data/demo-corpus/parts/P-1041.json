@@ -1,0 +1,21 @@
+{
+  "id": "P-1041",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "BLDC Motor v2 Enhanced",
+  "text": "BLDC Motor v2 Enhanced. Subsystem: Propulsion. Material: brushless DC, 4014 420KV, enhanced thermal dissipation. Mass: 198g. Manufactured by TorqueDrive Systems. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1041",
+    "revision": "B",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "brushless DC, 4014 420KV, enhanced thermal dissipation",
+    "mass_g": 198,
+    "manufacturer": "TorqueDrive Systems",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-533",
+    "DRW-539"
+  ]
+}

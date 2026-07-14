@@ -1,0 +1,21 @@
+{
+  "id": "P-1150",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Sonar Dome",
+  "text": "Sonar Dome. Subsystem: Payload. Material: HDPE acoustically transparent. Mass: 42g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1150",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "HDPE acoustically transparent",
+    "mass_g": 42,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-517",
+    "DRW-530"
+  ]
+}

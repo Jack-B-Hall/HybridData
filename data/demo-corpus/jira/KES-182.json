@@ -1,0 +1,31 @@
+{
+  "id": "KES-182",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Battery SOC drift after cold soak",
+  "text": "Bug: Battery SOC drift after cold soak. Reporter: Priya Nair. Assignee: Tobias Wren. Status: Done. Priority: High. Created: 2023-09-26.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E06",
+    "created": "2023-09-26",
+    "resolved": "2023-10-12",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-409",
+    "DOC-415",
+    "KES-010"
+  ]
+}

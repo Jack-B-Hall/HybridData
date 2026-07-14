@@ -1,0 +1,21 @@
+{
+  "id": "DOC-459",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Design Analysis",
+  "text": "# K-200 Airframe Design Analysis\n\nDocument number: MD-DOC-459-F. Revision: F. Type: design-note. Author: Lena Okafor. Created: 2023-08-30. Last modified: 2024-06-26. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1108, P-1126.",
+  "structured": {
+    "doc_number": "MD-DOC-459-F",
+    "revision": "F",
+    "doc_type": "design-note",
+    "author": "E03",
+    "created": "2023-08-30",
+    "last_modified": "2024-06-26",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1108",
+    "P-1126"
+  ]
+}

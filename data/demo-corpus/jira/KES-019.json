@@ -1,0 +1,24 @@
+{
+  "id": "KES-019",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Integration and test environment setup",
+  "text": "Epic: Integration and test environment setup. Reporter: Jordan Kim. Assignee: Lena Okafor. Status: Done. Priority: High. Created: 2024-09-12.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E03",
+    "created": "2024-09-12",
+    "resolved": "2024-11-16",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-434"
+  ]
+}

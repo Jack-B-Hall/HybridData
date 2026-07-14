@@ -1,0 +1,29 @@
+{
+  "id": "ECN-311",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-211",
+  "text": "Engineering Change Notice ECN-311. Implements ECR-211. Approved by Felix Herrera on 2024-07-14. Affected parts: P-1063, P-1179, P-1058. Updated documents: DOC-488, DOC-411.",
+  "structured": {
+    "ecr_id": "ECR-211",
+    "approved_by": "E09",
+    "approved_date": "2024-07-14",
+    "affected_parts": [
+      "P-1063",
+      "P-1179",
+      "P-1058"
+    ],
+    "affected_docs": [
+      "DOC-488",
+      "DOC-411"
+    ]
+  },
+  "refs": [
+    "ECR-211",
+    "P-1063",
+    "P-1179",
+    "P-1058",
+    "DOC-488",
+    "DOC-411"
+  ]
+}

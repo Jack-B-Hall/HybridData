@@ -1,0 +1,21 @@
+{
+  "id": "DOC-406",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Maintenance Procedure",
+  "text": "# K-200 Propulsion Maintenance Procedure\n\nDocument number: MD-DOC-406-A. Revision: A. Type: manual. Author: Nina Schulz. Created: 2024-11-15. Last modified: 2025-01-27. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1064.",
+  "structured": {
+    "doc_number": "MD-DOC-406-A",
+    "revision": "A",
+    "doc_type": "manual",
+    "author": "E12",
+    "created": "2024-11-15",
+    "last_modified": "2025-01-27",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1064",
+    "KES-166"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "WIKI-065",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Battery Weekly Status \u2014 Week 46, 2023",
+  "text": "# Battery Weekly Status \u2014 Week 46, 2023\n\n**Attendees:** Aisha Mbeki, Priya Nair, Nina Schulz\n\n## Summary\n\nThis page covers the software architecture selection for the Battery subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E13",
+    "created_date": "2023-06-20",
+    "last_modified": "2023-08-13",
+    "last_modified_by": "E05"
+  },
+  "refs": []
+}

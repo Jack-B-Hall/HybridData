@@ -1,0 +1,25 @@
+{
+  "id": "ECN-316",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-216",
+  "text": "Engineering Change Notice ECN-316. Implements ECR-216. Approved by Rowan Ellery on 2025-11-03. Affected parts: P-1140, P-1145. Updated documents: DOC-423.",
+  "structured": {
+    "ecr_id": "ECR-216",
+    "approved_by": "E13",
+    "approved_date": "2025-11-03",
+    "affected_parts": [
+      "P-1140",
+      "P-1145"
+    ],
+    "affected_docs": [
+      "DOC-423"
+    ]
+  },
+  "refs": [
+    "ECR-216",
+    "P-1140",
+    "P-1145",
+    "DOC-423"
+  ]
+}

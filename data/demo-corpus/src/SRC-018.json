@@ -1,0 +1,60 @@
+{
+  "id": "SRC-018",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "comms/encryption_handler.c \u2014 Comms/Datalink",
+  "text": "/* encryption_handler.c \u2014 Kestrel K-200 Comms/Datalink\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "encryption_handler",
+    "language": "C",
+    "subsystem": "Comms/Datalink",
+    "file_path": "comms/encryption_handler.c",
+    "primary_author": "E05",
+    "commit_log": [
+      {
+        "hash": "ff3562b",
+        "author": "E02",
+        "date": "2025-10-12",
+        "message": "Initial encryption_handler [KES-209]",
+        "kes_ref": "KES-209"
+      },
+      {
+        "hash": "da69649",
+        "author": "E12",
+        "date": "2025-11-15",
+        "message": "Update encryption_handler [KES-174]",
+        "kes_ref": "KES-174"
+      },
+      {
+        "hash": "328cd4b",
+        "author": "E04",
+        "date": "2025-12-14",
+        "message": "Update encryption_handler [KES-139]",
+        "kes_ref": "KES-139"
+      },
+      {
+        "hash": "ff2ee58",
+        "author": "E09",
+        "date": "2026-01-17",
+        "message": "Update encryption_handler [KES-035]",
+        "kes_ref": "KES-035"
+      },
+      {
+        "hash": "5ebce66",
+        "author": "E04",
+        "date": "2026-03-05",
+        "message": "Update encryption_handler [KES-031]",
+        "kes_ref": "KES-031"
+      }
+    ]
+  },
+  "refs": [
+    "KES-209",
+    "KES-174",
+    "KES-139",
+    "KES-035",
+    "KES-031",
+    "DOC-457",
+    "DOC-482"
+  ]
+}

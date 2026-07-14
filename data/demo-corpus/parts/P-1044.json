@@ -1,0 +1,21 @@
+{
+  "id": "P-1044",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor/ESC Controller Board",
+  "text": "Motor/ESC Controller Board. Subsystem: Propulsion. Material: PCB, STM32, CAN bus. Mass: 65g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1044",
+    "revision": "B",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "PCB, STM32, CAN bus",
+    "mass_g": 65,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-504",
+    "DRW-539"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ECR-214",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Battery cell chemistry change: P-1062 LiPo \u2192 LiFePO4",
+  "text": "Engineering Change Request ECR-214.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-10-12.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-10-19.\n\nSummary: Change the battery cell assembly (P-1062) from LiPo (6S2P 22.2V 20Ah) to LiFePO4 chemistry.\n\nRationale: The K-200 experienced a LiPo thermal runaway event on 8 September 2023 during a hot-day endurance test (KES-208). This was the second thermal anomaly on P-1062 cells (the first was a cell swelling event in March 2023). LiPo cells present an unacceptable risk under IEC 62133-2 compliance requirements for BVLOS maritime operations, particularly given the salt-water submersion risk profile. The customer contract (ref KES-208) explicitly prohibits LiPo chemistry for BVLOS maritime operations.\n\nLiFePO4 chemistry offers superior thermal stability (stable to 270\u00b0C vs LiPo thermal runaway at ~150\u00b0C) at a cost of approximately 12% lower energy density. The endurance reduction from 75 minutes projected to 66 minutes is within the 60-minute minimum requirement. Trade study presented at WIKI-052 (Battery Chemistry Design Review, 2023-10-05).\n\nImpact:\n- P-1062: New LiFePO4 cell assembly (CellCore Technologies, 6S2P 22.2V 20Ah LiFePO4)\n- P-1075: BMS module charge/discharge profile must be updated for LiFePO4 voltage curves (3.2V nominal vs 3.7V LiPo)\n- P-1064: Battery connector to remain AS150 \u2014 no change\n- DOC-421: Battery System Specification to be updated to Rev C\n- P-1079: Battery wiring harness \u2014 no change required\n- Qualification testing: Full cell-level and pack-level qualification per IEC 62133-2 required before ECN issue\n\nRelated: KES-208 (thermal runaway bug), WIKI-052 (design review meeting), DOC-421 (battery spec update).",
+  "structured": {
+    "raised_by": "E03",
+    "raised_date": "2023-10-12",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1062",
+      "P-1075"
+    ],
+    "affected_docs": [
+      "DOC-421"
+    ],
+    "jira_issues": [
+      "KES-208",
+      "KES-210"
+    ],
+    "approver": "E01",
+    "approved_date": "2023-10-19"
+  },
+  "refs": [
+    "P-1062",
+    "P-1075",
+    "P-1064",
+    "P-1079",
+    "DOC-421",
+    "KES-208",
+    "KES-210",
+    "WIKI-052"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ECR-209",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "BMS P-1075 safety parameter update: SOC floor 18%, SOC ceiling 82%, temperature de-rating",
+  "text": "Engineering Change Request ECR-209.\n\nRaised by: Lena Okafor (Battery & Power Systems Engineer), 2023-07-10.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-07-18.\n\nSummary: Update BMS module (P-1075) safety parameters: SOC lower limit set to 18%, SOC upper limit set to 82%, and temperature de-rating curve updated per March 2023 bench test data.\n\nRationale: The March 2023 bench test series (internal reference BT-2023-03-12) conducted ahead of the DOC-431 BMS Safety Specification release identified two critical safety limits (discussed at WIKI-014, BMS Safety Architecture Review, 2023-07-01):\n\n1. SOC Floor (18%): Below 18% SOC under 3C discharge, one of six series cells showed 12mV cell reversal for ~40 seconds. Cell reversal leads to separator failure and thermal event risk. The 18% floor provides a 6-point margin above the 12% reversal-onset, validated across the operating temperature range (-5\u00b0C to +45\u00b0C) by thermal modelling.\n\n2. SOC Ceiling (82%): At SOC above 85% with charge rate above 0.5C and ambient below 5\u00b0C, localised lithium plating was observed on anode graphite surfaces (confirmed by post-mortem optical microscopy). The 82% ceiling provides a 3-point margin below the 85% plating-onset. This limit is implemented in hardware on P-1075 to prevent bypass by any single-point software fault \u2014 per the decision at WIKI-014.\n\n3. Temperature de-rating curve: The previous de-rating curve in DOC-431 \u00a75.2 was based on manufacturer data only. The bench test data shows that at -5\u00b0C ambient the maximum allowable charge rate must be reduced to 0.3C (previously specified at 0.5C). DOC-431 \u00a75.2 de-rating table is to be updated.\n\nDr. Rhea Voss's review of DOC-431 (REV-623) contains additional commentary on the safety rationale for these limits \u2014 this commentary must be preserved in DOC-431.\n\nImpact:\n- P-1075: Hardware limits updated (18% floor lockout, 82% ceiling lockout, new de-rating curve in EEPROM)\n- DOC-431: \u00a74.3 SOC limits and \u00a75.2 de-rating table to be updated",
+  "structured": {
+    "raised_by": "E03",
+    "raised_date": "2023-07-10",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1075"
+    ],
+    "affected_docs": [
+      "DOC-431"
+    ],
+    "jira_issues": [],
+    "approver": "E01",
+    "approved_date": "2023-07-18"
+  },
+  "refs": [
+    "P-1075",
+    "DOC-431",
+    "WIKI-014",
+    "REV-623"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-062",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify ICD rev B",
+  "text": "Story: Verify ICD rev B. Reporter: Rowan Ellery. Assignee: Priya Nair. Status: In Progress. Priority: Low. Created: 2024-08-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E05",
+    "created": "2024-08-04",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "KES-016"
+  ]
+}

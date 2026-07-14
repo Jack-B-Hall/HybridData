@@ -1,0 +1,25 @@
+{
+  "id": "KES-004",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] GNC algorithm validation",
+  "text": "Epic: GNC algorithm validation. Reporter: Sam Dreher. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2025-06-03.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E14",
+    "created": "2025-06-03",
+    "resolved": "2025-07-26",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-444",
+    "WIKI-049"
+  ]
+}

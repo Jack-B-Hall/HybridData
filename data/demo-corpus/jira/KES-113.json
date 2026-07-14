@@ -1,0 +1,29 @@
+{
+  "id": "KES-113",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Marcus Thaine. Assignee: Tobias Wren. Status: Done. Priority: Medium. Created: 2025-01-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E02",
+    "assignee": "E06",
+    "created": "2025-01-23",
+    "resolved": "2025-03-21",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "KES-011"
+  ]
+}

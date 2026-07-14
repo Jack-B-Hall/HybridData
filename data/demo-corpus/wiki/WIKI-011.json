@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-011",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Battery Technical Note: gimbal stabilisation technology",
+  "text": "# Battery Technical Note: gimbal stabilisation technology\n\n**Attendees:** Tyler Moss, Lena Okafor, Tobias Wren\n\n## Summary\n\nThis page covers the gimbal stabilisation technology for the Battery subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Jordan Kim on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2025-07-21",
+    "last_modified": "2025-09-22",
+    "last_modified_by": "E08"
+  },
+  "refs": [
+    "DOC-476",
+    "DOC-471",
+    "KES-215"
+  ]
+}

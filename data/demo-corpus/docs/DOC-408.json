@@ -1,0 +1,22 @@
+{
+  "id": "DOC-408",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Subsystem Specification",
+  "text": "# K-200 Nav/GNC Subsystem Specification\n\nDocument number: MD-DOC-408-A. Revision: A. Type: specification. Author: Dev Patel. Created: 2024-09-17. Last modified: 2025-08-07. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1115, P-1096.",
+  "structured": {
+    "doc_number": "MD-DOC-408-A",
+    "revision": "A",
+    "doc_type": "specification",
+    "author": "E11",
+    "created": "2024-09-17",
+    "last_modified": "2025-08-07",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1115",
+    "P-1096",
+    "ECR-223"
+  ]
+}

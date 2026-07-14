@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-030",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: Nav/GNC Milestone 4",
+  "text": "# Action Items: Nav/GNC Milestone 4\n\n**Attendees:** Lena Okafor, Felix Herrera\n\n## Summary\n\nThis page covers the mission planning workflow for the Nav/GNC subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tobias Wren on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E10",
+    "created_date": "2024-03-04",
+    "last_modified": "2024-04-23",
+    "last_modified_by": "E06"
+  },
+  "refs": [
+    "DOC-484",
+    "DOC-422",
+    "KES-217"
+  ]
+}

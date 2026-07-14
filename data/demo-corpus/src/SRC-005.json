@@ -1,0 +1,44 @@
+{
+  "id": "SRC-005",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "comms/datalink_driver.py \u2014 Comms/Datalink",
+  "text": "# datalink_driver.py \u2014 Kestrel K-200 Comms/Datalink\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "datalink_driver",
+    "language": "Python",
+    "subsystem": "Comms/Datalink",
+    "file_path": "comms/datalink_driver.py",
+    "primary_author": "E05",
+    "commit_log": [
+      {
+        "hash": "5ed7de8",
+        "author": "E13",
+        "date": "2025-07-08",
+        "message": "Initial datalink_driver [KES-009]",
+        "kes_ref": "KES-009"
+      },
+      {
+        "hash": "29aa98a",
+        "author": "E11",
+        "date": "2025-07-17",
+        "message": "Update datalink_driver [KES-179]",
+        "kes_ref": "KES-179"
+      },
+      {
+        "hash": "8c75440",
+        "author": "E10",
+        "date": "2025-08-06",
+        "message": "Update datalink_driver [KES-089]",
+        "kes_ref": "KES-089"
+      }
+    ]
+  },
+  "refs": [
+    "KES-009",
+    "KES-179",
+    "KES-089",
+    "DOC-418",
+    "DOC-445"
+  ]
+}

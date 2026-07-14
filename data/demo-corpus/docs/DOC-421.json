@@ -1,0 +1,31 @@
+{
+  "id": "DOC-421",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery System Specification v2.0 (post LiFePO4 transition)",
+  "text": "# K-200 Battery System Specification\n\nDocument number: MD-DOC-421-C. Revision: C. Type: specification. Author: Lena Okafor. Created: 2023-04-01. Last modified: 2023-12-14. Status: Released.\n\nSubsystem: Battery.\n\n## Change History\n\n- Rev A: Initial LiPo baseline (2023-04-01)\n- Rev B: BMS SOC limits updated per ECR-209 (2023-07-18)\n- Rev C: LiFePO4 chemistry transition per ECN-312 / ECR-214 (2023-12-14)\n\n## \u00a71 Scope\n\nThis specification defines the battery system for the Kestrel K-200, covering cell chemistry, BMS requirements, safety limits, and qualification requirements.\n\n## \u00a72 Battery Cell Assembly \u2014 P-1062 Rev C\n\nChemistry: LiFePO4 (lithium iron phosphate). Configuration: 6S2P. Nominal voltage: 22.2V (3.7V/cell nominal). Capacity: 20Ah. Supplier: CellCore Technologies. Energy density: approximately 140 Wh/kg.\n\nThe transition from LiPo to LiFePO4 was driven by the thermal runaway event KES-208 (September 2023) and IEC 62133-2 compliance requirements for BVLOS maritime operations. Design review decision: WIKI-052 (2023-10-05). Change authority: ECN-312.\n\n## \u00a73 BMS Module \u2014 P-1075 Rev C\n\nThe BMS module manages cell balancing, SOC estimation, and safety protection. SOC limits (per ECR-209 and confirmed in REV-623 review commentary):\n- SOC floor: 18% (hardware lockout \u2014 prevents cell reversal under 3C discharge)\n- SOC ceiling: 82% (hardware lockout \u2014 prevents lithium plating at low temperature)\n\nThese limits are implemented in hardware independent of firmware to prevent single-point software fault bypass. See DOC-431 (BMS Safety Specification) for detailed rationale.\n\n## \u00a74 Electrical Interface\n\nMain connector: P-1064 (AS150 gold 150A). Battery wiring harness: P-1079. Power distribution: P-1076.",
+  "structured": {
+    "doc_number": "MD-DOC-421-C",
+    "revision": "C",
+    "doc_type": "specification",
+    "author": "E03",
+    "created": "2023-04-01",
+    "last_modified": "2023-12-14",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1062",
+    "P-1075",
+    "P-1064",
+    "P-1079",
+    "P-1076",
+    "ECR-214",
+    "ECN-312",
+    "ECR-209",
+    "DOC-431",
+    "KES-208",
+    "WIKI-052",
+    "REV-623"
+  ]
+}

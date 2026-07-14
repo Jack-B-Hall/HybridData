@@ -1,0 +1,18 @@
+{
+  "id": "P-1119",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Barometer Cover",
+  "text": "Barometer Cover. Subsystem: Nav/GNC. Material: sintered PTFE, dust/splash. Mass: 4g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1119",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "sintered PTFE, dust/splash",
+    "mass_g": 4,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-217",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Gimbal jitter on attitude manoeuvre",
+  "text": "Bug: Gimbal jitter on attitude manoeuvre. Reporter: Marcus Thaine. Assignee: Lena Okafor. Status: Done. Priority: Medium. Created: 2025-06-20.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E02",
+    "assignee": "E03",
+    "created": "2025-06-20",
+    "resolved": "2025-07-17",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

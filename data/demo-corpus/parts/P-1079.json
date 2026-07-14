@@ -1,0 +1,21 @@
+{
+  "id": "P-1079",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Wiring Harness",
+  "text": "Battery Wiring Harness. Subsystem: Battery. Material: silicone 10AWG, crimped lugs. Mass: 185g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1079",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "silicone 10AWG, crimped lugs",
+    "mass_g": 185,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-503",
+    "DRW-515"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1116",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Magnetometer Compensation Board",
+  "text": "Magnetometer Compensation Board. Subsystem: Nav/GNC. Material: PCB, null-coil correction. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1116",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "PCB, null-coil correction",
+    "mass_g": 18,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,21 @@
+{
+  "id": "DOC-465",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Interface Control Document",
+  "text": "# K-200 GCS Interface Control Document\n\nDocument number: MD-DOC-465-G. Revision: G. Type: ICD. Author: Tobias Wren. Created: 2025-05-27. Last modified: 2026-04-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1056.",
+  "structured": {
+    "doc_number": "MD-DOC-465-G",
+    "revision": "G",
+    "doc_type": "ICD",
+    "author": "E06",
+    "created": "2025-05-27",
+    "last_modified": "2026-04-30",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1056",
+    "KES-024"
+  ]
+}

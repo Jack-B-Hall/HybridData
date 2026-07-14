@@ -1,0 +1,30 @@
+{
+  "id": "KES-219",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Dev Patel. Assignee: Tobias Wren. Status: Open. Priority: Low. Created: 2023-09-20.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E11",
+    "assignee": "E06",
+    "created": "2023-09-20",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-451",
+    "KES-015"
+  ]
+}

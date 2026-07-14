@@ -1,0 +1,18 @@
+{
+  "id": "P-1047",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Thermal Sensor (set of 4)",
+  "text": "Motor Thermal Sensor (set of 4). Subsystem: Propulsion. Material: NTC thermistor 10k. Mass: 14g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1047",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "NTC thermistor 10k",
+    "mass_g": 14,
+    "manufacturer": "SenseCo",
+    "parent_id": null
+  },
+  "refs": []
+}

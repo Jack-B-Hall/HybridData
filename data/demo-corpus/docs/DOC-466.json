@@ -1,0 +1,24 @@
+{
+  "id": "DOC-466",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Qualification Test Report",
+  "text": "# K-200 Systems Qualification Test Report\n\nDocument number: MD-DOC-466-G. Revision: G. Type: test-report. Author: Tyler Moss. Created: 2023-10-13. Last modified: 2024-05-12. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1132, P-1013, P-1174, P-1077.",
+  "structured": {
+    "doc_number": "MD-DOC-466-G",
+    "revision": "G",
+    "doc_type": "test-report",
+    "author": "E14",
+    "created": "2023-10-13",
+    "last_modified": "2024-05-12",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1132",
+    "P-1013",
+    "P-1174",
+    "P-1077",
+    "ECR-202"
+  ]
+}

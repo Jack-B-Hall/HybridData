@@ -1,0 +1,18 @@
+{
+  "id": "P-1059",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Connector XT60 (x4 pairs)",
+  "text": "Motor Connector XT60 (x4 pairs). Subsystem: Propulsion. Material: XT60 gold plated. Mass: 14g. Manufactured by AmassConnect. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1059",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "XT60 gold plated",
+    "mass_g": 14,
+    "manufacturer": "AmassConnect",
+    "parent_id": null
+  },
+  "refs": []
+}

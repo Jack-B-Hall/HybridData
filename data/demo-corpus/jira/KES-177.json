@@ -1,0 +1,30 @@
+{
+  "id": "KES-177",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Tobias Wren. Assignee: Aisha Mbeki. Status: In Progress. Priority: Medium. Created: 2023-11-17.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E06",
+    "assignee": "E10",
+    "created": "2023-11-17",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-029",
+    "KES-006"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1094",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Receiver Board",
+  "text": "GPS Receiver Board. Subsystem: Nav/GNC. Material: u-blox F9P RTK dual-band. Mass: 32g. Manufactured by u-blox. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1094",
+    "revision": "B",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "u-blox F9P RTK dual-band",
+    "mass_g": 32,
+    "manufacturer": "u-blox",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091",
+    "DRW-506"
+  ]
+}

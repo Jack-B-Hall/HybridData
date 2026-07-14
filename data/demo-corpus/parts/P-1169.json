@@ -1,0 +1,20 @@
+{
+  "id": "P-1169",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS UPS Battery",
+  "text": "GCS UPS Battery. Subsystem: GCS. Material: 12V 18Ah SLA. Mass: 2800g. Manufactured by Yuasa. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1169",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "12V 18Ah SLA",
+    "mass_g": 2800,
+    "manufacturer": "Yuasa",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-528"
+  ]
+}

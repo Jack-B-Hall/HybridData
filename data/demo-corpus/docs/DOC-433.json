@@ -1,0 +1,21 @@
+{
+  "id": "DOC-433",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Interface Control Document",
+  "text": "# K-200 Propulsion Interface Control Document\n\nDocument number: MD-DOC-433-D. Revision: D. Type: ICD. Author: Tobias Wren. Created: 2023-07-13. Last modified: 2023-12-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1168.",
+  "structured": {
+    "doc_number": "MD-DOC-433-D",
+    "revision": "D",
+    "doc_type": "ICD",
+    "author": "E06",
+    "created": "2023-07-13",
+    "last_modified": "2023-12-30",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1168",
+    "ECR-224"
+  ]
+}

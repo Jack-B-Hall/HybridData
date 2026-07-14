@@ -1,0 +1,60 @@
+{
+  "id": "SRC-029",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "power/battery_balancer.c \u2014 Battery",
+  "text": "/* battery_balancer.c \u2014 Kestrel K-200 Battery\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "battery_balancer",
+    "language": "C",
+    "subsystem": "Battery",
+    "file_path": "power/battery_balancer.c",
+    "primary_author": "E14",
+    "commit_log": [
+      {
+        "hash": "53cc1ec",
+        "author": "E06",
+        "date": "2025-03-31",
+        "message": "Initial battery_balancer [KES-092]",
+        "kes_ref": "KES-092"
+      },
+      {
+        "hash": "de77ab7",
+        "author": "E03",
+        "date": "2025-05-07",
+        "message": "Update battery_balancer [KES-034]",
+        "kes_ref": "KES-034"
+      },
+      {
+        "hash": "d9e6bac",
+        "author": "E04",
+        "date": "2025-05-22",
+        "message": "Update battery_balancer [KES-058]",
+        "kes_ref": "KES-058"
+      },
+      {
+        "hash": "7117d45",
+        "author": "E10",
+        "date": "2025-07-18",
+        "message": "Update battery_balancer [KES-084]",
+        "kes_ref": "KES-084"
+      },
+      {
+        "hash": "1dc5ac8",
+        "author": "E11",
+        "date": "2025-08-24",
+        "message": "Update battery_balancer [KES-033]",
+        "kes_ref": "KES-033"
+      }
+    ]
+  },
+  "refs": [
+    "KES-092",
+    "KES-034",
+    "KES-058",
+    "KES-084",
+    "KES-033",
+    "DOC-452",
+    "DOC-476"
+  ]
+}

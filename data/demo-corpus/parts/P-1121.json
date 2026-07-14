@@ -1,0 +1,20 @@
+{
+  "id": "P-1121",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Datalink Controller Board",
+  "text": "Datalink Controller Board. Subsystem: Comms/Datalink. Material: PCB, STM32, SPI/UART bridge. Mass: 55g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1121",
+    "revision": "B",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "PCB, STM32, SPI/UART bridge",
+    "mass_g": 55,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-511"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1062",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Cell Assembly \u2014 LiFePO4",
+  "text": "Battery Cell Assembly \u2014 LiFePO4. Subsystem: Battery. Material: LiFePO4, 6S2P 22.2V 20Ah. Mass: 1820g. Manufactured by CellCore Technologies. Revision C. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1062",
+    "revision": "C",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "LiFePO4, 6S2P 22.2V 20Ah",
+    "mass_g": 1820,
+    "manufacturer": "CellCore Technologies",
+    "parent_id": null
+  },
+  "refs": []
+}

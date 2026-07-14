@@ -1,0 +1,18 @@
+{
+  "id": "P-1166",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Antenna Base \u2014 Secondary",
+  "text": "GCS Antenna Base \u2014 Secondary. Subsystem: GCS. Material: tripod mount, 5/8-11 thread. Mass: 320g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-GCS-1166",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "custom",
+    "material": "tripod mount, 5/8-11 thread",
+    "mass_g": 320,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

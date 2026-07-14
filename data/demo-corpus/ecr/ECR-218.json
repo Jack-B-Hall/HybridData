@@ -1,0 +1,36 @@
+{
+  "id": "ECR-218",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Sonar transducer vendor change: DepthWave \u2192 AquaSound Corp (P-1148 Rev B)",
+  "text": "Engineering Change Request ECR-218.\n\nRaised by: Cass Doyle (Payload Systems Engineer), 2024-09-05.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2024-09-12.\n\nSummary: Change sonar transducer (P-1148) from DepthWave Systems to AquaSound Corp.\n\nRationale: Integration testing (KES-156) revealed unacceptable frequency drift in the DepthWave transducer (KES-158): the centre frequency shifted from specified 200kHz to 184kHz over a 2-hour thermal soak at 35\u00b0C \u2014 a 16kHz drift. The sonar signal processor (P-1147) DSP filter and the sonar driver firmware (SRC-011) are tuned to 200kHz \u00b12kHz. A 16kHz drift cannot be compensated in software without a full DSP filter redesign and re-qualification.\n\nVendor evaluation at WIKI-045 (Sonar Vendor Selection Meeting, 2024-08-29) compared DepthWave, AquaSound Corp, and MarineSpec Ltd. AquaSound Corp was selected on:\n- Frequency stability: \u00b11.5kHz over temperature (vs \u00b116kHz for DepthWave)\n- Extended bandwidth: 100\u2013400kHz (enables future multi-frequency mode)\n- Depth rating: 30m (vs 20m for DepthWave)\n- DNV-GL certification data available (reduces qualification test burden)\n- IP68 connector standard on P-1148 Rev B (DepthWave required custom cable)\n\nO-ring flange compatibility with P-1149 mounting bracket (DRW-517) confirmed at WIKI-045.\n\nImpact:\n- P-1148: Revised to Rev B (AquaSound Corp supplier, updated interface drawing)\n- P-1149: Sonar mounting bracket \u2014 compatible, no change (O-ring confirmed)\n- DOC-462: Sonar System ICD to be updated for AquaSound electrical and acoustic interface\n- SRC-011 (sonar_driver.c): DSP filter centre frequency remains 200kHz, but anti-alias filter width can be narrowed \u2014 minor update\n- DOC-468: Sonar Performance Test Report to be re-issued with AquaSound data",
+  "structured": {
+    "raised_by": "E07",
+    "raised_date": "2024-09-05",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1148"
+    ],
+    "affected_docs": [
+      "DOC-462",
+      "DOC-468"
+    ],
+    "jira_issues": [
+      "KES-156",
+      "KES-158"
+    ],
+    "approver": "E01",
+    "approved_date": "2024-09-12"
+  },
+  "refs": [
+    "P-1148",
+    "P-1149",
+    "DOC-462",
+    "DOC-468",
+    "KES-156",
+    "KES-158",
+    "WIKI-045",
+    "SRC-011",
+    "DRW-517"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "DRW-533",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-533: Enhanced ESC Heatsink",
+  "text": "Drawing MD-DRW-533 Rev C \u2014 Enhanced ESC Heatsink\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1041, P-1042, P-1051.\n4. Drawn by Marcus Thaine, checked by Rowan Ellery, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-533",
+    "revision": "C",
+    "drawn_by": "E02",
+    "checked_by": "E13",
+    "approved_by": "E09",
+    "date": "2025-04-10",
+    "subsystem": "Propulsion",
+    "referenced_parts": [
+      "P-1041",
+      "P-1042",
+      "P-1051"
+    ]
+  },
+  "refs": [
+    "P-1041",
+    "P-1042",
+    "P-1051"
+  ]
+}

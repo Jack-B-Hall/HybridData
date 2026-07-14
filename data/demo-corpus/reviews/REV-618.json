@@ -1,0 +1,47 @@
+{
+  "id": "REV-618",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-479: REV-618",
+  "text": "# Review Record REV-618\n\nDocument: DOC-479. Reviewer: Rowan Ellery. Date: 2024-08-07. Overall disposition: Approved with comments.\n\n## Comments\n\n**C01** (Tyler Moss): Section 5.2: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C02** (Lena Okafor): Section 1.4: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C03** (Felix Herrera): Section 1.3: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C04** (Tobias Wren): Section 8.1: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-479",
+    "reviewer": "E13",
+    "review_date": "2024-08-07",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E14",
+        "text": "Section 5.2: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C02",
+        "author": "E03",
+        "text": "Section 1.4: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C03",
+        "author": "E09",
+        "text": "Section 1.3: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C04",
+        "author": "E06",
+        "text": "Section 8.1: The specification should clarify the interface requirement for DOC-479. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-479"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1140",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "RF Shield",
+  "text": "RF Shield. Subsystem: Comms/Datalink. Material: tinplate, 5-sided, press-fit. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1140",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "tinplate, 5-sided, press-fit",
+    "mass_g": 14,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

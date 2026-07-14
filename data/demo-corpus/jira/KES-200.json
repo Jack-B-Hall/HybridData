@@ -1,0 +1,30 @@
+{
+  "id": "KES-200",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Lena Okafor. Assignee: Aisha Mbeki. Status: Done. Priority: Medium. Created: 2024-01-08.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E03",
+    "assignee": "E10",
+    "created": "2024-01-08",
+    "resolved": "2024-04-18",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-041",
+    "KES-005"
+  ]
+}

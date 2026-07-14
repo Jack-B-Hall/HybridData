@@ -1,0 +1,29 @@
+{
+  "id": "KES-160",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Aisha Mbeki. Assignee: Nina Schulz. Status: Done. Priority: Low. Created: 2025-07-27.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E10",
+    "assignee": "E12",
+    "created": "2025-07-27",
+    "resolved": "2025-11-01",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "KES-016"
+  ]
+}

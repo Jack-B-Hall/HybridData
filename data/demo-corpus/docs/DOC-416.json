@@ -1,0 +1,25 @@
+{
+  "id": "DOC-416",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Subsystem Specification",
+  "text": "# K-200 Battery Subsystem Specification\n\nDocument number: MD-DOC-416-B. Revision: B. Type: specification. Author: Nina Schulz. Created: 2023-04-28. Last modified: 2023-08-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1031, P-1062, P-1079.",
+  "structured": {
+    "doc_number": "MD-DOC-416-B",
+    "revision": "B",
+    "doc_type": "specification",
+    "author": "E12",
+    "created": "2023-04-28",
+    "last_modified": "2023-08-04",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1031",
+    "P-1062",
+    "P-1079",
+    "ECR-210",
+    "ECR-233",
+    "KES-153"
+  ]
+}

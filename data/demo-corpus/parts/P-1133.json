@@ -1,0 +1,20 @@
+{
+  "id": "P-1133",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Diversity Antenna Mount",
+  "text": "Diversity Antenna Mount. Subsystem: Comms/Datalink. Material: CFRP bracket, 60mm spacing. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1133",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "CFRP bracket, 60mm spacing",
+    "mass_g": 18,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-531"
+  ]
+}

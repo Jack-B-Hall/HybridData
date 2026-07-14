@@ -1,0 +1,36 @@
+{
+  "id": "ECR-212",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Battery \u2014 update P-1046 per KES-192",
+  "text": "Engineering Change Request ECR-212. Subsystem: Battery. Affected parts: P-1046, P-1010, P-1102, P-1127. Linked issues: KES-192. Raised by: Priya Nair on 2024-08-29. Status: Approved.",
+  "structured": {
+    "raised_by": "E05",
+    "raised_date": "2024-08-29",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1046",
+      "P-1010",
+      "P-1102",
+      "P-1127"
+    ],
+    "affected_docs": [
+      "DOC-405",
+      "DOC-402"
+    ],
+    "jira_issues": [
+      "KES-192"
+    ],
+    "approver": "E06",
+    "approved_date": "2024-10-09"
+  },
+  "refs": [
+    "P-1046",
+    "P-1010",
+    "P-1102",
+    "P-1127",
+    "KES-192",
+    "DOC-405",
+    "DOC-402"
+  ]
+}

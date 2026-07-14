@@ -1,0 +1,37 @@
+{
+  "id": "ECR-207",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Wing skin material change: CFRP \u2192 hybrid carbon-aramid composite (P-1008, P-1009)",
+  "text": "Engineering Change Request ECR-207.\n\nRaised by: Tobias Wren (Structural/Airframe Engineer), 2023-08-29.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2023-09-05.\n\nSummary: Change wing skin material for P-1008 (port) and P-1009 (starboard) from CFRP (0\u00b0/90\u00b0 layup) to hybrid carbon-aramid composite (CFRP weave + Kevlar\u00ae \u00b145\u00b0 interlayer).\n\nRationale: Ground vibration testing (June 2023) identified delamination at the wing root bond line of both CFRP wing skins (P-1008, P-1009) after 12 hours at the motor vibration spectrum, documented in KES-045 (delamination bug) under the KES-042 wing skin trade study epic.\n\nMaterial coupon tests in KES-042 evaluated three options: CFRP (failed at 12h), quasi-isotropic CFRP (passes 50h estimate), and hybrid carbon-aramid (no delamination at 100h). The aramid \u00b145\u00b0 interlayer provides crack arrest and dramatically increases impact resistance. This was agreed at WIKI-017 (Airframe Materials Review, 2023-08-22). The mass penalty is +25g per skin (+50g total), which is within the 340g system mass margin documented in REV-631.\n\nImpact:\n- P-1008: Material updated to hybrid carbon-aramid composite, Rev C\n- P-1009: Material updated to hybrid carbon-aramid composite, Rev C\n- DOC-409: Structural Specification to be updated\n- DOC-407: Airframe Loads Analysis to be re-run for stiffness change (Tobias Wren)\n- DRW-502: Wing Skin & Spar Assembly drawing to be updated with new layup schedule\n- P-1017 (wiring harness bracket): No change \u2014 bracket bonded to airframe, not wing skin",
+  "structured": {
+    "raised_by": "E06",
+    "raised_date": "2023-08-29",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1008",
+      "P-1009"
+    ],
+    "affected_docs": [
+      "DOC-409",
+      "DOC-407"
+    ],
+    "jira_issues": [
+      "KES-042",
+      "KES-045"
+    ],
+    "approver": "E01",
+    "approved_date": "2023-09-05"
+  },
+  "refs": [
+    "P-1008",
+    "P-1009",
+    "DOC-409",
+    "DOC-407",
+    "DRW-502",
+    "KES-042",
+    "KES-045",
+    "WIKI-017",
+    "P-1017"
+  ]
+}

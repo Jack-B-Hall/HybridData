@@ -1,0 +1,29 @@
+{
+  "id": "KES-178",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Felix Herrera. Assignee: Marcus Thaine. Status: Open. Priority: High. Created: 2025-04-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E02",
+    "created": "2025-04-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-205",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Rowan Ellery. Assignee: Nina Schulz. Status: In Progress. Priority: Medium. Created: 2024-01-27.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E13",
+    "assignee": "E12",
+    "created": "2024-01-27",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-065",
+    "KES-018"
+  ]
+}

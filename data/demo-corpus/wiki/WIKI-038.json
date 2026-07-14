@@ -1,0 +1,28 @@
+{
+  "id": "WIKI-038",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Payload Gimbal Design Review \u2014 2024-06-18",
+  "text": "# Payload Gimbal Design Review \u2014 2024-06-18\n\n**Space:** K200  \n**Meeting type:** Technical Design Review / Design Rejection  \n**Attendees:** Cass Doyle (Payload), Felix Herrera (Integration), Aisha Mbeki (Test), Tobias Wren (Airframe), Sam Dreher (GNC)  \n**Chair:** Felix Herrera  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nKES-134 (epic: payload gimbal integration) began with the original 2-axis gimbal sourced from GimbalTech Ltd in early 2024. During integration testing the gimbal exhibited structural resonance. KES-137 (bug: gimbal resonance during level flight) documented that the GimbalTech unit had a resonant frequency of 8.2Hz which coincided with the wing flutter mode of the airframe at 8\u20139Hz. At resonance the camera image was unusable \u2014 jitter exceeded \u00b14\u00b0 peak-to-peak when the requirement in DOC-449 (Payload ICD) is \u00b10.5\u00b0.\n\n## Root Cause\n\nCass Doyle presented the vibration analysis. The GimbalTech gimbal (no longer referenced as it is being rejected) had a resonant frequency of 8.2Hz due to the lightweight hollow-tube frame construction. The K-200 airframe wing flutter mode at cruise is 8\u20139Hz per the loads analysis (DOC-407). This was a design oversight \u2014 gimbal resonance was not considered during the original payload bay design.\n\nSam Dreher confirmed that active electronic stabilisation in SRC-021 (gimbal_driver.py) cannot compensate for structural resonance at the same frequency as the control bandwidth limit.\n\n## Replacement Design\n\nCass Doyle proposed the redesigned gimbal assembly (P-1154, now Rev C) using hollow-shaft BLDC motors (P-1155 pitch, P-1156 roll, P-1157 yaw) from GB-Systems with a stiffer carbon fibre frame. The natural frequency of the new assembly is 24Hz, well above the airframe flutter mode.\n\nThe gimbal controller board (P-1158) was also redesigned \u2014 the original SimpleBGC 8-bit board was replaced with the 32-bit extended version with a dedicated IMU providing attitude feedback independent of the FCU.\n\nTest results from bench testing with induced vibration at 8.2Hz showed the new design achieved \u00b10.08\u00b0 jitter, well within the \u00b10.5\u00b0 requirement.\n\n## Decision\n\n**AGREED:** Reject the GimbalTech gimbal. Adopt redesigned K-200 gimbal (P-1154 Rev C) with P-1155/P-1156/P-1157 motors and P-1158 controller.\n\n- Decision maker: Cass Doyle (Payload lead), approved by Felix Herrera (Integration)\n- Rationale: GimbalTech resonance at 8.2Hz coincides with airframe wing flutter mode (DOC-407); new design 24Hz resonant frequency clears the airframe mode by 3x; bench test confirms \u00b10.08\u00b0 jitter\n- ECR to be raised: ECR-216 (Cass Doyle)\n- Payload ICD to update: DOC-449 (controller interface change for P-1158)\n- Gimbal driver update: SRC-021 gimbal_driver.py (Cass Doyle)\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-216 for gimbal replacement | Cass Doyle | 2024-06-25 |\n| A2 | Update DOC-449 Payload ICD for P-1154 Rev C and P-1158 | Cass Doyle | 2024-07-31 |\n| A3 | Update SRC-021 gimbal_driver.py for P-1158 interface | Cass Doyle | 2024-07-31 |\n| A4 | Update DRW-519 Gimbal Mount Detail | Tobias Wren | 2024-07-15 |\n| A5 | Flight test gimbal performance per DOC-449 criteria | Aisha Mbeki | 2024-08-31 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E09",
+    "created_date": "2024-06-18",
+    "last_modified": "2024-06-19",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "KES-134",
+    "KES-137",
+    "ECR-216",
+    "DOC-449",
+    "DOC-407",
+    "P-1154",
+    "P-1155",
+    "P-1156",
+    "P-1157",
+    "P-1158",
+    "SRC-021",
+    "DRW-519"
+  ]
+}

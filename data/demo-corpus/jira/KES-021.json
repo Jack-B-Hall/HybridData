@@ -1,0 +1,29 @@
+{
+  "id": "KES-021",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Telemetry packet loss at range edge",
+  "text": "Bug: Telemetry packet loss at range edge. Reporter: Dev Patel. Assignee: Dev Patel. Status: In Progress. Priority: Medium. Created: 2023-01-21.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E11",
+    "created": "2023-01-21",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

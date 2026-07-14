@@ -1,0 +1,29 @@
+{
+  "id": "KES-212",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Aisha Mbeki. Assignee: Aisha Mbeki. Status: Done. Priority: High. Created: 2024-03-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E10",
+    "created": "2024-03-12",
+    "resolved": "2024-05-04",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

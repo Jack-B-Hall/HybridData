@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-007",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Programme Status Gate 3 \u2014 2024-09-12",
+  "text": "# Programme Status Gate 3 \u2014 2024-09-12\n\n**Attendees:** Nina Schulz, Rowan Ellery, Felix Herrera, Marcus Thaine\n\n## Summary\n\nThis page covers the EMC mitigation strategy for the Systems subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Rowan Ellery on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E09",
+    "created_date": "2024-09-12",
+    "last_modified": "2024-11-14",
+    "last_modified_by": "E13"
+  },
+  "refs": [
+    "DOC-436"
+  ]
+}

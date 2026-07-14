@@ -1,0 +1,30 @@
+{
+  "id": "KES-167",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create environmental test report",
+  "text": "Story: Create environmental test report. Reporter: Marcus Thaine. Assignee: Rowan Ellery. Status: Open. Priority: High. Created: 2024-12-05.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E02",
+    "assignee": "E13",
+    "created": "2024-12-05",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-020",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-020"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-472",
+    "KES-020"
+  ]
+}

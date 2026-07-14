@@ -1,0 +1,31 @@
+{
+  "id": "KES-093",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Sam Dreher. Assignee: Tobias Wren. Status: Done. Priority: Medium. Created: 2024-09-02.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E06",
+    "created": "2024-09-02",
+    "resolved": "2024-11-07",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-002",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-002"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-490",
+    "DOC-452",
+    "KES-002"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1054",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Cable \u2014 Aft Starboard",
+  "text": "Motor Cable \u2014 Aft Starboard. Subsystem: Propulsion. Material: silicone 14AWG, 400mm. Mass: 32g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1054",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "silicone 14AWG, 400mm",
+    "mass_g": 32,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-525"
+  ]
+}

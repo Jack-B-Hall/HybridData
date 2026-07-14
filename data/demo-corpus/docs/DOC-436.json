@@ -1,0 +1,24 @@
+{
+  "id": "DOC-436",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Acceptance Test Procedure",
+  "text": "# K-200 Comms/Datalink Acceptance Test Procedure\n\nDocument number: MD-DOC-436-D. Revision: D. Type: procedure. Author: Felix Herrera. Created: 2025-01-11. Last modified: 2025-04-18. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1019, P-1059, P-1099, P-1023.",
+  "structured": {
+    "doc_number": "MD-DOC-436-D",
+    "revision": "D",
+    "doc_type": "procedure",
+    "author": "E09",
+    "created": "2025-01-11",
+    "last_modified": "2025-04-18",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1019",
+    "P-1059",
+    "P-1099",
+    "P-1023",
+    "KES-081"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "REV-619",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-480: REV-619",
+  "text": "# Review Record REV-619\n\nDocument: DOC-480. Reviewer: Aisha Mbeki. Date: 2025-12-06. Overall disposition: Approved with comments.\n\n## Comments\n\n**C01** (Felix Herrera): Section 8.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table. \u2014 *Accepted*\n\n**C02** (Sam Dreher): Section 4.5: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table. \u2014 *Action required*\n\n**C03** (Rowan Ellery): Section 8.3: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table. \u2014 *Accepted*\n\n**C04** (Lena Okafor): Section 2.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table. \u2014 *Accepted*\n\n**C05** (Nina Schulz): Section 8.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table. \u2014 *Noted*",
+  "structured": {
+    "doc_ref": "DOC-480",
+    "reviewer": "E10",
+    "review_date": "2025-12-06",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E09",
+        "text": "Section 8.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      },
+      {
+        "comment_id": "C02",
+        "author": "E04",
+        "text": "Section 4.5: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table.",
+        "disposition": "Action required",
+        "refs": []
+      },
+      {
+        "comment_id": "C03",
+        "author": "E13",
+        "text": "Section 8.3: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      },
+      {
+        "comment_id": "C04",
+        "author": "E03",
+        "text": "Section 2.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      },
+      {
+        "comment_id": "C05",
+        "author": "E12",
+        "text": "Section 8.1: The specification should clarify the interface requirement for DOC-480. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-480"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-074",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Decision Record: datalink frequency selection",
+  "text": "# Decision Record: datalink frequency selection\n\n**Attendees:** Nina Schulz, Rowan Ellery, Dev Patel\n\n## Summary\n\nThis page covers the datalink frequency selection for the Battery subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Nina Schulz on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E10",
+    "created_date": "2025-01-26",
+    "last_modified": "2025-03-23",
+    "last_modified_by": "E12"
+  },
+  "refs": [
+    "ECR-215",
+    "ECR-224",
+    "DOC-450"
+  ]
+}

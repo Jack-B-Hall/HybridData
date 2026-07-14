@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-053",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Integration Integration Planning \u2014 2024-11-10",
+  "text": "# Integration Integration Planning \u2014 2024-11-10\n\n**Attendees:** Tobias Wren, Rowan Ellery, Sam Dreher, Tyler Moss\n\n## Summary\n\nThis page covers the supplier evaluation results for the Integration subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Aisha Mbeki on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E06",
+    "created_date": "2024-11-10",
+    "last_modified": "2024-12-29",
+    "last_modified_by": "E10"
+  },
+  "refs": [
+    "ECR-231",
+    "DOC-418"
+  ]
+}

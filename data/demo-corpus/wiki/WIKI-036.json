@@ -1,0 +1,23 @@
+{
+  "id": "WIKI-036",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2025-11-15",
+  "text": "# Risk Review Meeting \u2014 2025-11-15\n\n**Attendees:** Tyler Moss, Lena Okafor, Marcus Thaine\n\n## Summary\n\nThis page covers the battery chemistry evaluation for the Airframe subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E02",
+    "created_date": "2025-11-15",
+    "last_modified": "2026-01-13",
+    "last_modified_by": "E05"
+  },
+  "refs": [
+    "ECR-224",
+    "ECR-229",
+    "DOC-429",
+    "DOC-401",
+    "DOC-444",
+    "KES-141",
+    "KES-134"
+  ]
+}

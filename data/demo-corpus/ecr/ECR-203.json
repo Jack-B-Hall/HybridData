@@ -1,0 +1,32 @@
+{
+  "id": "ECR-203",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Systems \u2014 update P-1168 per KES-185",
+  "text": "Engineering Change Request ECR-203. Subsystem: Systems. Affected parts: P-1168, P-1149, P-1148. Linked issues: KES-185. Raised by: Tyler Moss on 2025-08-10. Status: Approved.",
+  "structured": {
+    "raised_by": "E14",
+    "raised_date": "2025-08-10",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1168",
+      "P-1149",
+      "P-1148"
+    ],
+    "affected_docs": [
+      "DOC-475"
+    ],
+    "jira_issues": [
+      "KES-185"
+    ],
+    "approver": "E10",
+    "approved_date": "2025-08-25"
+  },
+  "refs": [
+    "P-1168",
+    "P-1149",
+    "P-1148",
+    "KES-185",
+    "DOC-475"
+  ]
+}

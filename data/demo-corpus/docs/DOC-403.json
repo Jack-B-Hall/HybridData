@@ -1,0 +1,21 @@
+{
+  "id": "DOC-403",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Design Analysis",
+  "text": "# K-200 Systems Design Analysis\n\nDocument number: MD-DOC-403-A. Revision: A. Type: design-note. Author: Priya Nair. Created: 2024-04-24. Last modified: 2024-10-20. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1105.",
+  "structured": {
+    "doc_number": "MD-DOC-403-A",
+    "revision": "A",
+    "doc_type": "design-note",
+    "author": "E05",
+    "created": "2024-04-24",
+    "last_modified": "2024-10-20",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1105",
+    "KES-078"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ECN-319",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-219",
+  "text": "Engineering Change Notice ECN-319. Implements ECR-219. Approved by Felix Herrera on 2025-02-22. Affected parts: P-1085, P-1099, P-1036. Updated documents: DOC-465.",
+  "structured": {
+    "ecr_id": "ECR-219",
+    "approved_by": "E09",
+    "approved_date": "2025-02-22",
+    "affected_parts": [
+      "P-1085",
+      "P-1099",
+      "P-1036"
+    ],
+    "affected_docs": [
+      "DOC-465"
+    ]
+  },
+  "refs": [
+    "ECR-219",
+    "P-1085",
+    "P-1099",
+    "P-1036",
+    "DOC-465"
+  ]
+}

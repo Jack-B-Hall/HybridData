@@ -1,0 +1,22 @@
+{
+  "id": "DOC-412",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Acceptance Test Procedure",
+  "text": "# K-200 Systems Acceptance Test Procedure\n\nDocument number: MD-DOC-412-B. Revision: B. Type: procedure. Author: Aisha Mbeki. Created: 2023-09-26. Last modified: 2024-05-20. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1048, P-1164.",
+  "structured": {
+    "doc_number": "MD-DOC-412-B",
+    "revision": "B",
+    "doc_type": "procedure",
+    "author": "E10",
+    "created": "2023-09-26",
+    "last_modified": "2024-05-20",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1048",
+    "P-1164",
+    "KES-189"
+  ]
+}

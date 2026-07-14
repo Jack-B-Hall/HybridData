@@ -1,0 +1,43 @@
+{
+  "id": "ECR-228",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "GNC sensor suite upgrade: IMU P-1092\u2192P-1093, GPS antenna P-1097\u2192P-1098",
+  "text": "Engineering Change Request ECR-228.\n\nRaised by: Sam Dreher (Nav/GNC Software Lead), 2024-12-10.\nStatus: Approved. Approved by: Felix Herrera (Systems Integration), 2024-12-18.\n\nSummary: Replace the GNC sensor suite \u2014 IMU module from ICM-42688-P (P-1092) to ADIS16505-2 (P-1093), and GPS antenna from L1/L2 patch (P-1097) to L1/L2/L5 helical (P-1098).\n\nRationale: Flight test campaign phase 1 (DOC-467) revealed two GNC performance deficiencies:\n\n1. IMU vibration error (KES-089, KES-091): The ICM-42688-P (P-1092) MEMS resonant frequency (4.8kHz) is excited by motor vibration harmonics from P-1041 motors at mid-throttle, causing attitude estimation errors up to 2.1\u00b0 roll. The DOC-455 (GNC ICD) requirement is 0.5\u00b0 attitude accuracy. The ADIS16505-2 (P-1093) has a 18kHz resonant frequency well above the motor harmonic range, and its vibration rectification error is 8x better (0.006 vs 0.05\u00b0/s/g\u00b2).\n\n2. GPS dropout during manoeuvres: The patch antenna (P-1097) loses reliable sky view at roll angles above 15\u00b0, causing GPS dropouts. The helical antenna (P-1098) provides near-hemispherical coverage and maintains >20dBHz at 30\u00b0 elevation. It also adds L5 support, improving multi-path rejection in complex sea-state environments.\n\nBoth changes agreed at WIKI-067 (GNC Sensor Suite Design Review, 2024-12-03).\n\nImpact:\n- P-1092: Obsoleted, replaced by P-1093\n- P-1097: Obsoleted, replaced by P-1098\n- SRC-007 (nav_filter.c): EKF IMU driver update for ADIS SPI interface \u2014 Dev Patel\n- SRC-009 (gps_driver.c): GPS driver update for L5 band \u2014 Dev Patel\n- DOC-455: GNC ICD to Rev B (attitude accuracy requirement now achievable)\n- DOC-456: GPS Performance Specification to Rev B\n- DOC-467: Flight Test Report to be updated after re-qualification flight tests",
+  "structured": {
+    "raised_by": "E04",
+    "raised_date": "2024-12-10",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1092",
+      "P-1093",
+      "P-1097",
+      "P-1098"
+    ],
+    "affected_docs": [
+      "DOC-455",
+      "DOC-456",
+      "DOC-467"
+    ],
+    "jira_issues": [
+      "KES-089",
+      "KES-091"
+    ],
+    "approver": "E09",
+    "approved_date": "2024-12-18"
+  },
+  "refs": [
+    "P-1092",
+    "P-1093",
+    "P-1097",
+    "P-1098",
+    "DOC-455",
+    "DOC-456",
+    "DOC-467",
+    "KES-089",
+    "KES-091",
+    "WIKI-067",
+    "SRC-007",
+    "SRC-009"
+  ]
+}

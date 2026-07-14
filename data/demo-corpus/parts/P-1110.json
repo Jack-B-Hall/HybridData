@@ -1,0 +1,20 @@
+{
+  "id": "P-1110",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Servo \u2014 Rudder",
+  "text": "Servo \u2014 Rudder. Subsystem: Nav/GNC. Material: Hitec HS-5086WP waterproof. Mass: 28g. Manufactured by HitecAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1110",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "Hitec HS-5086WP waterproof",
+    "mass_g": 28,
+    "manufacturer": "HitecAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-522"
+  ]
+}

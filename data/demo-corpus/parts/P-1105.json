@@ -1,0 +1,20 @@
+{
+  "id": "P-1105",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "FCU Wiring Harness",
+  "text": "FCU Wiring Harness. Subsystem: Nav/GNC. Material: JST-GH, 300mm, shielded. Mass: 45g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1105",
+    "revision": "B",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "JST-GH, 300mm, shielded",
+    "mass_g": 45,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-506"
+  ]
+}

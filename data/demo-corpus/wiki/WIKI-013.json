@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-013",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Comms/Datalink Integration Planning \u2014 2025-01-08",
+  "text": "# Comms/Datalink Integration Planning \u2014 2025-01-08\n\n**Attendees:** Felix Herrera, Nina Schulz, Lena Okafor, Marcus Thaine\n\n## Summary\n\nThis page covers the GCS display layout for the Comms/Datalink subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tyler Moss on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E06",
+    "created_date": "2025-01-08",
+    "last_modified": "2025-04-01",
+    "last_modified_by": "E14"
+  },
+  "refs": [
+    "ECR-223",
+    "ECR-230",
+    "DOC-439",
+    "DOC-487"
+  ]
+}

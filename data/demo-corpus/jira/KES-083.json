@@ -1,0 +1,31 @@
+{
+  "id": "KES-083",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Tobias Wren. Assignee: Tobias Wren. Status: In Progress. Priority: Low. Created: 2024-06-17.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E06",
+    "assignee": "E06",
+    "created": "2024-06-17",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-441",
+    "WIKI-069",
+    "KES-015"
+  ]
+}

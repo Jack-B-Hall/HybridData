@@ -1,0 +1,21 @@
+{
+  "id": "P-1149",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Sonar Mounting Bracket",
+  "text": "Sonar Mounting Bracket. Subsystem: Payload. Material: aluminium 6061-T6, 7\u00b0 cant, waterproof. Mass: 68g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1149",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6, 7\u00b0 cant, waterproof",
+    "mass_g": 68,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-508",
+    "DRW-517"
+  ]
+}

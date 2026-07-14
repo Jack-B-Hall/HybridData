@@ -1,0 +1,18 @@
+{
+  "id": "P-1049",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Propeller Locking Nut (x4)",
+  "text": "Propeller Locking Nut (x4). Subsystem: Propulsion. Material: aluminium self-locking. Mass: 8g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1049",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "aluminium self-locking",
+    "mass_g": 8,
+    "manufacturer": "PropTech GmbH",
+    "parent_id": null
+  },
+  "refs": []
+}

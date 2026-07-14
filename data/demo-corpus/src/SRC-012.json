@@ -1,0 +1,60 @@
+{
+  "id": "SRC-012",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/sonar_pipeline.py \u2014 Payload",
+  "text": "# sonar_pipeline.py \u2014 Kestrel K-200 Payload\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "sonar_pipeline",
+    "language": "Python",
+    "subsystem": "Payload",
+    "file_path": "payload/sonar_pipeline.py",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "c88a89e",
+        "author": "E04",
+        "date": "2025-03-08",
+        "message": "Initial sonar_pipeline [KES-027]",
+        "kes_ref": "KES-027"
+      },
+      {
+        "hash": "f55c6b9",
+        "author": "E11",
+        "date": "2025-05-05",
+        "message": "Update sonar_pipeline [KES-081]",
+        "kes_ref": "KES-081"
+      },
+      {
+        "hash": "68b57f0",
+        "author": "E05",
+        "date": "2025-06-11",
+        "message": "Update sonar_pipeline [KES-140]",
+        "kes_ref": "KES-140"
+      },
+      {
+        "hash": "02e0f35",
+        "author": "E12",
+        "date": "2025-06-14",
+        "message": "Update sonar_pipeline [KES-073]",
+        "kes_ref": "KES-073"
+      },
+      {
+        "hash": "de89917",
+        "author": "E14",
+        "date": "2025-08-03",
+        "message": "Update sonar_pipeline [KES-211]",
+        "kes_ref": "KES-211"
+      }
+    ]
+  },
+  "refs": [
+    "KES-027",
+    "KES-081",
+    "KES-140",
+    "KES-073",
+    "KES-211",
+    "DOC-420",
+    "DOC-418"
+  ]
+}

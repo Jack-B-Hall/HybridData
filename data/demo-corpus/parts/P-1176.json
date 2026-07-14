@@ -1,0 +1,18 @@
+{
+  "id": "P-1176",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS GPS Dongle",
+  "text": "GCS GPS Dongle. Subsystem: GCS. Material: u-blox NEO-M8N USB. Mass: 18g. Manufactured by u-blox. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1176",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "u-blox NEO-M8N USB",
+    "mass_g": 18,
+    "manufacturer": "u-blox",
+    "parent_id": null
+  },
+  "refs": []
+}

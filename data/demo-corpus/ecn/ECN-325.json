@@ -1,0 +1,29 @@
+{
+  "id": "ECN-325",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-225",
+  "text": "Engineering Change Notice ECN-325. Implements ECR-225. Approved by Sam Dreher on 2024-04-24. Affected parts: P-1163, P-1040, P-1100. Updated documents: DOC-447, DOC-414.",
+  "structured": {
+    "ecr_id": "ECR-225",
+    "approved_by": "E04",
+    "approved_date": "2024-04-24",
+    "affected_parts": [
+      "P-1163",
+      "P-1040",
+      "P-1100"
+    ],
+    "affected_docs": [
+      "DOC-447",
+      "DOC-414"
+    ]
+  },
+  "refs": [
+    "ECR-225",
+    "P-1163",
+    "P-1040",
+    "P-1100",
+    "DOC-447",
+    "DOC-414"
+  ]
+}

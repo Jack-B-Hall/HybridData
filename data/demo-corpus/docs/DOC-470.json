@@ -1,0 +1,25 @@
+{
+  "id": "DOC-470",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Maintenance Procedure",
+  "text": "# K-200 Battery Maintenance Procedure\n\nDocument number: MD-DOC-470-H. Revision: H. Type: manual. Author: Felix Herrera. Created: 2025-05-22. Last modified: 2026-01-09. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1008, P-1098, P-1175, P-1110.",
+  "structured": {
+    "doc_number": "MD-DOC-470-H",
+    "revision": "H",
+    "doc_type": "manual",
+    "author": "E09",
+    "created": "2025-05-22",
+    "last_modified": "2026-01-09",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1008",
+    "P-1098",
+    "P-1175",
+    "P-1110",
+    "ECR-212",
+    "KES-115"
+  ]
+}

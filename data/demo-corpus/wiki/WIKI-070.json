@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-070",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: Systems Milestone 4",
+  "text": "# Action Items: Systems Milestone 4\n\n**Attendees:** Tyler Moss, Marcus Thaine\n\n## Summary\n\nThis page covers the test coverage approach for the Systems subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Aisha Mbeki on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2024-01-23",
+    "last_modified": "2024-03-12",
+    "last_modified_by": "E10"
+  },
+  "refs": [
+    "ECR-228",
+    "DOC-430",
+    "DOC-411",
+    "KES-066",
+    "KES-049"
+  ]
+}

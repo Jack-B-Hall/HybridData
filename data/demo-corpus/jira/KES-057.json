@@ -1,0 +1,31 @@
+{
+  "id": "KES-057",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Priya Nair. Assignee: Priya Nair. Status: Done. Priority: Medium. Created: 2023-11-17.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E05",
+    "assignee": "E05",
+    "created": "2023-11-17",
+    "resolved": "2023-11-30",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-479",
+    "DOC-410",
+    "KES-010"
+  ]
+}

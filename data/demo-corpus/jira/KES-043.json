@@ -1,0 +1,29 @@
+{
+  "id": "KES-043",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Lena Okafor. Assignee: Lena Okafor. Status: Open. Priority: Low. Created: 2023-11-21.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E03",
+    "assignee": "E03",
+    "created": "2023-11-21",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

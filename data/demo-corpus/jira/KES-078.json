@@ -1,0 +1,29 @@
+{
+  "id": "KES-078",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Aisha Mbeki. Assignee: Jordan Kim. Status: Open. Priority: High. Created: 2024-01-27.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E08",
+    "created": "2024-01-27",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

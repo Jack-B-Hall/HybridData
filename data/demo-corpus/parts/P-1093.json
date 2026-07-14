@@ -1,0 +1,21 @@
+{
+  "id": "P-1093",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "IMU Module \u2014 Enhanced",
+  "text": "IMU Module \u2014 Enhanced. Subsystem: Nav/GNC. Material: ADIS16505-2, \u00b1500dps tactical grade. Mass: 16g. Manufactured by Analog Devices. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1093",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "ADIS16505-2, \u00b1500dps tactical grade",
+    "mass_g": 16,
+    "manufacturer": "Analog Devices",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091",
+    "DRW-538"
+  ]
+}

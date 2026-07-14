@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-018",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Decision Record: sensor fusion algorithm choice",
+  "text": "# Decision Record: sensor fusion algorithm choice\n\n**Attendees:** Dev Patel, Lena Okafor\n\n## Summary\n\nThis page covers the sensor fusion algorithm choice for the Airframe subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Jordan Kim on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E08",
+    "created_date": "2024-04-24",
+    "last_modified": "2024-05-28",
+    "last_modified_by": "E08"
+  },
+  "refs": [
+    "DOC-461",
+    "KES-121"
+  ]
+}

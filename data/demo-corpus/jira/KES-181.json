@@ -1,0 +1,29 @@
+{
+  "id": "KES-181",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Tobias Wren. Assignee: Priya Nair. Status: Done. Priority: Medium. Created: 2023-11-22.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E06",
+    "assignee": "E05",
+    "created": "2023-11-22",
+    "resolved": "2024-02-10",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

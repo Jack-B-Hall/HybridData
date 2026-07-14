@@ -1,0 +1,30 @@
+{
+  "id": "DRW-520",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-520: RF Antenna Integration",
+  "text": "Drawing MD-DRW-520 Rev E \u2014 RF Antenna Integration\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1122, P-1123, P-1130, P-1131, P-1132.\n4. Drawn by Priya Nair, checked by Rowan Ellery, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-520",
+    "revision": "E",
+    "drawn_by": "E05",
+    "checked_by": "E13",
+    "approved_by": "E09",
+    "date": "2024-04-16",
+    "subsystem": "Comms/Datalink",
+    "referenced_parts": [
+      "P-1122",
+      "P-1123",
+      "P-1130",
+      "P-1131",
+      "P-1132"
+    ]
+  },
+  "refs": [
+    "P-1122",
+    "P-1123",
+    "P-1130",
+    "P-1131",
+    "P-1132"
+  ]
+}

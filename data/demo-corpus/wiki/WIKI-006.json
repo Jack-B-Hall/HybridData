@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-006",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: GCS Milestone 1",
+  "text": "# Action Items: GCS Milestone 1\n\n**Attendees:** Lena Okafor, Tyler Moss, Nina Schulz, Rowan Ellery\n\n## Summary\n\nThis page covers the test coverage approach for the GCS subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Nina Schulz on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E14",
+    "created_date": "2024-05-17",
+    "last_modified": "2024-08-01",
+    "last_modified_by": "E12"
+  },
+  "refs": [
+    "DOC-420",
+    "DOC-419"
+  ]
+}

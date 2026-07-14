@@ -1,0 +1,21 @@
+{
+  "id": "DOC-439",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Environmental Test Report",
+  "text": "# K-200 Systems Environmental Test Report\n\nDocument number: MD-DOC-439-D. Revision: D. Type: risk-register. Author: Lena Okafor. Created: 2023-05-14. Last modified: 2023-08-23. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1151.",
+  "structured": {
+    "doc_number": "MD-DOC-439-D",
+    "revision": "D",
+    "doc_type": "risk-register",
+    "author": "E03",
+    "created": "2023-05-14",
+    "last_modified": "2023-08-23",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1151",
+    "KES-110"
+  ]
+}

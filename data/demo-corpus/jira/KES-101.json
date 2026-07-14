@@ -1,0 +1,29 @@
+{
+  "id": "KES-101",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Lena Okafor. Assignee: Marcus Thaine. Status: Open. Priority: Low. Created: 2024-05-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E03",
+    "assignee": "E02",
+    "created": "2024-05-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "KES-016"
+  ]
+}

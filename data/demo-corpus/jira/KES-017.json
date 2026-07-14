@@ -1,0 +1,22 @@
+{
+  "id": "KES-017",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Software configuration management",
+  "text": "Epic: Software configuration management. Reporter: Felix Herrera. Assignee: Nina Schulz. Status: In Progress. Priority: High. Created: 2025-09-04.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E12",
+    "created": "2025-09-04",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

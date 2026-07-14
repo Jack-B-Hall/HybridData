@@ -1,0 +1,28 @@
+{
+  "id": "DRW-527",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-527: Inrush & Fuse Assembly",
+  "text": "Drawing MD-DRW-527 Rev B \u2014 Inrush & Fuse Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1072, P-1073, P-1074, P-1082.\n4. Drawn by Rowan Ellery, checked by Lena Okafor, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-527",
+    "revision": "B",
+    "drawn_by": "E13",
+    "checked_by": "E03",
+    "approved_by": "E09",
+    "date": "2024-11-12",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1072",
+      "P-1073",
+      "P-1074",
+      "P-1082"
+    ]
+  },
+  "refs": [
+    "P-1072",
+    "P-1073",
+    "P-1074",
+    "P-1082"
+  ]
+}

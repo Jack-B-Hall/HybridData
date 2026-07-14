@@ -1,0 +1,30 @@
+{
+  "id": "KES-131",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Dev Patel. Assignee: Rowan Ellery. Status: Done. Priority: Low. Created: 2025-01-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E11",
+    "assignee": "E13",
+    "created": "2025-01-23",
+    "resolved": "2025-02-09",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-016",
+    "KES-012"
+  ]
+}

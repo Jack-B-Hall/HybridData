@@ -1,0 +1,22 @@
+{
+  "id": "DOC-415",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Environmental Test Report",
+  "text": "# K-200 Propulsion Environmental Test Report\n\nDocument number: MD-DOC-415-B. Revision: B. Type: risk-register. Author: Nina Schulz. Created: 2024-03-08. Last modified: 2025-02-01. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1090.",
+  "structured": {
+    "doc_number": "MD-DOC-415-B",
+    "revision": "B",
+    "doc_type": "risk-register",
+    "author": "E12",
+    "created": "2024-03-08",
+    "last_modified": "2025-02-01",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1090",
+    "ECR-212",
+    "ECR-220"
+  ]
+}

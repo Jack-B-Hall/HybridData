@@ -1,0 +1,44 @@
+{
+  "id": "SRC-028",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/servo_driver.c \u2014 Nav/GNC",
+  "text": "/* servo_driver.c \u2014 Kestrel K-200 Nav/GNC\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "servo_driver",
+    "language": "C",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/servo_driver.c",
+    "primary_author": "E11",
+    "commit_log": [
+      {
+        "hash": "5712409",
+        "author": "E11",
+        "date": "2023-10-11",
+        "message": "Initial servo_driver [KES-071]",
+        "kes_ref": "KES-071"
+      },
+      {
+        "hash": "884fc92",
+        "author": "E05",
+        "date": "2023-11-13",
+        "message": "Update servo_driver [KES-027]",
+        "kes_ref": "KES-027"
+      },
+      {
+        "hash": "800e061",
+        "author": "E08",
+        "date": "2023-12-03",
+        "message": "Update servo_driver [KES-157]",
+        "kes_ref": "KES-157"
+      }
+    ]
+  },
+  "refs": [
+    "KES-071",
+    "KES-027",
+    "KES-157",
+    "DOC-451",
+    "DOC-423"
+  ]
+}

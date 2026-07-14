@@ -1,0 +1,24 @@
+{
+  "id": "DOC-440",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Subsystem Specification",
+  "text": "# K-200 Integration Subsystem Specification\n\nDocument number: MD-DOC-440-E. Revision: E. Type: specification. Author: Jordan Kim. Created: 2025-04-21. Last modified: 2025-07-31. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1071, P-1166.",
+  "structured": {
+    "doc_number": "MD-DOC-440-E",
+    "revision": "E",
+    "doc_type": "specification",
+    "author": "E08",
+    "created": "2025-04-21",
+    "last_modified": "2025-07-31",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1071",
+    "P-1166",
+    "ECR-202",
+    "ECR-220",
+    "KES-156"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1172",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Emergency Stop Button",
+  "text": "GCS Emergency Stop Button. Subsystem: GCS. Material: Schneider XB5AS54, 40mm red mushroom. Mass: 88g. Manufactured by Schneider. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1172",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "Schneider XB5AS54, 40mm red mushroom",
+    "mass_g": 88,
+    "manufacturer": "Schneider",
+    "parent_id": null
+  },
+  "refs": []
+}

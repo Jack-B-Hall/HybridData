@@ -1,0 +1,60 @@
+{
+  "id": "SRC-020",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "comms/telemetry_encoder.c \u2014 Comms/Datalink",
+  "text": "/* telemetry_encoder.c \u2014 Kestrel K-200 Comms/Datalink\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "telemetry_encoder",
+    "language": "C",
+    "subsystem": "Comms/Datalink",
+    "file_path": "comms/telemetry_encoder.c",
+    "primary_author": "E05",
+    "commit_log": [
+      {
+        "hash": "60b659b",
+        "author": "E09",
+        "date": "2025-09-30",
+        "message": "Initial telemetry_encoder [KES-064]",
+        "kes_ref": "KES-064"
+      },
+      {
+        "hash": "ab017ee",
+        "author": "E11",
+        "date": "2025-11-08",
+        "message": "Update telemetry_encoder [KES-138]",
+        "kes_ref": "KES-138"
+      },
+      {
+        "hash": "6b88a04",
+        "author": "E11",
+        "date": "2025-11-24",
+        "message": "Update telemetry_encoder [KES-133]",
+        "kes_ref": "KES-133"
+      },
+      {
+        "hash": "769082d",
+        "author": "E06",
+        "date": "2025-12-20",
+        "message": "Update telemetry_encoder [KES-078]",
+        "kes_ref": "KES-078"
+      },
+      {
+        "hash": "829e865",
+        "author": "E14",
+        "date": "2026-01-18",
+        "message": "Update telemetry_encoder [KES-024]",
+        "kes_ref": "KES-024"
+      }
+    ]
+  },
+  "refs": [
+    "KES-064",
+    "KES-138",
+    "KES-133",
+    "KES-078",
+    "KES-024",
+    "DOC-404",
+    "DOC-423"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-111",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Felix Herrera. Assignee: Jordan Kim. Status: Done. Priority: High. Created: 2025-10-15.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E08",
+    "created": "2025-10-15",
+    "resolved": "2026-01-02",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-431",
+    "KES-018"
+  ]
+}

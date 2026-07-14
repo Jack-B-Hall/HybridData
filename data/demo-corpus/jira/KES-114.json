@@ -1,0 +1,29 @@
+{
+  "id": "KES-114",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Sam Dreher. Assignee: Sam Dreher. Status: Open. Priority: Low. Created: 2023-06-30.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E04",
+    "created": "2023-06-30",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

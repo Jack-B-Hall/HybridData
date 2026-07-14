@@ -1,0 +1,31 @@
+{
+  "id": "KES-036",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate test coverage matrix",
+  "text": "Story: Validate test coverage matrix. Reporter: Rowan Ellery. Assignee: Tyler Moss. Status: In Progress. Priority: High. Created: 2024-10-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E13",
+    "assignee": "E14",
+    "created": "2024-10-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-007",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-007"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-417",
+    "DOC-486",
+    "KES-007"
+  ]
+}

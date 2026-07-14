@@ -1,0 +1,31 @@
+{
+  "id": "ECN-307",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-207: Wing skin material change to hybrid carbon-aramid composite",
+  "text": "Engineering Change Notice ECN-307. Implements ECR-207.\nApproved by: Dr. Rhea Voss, 2023-09-05.\n\nAuthorised changes:\n1. P-1008 (Wing Skin Port): Updated to Rev C. Material changed to hybrid carbon-aramid composite (CFRP weave + Kevlar\u00ae \u00b145\u00b0 interlayer). Mass increase: +25g.\n2. P-1009 (Wing Skin Starboard): Updated to Rev C. Same material change. Mass increase: +25g.\n3. DOC-409 (Structural Specification): Updated to include hybrid composite material specification and bonding requirements.\n4. DOC-407 (Airframe Loads Analysis): Re-run for modified stiffness characteristics of hybrid composite. Stiffness reduction of 8% vs straight CFRP confirmed acceptable against flutter margins. Tobias Wren, completed 2023-10-05.\n5. DRW-502 (Wing Skin & Spar Assembly): Updated with hybrid composite layup schedule (0\u00b0/90\u00b0 CFRP + \u00b145\u00b0 aramid interlayer + 0\u00b0/90\u00b0 CFRP).\n6. Mass impact: +50g total. System mass margin remains at 290g (340g - 50g), per updated DOC-401.",
+  "structured": {
+    "ecr_id": "ECR-207",
+    "approved_by": "E01",
+    "approved_date": "2023-09-05",
+    "affected_parts": [
+      "P-1008",
+      "P-1009"
+    ],
+    "affected_docs": [
+      "DOC-409",
+      "DOC-407"
+    ]
+  },
+  "refs": [
+    "ECR-207",
+    "P-1008",
+    "P-1009",
+    "DOC-409",
+    "DOC-407",
+    "DRW-502",
+    "KES-042",
+    "KES-045",
+    "WIKI-017"
+  ]
+}

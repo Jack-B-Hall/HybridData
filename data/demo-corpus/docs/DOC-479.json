@@ -1,0 +1,36 @@
+{
+  "id": "DOC-479",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Software Architecture Document v1.0",
+  "text": "# K-200 GCS Software Architecture Document\n\nDocument number: MD-DOC-479-A. Revision: A. Type: specification. Author: Jordan Kim. Created: 2024-11-15. Last modified: 2024-11-15. Status: Released.\n\nBackground: The GCS architecture was refactored from a monolithic design (SRC-001 gcs_main.py, 8,400 lines) to the v2 backend/frontend split documented here. Change authority: ECN-320 / ECR-225. Design review: WIKI-058 (GCS Architecture Review, 2024-10-15).\n\n## \u00a72 Architecture Overview\n\n**Backend service (SRC-024 gcs_ui_backend.py):** asyncio Python process. Owns all drone communications via P-1167 (GCS Radio Unit). Receives and decodes MAVLink telemetry from the drone via P-1126 (radio) and P-1127 (encryption/decryption FPGA). Encodes and sends command packets. Maintains drone state machine. Exposes a WebSocket API on localhost:8765 for the frontend.\n\n**Frontend:** Vue.js SPA served locally by SRC-024. Displays real-time telemetry, map (SRC-025 replaced by Leaflet JS), camera feed, sonar overlay, and mission planning tools (SRC-017 mission_planner.py adapted to SRC-024 WebSocket API).\n\n**Encryption integration:** SRC-024 calls SRC-018 (encryption_handler.c, Lattice iCE40 AES-256-GCM FPGA driver) via Python ctypes. Session key management handled in SRC-024.\n\n## \u00a73 Archived Components\n\nSRC-001 (gcs_main.py v1.8.4): archived, not maintained. SRC-002 (gcs_telemetry.py): functionality absorbed into SRC-024. SRC-025 (gcs_map_layer.py): replaced by Leaflet JS map component.\n\n## \u00a74 Interfaces\n\nGCS Radio Unit (P-1167) \u2192 SRC-024 (serial/UDP) \u2192 WebSocket \u2192 Frontend. Encryption: P-1127 FPGA module inline between P-1121 (datalink controller) and P-1167. Protocol: DOC-471 (Comms ICD Rev C), DOC-472 (Protocol Spec Rev B).",
+  "structured": {
+    "doc_number": "MD-DOC-479-A",
+    "revision": "A",
+    "doc_type": "specification",
+    "author": "E08",
+    "created": "2024-11-15",
+    "last_modified": "2024-11-15",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-017",
+    "SRC-018",
+    "SRC-024",
+    "SRC-025",
+    "P-1121",
+    "P-1126",
+    "P-1127",
+    "P-1167",
+    "DOC-471",
+    "DOC-472",
+    "ECR-225",
+    "ECN-320",
+    "KES-173",
+    "KES-175",
+    "WIKI-058"
+  ]
+}

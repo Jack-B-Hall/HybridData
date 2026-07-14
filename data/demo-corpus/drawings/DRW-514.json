@@ -1,0 +1,28 @@
+{
+  "id": "DRW-514",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-514: Camera Installation",
+  "text": "Drawing MD-DRW-514 Rev D \u2014 Camera Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1152, P-1153, P-1154, P-1162.\n4. Drawn by Cass Doyle, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-514",
+    "revision": "D",
+    "drawn_by": "E07",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-10-28",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1152",
+      "P-1153",
+      "P-1154",
+      "P-1162"
+    ]
+  },
+  "refs": [
+    "P-1152",
+    "P-1153",
+    "P-1154",
+    "P-1162"
+  ]
+}

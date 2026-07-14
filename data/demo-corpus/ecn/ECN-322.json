@@ -1,0 +1,37 @@
+{
+  "id": "ECN-322",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-229: Comms encryption upgrade (P-1127 FPGA, P-1125\u2192P-1126)",
+  "text": "Engineering Change Notice ECN-322. Implements ECR-229.\nApproved by: Felix Herrera, 2025-02-05.\n\nAuthorised changes:\n1. P-1125 (Radio Transceiver Original, 500kbps): Obsoleted.\n2. P-1126 (Radio Transceiver Enhanced, 2Mbps dual-band): Added to BOM.\n3. P-1127 (Encryption Module FPGA, Lattice iCE40 AES-256-GCM): Added to BOM.\n4. P-1167 (GCS Radio Unit): Updated to FreeWave GXM paired to P-1126.\n5. SRC-018 (encryption_handler.c): Implementation complete, integration tested. Committed 2025-02-14.\n6. SRC-024 (gcs_ui_backend.py): Protocol stack updated for encrypted sessions. Jordan Kim, committed 2025-02-28.\n7. DOC-471 (Comms System ICD): Updated to Rev C. Encryption framing documented.\n8. DOC-472 (Comms Protocol Specification): Updated to Rev B.\n9. DRW-531 (Enhanced Antenna Mount): Updated for P-1126 dimensions.\n10. Security assessment clearance: Customer security team reviewed encryption design and approved (ref: MD-SEC-2025-01).",
+  "structured": {
+    "ecr_id": "ECR-229",
+    "approved_by": "E09",
+    "approved_date": "2025-02-05",
+    "affected_parts": [
+      "P-1125",
+      "P-1126",
+      "P-1127",
+      "P-1167"
+    ],
+    "affected_docs": [
+      "DOC-471",
+      "DOC-472"
+    ]
+  },
+  "refs": [
+    "ECR-229",
+    "P-1125",
+    "P-1126",
+    "P-1127",
+    "P-1167",
+    "DOC-471",
+    "DOC-472",
+    "SRC-018",
+    "SRC-024",
+    "DRW-531",
+    "KES-201",
+    "KES-203",
+    "WIKI-071"
+  ]
+}

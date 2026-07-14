@@ -1,0 +1,24 @@
+{
+  "id": "DOC-426",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Qualification Test Report",
+  "text": "# K-200 Nav/GNC Qualification Test Report\n\nDocument number: MD-DOC-426-C. Revision: C. Type: test-report. Author: Tobias Wren. Created: 2023-11-24. Last modified: 2024-10-12. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1132, P-1174, P-1025.",
+  "structured": {
+    "doc_number": "MD-DOC-426-C",
+    "revision": "C",
+    "doc_type": "test-report",
+    "author": "E06",
+    "created": "2023-11-24",
+    "last_modified": "2024-10-12",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1132",
+    "P-1174",
+    "P-1025",
+    "ECR-204",
+    "ECR-218"
+  ]
+}

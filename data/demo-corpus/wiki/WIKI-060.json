@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-060",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2023-10-19",
+  "text": "# Risk Review Meeting \u2014 2023-10-19\n\n**Attendees:** Felix Herrera, Jordan Kim\n\n## Summary\n\nThis page covers the sonar frequency range for the GCS subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Marcus Thaine on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2023-10-19",
+    "last_modified": "2023-12-29",
+    "last_modified_by": "E02"
+  },
+  "refs": [
+    "ECR-210",
+    "ECR-224",
+    "DOC-438",
+    "DOC-418",
+    "DOC-460"
+  ]
+}

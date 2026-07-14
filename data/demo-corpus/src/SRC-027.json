@@ -1,0 +1,44 @@
+{
+  "id": "SRC-027",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "propulsion/esc_driver.c \u2014 Propulsion",
+  "text": "/* esc_driver.c \u2014 Kestrel K-200 Propulsion\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "esc_driver",
+    "language": "C",
+    "subsystem": "Propulsion",
+    "file_path": "propulsion/esc_driver.c",
+    "primary_author": "E14",
+    "commit_log": [
+      {
+        "hash": "d45c1f8",
+        "author": "E14",
+        "date": "2023-08-27",
+        "message": "Initial esc_driver [KES-124]",
+        "kes_ref": "KES-124"
+      },
+      {
+        "hash": "06d140d",
+        "author": "E14",
+        "date": "2023-09-05",
+        "message": "Update esc_driver [KES-053]",
+        "kes_ref": "KES-053"
+      },
+      {
+        "hash": "708a494",
+        "author": "E08",
+        "date": "2023-10-31",
+        "message": "Update esc_driver [KES-023]",
+        "kes_ref": "KES-023"
+      }
+    ]
+  },
+  "refs": [
+    "KES-124",
+    "KES-053",
+    "KES-023",
+    "DOC-427",
+    "DOC-442"
+  ]
+}

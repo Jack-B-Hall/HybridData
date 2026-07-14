@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-020",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2024-11-06",
+  "text": "# Risk Review Meeting \u2014 2024-11-06\n\n**Attendees:** Felix Herrera, Tyler Moss, Rowan Ellery, Aisha Mbeki\n\n## Summary\n\nThis page covers the battery chemistry evaluation for the Battery subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Aisha Mbeki on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E02",
+    "created_date": "2024-11-06",
+    "last_modified": "2024-12-12",
+    "last_modified_by": "E10"
+  },
+  "refs": [
+    "ECR-211",
+    "DOC-417"
+  ]
+}

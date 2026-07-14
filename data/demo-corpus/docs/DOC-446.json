@@ -1,0 +1,20 @@
+{
+  "id": "DOC-446",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Maintenance Procedure",
+  "text": "# K-200 Payload Maintenance Procedure\n\nDocument number: MD-DOC-446-E. Revision: E. Type: manual. Author: Felix Herrera. Created: 2024-09-23. Last modified: 2025-09-12. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1080.",
+  "structured": {
+    "doc_number": "MD-DOC-446-E",
+    "revision": "E",
+    "doc_type": "manual",
+    "author": "E09",
+    "created": "2024-09-23",
+    "last_modified": "2025-09-12",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1080"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-029",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Battery Integration Planning \u2014 2025-06-14",
+  "text": "# Battery Integration Planning \u2014 2025-06-14\n\n**Attendees:** Tyler Moss, Lena Okafor, Jordan Kim\n\n## Summary\n\nThis page covers the GCS display layout for the Battery subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Marcus Thaine on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E03",
+    "created_date": "2025-06-14",
+    "last_modified": "2025-06-16",
+    "last_modified_by": "E02"
+  },
+  "refs": [
+    "KES-113",
+    "KES-160"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1152",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Camera Module",
+  "text": "Camera Module. Subsystem: Payload. Material: Sony IMX577, 4K30fps, 12MP. Mass: 85g. Manufactured by SonyAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PAY-1152",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "COTS",
+    "material": "Sony IMX577, 4K30fps, 12MP",
+    "mass_g": 85,
+    "manufacturer": "SonyAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-514",
+    "DRW-537"
+  ]
+}

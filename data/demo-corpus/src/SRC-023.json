@@ -1,0 +1,52 @@
+{
+  "id": "SRC-023",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "system/diagnostic_logger.py \u2014 Systems",
+  "text": "# diagnostic_logger.py \u2014 Kestrel K-200 Systems\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "diagnostic_logger",
+    "language": "Python",
+    "subsystem": "Systems",
+    "file_path": "system/diagnostic_logger.py",
+    "primary_author": "E09",
+    "commit_log": [
+      {
+        "hash": "dcd171d",
+        "author": "E09",
+        "date": "2025-05-16",
+        "message": "Initial diagnostic_logger [KES-095]",
+        "kes_ref": "KES-095"
+      },
+      {
+        "hash": "8b91baf",
+        "author": "E09",
+        "date": "2025-06-07",
+        "message": "Update diagnostic_logger [KES-135]",
+        "kes_ref": "KES-135"
+      },
+      {
+        "hash": "9cb6d49",
+        "author": "E14",
+        "date": "2025-07-08",
+        "message": "Update diagnostic_logger [KES-186]",
+        "kes_ref": "KES-186"
+      },
+      {
+        "hash": "97b7ce3",
+        "author": "E04",
+        "date": "2025-08-17",
+        "message": "Update diagnostic_logger [KES-091]",
+        "kes_ref": "KES-091"
+      }
+    ]
+  },
+  "refs": [
+    "KES-095",
+    "KES-135",
+    "KES-186",
+    "KES-091",
+    "DOC-438",
+    "DOC-425"
+  ]
+}

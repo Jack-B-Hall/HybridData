@@ -1,0 +1,18 @@
+{
+  "id": "P-1141",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Frequency Hopping Module",
+  "text": "Frequency Hopping Module. Subsystem: Comms/Datalink. Material: SiK radio 915MHz hopping. Mass: 22g. Manufactured by RFDesign. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1141",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "SiK radio 915MHz hopping",
+    "mass_g": 22,
+    "manufacturer": "RFDesign",
+    "parent_id": null
+  },
+  "refs": []
+}

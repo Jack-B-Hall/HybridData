@@ -1,0 +1,23 @@
+{
+  "id": "DOC-443",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Design Analysis",
+  "text": "# K-200 Battery Design Analysis\n\nDocument number: MD-DOC-443-E. Revision: E. Type: design-note. Author: Nina Schulz. Created: 2024-04-06. Last modified: 2024-11-09. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1121, P-1019.",
+  "structured": {
+    "doc_number": "MD-DOC-443-E",
+    "revision": "E",
+    "doc_type": "design-note",
+    "author": "E12",
+    "created": "2024-04-06",
+    "last_modified": "2024-11-09",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1121",
+    "P-1019",
+    "ECR-201",
+    "KES-011"
+  ]
+}

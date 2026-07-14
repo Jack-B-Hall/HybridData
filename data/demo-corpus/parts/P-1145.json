@@ -1,0 +1,18 @@
+{
+  "id": "P-1145",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Ground Plane Board",
+  "text": "Ground Plane Board. Subsystem: Comms/Datalink. Material: PCB, copper pour, SMA. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1145",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "PCB, copper pour, SMA",
+    "mass_g": 12,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-072",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Tobias Wren. Assignee: Nina Schulz. Status: Done. Priority: Low. Created: 2025-02-26.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E06",
+    "assignee": "E12",
+    "created": "2025-02-26",
+    "resolved": "2025-04-27",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-076",
+    "KES-001"
+  ]
+}

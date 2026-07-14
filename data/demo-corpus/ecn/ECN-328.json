@@ -1,0 +1,29 @@
+{
+  "id": "ECN-328",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-228",
+  "text": "Engineering Change Notice ECN-328. Implements ECR-228. Approved by Lena Okafor on 2024-03-28. Affected parts: P-1024, P-1153, P-1154. Updated documents: DOC-450, DOC-402.",
+  "structured": {
+    "ecr_id": "ECR-228",
+    "approved_by": "E03",
+    "approved_date": "2024-03-28",
+    "affected_parts": [
+      "P-1024",
+      "P-1153",
+      "P-1154"
+    ],
+    "affected_docs": [
+      "DOC-450",
+      "DOC-402"
+    ]
+  },
+  "refs": [
+    "ECR-228",
+    "P-1024",
+    "P-1153",
+    "P-1154",
+    "DOC-450",
+    "DOC-402"
+  ]
+}

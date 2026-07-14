@@ -1,0 +1,29 @@
+{
+  "id": "KES-103",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Dev Patel. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2024-08-01.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E11",
+    "assignee": "E14",
+    "created": "2024-08-01",
+    "resolved": "2024-10-03",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

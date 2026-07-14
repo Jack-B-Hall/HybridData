@@ -1,0 +1,21 @@
+{
+  "id": "P-1151",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Sonar Cable Harness",
+  "text": "Sonar Cable Harness. Subsystem: Payload. Material: coax + power, IP68 connector, 600mm. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1151",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "coax + power, IP68 connector, 600mm",
+    "mass_g": 55,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-517",
+    "DRW-530"
+  ]
+}

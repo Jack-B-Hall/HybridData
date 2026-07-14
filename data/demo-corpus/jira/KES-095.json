@@ -1,0 +1,29 @@
+{
+  "id": "KES-095",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Rowan Ellery. Assignee: Nina Schulz. Status: Done. Priority: Medium. Created: 2023-03-03.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E13",
+    "assignee": "E12",
+    "created": "2023-03-03",
+    "resolved": "2023-06-18",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

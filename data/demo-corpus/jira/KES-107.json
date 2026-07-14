@@ -1,0 +1,29 @@
+{
+  "id": "KES-107",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create environmental test report",
+  "text": "Story: Create environmental test report. Reporter: Priya Nair. Assignee: Tyler Moss. Status: Open. Priority: High. Created: 2024-05-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E14",
+    "created": "2024-05-23",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "KES-011"
+  ]
+}

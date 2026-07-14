@@ -1,0 +1,37 @@
+{
+  "id": "DOC-449",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload System Interface Control Document v2.0",
+  "text": "# K-200 Payload System Interface Control Document\n\nDocument number: MD-DOC-449-B. Revision: B. Type: ICD. Author: Cass Doyle. Created: 2023-09-01. Last modified: 2024-07-31. Status: Released.\n\n## Change History\n- Rev A: Initial ICD (2-axis GimbalTech gimbal baseline, 2023-09-01)\n- Rev B: Updated for P-1154 Rev C 3-axis gimbal redesign per ECN-313 / ECR-216 (2024-07-31)\n\n## \u00a73 Camera Gimbal \u2014 P-1154 Rev C\n\nThe current camera gimbal is the Meridian Dynamics 3-axis brushless gimbal (P-1154 Rev C), replacing the original GimbalTech 2-axis unit. Change rationale: GimbalTech exhibited 8.2Hz resonance coinciding with airframe wing flutter mode 8\u20139Hz per DOC-407, causing image jitter of \u00b14\u00b0 (requirement: \u00b10.5\u00b0). See ECR-216, WIKI-038.\n\nCurrent gimbal performance (flight test, 2024-08-22): jitter \u00b10.09\u00b0 (requirement \u00b10.5\u00b0). PASS.\n\nGimbal axes: pitch \u00b130\u00b0, roll \u00b130\u00b0, yaw \u00b130\u00b0. Motors: P-1155 (pitch), P-1156 (roll), P-1157 (yaw). Controller: P-1158 (SimpleBGC 32-bit extended). Driver: SRC-021 (gimbal_driver.py).\n\n## \u00a74 Sonar Transducer \u2014 P-1148 Rev B\n\nAquaSound Corp broadband 100\u2013400kHz. Mounting: P-1149 bracket at 7\u00b0 downward cant. See DOC-462 (Sonar System ICD) and DRW-517. The 7\u00b0 cant is safety-critical \u2014 see REV-641 (Cass Doyle review of DRW-517) for rationale.\n\n## \u00a75 Camera Module \u2014 P-1152\n\nSony IMX577 4K30fps. Lens: P-1153. Camera harness: P-1161. Driver: SRC-013 (camera_driver.py).",
+  "structured": {
+    "doc_number": "MD-DOC-449-B",
+    "revision": "B",
+    "doc_type": "ICD",
+    "author": "E07",
+    "created": "2023-09-01",
+    "last_modified": "2024-07-31",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1148",
+    "P-1149",
+    "P-1152",
+    "P-1153",
+    "P-1154",
+    "P-1155",
+    "P-1156",
+    "P-1157",
+    "P-1158",
+    "P-1161",
+    "SRC-021",
+    "SRC-013",
+    "DOC-407",
+    "DOC-462",
+    "ECR-216",
+    "ECN-313",
+    "WIKI-038",
+    "REV-641"
+  ]
+}

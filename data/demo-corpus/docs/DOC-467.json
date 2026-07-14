@@ -1,0 +1,23 @@
+{
+  "id": "DOC-467",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Design Analysis",
+  "text": "# K-200 Integration Design Analysis\n\nDocument number: MD-DOC-467-G. Revision: G. Type: design-note. Author: Aisha Mbeki. Created: 2024-08-23. Last modified: 2025-06-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1025, P-1119.",
+  "structured": {
+    "doc_number": "MD-DOC-467-G",
+    "revision": "G",
+    "doc_type": "design-note",
+    "author": "E10",
+    "created": "2024-08-23",
+    "last_modified": "2025-06-30",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1025",
+    "P-1119",
+    "ECR-208",
+    "KES-213"
+  ]
+}

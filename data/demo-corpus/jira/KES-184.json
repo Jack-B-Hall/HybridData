@@ -1,0 +1,30 @@
+{
+  "id": "KES-184",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Priya Nair. Assignee: Nina Schulz. Status: Done. Priority: Low. Created: 2025-05-22.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E05",
+    "assignee": "E12",
+    "created": "2025-05-22",
+    "resolved": "2025-06-24",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-047",
+    "KES-012"
+  ]
+}

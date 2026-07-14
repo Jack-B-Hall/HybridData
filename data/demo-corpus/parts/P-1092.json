@@ -1,0 +1,21 @@
+{
+  "id": "P-1092",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "IMU Module \u2014 Original (obsolete)",
+  "text": "IMU Module \u2014 Original (obsolete). Subsystem: Nav/GNC. Material: ICM-42688-P, \u00b116g/\u00b12000dps. Mass: 8g. Manufactured by InvenSense. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1092",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "ICM-42688-P, \u00b116g/\u00b12000dps",
+    "mass_g": 8,
+    "manufacturer": "InvenSense",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091",
+    "DRW-526"
+  ]
+}

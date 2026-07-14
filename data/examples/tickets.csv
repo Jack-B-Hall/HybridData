@@ -1,0 +1,3 @@
+key,summary,detail,links
+TCK-1,Coolant pump noise,Pump P-2201 emits a whine above 1.0 L/min flow.,P-1062;DOC-EX-1
+TCK-2,Firmware watchdog reset,GCS firmware resets under sustained telemetry load.,SRC-001

@@ -1,0 +1,20 @@
+{
+  "id": "P-1070",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Venting Membrane",
+  "text": "Battery Venting Membrane. Subsystem: Battery. Material: PTFE, 0.1 \u03bcm. Mass: 8g. Manufactured by GoreTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1070",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "PTFE, 0.1 \u03bcm",
+    "mass_g": 8,
+    "manufacturer": "GoreTech",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061"
+  ]
+}

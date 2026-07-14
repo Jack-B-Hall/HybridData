@@ -1,0 +1,31 @@
+{
+  "id": "KES-032",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Tyler Moss. Assignee: Tyler Moss. Status: Open. Priority: High. Created: 2025-10-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E14",
+    "assignee": "E14",
+    "created": "2025-10-12",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-428",
+    "DOC-408",
+    "KES-014"
+  ]
+}

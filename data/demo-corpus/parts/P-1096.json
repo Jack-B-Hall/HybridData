@@ -1,0 +1,20 @@
+{
+  "id": "P-1096",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Magnetometer",
+  "text": "Magnetometer. Subsystem: Nav/GNC. Material: RM3100 industrial grade. Mass: 6g. Manufactured by PNI Sensor. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1096",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "RM3100 industrial grade",
+    "mass_g": 6,
+    "manufacturer": "PNI Sensor",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091"
+  ]
+}

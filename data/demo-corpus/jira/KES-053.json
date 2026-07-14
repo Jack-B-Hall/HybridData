@@ -1,0 +1,29 @@
+{
+  "id": "KES-053",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Rowan Ellery. Assignee: Felix Herrera. Status: In Progress. Priority: Low. Created: 2024-11-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E09",
+    "created": "2024-11-18",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1167",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Radio Unit",
+  "text": "GCS Radio Unit. Subsystem: GCS. Material: FreeWave GXM, paired to P-1126. Mass: 185g. Manufactured by FreeWave Tech. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1167",
+    "revision": "B",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "FreeWave GXM, paired to P-1126",
+    "mass_g": 185,
+    "manufacturer": "FreeWave Tech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-509"
+  ]
+}

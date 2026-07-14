@@ -1,0 +1,21 @@
+{
+  "id": "P-1061",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Enclosure",
+  "text": "Battery Enclosure. Subsystem: Battery. Material: aluminium 6061-T6, IP67. Mass: 310g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1061",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6, IP67",
+    "mass_g": 310,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-503",
+    "DRW-521"
+  ]
+}

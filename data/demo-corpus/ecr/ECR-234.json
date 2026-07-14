@@ -1,0 +1,36 @@
+{
+  "id": "ECR-234",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Payload \u2014 update P-1120 per KES-095",
+  "text": "Engineering Change Request ECR-234. Subsystem: Payload. Affected parts: P-1120, P-1026, P-1121, P-1082. Linked issues: KES-095. Raised by: Jordan Kim on 2024-01-10. Status: Approved.",
+  "structured": {
+    "raised_by": "E08",
+    "raised_date": "2024-01-10",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1120",
+      "P-1026",
+      "P-1121",
+      "P-1082"
+    ],
+    "affected_docs": [
+      "DOC-453",
+      "DOC-406"
+    ],
+    "jira_issues": [
+      "KES-095"
+    ],
+    "approver": "E12",
+    "approved_date": "2024-03-10"
+  },
+  "refs": [
+    "P-1120",
+    "P-1026",
+    "P-1121",
+    "P-1082",
+    "KES-095",
+    "DOC-453",
+    "DOC-406"
+  ]
+}

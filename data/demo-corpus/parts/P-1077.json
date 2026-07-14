@@ -1,0 +1,20 @@
+{
+  "id": "P-1077",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Current Sensor",
+  "text": "Current Sensor. Subsystem: Battery. Material: Hall-effect, ACS758 200A. Mass: 18g. Manufactured by AllegroAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1077",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "Hall-effect, ACS758 200A",
+    "mass_g": 18,
+    "manufacturer": "AllegroAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-532"
+  ]
+}

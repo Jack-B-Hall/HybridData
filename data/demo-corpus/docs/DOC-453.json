@@ -1,0 +1,24 @@
+{
+  "id": "DOC-453",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Risk Register",
+  "text": "# K-200 Nav/GNC Risk Register\n\nDocument number: MD-DOC-453-F. Revision: F. Type: analysis. Author: Marcus Thaine. Created: 2024-08-20. Last modified: 2025-08-20. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1058, P-1083, P-1064, P-1107.",
+  "structured": {
+    "doc_number": "MD-DOC-453-F",
+    "revision": "F",
+    "doc_type": "analysis",
+    "author": "E02",
+    "created": "2024-08-20",
+    "last_modified": "2025-08-20",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1058",
+    "P-1083",
+    "P-1064",
+    "P-1107",
+    "KES-212"
+  ]
+}

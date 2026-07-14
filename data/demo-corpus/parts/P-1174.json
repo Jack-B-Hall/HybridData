@@ -1,0 +1,18 @@
+{
+  "id": "P-1174",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Keyboard \u2014 Ruggedised",
+  "text": "GCS Keyboard \u2014 Ruggedised. Subsystem: GCS. Material: IP65 backlit, USB. Mass: 385g. Manufactured by iKeyAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1174",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "IP65 backlit, USB",
+    "mass_g": 385,
+    "manufacturer": "iKeyAU",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,31 @@
+{
+  "id": "KES-215",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Tyler Moss. Assignee: Jordan Kim. Status: Done. Priority: High. Created: 2024-02-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E14",
+    "assignee": "E08",
+    "created": "2024-02-12",
+    "resolved": "2024-05-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-464",
+    "DOC-440",
+    "KES-019"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1001",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Fuselage Main Body",
+  "text": "Fuselage Main Body. Subsystem: Airframe. Material: CFRP. Mass: 1240g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1001",
+    "revision": "C",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "CFRP",
+    "mass_g": 1240,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-501"
+  ]
+}

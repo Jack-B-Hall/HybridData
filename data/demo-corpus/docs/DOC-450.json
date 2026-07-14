@@ -1,0 +1,23 @@
+{
+  "id": "DOC-450",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Qualification Test Report",
+  "text": "# K-200 Airframe Qualification Test Report\n\nDocument number: MD-DOC-450-F. Revision: F. Type: test-report. Author: Tyler Moss. Created: 2023-06-01. Last modified: 2023-07-16. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1110, P-1070, P-1135.",
+  "structured": {
+    "doc_number": "MD-DOC-450-F",
+    "revision": "F",
+    "doc_type": "test-report",
+    "author": "E14",
+    "created": "2023-06-01",
+    "last_modified": "2023-07-16",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1110",
+    "P-1070",
+    "P-1135",
+    "ECR-232"
+  ]
+}

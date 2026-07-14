@@ -1,0 +1,30 @@
+{
+  "id": "KES-164",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Rowan Ellery. Assignee: Priya Nair. Status: Done. Priority: High. Created: 2024-11-08.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E13",
+    "assignee": "E05",
+    "created": "2024-11-08",
+    "resolved": "2025-02-03",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-008",
+    "KES-019"
+  ]
+}

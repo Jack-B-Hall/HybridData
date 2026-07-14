@@ -1,0 +1,28 @@
+{
+  "id": "DRW-516",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-516: FCU Mounting & Interface",
+  "text": "Drawing MD-DRW-516 Rev A \u2014 FCU Mounting & Interface\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1091, P-1103, P-1104, P-1106.\n4. Drawn by Rowan Ellery, checked by Felix Herrera, approved by Sam Dreher.",
+  "structured": {
+    "drawing_number": "MD-DRW-516",
+    "revision": "A",
+    "drawn_by": "E13",
+    "checked_by": "E09",
+    "approved_by": "E04",
+    "date": "2024-03-11",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1091",
+      "P-1103",
+      "P-1104",
+      "P-1106"
+    ]
+  },
+  "refs": [
+    "P-1091",
+    "P-1103",
+    "P-1104",
+    "P-1106"
+  ]
+}

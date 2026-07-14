@@ -1,0 +1,30 @@
+{
+  "id": "KES-209",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify software design document",
+  "text": "Story: Qualify software design document. Reporter: Tyler Moss. Assignee: Nina Schulz. Status: Done. Priority: Medium. Created: 2024-12-11.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E12",
+    "created": "2024-12-11",
+    "resolved": "2025-04-07",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-020",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-020"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-004",
+    "KES-020"
+  ]
+}

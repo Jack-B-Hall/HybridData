@@ -1,0 +1,20 @@
+{
+  "id": "P-1039",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Propeller Adapter Set",
+  "text": "Propeller Adapter Set. Subsystem: Propulsion. Material: aluminium 6061. Mass: 22g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1039",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "aluminium 6061",
+    "mass_g": 22,
+    "manufacturer": "PropTech GmbH",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-504"
+  ]
+}

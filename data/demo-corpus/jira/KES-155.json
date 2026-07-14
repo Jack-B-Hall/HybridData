@@ -1,0 +1,29 @@
+{
+  "id": "KES-155",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Lena Okafor. Assignee: Jordan Kim. Status: Open. Priority: Medium. Created: 2025-06-17.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E03",
+    "assignee": "E08",
+    "created": "2025-06-17",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "KES-015"
+  ]
+}

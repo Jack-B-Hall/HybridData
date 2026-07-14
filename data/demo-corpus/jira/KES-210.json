@@ -1,0 +1,29 @@
+{
+  "id": "KES-210",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Mission file import validation error",
+  "text": "Bug: Mission file import validation error. Reporter: Tobias Wren. Assignee: Rowan Ellery. Status: Done. Priority: High. Created: 2024-03-26.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E13",
+    "created": "2024-03-26",
+    "resolved": "2024-07-12",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "KES-019"
+  ]
+}

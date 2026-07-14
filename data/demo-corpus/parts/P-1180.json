@@ -1,0 +1,18 @@
+{
+  "id": "P-1180",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Indicator Panel",
+  "text": "GCS Indicator Panel. Subsystem: GCS. Material: PCB, 8x LED + buzzer, USB. Mass: 45g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-GCS-1180",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "custom",
+    "material": "PCB, 8x LED + buzzer, USB",
+    "mass_g": 45,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

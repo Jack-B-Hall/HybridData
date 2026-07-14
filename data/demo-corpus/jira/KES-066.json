@@ -1,0 +1,31 @@
+{
+  "id": "KES-066",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Nina Schulz. Assignee: Priya Nair. Status: Open. Priority: Low. Created: 2025-10-15.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E12",
+    "assignee": "E05",
+    "created": "2025-10-15",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-463",
+    "DOC-404",
+    "KES-018"
+  ]
+}

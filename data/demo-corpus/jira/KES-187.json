@@ -1,0 +1,43 @@
+{
+  "id": "KES-187",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Motor P-1031 fwd-port thermal cutout during 45-minute endurance run",
+  "text": "Bug KES-187. Reporter: Aisha Mbeki. Assignee: Marcus Thaine (Propulsion Lead). Status: Done. Priority: Critical. Created: 2024-04-02. Resolved: 2024-04-22.\n\nDescription: During a 45-minute endurance run on 2 April 2024 at ambient temperature 30\u00b0C, the fwd-port TorqueDrive 4012 490KV motor (P-1031) triggered its internal thermal cutout at T+38 minutes. Motor controller board (P-1044) thermal logging showed winding temperature reached 108\u00b0C, against a rated maximum continuous temperature of 85\u00b0C. The motor shutdown caused an autopilot attitude disturbance event but the FCU (P-1091) recovered within 2 seconds.\n\nThe ESC (P-1032) data showed no overcurrent prior to the motor cutout, confirming the thermal event originated in the motor windings rather than the ESC.\n\nThis is the first thermal event on the propulsion system. Ambient temperature was 30\u00b0C; the customer requirement specifies 40\u00b0C maximum operating temperature.\n\nAcceptance criteria: Motor replacement ECR-221 approved and ECN-318 issued.\n\nLinked to: KES-188 (related ESC overcurrent event), ECR-221 (motor replacement ECR), WIKI-031 (propulsion thermal review meeting).",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Critical",
+    "reporter": "E10",
+    "assignee": "E02",
+    "created": "2024-04-02",
+    "resolved": "2024-04-22",
+    "labels": [
+      "propulsion",
+      "thermal",
+      "safety"
+    ],
+    "parent_id": null,
+    "linked_issues": [
+      {
+        "type": "relates-to",
+        "target": "KES-188"
+      },
+      {
+        "type": "triggers",
+        "target": "ECR-221"
+      }
+    ]
+  },
+  "refs": [
+    "P-1031",
+    "P-1032",
+    "P-1044",
+    "P-1091",
+    "ECR-221",
+    "ECN-318",
+    "WIKI-031",
+    "KES-188",
+    "DOC-445"
+  ]
+}

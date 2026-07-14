@@ -1,0 +1,20 @@
+{
+  "id": "P-1074",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Fuse Holder",
+  "text": "Fuse Holder. Subsystem: Battery. Material: ATC/ATO holder, waterproof. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1074",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "ATC/ATO holder, waterproof",
+    "mass_g": 14,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-527"
+  ]
+}

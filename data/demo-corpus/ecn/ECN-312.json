@@ -1,0 +1,27 @@
+{
+  "id": "ECN-312",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-214: Battery cell chemistry change LiPo to LiFePO4",
+  "text": "Engineering Change Notice ECN-312. Implements ECR-214.\nApproved by: Dr. Rhea Voss, 2023-10-19.\n\nThis ECN formally authorises the implementation of ECR-214 (battery chemistry change). The change baseline is effective from ECN-312 approval date.\n\nAuthorised changes:\n1. P-1062 (Battery Cell Assembly) updated to Rev C: LiFePO4 chemistry, 6S2P 22.2V 20Ah, supplier CellCore Technologies. Nominal cell voltage 3.2V (vs 3.7V LiPo). LiPo Rev B stock to be quarantined.\n2. P-1075 (BMS Module) updated to Rev C: charge/discharge profiles updated for LiFePO4 voltage curves (3.2V nominal, 3.65V max, 2.5V min per cell). Hardware SOC limits remain per ECR-209 (18% floor / 82% ceiling).\n3. DOC-421 (Battery System Specification) updated to Rev C: reflects LiFePO4 chemistry, updated energy density, updated BMS profiles.\n\nQualification status: Cell-level qualification per IEC 62133-2 completed (Aisha Mbeki, test report DOC-421 Rev C appendix). Pack-level qualification passed 2023-12-14.",
+  "structured": {
+    "ecr_id": "ECR-214",
+    "approved_by": "E01",
+    "approved_date": "2023-10-19",
+    "affected_parts": [
+      "P-1062",
+      "P-1075"
+    ],
+    "affected_docs": [
+      "DOC-421"
+    ]
+  },
+  "refs": [
+    "ECR-214",
+    "P-1062",
+    "P-1075",
+    "DOC-421",
+    "WIKI-052",
+    "KES-208"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "REV-623",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-431: BMS Safety Specification v1.3 \u2014 REV-623",
+  "text": "# Review Record REV-623\n\nDocument: DOC-431 (BMS Safety Specification v1.3). Reviewer: Dr. Rhea Voss (Chief Systems Engineer). Date: 2023-07-12. Overall disposition: Approved with comments.\n\nStatus: Closed.\n\n## Comments\n\n**C01** (Dr. Rhea Voss): Section 4.3 \u2014 SOC operating limits. The 18% lower SOC floor hardcoded into P-1075 (BMS Module) must NOT be raised without re-running the full thermal model using the BlackHat2023 bench-test dataset. We observed accelerated SEI layer growth and localised lithium plating during the March 2023 bench tests when SOC was allowed to reach 12%. The 18% floor gives a 6-point safety margin that the thermal model validated to prevent cell reversal under the maximum discharge rate of 3C. Any change must go through ECR-209 and be re-validated by the test team (Aisha Mbeki). \u2014 *Action required*\n\n**C02** (Dr. Rhea Voss): Section 4.3 \u2014 SOC ceiling. The 82% upper limit is equally safety-critical. We saw cell-level lithium plating at >85% SOC during the same March 2023 bench tests when charge rate exceeded 0.5C at ambient temperatures below 5\u00b0C. The 82% ceiling was chosen to keep the cell well clear of the plating onset at high SOC + low temperature. This limit is implemented in hardware (P-1075 hardware lockout) not just firmware, specifically to prevent a single-point software fault from bypassing it. If anyone proposes raising this limit for range reasons, they must first demonstrate via calorimetry that the plating risk is mitigated. This rationale must be recorded explicitly in DOC-431 \u00a74.3 so it survives engineering staff changes. \u2014 *Action required*\n\n**C03** (Dr. Rhea Voss): Section 6 \u2014 Emergency disconnect. The manual disconnect procedure references P-1064 (Battery Connector Main). Confirm that the AS150 connector used in P-1064 rev B meets the interrupt-under-load spec at the 50A maximum discharge current. The original AS150 spec sheet is ambiguous on this. \u2014 *Noted*\n\n**C04** (Dr. Rhea Voss): General \u2014 The document must be updated to cross-reference ECR-209 (BMS parameter update, Jan 2023) which changed the temperature de-rating curve. Currently DOC-431 \u00a75.2 does not mention ECR-209 and the old de-rating table is still shown. This is a traceability gap that will be flagged in the next WPPR cycle. \u2014 *Action required*",
+  "structured": {
+    "doc_ref": "DOC-431",
+    "reviewer": "E01",
+    "review_date": "2023-07-12",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E01",
+        "text": "Section 4.3 \u2014 The 18% SOC floor on P-1075 must NOT be raised without re-running thermal model on BlackHat2023 data. The 18% floor prevents cell reversal under 3C discharge. Any change requires ECR-209 and re-validation by Aisha Mbeki.",
+        "disposition": "Action required",
+        "refs": [
+          "P-1075",
+          "ECR-209"
+        ]
+      },
+      {
+        "comment_id": "C02",
+        "author": "E01",
+        "text": "Section 4.3 \u2014 The 82% SOC ceiling is safety-critical. Lithium plating observed at >85% SOC during March 2023 bench tests. Implemented in hardware on P-1075 to prevent single-point software fault bypass. Rationale must be preserved in DOC-431 \u00a74.3.",
+        "disposition": "Action required",
+        "refs": [
+          "P-1075",
+          "DOC-431"
+        ]
+      },
+      {
+        "comment_id": "C03",
+        "author": "E01",
+        "text": "Section 6 \u2014 Confirm AS150 connector (P-1064 rev B) meets interrupt-under-load spec at 50A.",
+        "disposition": "Noted",
+        "refs": [
+          "P-1064"
+        ]
+      },
+      {
+        "comment_id": "C04",
+        "author": "E01",
+        "text": "DOC-431 \u00a75.2 does not reference ECR-209 and still shows old temperature de-rating table. Traceability gap for WPPR.",
+        "disposition": "Action required",
+        "refs": [
+          "ECR-209",
+          "DOC-431"
+        ]
+      }
+    ]
+  },
+  "refs": [
+    "DOC-431",
+    "P-1075",
+    "P-1064",
+    "ECR-209",
+    "WIKI-014"
+  ]
+}

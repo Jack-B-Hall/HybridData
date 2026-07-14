@@ -1,0 +1,31 @@
+{
+  "id": "KES-122",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify ICD rev B",
+  "text": "Story: Verify ICD rev B. Reporter: Jordan Kim. Assignee: Tyler Moss. Status: Done. Priority: Medium. Created: 2025-05-19.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E14",
+    "created": "2025-05-19",
+    "resolved": "2025-06-20",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-468",
+    "DOC-465",
+    "KES-010"
+  ]
+}

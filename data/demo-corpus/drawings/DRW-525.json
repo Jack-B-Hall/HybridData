@@ -1,0 +1,30 @@
+{
+  "id": "DRW-525",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-525: Motor Cable Routing",
+  "text": "Drawing MD-DRW-525 Rev E \u2014 Motor Cable Routing\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1037, P-1038, P-1053, P-1054, P-1058.\n4. Drawn by Marcus Thaine, checked by Rowan Ellery, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-525",
+    "revision": "E",
+    "drawn_by": "E02",
+    "checked_by": "E13",
+    "approved_by": "E09",
+    "date": "2024-09-14",
+    "subsystem": "Propulsion",
+    "referenced_parts": [
+      "P-1037",
+      "P-1038",
+      "P-1053",
+      "P-1054",
+      "P-1058"
+    ]
+  },
+  "refs": [
+    "P-1037",
+    "P-1038",
+    "P-1053",
+    "P-1054",
+    "P-1058"
+  ]
+}

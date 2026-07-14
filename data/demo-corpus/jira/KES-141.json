@@ -1,0 +1,29 @@
+{
+  "id": "KES-141",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Priya Nair. Assignee: Felix Herrera. Status: Done. Priority: High. Created: 2024-12-14.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E09",
+    "created": "2024-12-14",
+    "resolved": "2025-04-08",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "KES-015"
+  ]
+}

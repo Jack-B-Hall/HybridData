@@ -1,0 +1,29 @@
+{
+  "id": "KES-067",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create environmental test report",
+  "text": "Story: Create environmental test report. Reporter: Aisha Mbeki. Assignee: Sam Dreher. Status: Open. Priority: Low. Created: 2023-03-16.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E10",
+    "assignee": "E04",
+    "created": "2023-03-16",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

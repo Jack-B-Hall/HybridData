@@ -1,0 +1,21 @@
+{
+  "id": "P-1018",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Rudder Assembly",
+  "text": "Rudder Assembly. Subsystem: Airframe. Material: CFRP. Mass: 48g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1018",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "CFRP",
+    "mass_g": 48,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1005"
+  },
+  "refs": [
+    "P-1005",
+    "DRW-512"
+  ]
+}

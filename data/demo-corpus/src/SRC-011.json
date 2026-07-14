@@ -1,0 +1,52 @@
+{
+  "id": "SRC-011",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/sonar_driver.c \u2014 Payload",
+  "text": "/* sonar_driver.c \u2014 Kestrel K-200 Payload\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "sonar_driver",
+    "language": "C",
+    "subsystem": "Payload",
+    "file_path": "payload/sonar_driver.c",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "1e37e1c",
+        "author": "E14",
+        "date": "2023-05-05",
+        "message": "Initial sonar_driver [KES-156]",
+        "kes_ref": "KES-156"
+      },
+      {
+        "hash": "bedc098",
+        "author": "E11",
+        "date": "2023-05-09",
+        "message": "Update sonar_driver [KES-093]",
+        "kes_ref": "KES-093"
+      },
+      {
+        "hash": "1381363",
+        "author": "E06",
+        "date": "2023-06-25",
+        "message": "Update sonar_driver [KES-019]",
+        "kes_ref": "KES-019"
+      },
+      {
+        "hash": "a2b61a5",
+        "author": "E12",
+        "date": "2023-08-07",
+        "message": "Update sonar_driver [KES-064]",
+        "kes_ref": "KES-064"
+      }
+    ]
+  },
+  "refs": [
+    "KES-156",
+    "KES-093",
+    "KES-019",
+    "KES-064",
+    "DOC-459",
+    "DOC-490"
+  ]
+}

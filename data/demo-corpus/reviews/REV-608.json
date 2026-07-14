@@ -1,0 +1,26 @@
+{
+  "id": "REV-608",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-469: REV-608",
+  "text": "# Review Record REV-608\n\nDocument: DOC-469. Reviewer: Nina Schulz. Date: 2024-03-15. Overall disposition: Rejected.\n\n## Comments\n\n**C01** (Jordan Kim): Section 8.4: The specification should clarify the interface requirement for DOC-469. Recommend updating the acceptance criteria table. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-469",
+    "reviewer": "E12",
+    "review_date": "2024-03-15",
+    "status": "Open",
+    "overall_disposition": "Rejected",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E08",
+        "text": "Section 8.4: The specification should clarify the interface requirement for DOC-469. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-469"
+  ]
+}

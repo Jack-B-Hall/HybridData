@@ -1,0 +1,60 @@
+{
+  "id": "SRC-022",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "system/health_monitor.py \u2014 Systems",
+  "text": "# health_monitor.py \u2014 Kestrel K-200 Systems\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "health_monitor",
+    "language": "Python",
+    "subsystem": "Systems",
+    "file_path": "system/health_monitor.py",
+    "primary_author": "E09",
+    "commit_log": [
+      {
+        "hash": "123947d",
+        "author": "E04",
+        "date": "2024-01-30",
+        "message": "Initial health_monitor [KES-161]",
+        "kes_ref": "KES-161"
+      },
+      {
+        "hash": "973a779",
+        "author": "E02",
+        "date": "2024-03-05",
+        "message": "Update health_monitor [KES-207]",
+        "kes_ref": "KES-207"
+      },
+      {
+        "hash": "4ad3205",
+        "author": "E11",
+        "date": "2024-03-06",
+        "message": "Update health_monitor [KES-063]",
+        "kes_ref": "KES-063"
+      },
+      {
+        "hash": "ad4e062",
+        "author": "E02",
+        "date": "2024-03-16",
+        "message": "Update health_monitor [KES-219]",
+        "kes_ref": "KES-219"
+      },
+      {
+        "hash": "ab98fb5",
+        "author": "E12",
+        "date": "2024-04-29",
+        "message": "Update health_monitor [KES-073]",
+        "kes_ref": "KES-073"
+      }
+    ]
+  },
+  "refs": [
+    "KES-161",
+    "KES-207",
+    "KES-063",
+    "KES-219",
+    "KES-073",
+    "DOC-405",
+    "DOC-412"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-014",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "BMS Safety Architecture Review \u2014 2023-07-01",
+  "text": "# BMS Safety Architecture Review \u2014 2023-07-01\n\n**Space:** K200  \n**Meeting type:** Safety Review  \n**Attendees:** Dr. Rhea Voss (CSE), Lena Okafor (Power), Rowan Ellery (Electrical), Tyler Moss (Firmware), Aisha Mbeki (Test), Nina Schulz (Quality)  \n**Chair:** Dr. Rhea Voss  \n**Minutes recorded by:** Nina Schulz\n\n---\n\n## Purpose\n\nThis review was convened to establish the safety architecture for the BMS module (P-1075) ahead of the DOC-431 BMS Safety Specification release. The March 2023 bench test series identified two safety-relevant observations that needed to be captured in the specification before the BMS hardware was finalised.\n\n## March 2023 Bench Test Findings\n\nLena Okafor presented the relevant test data:\n\n1. **SOC floor (18% minimum):** Below 18% SOC under a 3C discharge rate, one of the six series cells showed a measured cell voltage reversal of 12mV lasting approximately 40 seconds. Cell reversal is a precursor to separator failure and thermal event. The thermal model (run by Lena Okafor, data in internal test log reference BT-2023-03-12) shows that a 6-point margin (18% floor vs the 12% reversal-onset) provides the required safety buffer at all operating temperatures from -5\u00b0C to +45\u00b0C.\n\n2. **SOC ceiling (82% maximum):** At SOC above 85% and charge rate above 0.5C with ambient below 5\u00b0C, localised lithium plating was observed on the anode surface of the graphite cells in the test batch (post-mortem optical microscopy). Plating is a fire risk. The 82% ceiling was selected to provide a 3-point margin below the plating onset at 85%.\n\n## Architecture Decisions\n\n**AGREED:** Implement the 18% SOC floor and 82% SOC ceiling as hardware limits in P-1075, not firmware-only. The BMS hardware lockout circuit must be independent of the main microcontroller to prevent single-point software fault bypass.\n\n- Decision maker: Dr. Rhea Voss (CSE)\n- ECR reference: ECR-209 (BMS parameter update, captures the specific threshold values from this meeting)\n- Documentation: DOC-431 \u00a74.3 must record the full rationale (Lena Okafor to draft, Dr. Voss to review)\n- Review record: REV-623 (Dr. Voss review of DOC-431 v1.3) contains additional comments on this rationale\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Update P-1075 BMS hardware design for independent lockout circuit | Rowan Ellery | 2023-08-01 |\n| A2 | Draft DOC-431 \u00a74.3 with full SOC limit rationale | Lena Okafor | 2023-07-21 |\n| A3 | Raise ECR-209 to formally capture BMS parameter changes | Lena Okafor | 2023-07-10 |\n| A4 | Review DOC-431 v1.3 | Dr. Rhea Voss | 2023-07-12 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2023-07-01",
+    "last_modified": "2023-07-02",
+    "last_modified_by": "E12"
+  },
+  "refs": [
+    "P-1075",
+    "DOC-431",
+    "ECR-209",
+    "REV-623"
+  ]
+}

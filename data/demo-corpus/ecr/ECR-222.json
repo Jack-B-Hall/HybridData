@@ -1,0 +1,32 @@
+{
+  "id": "ECR-222",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Propulsion \u2014 update P-1018 per KES-009",
+  "text": "Engineering Change Request ECR-222. Subsystem: Propulsion. Affected parts: P-1018. Linked issues: KES-009, KES-074. Raised by: Marcus Thaine on 2024-05-07. Status: Approved.",
+  "structured": {
+    "raised_by": "E02",
+    "raised_date": "2024-05-07",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1018"
+    ],
+    "affected_docs": [
+      "DOC-424",
+      "DOC-418"
+    ],
+    "jira_issues": [
+      "KES-009",
+      "KES-074"
+    ],
+    "approver": "E13",
+    "approved_date": "2024-06-27"
+  },
+  "refs": [
+    "P-1018",
+    "KES-009",
+    "KES-074",
+    "DOC-424",
+    "DOC-418"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "DRW-538",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-538: IMU v2 Installation",
+  "text": "Drawing MD-DRW-538 Rev C \u2014 IMU v2 Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1093, P-1103, P-1118.\n4. Drawn by Rowan Ellery, checked by Sam Dreher, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-538",
+    "revision": "C",
+    "drawn_by": "E13",
+    "checked_by": "E04",
+    "approved_by": "E09",
+    "date": "2025-09-15",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1093",
+      "P-1103",
+      "P-1118"
+    ]
+  },
+  "refs": [
+    "P-1093",
+    "P-1103",
+    "P-1118"
+  ]
+}

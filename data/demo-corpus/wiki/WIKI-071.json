@@ -1,0 +1,27 @@
+{
+  "id": "WIKI-071",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Comms Datalink Encryption Upgrade Review \u2014 2025-01-22",
+  "text": "# Comms Datalink Encryption Upgrade Review \u2014 2025-01-22\n\n**Space:** K200  \n**Meeting type:** Technical Design Review  \n**Attendees:** Priya Nair (Comms), Sam Dreher (GNC), Felix Herrera (Integration), Jordan Kim (GCS SW), Tyler Moss (Firmware), Nina Schulz (Quality)  \n**Chair:** Priya Nair  \n**Minutes recorded by:** Jordan Kim\n\n---\n\n## Background\n\nA penetration test conducted by an external security assessment firm in December 2024 (report ref: MD-SEC-2024-11) identified that the K-200 datalink using the original FreeWave P-1125 radio with no end-to-end encryption was vulnerable to command injection \u2014 an attacker with a compatible radio could inject spoofed command packets. This was escalated as KES-201 (epic: comms encryption upgrade). The customer's security addendum to the contract (ref: KES-203) requires AES-256-GCM encryption on all command and telemetry traffic by programme milestone M4 (March 2025).\n\n## Architecture Proposal\n\nPriya Nair presented the encryption architecture:\n\n1. **FPGA encryption module (P-1127):** A Lattice iCE40-based FPGA module implementing AES-256-GCM in hardware sits between the datalink controller (P-1121) and the radio (P-1125/P-1126). All command/telemetry data is encrypted before transmission and decrypted on receipt.\n2. **Key management:** Session keys derived via ECDH on each power-cycle, using a pre-shared master key stored in secure flash on P-1127. Key rotation every 60 minutes of continuous operation.\n3. **Bandwidth impact:** AES-256-GCM adds 16-byte authentication tag per packet and ~3% throughput overhead. This was the primary driver for upgrading the radio from P-1125 (500kbps) to P-1126 (2Mbps), maintaining adequate headroom for telemetry at the higher overhead.\n\nJordan Kim confirmed that the GCS software (SRC-024 gcs_ui_backend.py) will require a protocol stack update to handle encrypted sessions, tracked as KES-203.\n\nTyler Moss confirmed that encryption_handler.c (SRC-018) implementing the FPGA interface is complete and passing unit tests.\n\n## Decision\n\n**AGREED:** Implement AES-256-GCM encryption via P-1127 FPGA module. Upgrade radio to P-1126 to accommodate bandwidth overhead.\n\n- Decision maker: Priya Nair (Comms lead), approved by Felix Herrera (Systems Integration)\n- Rationale: Customer contract requirement (KES-203), penetration test finding (MD-SEC-2024-11), bandwidth headroom needed for encrypted telemetry\n- ECR to be raised: ECR-229 (Priya Nair, covering P-1125 \u2192 P-1126 swap and P-1127 addition)\n- Documents to update: DOC-471 (Comms ICD), DOC-472 (Comms Protocol Spec), SRC-018 (encryption_handler.c)\n- GCS update: SRC-024 to implement encrypted session protocol (Jordan Kim, by 2025-02-28)\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-229 | Priya Nair | 2025-01-29 |\n| A2 | Complete SRC-018 encryption_handler.c integration testing | Tyler Moss | 2025-02-14 |\n| A3 | Update DOC-471 Comms ICD to Rev C | Priya Nair | 2025-02-28 |\n| A4 | Update DOC-472 Protocol Spec to Rev B | Priya Nair | 2025-02-28 |\n| A5 | Update GCS SRC-024 for encrypted session protocol | Jordan Kim | 2025-02-28 |\n| A6 | Update DRW-531 antenna mount for P-1126 | Rowan Ellery | 2025-02-15 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E08",
+    "created_date": "2025-01-22",
+    "last_modified": "2025-01-23",
+    "last_modified_by": "E08"
+  },
+  "refs": [
+    "KES-201",
+    "KES-203",
+    "ECR-229",
+    "DOC-471",
+    "DOC-472",
+    "P-1125",
+    "P-1126",
+    "P-1127",
+    "SRC-018",
+    "SRC-024",
+    "DRW-531"
+  ]
+}

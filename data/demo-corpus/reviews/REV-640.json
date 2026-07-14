@@ -1,0 +1,26 @@
+{
+  "id": "REV-640",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-411: REV-640",
+  "text": "# Review Record REV-640\n\nDocument: DOC-411. Reviewer: Aisha Mbeki. Date: 2024-09-19. Overall disposition: Approved with comments.\n\n## Comments\n\n**C01** (Dev Patel): Section 7.2: The specification should clarify the interface requirement for DOC-411. Recommend updating the acceptance criteria table. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-411",
+    "reviewer": "E10",
+    "review_date": "2024-09-19",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E11",
+        "text": "Section 7.2: The specification should clarify the interface requirement for DOC-411. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-411"
+  ]
+}

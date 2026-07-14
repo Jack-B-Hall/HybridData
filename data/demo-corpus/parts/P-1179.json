@@ -1,0 +1,18 @@
+{
+  "id": "P-1179",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Fan",
+  "text": "GCS Fan. Subsystem: GCS. Material: 80mm 12V DC fan, 35dB. Mass: 68g. Manufactured by NidecAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1179",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "80mm 12V DC fan, 35dB",
+    "mass_g": 68,
+    "manufacturer": "NidecAU",
+    "parent_id": null
+  },
+  "refs": []
+}

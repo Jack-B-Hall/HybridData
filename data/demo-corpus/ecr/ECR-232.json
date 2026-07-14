@@ -1,0 +1,32 @@
+{
+  "id": "ECR-232",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Integration \u2014 update P-1123 per KES-078",
+  "text": "Engineering Change Request ECR-232. Subsystem: Integration. Affected parts: P-1123, P-1054. Linked issues: KES-078, KES-004. Raised by: Lena Okafor on 2023-09-09. Status: In Review.",
+  "structured": {
+    "raised_by": "E03",
+    "raised_date": "2023-09-09",
+    "status": "In Review",
+    "affected_parts": [
+      "P-1123",
+      "P-1054"
+    ],
+    "affected_docs": [
+      "DOC-425"
+    ],
+    "jira_issues": [
+      "KES-078",
+      "KES-004"
+    ],
+    "approver": "E14",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1123",
+    "P-1054",
+    "KES-078",
+    "KES-004",
+    "DOC-425"
+  ]
+}

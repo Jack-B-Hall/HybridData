@@ -1,0 +1,29 @@
+{
+  "id": "KES-080",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Tyler Moss. Assignee: Felix Herrera. Status: Done. Priority: Medium. Created: 2025-10-16.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E09",
+    "created": "2025-10-16",
+    "resolved": "2026-01-05",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

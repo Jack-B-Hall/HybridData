@@ -1,0 +1,52 @@
+{
+  "id": "SRC-019",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "comms/protocol_handler.c \u2014 Comms/Datalink",
+  "text": "/* protocol_handler.c \u2014 Kestrel K-200 Comms/Datalink\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "protocol_handler",
+    "language": "C",
+    "subsystem": "Comms/Datalink",
+    "file_path": "comms/protocol_handler.c",
+    "primary_author": "E05",
+    "commit_log": [
+      {
+        "hash": "12c9493",
+        "author": "E05",
+        "date": "2025-10-21",
+        "message": "Initial protocol_handler [KES-200]",
+        "kes_ref": "KES-200"
+      },
+      {
+        "hash": "01c2d7a",
+        "author": "E13",
+        "date": "2025-11-05",
+        "message": "Update protocol_handler [KES-060]",
+        "kes_ref": "KES-060"
+      },
+      {
+        "hash": "7230c04",
+        "author": "E09",
+        "date": "2025-11-17",
+        "message": "Update protocol_handler [KES-219]",
+        "kes_ref": "KES-219"
+      },
+      {
+        "hash": "a332f79",
+        "author": "E14",
+        "date": "2025-12-14",
+        "message": "Update protocol_handler [KES-057]",
+        "kes_ref": "KES-057"
+      }
+    ]
+  },
+  "refs": [
+    "KES-200",
+    "KES-060",
+    "KES-219",
+    "KES-057",
+    "DOC-489",
+    "DOC-442"
+  ]
+}

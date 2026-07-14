@@ -1,0 +1,39 @@
+{
+  "id": "ECN-326",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-228: GNC sensor suite upgrade (IMU P-1092\u2192P-1093, GPS P-1097\u2192P-1098)",
+  "text": "Engineering Change Notice ECN-326. Implements ECR-228.\nApproved by: Felix Herrera, 2024-12-18.\n\nAuthorised changes:\n1. P-1092 (IMU ICM-42688-P): Obsoleted.\n2. P-1093 (IMU ADIS16505-2 tactical grade): Added to BOM.\n3. P-1097 (GPS antenna patch L1/L2): Obsoleted.\n4. P-1098 (GPS antenna helical L1/L2/L5 IP68): Added to BOM.\n5. SRC-007 (nav_filter.c): EKF IMU driver updated for ADIS SPI. Attitude accuracy improved to 0.3\u00b0 roll in bench simulation. Committed Q1 2025.\n6. SRC-009 (gps_driver.c): Updated for L5 band support. Committed Q1 2025.\n7. DOC-455 (GNC ICD): Updated to Rev B. Attitude accuracy requirement re-confirmed achievable at 0.5\u00b0 with P-1093.\n8. DOC-456 (GPS Performance Specification): Updated to Rev B.\n9. DOC-467 (Flight Test Report): Re-issued after re-qualification flight tests (Aisha Mbeki, Q2 2025).\n10. DRW-534 (GPS v2 Antenna Installation): Updated for P-1098 helical form factor.",
+  "structured": {
+    "ecr_id": "ECR-228",
+    "approved_by": "E09",
+    "approved_date": "2024-12-18",
+    "affected_parts": [
+      "P-1092",
+      "P-1093",
+      "P-1097",
+      "P-1098"
+    ],
+    "affected_docs": [
+      "DOC-455",
+      "DOC-456",
+      "DOC-467"
+    ]
+  },
+  "refs": [
+    "ECR-228",
+    "P-1092",
+    "P-1093",
+    "P-1097",
+    "P-1098",
+    "DOC-455",
+    "DOC-456",
+    "DOC-467",
+    "SRC-007",
+    "SRC-009",
+    "DRW-534",
+    "KES-089",
+    "KES-091",
+    "WIKI-067"
+  ]
+}

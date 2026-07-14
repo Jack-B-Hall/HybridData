@@ -1,0 +1,21 @@
+{
+  "id": "P-1016",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Elevator Assembly",
+  "text": "Elevator Assembly. Subsystem: Airframe. Material: CFRP. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1016",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "CFRP",
+    "mass_g": 55,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1005"
+  },
+  "refs": [
+    "P-1005",
+    "DRW-512"
+  ]
+}

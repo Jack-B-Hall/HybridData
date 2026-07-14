@@ -1,0 +1,29 @@
+{
+  "id": "KES-098",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Radio frequency scan missing occupied channels",
+  "text": "Bug: Radio frequency scan missing occupied channels. Reporter: Dev Patel. Assignee: Marcus Thaine. Status: Done. Priority: Medium. Created: 2025-08-08.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E02",
+    "created": "2025-08-08",
+    "resolved": "2025-08-29",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-013",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-013"
+      }
+    ]
+  },
+  "refs": [
+    "KES-013"
+  ]
+}

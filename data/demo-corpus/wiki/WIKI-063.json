@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-063",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Programme Status Gate 5 \u2014 2023-11-11",
+  "text": "# Programme Status Gate 5 \u2014 2023-11-11\n\n**Attendees:** Lena Okafor, Dev Patel, Tobias Wren, Felix Herrera\n\n## Summary\n\nThis page covers the maintenance schedule for the Airframe subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tobias Wren on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E13",
+    "created_date": "2023-11-11",
+    "last_modified": "2023-12-15",
+    "last_modified_by": "E06"
+  },
+  "refs": [
+    "KES-094",
+    "KES-151"
+  ]
+}

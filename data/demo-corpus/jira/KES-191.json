@@ -1,0 +1,29 @@
+{
+  "id": "KES-191",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Aisha Mbeki. Assignee: Tyler Moss. Status: Open. Priority: High. Created: 2025-11-03.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E14",
+    "created": "2025-11-03",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

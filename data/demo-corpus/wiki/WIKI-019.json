@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-019",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Propulsion Technical Note: material selection for structural panels",
+  "text": "# Propulsion Technical Note: material selection for structural panels\n\n**Attendees:** Lena Okafor, Aisha Mbeki\n\n## Summary\n\nThis page covers the material selection for structural panels for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Sam Dreher on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E02",
+    "created_date": "2025-07-17",
+    "last_modified": "2025-08-04",
+    "last_modified_by": "E04"
+  },
+  "refs": [
+    "DOC-459",
+    "DOC-419",
+    "DOC-441"
+  ]
+}

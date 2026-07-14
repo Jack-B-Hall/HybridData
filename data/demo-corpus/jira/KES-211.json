@@ -1,0 +1,32 @@
+{
+  "id": "KES-211",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Tobias Wren. Assignee: Rowan Ellery. Status: Done. Priority: High. Created: 2024-09-29.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E13",
+    "created": "2024-09-29",
+    "resolved": "2024-12-09",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-439",
+    "DOC-459",
+    "WIKI-008",
+    "KES-018"
+  ]
+}

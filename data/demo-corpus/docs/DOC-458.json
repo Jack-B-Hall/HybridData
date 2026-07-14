@@ -1,0 +1,22 @@
+{
+  "id": "DOC-458",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Qualification Test Report",
+  "text": "# K-200 Integration Qualification Test Report\n\nDocument number: MD-DOC-458-F. Revision: F. Type: test-report. Author: Rowan Ellery. Created: 2025-01-11. Last modified: 2025-02-14. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1001, P-1169, P-1097.",
+  "structured": {
+    "doc_number": "MD-DOC-458-F",
+    "revision": "F",
+    "doc_type": "test-report",
+    "author": "E13",
+    "created": "2025-01-11",
+    "last_modified": "2025-02-14",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1001",
+    "P-1169",
+    "P-1097"
+  ]
+}

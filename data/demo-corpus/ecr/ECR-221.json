@@ -1,0 +1,40 @@
+{
+  "id": "ECR-221",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Replace propulsion motors P-1031 and ESCs P-1032 with P-1041/P-1042",
+  "text": "Engineering Change Request ECR-221.\n\nRaised by: Marcus Thaine (Propulsion Lead), 2024-04-15.\nStatus: Approved. Approved by: Dr. Rhea Voss, 2024-04-22.\n\nSummary: Replace all four instances of the TorqueDrive 4012 490KV motors (P-1031) and ControlAir 60A ESCs (P-1032) with TorqueDrive 4014 420KV Enhanced motors (P-1041) and ControlAir 80A Enhanced ESCs (P-1042).\n\nRationale: Two thermal events during April 2024 testing demonstrated that P-1031 motors cannot meet the 40\u00b0C ambient temperature operating requirement:\n- KES-187 (2024-04-02): Fwd-port P-1031 motor reached 108\u00b0C winding temperature during 45-min endurance run at 30\u00b0C ambient, triggering thermal cutout. Winding temperature rating is 85\u00b0C maximum continuous.\n- KES-188 (2024-04-08): Fwd-stbd P-1031 motor ESC (P-1032) repeatedly overcurrented due to thermal throttling, causing motor sync loss.\n\nRoot cause (established at WIKI-031 Propulsion Thermal Review, 2024-04-10): The 4012 490KV winding design has insufficient stator-to-case thermal conductivity. The P-1031 motor was selected in 2023 without a hot-day endurance test.\n\nThe TorqueDrive 4014 420KV Enhanced (P-1041) uses an improved winding geometry that reduces stator temperature by approximately 18\u00b0C at the same operating point (per TorqueDrive data sheet DS-4014E rev 2). Paired with the ControlAir 80A Enhanced ESC (P-1042, copper heatsink) and P-1051 heatsink, the thermal margin is restored to 22\u00b0C at 40\u00b0C ambient.\n\nImpact:\n- P-1031: Obsoleted, to be removed from BOM\n- P-1032: Obsoleted, to be removed from BOM\n- P-1041: New motor (4x required)\n- P-1042: New ESC (4x required)\n- P-1044: Motor controller board \u2014 compatible, no change\n- P-1012: Motor mounts \u2014 Tobias Wren confirmed fit compatibility at WIKI-031\n- DOC-445: Motor qualification test report to be created\n- SRC-026: motor_controller.c requires KV-rating update",
+  "structured": {
+    "raised_by": "E02",
+    "raised_date": "2024-04-15",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1031",
+      "P-1032",
+      "P-1041",
+      "P-1042"
+    ],
+    "affected_docs": [
+      "DOC-445"
+    ],
+    "jira_issues": [
+      "KES-187",
+      "KES-188"
+    ],
+    "approver": "E01",
+    "approved_date": "2024-04-22"
+  },
+  "refs": [
+    "P-1031",
+    "P-1032",
+    "P-1041",
+    "P-1042",
+    "P-1044",
+    "P-1012",
+    "DOC-445",
+    "KES-187",
+    "KES-188",
+    "WIKI-031",
+    "SRC-026"
+  ]
+}

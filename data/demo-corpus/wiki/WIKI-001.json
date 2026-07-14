@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-001",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Propulsion Weekly Status \u2014 Week 43, 2023",
+  "text": "# Propulsion Weekly Status \u2014 Week 43, 2023\n\n**Attendees:** Tobias Wren, Felix Herrera\n\n## Summary\n\nThis page covers the software architecture selection for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E10",
+    "created_date": "2023-05-27",
+    "last_modified": "2023-06-09",
+    "last_modified_by": "E05"
+  },
+  "refs": [
+    "ECR-219"
+  ]
+}

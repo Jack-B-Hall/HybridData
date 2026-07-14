@@ -1,0 +1,22 @@
+{
+  "id": "DOC-452",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Acceptance Test Procedure",
+  "text": "# K-200 Battery Acceptance Test Procedure\n\nDocument number: MD-DOC-452-F. Revision: F. Type: procedure. Author: Marcus Thaine. Created: 2023-03-18. Last modified: 2023-04-23. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1012, P-1121.",
+  "structured": {
+    "doc_number": "MD-DOC-452-F",
+    "revision": "F",
+    "doc_type": "procedure",
+    "author": "E02",
+    "created": "2023-03-18",
+    "last_modified": "2023-04-23",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1012",
+    "P-1121",
+    "ECR-212"
+  ]
+}

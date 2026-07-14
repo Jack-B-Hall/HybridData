@@ -1,0 +1,30 @@
+{
+  "id": "KES-099",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Rowan Ellery. Assignee: Dev Patel. Status: Open. Priority: Low. Created: 2025-08-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E11",
+    "created": "2025-08-23",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-047",
+    "KES-001"
+  ]
+}

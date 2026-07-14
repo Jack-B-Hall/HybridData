@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-025",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Systems Weekly Status \u2014 Week 8, 2024",
+  "text": "# Systems Weekly Status \u2014 Week 8, 2024\n\n**Attendees:** Nina Schulz, Sam Dreher, Felix Herrera, Lena Okafor\n\n## Summary\n\nThis page covers the encryption approach for the Systems subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Aisha Mbeki on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E06",
+    "created_date": "2024-08-13",
+    "last_modified": "2024-11-11",
+    "last_modified_by": "E10"
+  },
+  "refs": [
+    "ECR-220",
+    "DOC-485"
+  ]
+}

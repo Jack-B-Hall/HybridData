@@ -1,0 +1,22 @@
+{
+  "id": "KES-013",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] WPPR documentation cycle 1",
+  "text": "Epic: WPPR documentation cycle 1. Reporter: Priya Nair. Assignee: Rowan Ellery. Status: In Progress. Priority: High. Created: 2025-11-07.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E13",
+    "created": "2025-11-07",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

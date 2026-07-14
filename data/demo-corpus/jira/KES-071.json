@@ -1,0 +1,29 @@
+{
+  "id": "KES-071",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Jordan Kim. Assignee: Sam Dreher. Status: Done. Priority: High. Created: 2023-09-11.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E04",
+    "created": "2023-09-11",
+    "resolved": "2023-12-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-009",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "KES-009"
+  ]
+}

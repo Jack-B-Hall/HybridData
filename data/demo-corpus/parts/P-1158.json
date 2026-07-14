@@ -1,0 +1,21 @@
+{
+  "id": "P-1158",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Gimbal Controller Board",
+  "text": "Gimbal Controller Board. Subsystem: Payload. Material: PCB, SimpleBGC 32-bit extended, IMU. Mass: 35g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1158",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "PCB, SimpleBGC 32-bit extended, IMU",
+    "mass_g": 35,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-519",
+    "DRW-536"
+  ]
+}

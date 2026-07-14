@@ -1,0 +1,18 @@
+{
+  "id": "P-1135",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Heatsink \u2014 Radio",
+  "text": "Heatsink \u2014 Radio. Subsystem: Comms/Datalink. Material: aluminium, finned. Mass: 32g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1135",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "aluminium, finned",
+    "mass_g": 32,
+    "manufacturer": "ThermalTech",
+    "parent_id": null
+  },
+  "refs": []
+}

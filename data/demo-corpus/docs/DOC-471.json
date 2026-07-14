@@ -1,0 +1,31 @@
+{
+  "id": "DOC-471",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms System Interface Control Document v3.0 (Rev C)",
+  "text": "# K-200 Comms System Interface Control Document\n\nDocument number: MD-DOC-471-C. Revision: C. Type: ICD. Author: Priya Nair. Created: 2023-06-01. Last modified: 2025-02-28. Status: Released.\n\n## Change History\n- Rev A: 900MHz FHSS baseline, P-1125 (2023-06-01)\n- Rev B: Diversity antenna system added (2024-03-01)\n- Rev C: AES-256-GCM encryption layer added, radio P-1125\u2192P-1126, P-1127 FPGA module (2025-02-28, per ECN-322)\n\n## \u00a73 Radio Subsystem \u2014 P-1126 Enhanced\n\nCurrent radio: FreeWave Enhanced Dual-Band (P-1126 Rev B). Frequency: 900MHz / 2.4GHz FHSS. Data rate: 2Mbps. Output power: 1W. Range: 15km at 1W. The P-1126 replaced P-1125 (500kbps) to accommodate the bandwidth overhead of AES-256-GCM encryption. Change authority: ECN-322.\n\n## \u00a74 Encryption \u2014 P-1127 FPGA Module\n\nAll command and telemetry traffic is encrypted with AES-256-GCM before transmission by the P-1127 FPGA encryption module (Lattice iCE40, hardware implementation). The FPGA module sits between the datalink controller (P-1121) and the radio (P-1126). Session keys are derived via ECDH on power-cycle, with 60-minute rotation. Implementation: SRC-018 (encryption_handler.c). GCS protocol stack: SRC-024 (gcs_ui_backend.py).\n\nSecurity requirement source: Customer contract security addendum, KES-203, penetration test MD-SEC-2024-11. Design review: WIKI-071.\n\n## \u00a75 Protocol \u2014 see DOC-472\n\nDetailed protocol specification in DOC-472 (Comms Protocol Specification Rev B).",
+  "structured": {
+    "doc_number": "MD-DOC-471-C",
+    "revision": "C",
+    "doc_type": "ICD",
+    "author": "E05",
+    "created": "2023-06-01",
+    "last_modified": "2025-02-28",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1121",
+    "P-1125",
+    "P-1126",
+    "P-1127",
+    "SRC-018",
+    "SRC-024",
+    "DOC-472",
+    "ECR-229",
+    "ECN-322",
+    "KES-201",
+    "KES-203",
+    "WIKI-071"
+  ]
+}

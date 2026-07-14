@@ -1,0 +1,25 @@
+{
+  "id": "DOC-430",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Maintenance Procedure",
+  "text": "# K-200 Systems Maintenance Procedure\n\nDocument number: MD-DOC-430-D. Revision: D. Type: manual. Author: Tyler Moss. Created: 2023-05-07. Last modified: 2024-01-26. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1017, P-1137, P-1102.",
+  "structured": {
+    "doc_number": "MD-DOC-430-D",
+    "revision": "D",
+    "doc_type": "manual",
+    "author": "E14",
+    "created": "2023-05-07",
+    "last_modified": "2024-01-26",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1017",
+    "P-1137",
+    "P-1102",
+    "ECR-214",
+    "ECR-232",
+    "KES-213"
+  ]
+}

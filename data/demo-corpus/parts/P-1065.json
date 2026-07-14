@@ -1,0 +1,18 @@
+{
+  "id": "P-1065",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Charge Connector",
+  "text": "Charge Connector. Subsystem: Battery. Material: XT90-S anti-spark. Mass: 12g. Manufactured by AmassConnect. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1065",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "XT90-S anti-spark",
+    "mass_g": 12,
+    "manufacturer": "AmassConnect",
+    "parent_id": null
+  },
+  "refs": []
+}

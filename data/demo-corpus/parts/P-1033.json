@@ -1,0 +1,18 @@
+{
+  "id": "P-1033",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Propeller Fwd CW 15x5.5",
+  "text": "Propeller Fwd CW 15x5.5. Subsystem: Propulsion. Material: carbon fibre. Mass: 42g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1033",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "carbon fibre",
+    "mass_g": 42,
+    "manufacturer": "PropTech GmbH",
+    "parent_id": null
+  },
+  "refs": []
+}

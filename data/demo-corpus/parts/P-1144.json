@@ -1,0 +1,18 @@
+{
+  "id": "P-1144",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Datalink Cable \u2014 GCS",
+  "text": "Datalink Cable \u2014 GCS. Subsystem: Comms/Datalink. Material: RS-422, 50m, armoured. Mass: 480g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1144",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "RS-422, 50m, armoured",
+    "mass_g": 480,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

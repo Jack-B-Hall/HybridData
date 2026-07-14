@@ -1,0 +1,28 @@
+{
+  "id": "DRW-510",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-510: BMS Enclosure Assembly",
+  "text": "Drawing MD-DRW-510 Rev E \u2014 BMS Enclosure Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1075, P-1080, P-1081, P-1082.\n4. Drawn by Rowan Ellery, checked by Lena Okafor, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-510",
+    "revision": "E",
+    "drawn_by": "E13",
+    "checked_by": "E03",
+    "approved_by": "E01",
+    "date": "2024-01-14",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1075",
+      "P-1080",
+      "P-1081",
+      "P-1082"
+    ]
+  },
+  "refs": [
+    "P-1075",
+    "P-1080",
+    "P-1081",
+    "P-1082"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1056",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Inrush Limiter \u2014 Motor Bus",
+  "text": "Inrush Limiter \u2014 Motor Bus. Subsystem: Propulsion. Material: NTC inrush limiter 22R. Mass: 10g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1056",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "NTC inrush limiter 22R",
+    "mass_g": 10,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

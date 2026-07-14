@@ -1,0 +1,23 @@
+{
+  "id": "DOC-469",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Risk Register",
+  "text": "# K-200 Propulsion Risk Register\n\nDocument number: MD-DOC-469-G. Revision: G. Type: analysis. Author: Priya Nair. Created: 2024-11-23. Last modified: 2025-08-07. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1024, P-1085.",
+  "structured": {
+    "doc_number": "MD-DOC-469-G",
+    "revision": "G",
+    "doc_type": "analysis",
+    "author": "E05",
+    "created": "2024-11-23",
+    "last_modified": "2025-08-07",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1024",
+    "P-1085",
+    "ECR-204",
+    "ECR-211"
+  ]
+}

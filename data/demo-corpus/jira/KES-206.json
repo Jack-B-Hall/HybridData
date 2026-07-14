@@ -1,0 +1,29 @@
+{
+  "id": "KES-206",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Sam Dreher. Assignee: Tobias Wren. Status: Done. Priority: Medium. Created: 2023-12-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E06",
+    "created": "2023-12-23",
+    "resolved": "2024-01-22",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-017",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-017"
+      }
+    ]
+  },
+  "refs": [
+    "KES-017"
+  ]
+}

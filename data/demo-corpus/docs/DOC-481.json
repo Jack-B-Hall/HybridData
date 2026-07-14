@@ -1,0 +1,21 @@
+{
+  "id": "DOC-481",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Interface Control Document",
+  "text": "# K-200 Comms/Datalink Interface Control Document\n\nDocument number: MD-DOC-481-A. Revision: A. Type: ICD. Author: Aisha Mbeki. Created: 2024-11-26. Last modified: 2025-06-06. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1144, P-1178.",
+  "structured": {
+    "doc_number": "MD-DOC-481-A",
+    "revision": "A",
+    "doc_type": "ICD",
+    "author": "E10",
+    "created": "2024-11-26",
+    "last_modified": "2025-06-06",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1144",
+    "P-1178"
+  ]
+}

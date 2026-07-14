@@ -1,0 +1,36 @@
+{
+  "id": "SRC-024",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gcs/gcs_ui_backend.py \u2014 GCS",
+  "text": "# gcs_ui_backend.py \u2014 Kestrel K-200 GCS\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gcs_ui_backend",
+    "language": "Python",
+    "subsystem": "GCS",
+    "file_path": "gcs/gcs_ui_backend.py",
+    "primary_author": "E08",
+    "commit_log": [
+      {
+        "hash": "cb39605",
+        "author": "E13",
+        "date": "2023-03-04",
+        "message": "Initial gcs_ui_backend [KES-120]",
+        "kes_ref": "KES-120"
+      },
+      {
+        "hash": "034c485",
+        "author": "E05",
+        "date": "2023-04-25",
+        "message": "Update gcs_ui_backend [KES-164]",
+        "kes_ref": "KES-164"
+      }
+    ]
+  },
+  "refs": [
+    "KES-120",
+    "KES-164",
+    "DOC-401",
+    "DOC-415"
+  ]
+}

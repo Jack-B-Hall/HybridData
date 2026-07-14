@@ -1,0 +1,20 @@
+{
+  "id": "P-1112",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Cable",
+  "text": "GPS Cable. Subsystem: Nav/GNC. Material: SMA-SMA, LMR100, 400mm. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1112",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "SMA-SMA, LMR100, 400mm",
+    "mass_g": 12,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-513"
+  ]
+}

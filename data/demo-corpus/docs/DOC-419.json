@@ -1,0 +1,21 @@
+{
+  "id": "DOC-419",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Design Analysis",
+  "text": "# K-200 Payload Design Analysis\n\nDocument number: MD-DOC-419-B. Revision: B. Type: design-note. Author: Jordan Kim. Created: 2023-02-10. Last modified: 2023-11-15. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1050, P-1099.",
+  "structured": {
+    "doc_number": "MD-DOC-419-B",
+    "revision": "B",
+    "doc_type": "design-note",
+    "author": "E08",
+    "created": "2023-02-10",
+    "last_modified": "2023-11-15",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1050",
+    "P-1099"
+  ]
+}

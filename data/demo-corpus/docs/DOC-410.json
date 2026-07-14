@@ -1,0 +1,24 @@
+{
+  "id": "DOC-410",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Qualification Test Report",
+  "text": "# K-200 Payload Qualification Test Report\n\nDocument number: MD-DOC-410-B. Revision: B. Type: test-report. Author: Aisha Mbeki. Created: 2023-05-11. Last modified: 2024-01-20. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1082, P-1018, P-1077, P-1012.",
+  "structured": {
+    "doc_number": "MD-DOC-410-B",
+    "revision": "B",
+    "doc_type": "test-report",
+    "author": "E10",
+    "created": "2023-05-11",
+    "last_modified": "2024-01-20",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1082",
+    "P-1018",
+    "P-1077",
+    "P-1012",
+    "KES-218"
+  ]
+}

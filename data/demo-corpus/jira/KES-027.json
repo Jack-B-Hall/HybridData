@@ -1,0 +1,31 @@
+{
+  "id": "KES-027",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create environmental test report",
+  "text": "Story: Create environmental test report. Reporter: Felix Herrera. Assignee: Priya Nair. Status: Open. Priority: Medium. Created: 2023-08-01.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E09",
+    "assignee": "E05",
+    "created": "2023-08-01",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-446",
+    "DOC-455",
+    "KES-016"
+  ]
+}

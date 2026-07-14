@@ -1,0 +1,23 @@
+{
+  "id": "DOC-488",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Subsystem Specification",
+  "text": "# K-200 Battery Subsystem Specification\n\nDocument number: MD-DOC-488-A. Revision: A. Type: specification. Author: Lena Okafor. Created: 2024-01-13. Last modified: 2024-12-12. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1008, P-1111, P-1168, P-1043.",
+  "structured": {
+    "doc_number": "MD-DOC-488-A",
+    "revision": "A",
+    "doc_type": "specification",
+    "author": "E03",
+    "created": "2024-01-13",
+    "last_modified": "2024-12-12",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1008",
+    "P-1111",
+    "P-1168",
+    "P-1043"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-138",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Aisha Mbeki. Assignee: Tyler Moss. Status: Open. Priority: High. Created: 2025-07-16.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E14",
+    "created": "2025-07-16",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-004",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-004"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-442",
+    "KES-004"
+  ]
+}

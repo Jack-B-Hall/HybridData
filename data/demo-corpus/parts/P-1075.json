@@ -1,0 +1,21 @@
+{
+  "id": "P-1075",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "BMS Module",
+  "text": "BMS Module. Subsystem: Battery. Material: PCB, TI BQ77PL900 based, 6S. Mass: 95g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1075",
+    "revision": "C",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, TI BQ77PL900 based, 6S",
+    "mass_g": 95,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-510",
+    "DRW-532"
+  ]
+}

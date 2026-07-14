@@ -1,0 +1,24 @@
+{
+  "id": "DOC-431",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 BMS Safety Specification v1.3",
+  "text": "# K-200 BMS Safety Specification\n\nDocument number: MD-DOC-431-B. Revision: B. Type: specification. Author: Lena Okafor. Created: 2023-06-15. Last modified: 2023-07-25. Status: Released.\n\nReviewed by: Dr. Rhea Voss (REV-623, 2023-07-12, Approved with comments \u2014 see review for critical rationale).\n\n## \u00a74 Operating Limits\n\n### \u00a74.3 State-of-Charge Limits (per ECR-209)\n\nThe BMS module (P-1075) enforces the following SOC limits in hardware:\n\n- **Lower SOC limit: 18%** \u2014 This floor prevents cell reversal under the 3C maximum discharge rate. March 2023 bench tests (BT-2023-03-12) showed cell reversal onset at 12% SOC. The 6-point margin (18%) was validated across the full operating temperature range (-5\u00b0C to +45\u00b0C). This limit is a hardware lockout independent of firmware. It must NOT be raised without re-running the full thermal model on the BT-2023-03-12 dataset and obtaining CSE approval via ECR process. See REV-623 comment C01 for detailed rationale from Dr. Voss.\n\n- **Upper SOC limit: 82%** \u2014 This ceiling prevents lithium plating on the anode graphite at high SOC combined with low temperature or high charge rate. Plating was observed in post-mortem optical microscopy of test cells charged above 85% SOC at 0.5C and ambient below 5\u00b0C. The 3-point margin (82%) is required to keep the cell safely below plating onset. Implemented in hardware on P-1075. See REV-623 comment C02.\n\n### \u00a74.4 Emergency Disconnect\n\nManual disconnect via P-1064 (Battery Connector Main, AS150 gold 150A). Interrupt-under-load capability confirmed for AS150 rev B at 50A.\n\n## \u00a75 Temperature De-rating\n\n### \u00a75.2 Charge Rate De-rating vs Temperature (per ECR-209)\n\n| Ambient temperature | Max charge rate |\n|---|---|\n| > 15\u00b0C | 1.0C |\n| 5\u00b0C to 15\u00b0C | 0.5C |\n| -5\u00b0C to 5\u00b0C | 0.3C |\n| < -5\u00b0C | Charging prohibited |\n\nPrevious specification (Rev A) allowed 0.5C at -5\u00b0C to 5\u00b0C. Updated per bench test data showing plating risk at that rate/temperature combination.",
+  "structured": {
+    "doc_number": "MD-DOC-431-B",
+    "revision": "B",
+    "doc_type": "specification",
+    "author": "E03",
+    "created": "2023-06-15",
+    "last_modified": "2023-07-25",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1075",
+    "P-1064",
+    "ECR-209",
+    "REV-623",
+    "WIKI-014"
+  ]
+}

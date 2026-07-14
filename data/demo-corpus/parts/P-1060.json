@@ -1,0 +1,18 @@
+{
+  "id": "P-1060",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Data Cable Harness",
+  "text": "Motor Data Cable Harness. Subsystem: Propulsion. Material: JST-GH 4-pin, 200mm. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1060",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "JST-GH 4-pin, 200mm",
+    "mass_g": 18,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

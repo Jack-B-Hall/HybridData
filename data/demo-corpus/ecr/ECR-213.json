@@ -1,0 +1,36 @@
+{
+  "id": "ECR-213",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Comms/Datalink \u2014 update P-1165 per KES-218",
+  "text": "Engineering Change Request ECR-213. Subsystem: Comms/Datalink. Affected parts: P-1165, P-1140, P-1135, P-1127. Linked issues: KES-218. Raised by: Nina Schulz on 2023-06-18. Status: Approved.",
+  "structured": {
+    "raised_by": "E12",
+    "raised_date": "2023-06-18",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1165",
+      "P-1140",
+      "P-1135",
+      "P-1127"
+    ],
+    "affected_docs": [
+      "DOC-435",
+      "DOC-425"
+    ],
+    "jira_issues": [
+      "KES-218"
+    ],
+    "approver": "E03",
+    "approved_date": "2023-07-14"
+  },
+  "refs": [
+    "P-1165",
+    "P-1140",
+    "P-1135",
+    "P-1127",
+    "KES-218",
+    "DOC-435",
+    "DOC-425"
+  ]
+}

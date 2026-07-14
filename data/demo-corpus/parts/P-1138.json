@@ -1,0 +1,18 @@
+{
+  "id": "P-1138",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Status LED \u2014 Radio",
+  "text": "Status LED \u2014 Radio. Subsystem: Comms/Datalink. Material: RGB LED, IP65, panel-mount. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1138",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "RGB LED, IP65, panel-mount",
+    "mass_g": 8,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

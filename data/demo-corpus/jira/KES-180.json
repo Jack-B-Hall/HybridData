@@ -1,0 +1,29 @@
+{
+  "id": "KES-180",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement power budget model",
+  "text": "Story: Implement power budget model. Reporter: Tobias Wren. Assignee: Aisha Mbeki. Status: Done. Priority: Medium. Created: 2023-10-31.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E06",
+    "assignee": "E10",
+    "created": "2023-10-31",
+    "resolved": "2024-02-15",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-002",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-002"
+      }
+    ]
+  },
+  "refs": [
+    "KES-002"
+  ]
+}

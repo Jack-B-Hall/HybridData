@@ -1,0 +1,38 @@
+{
+  "id": "ECR-208",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: GCS \u2014 update P-1089 per KES-183",
+  "text": "Engineering Change Request ECR-208. Subsystem: GCS. Affected parts: P-1089, P-1038, P-1075, P-1011. Linked issues: KES-183, KES-021. Raised by: Nina Schulz on 2025-01-21. Status: In Review.",
+  "structured": {
+    "raised_by": "E12",
+    "raised_date": "2025-01-21",
+    "status": "In Review",
+    "affected_parts": [
+      "P-1089",
+      "P-1038",
+      "P-1075",
+      "P-1011"
+    ],
+    "affected_docs": [
+      "DOC-457",
+      "DOC-484"
+    ],
+    "jira_issues": [
+      "KES-183",
+      "KES-021"
+    ],
+    "approver": "E06",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1089",
+    "P-1038",
+    "P-1075",
+    "P-1011",
+    "KES-183",
+    "KES-021",
+    "DOC-457",
+    "DOC-484"
+  ]
+}

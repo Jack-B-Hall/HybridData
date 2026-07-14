@@ -1,0 +1,21 @@
+{
+  "id": "P-1082",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Overvoltage Protection Module",
+  "text": "Overvoltage Protection Module. Subsystem: Battery. Material: PCB, TVS + MOSFET. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1082",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, TVS + MOSFET",
+    "mass_g": 22,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-510",
+    "DRW-527"
+  ]
+}

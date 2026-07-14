@@ -1,0 +1,32 @@
+{
+  "id": "DRW-501",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-501: Fuselage Assembly",
+  "text": "Drawing MD-DRW-501 Rev A \u2014 Fuselage Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1001, P-1004, P-1005, P-1019, P-1020, P-1021.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-501",
+    "revision": "A",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-04-15",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1001",
+      "P-1004",
+      "P-1005",
+      "P-1019",
+      "P-1020",
+      "P-1021"
+    ]
+  },
+  "refs": [
+    "P-1001",
+    "P-1004",
+    "P-1005",
+    "P-1019",
+    "P-1020",
+    "P-1021"
+  ]
+}

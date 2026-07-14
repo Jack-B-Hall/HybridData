@@ -1,0 +1,42 @@
+{
+  "id": "ECR-216",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Payload gimbal redesign: reject GimbalTech unit, adopt K-200 custom gimbal P-1154 Rev C",
+  "text": "Engineering Change Request ECR-216.\n\nRaised by: Cass Doyle (Payload Systems Engineer), 2024-06-25.\nStatus: Approved. Approved by: Felix Herrera (Systems Integration), 2024-07-02.\n\nSummary: Reject the GimbalTech 2-axis gimbal and replace with the Meridian Dynamics 3-axis gimbal assembly (P-1154 Rev C), using GB-Systems hollow-shaft motors (P-1155 pitch, P-1156 roll, P-1157 yaw) and Meridian Dynamics SimpleBGC 32-bit extended controller (P-1158).\n\nRationale: The GimbalTech gimbal exhibited 8.2Hz structural resonance during integration testing (KES-137, gimbal resonance bug under KES-134 epic). The K-200 airframe wing flutter mode is 8\u20139Hz per DOC-407 loads analysis. At resonance the camera image jitter exceeded \u00b14\u00b0 peak-to-peak \u2014 far outside the \u00b10.5\u00b0 requirement in DOC-449 (Payload ICD). Active electronic stabilisation in SRC-021 (gimbal_driver.py) cannot compensate for structural resonance at the same frequency as the control bandwidth limit (Sam Dreher confirmed at WIKI-038).\n\nThe redesigned P-1154 Rev C uses a stiffer CFRP frame with a natural frequency of 24Hz, confirmed by bench test with induced vibration at 8.2Hz achieving \u00b10.08\u00b0 jitter (vs \u00b14\u00b0 for GimbalTech). The SimpleBGC 32-bit controller (P-1158) provides an independent onboard IMU for attitude feedback. The gimbal now covers 3 axes (pitch, roll, yaw) rather than 2 (pitch, roll), providing additional stabilisation margin in banked turns.\n\nImpact:\n- P-1154: Updated to Rev C (new mechanical design, CFRP frame)\n- P-1155, P-1156, P-1157: New GB-Systems motors (previously GimbalTech motors)\n- P-1158: New SimpleBGC 32-bit controller board (previously 8-bit GimbalTech board)\n- DOC-449: Payload System ICD to be updated for P-1158 interface and 3-axis spec\n- SRC-021 (gimbal_driver.py): Updated for P-1158 interface \u2014 Cass Doyle\n- DRW-519: Gimbal Mount Detail drawing to be updated\n- Qualification: Flight test per DOC-449 acceptance criteria required",
+  "structured": {
+    "raised_by": "E07",
+    "raised_date": "2024-06-25",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1154",
+      "P-1155",
+      "P-1156",
+      "P-1157",
+      "P-1158"
+    ],
+    "affected_docs": [
+      "DOC-449"
+    ],
+    "jira_issues": [
+      "KES-134",
+      "KES-137"
+    ],
+    "approver": "E09",
+    "approved_date": "2024-07-02"
+  },
+  "refs": [
+    "P-1154",
+    "P-1155",
+    "P-1156",
+    "P-1157",
+    "P-1158",
+    "DOC-449",
+    "DOC-407",
+    "KES-134",
+    "KES-137",
+    "WIKI-038",
+    "SRC-021",
+    "DRW-519"
+  ]
+}

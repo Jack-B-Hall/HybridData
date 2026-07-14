@@ -1,0 +1,36 @@
+{
+  "id": "SRC-007",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/nav_filter.c \u2014 Nav/GNC",
+  "text": "/* nav_filter.c \u2014 Kestrel K-200 Nav/GNC\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "nav_filter",
+    "language": "C",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/nav_filter.c",
+    "primary_author": "E04",
+    "commit_log": [
+      {
+        "hash": "36c75b0",
+        "author": "E10",
+        "date": "2023-11-04",
+        "message": "Initial nav_filter [KES-004]",
+        "kes_ref": "KES-004"
+      },
+      {
+        "hash": "0c173dd",
+        "author": "E04",
+        "date": "2023-11-10",
+        "message": "Update nav_filter [KES-216]",
+        "kes_ref": "KES-216"
+      }
+    ]
+  },
+  "refs": [
+    "KES-004",
+    "KES-216",
+    "DOC-402",
+    "DOC-416"
+  ]
+}

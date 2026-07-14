@@ -1,0 +1,20 @@
+{
+  "id": "P-1040",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "ESC Mounting Plate",
+  "text": "ESC Mounting Plate. Subsystem: Propulsion. Material: aluminium 6061-T6. Mass: 36g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1040",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6",
+    "mass_g": 36,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-504"
+  ]
+}

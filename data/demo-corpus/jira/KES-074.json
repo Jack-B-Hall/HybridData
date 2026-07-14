@@ -1,0 +1,29 @@
+{
+  "id": "KES-074",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Rowan Ellery. Assignee: Jordan Kim. Status: In Progress. Priority: Low. Created: 2023-06-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E08",
+    "created": "2023-06-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

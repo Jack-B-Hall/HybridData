@@ -1,0 +1,43 @@
+{
+  "id": "ECR-229",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Comms datalink encryption upgrade: AES-256-GCM via P-1127 FPGA, radio P-1125\u2192P-1126",
+  "text": "Engineering Change Request ECR-229.\n\nRaised by: Priya Nair (Comms/Datalink Engineer), 2025-01-29.\nStatus: Approved. Approved by: Felix Herrera (Systems Integration), 2025-02-05.\n\nSummary: Add AES-256-GCM hardware encryption module (P-1127 FPGA) to the datalink, and upgrade the radio from P-1125 (FreeWave 500kbps) to P-1126 (FreeWave 2Mbps dual-band) to accommodate the bandwidth overhead.\n\nRationale: A penetration test conducted in December 2024 (report MD-SEC-2024-11) found that the K-200 command and telemetry link was vulnerable to command injection \u2014 an attacker with a compatible FreeWave radio could inject spoofed command packets. The customer's security addendum (contract KES-203) requires AES-256-GCM end-to-end encryption on all command and telemetry traffic by programme milestone M4 (March 2025). This was agreed at WIKI-071 (Comms Encryption Upgrade Review, 2025-01-22).\n\nArchitecture (from WIKI-071): The P-1127 FPGA module (Lattice iCE40, implementing AES-256-GCM in hardware) sits between the datalink controller (P-1121) and the radio (P-1125/P-1126). Session keys are derived via ECDH on each power cycle, with key rotation every 60 minutes. The AES-256-GCM 16-byte auth tag and protocol overhead add approximately 3% throughput overhead. At 500kbps (P-1125) this is marginal; the P-1126 at 2Mbps provides sufficient headroom for full telemetry at 200ms update rate.\n\nImpact:\n- P-1125: Obsoleted, replaced by P-1126\n- P-1127: New part (FPGA encryption module), added to BOM\n- P-1121: Datalink controller board \u2014 compatible SPI interface confirmed\n- SRC-018 (encryption_handler.c): Implementation complete, unit tests passing\n- SRC-024 (gcs_ui_backend.py): Protocol stack update required for encrypted sessions \u2014 Jordan Kim\n- DOC-471: Comms System ICD to Rev C (new encryption framing)\n- DOC-472: Comms Protocol Specification to Rev B\n- DRW-531: Enhanced antenna mount drawing to be updated for P-1126 dimensions\n- P-1167: GCS Radio Unit \u2014 must be swapped to FreeWave GXM unit paired to P-1126\n- GCS antenna mounts (P-1165, P-1166): No change",
+  "structured": {
+    "raised_by": "E05",
+    "raised_date": "2025-01-29",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1125",
+      "P-1126",
+      "P-1127",
+      "P-1167"
+    ],
+    "affected_docs": [
+      "DOC-471",
+      "DOC-472"
+    ],
+    "jira_issues": [
+      "KES-201",
+      "KES-203"
+    ],
+    "approver": "E09",
+    "approved_date": "2025-02-05"
+  },
+  "refs": [
+    "P-1125",
+    "P-1126",
+    "P-1127",
+    "P-1121",
+    "P-1167",
+    "DOC-471",
+    "DOC-472",
+    "KES-201",
+    "KES-203",
+    "WIKI-071",
+    "SRC-018",
+    "SRC-024",
+    "DRW-531"
+  ]
+}

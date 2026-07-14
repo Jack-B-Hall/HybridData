@@ -1,0 +1,18 @@
+{
+  "id": "P-1083",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Bay Fan",
+  "text": "Battery Bay Fan. Subsystem: Battery. Material: axial 40mm 5V brushless. Mass: 18g. Manufactured by SanyoDenki. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1083",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "axial 40mm 5V brushless",
+    "mass_g": 18,
+    "manufacturer": "SanyoDenki",
+    "parent_id": null
+  },
+  "refs": []
+}

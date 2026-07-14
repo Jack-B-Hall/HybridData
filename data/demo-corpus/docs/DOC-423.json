@@ -1,0 +1,23 @@
+{
+  "id": "DOC-423",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Environmental Test Report",
+  "text": "# K-200 Airframe Environmental Test Report\n\nDocument number: MD-DOC-423-C. Revision: C. Type: risk-register. Author: Lena Okafor. Created: 2025-02-23. Last modified: 2026-02-22. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1077, P-1009.",
+  "structured": {
+    "doc_number": "MD-DOC-423-C",
+    "revision": "C",
+    "doc_type": "risk-register",
+    "author": "E03",
+    "created": "2025-02-23",
+    "last_modified": "2026-02-22",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1077",
+    "P-1009",
+    "ECR-206",
+    "ECR-229"
+  ]
+}

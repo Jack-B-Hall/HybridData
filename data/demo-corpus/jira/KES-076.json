@@ -1,0 +1,29 @@
+{
+  "id": "KES-076",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate test coverage matrix",
+  "text": "Story: Validate test coverage matrix. Reporter: Aisha Mbeki. Assignee: Aisha Mbeki. Status: In Progress. Priority: Low. Created: 2025-06-30.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E10",
+    "assignee": "E10",
+    "created": "2025-06-30",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

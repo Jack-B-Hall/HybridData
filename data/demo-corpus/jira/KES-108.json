@@ -1,0 +1,29 @@
+{
+  "id": "KES-108",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate interface control document",
+  "text": "Story: Integrate interface control document. Reporter: Tyler Moss. Assignee: Aisha Mbeki. Status: Open. Priority: Medium. Created: 2025-03-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E10",
+    "created": "2025-03-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "KES-011"
+  ]
+}

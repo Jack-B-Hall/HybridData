@@ -1,0 +1,20 @@
+{
+  "id": "P-1130",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Antenna Connector SMA (x4)",
+  "text": "Antenna Connector SMA (x4). Subsystem: Comms/Datalink. Material: SMA female, gold, IP67. Mass: 16g. Manufactured by Amphenol. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1130",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "SMA female, gold, IP67",
+    "mass_g": 16,
+    "manufacturer": "Amphenol",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-520"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1102",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Antenna Mount",
+  "text": "GPS Antenna Mount. Subsystem: Nav/GNC. Material: CFRP, top-deck mounting. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1102",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "CFRP, top-deck mounting",
+    "mass_g": 18,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-513",
+    "DRW-534"
+  ]
+}

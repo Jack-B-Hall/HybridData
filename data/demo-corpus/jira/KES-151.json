@@ -1,0 +1,30 @@
+{
+  "id": "KES-151",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Priya Nair. Assignee: Dev Patel. Status: Open. Priority: High. Created: 2023-09-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E11",
+    "created": "2023-09-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-009",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-076",
+    "KES-009"
+  ]
+}

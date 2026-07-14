@@ -1,0 +1,25 @@
+{
+  "id": "DOC-404",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Acceptance Test Procedure",
+  "text": "# K-200 Integration Acceptance Test Procedure\n\nDocument number: MD-DOC-404-A. Revision: A. Type: procedure. Author: Priya Nair. Created: 2023-10-17. Last modified: 2024-02-02. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1097, P-1019, P-1115, P-1154.",
+  "structured": {
+    "doc_number": "MD-DOC-404-A",
+    "revision": "A",
+    "doc_type": "procedure",
+    "author": "E05",
+    "created": "2023-10-17",
+    "last_modified": "2024-02-02",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1097",
+    "P-1019",
+    "P-1115",
+    "P-1154",
+    "ECR-235",
+    "ECR-233"
+  ]
+}

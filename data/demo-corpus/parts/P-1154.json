@@ -1,0 +1,21 @@
+{
+  "id": "P-1154",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Camera Gimbal Assembly",
+  "text": "Camera Gimbal Assembly. Subsystem: Payload. Material: 3-axis brushless, \u00b130\u00b0 all axes, 0.01\u00b0 stability. Mass: 215g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1154",
+    "revision": "C",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "3-axis brushless, \u00b130\u00b0 all axes, 0.01\u00b0 stability",
+    "mass_g": 215,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-508",
+    "DRW-514"
+  ]
+}

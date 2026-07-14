@@ -1,0 +1,25 @@
+{
+  "id": "DOC-473",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Interface Control Document",
+  "text": "# K-200 Payload Interface Control Document\n\nDocument number: MD-DOC-473-H. Revision: H. Type: ICD. Author: Tyler Moss. Created: 2024-02-03. Last modified: 2024-11-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1089, P-1145, P-1129, P-1083.",
+  "structured": {
+    "doc_number": "MD-DOC-473-H",
+    "revision": "H",
+    "doc_type": "ICD",
+    "author": "E14",
+    "created": "2024-02-03",
+    "last_modified": "2024-11-04",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1089",
+    "P-1145",
+    "P-1129",
+    "P-1083",
+    "ECR-202",
+    "KES-057"
+  ]
+}

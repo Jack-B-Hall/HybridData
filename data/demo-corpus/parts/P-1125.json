@@ -1,0 +1,20 @@
+{
+  "id": "P-1125",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Radio Transceiver \u2014 Original",
+  "text": "Radio Transceiver \u2014 Original. Subsystem: Comms/Datalink. Material: 900MHz FHSS 500kbps 1W. Mass: 125g. Manufactured by FreeWave Tech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1125",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "900MHz FHSS 500kbps 1W",
+    "mass_g": 125,
+    "manufacturer": "FreeWave Tech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-511"
+  ]
+}

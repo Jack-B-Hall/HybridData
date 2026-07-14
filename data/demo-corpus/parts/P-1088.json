@@ -1,0 +1,20 @@
+{
+  "id": "P-1088",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Cell Spacer (x12)",
+  "text": "Battery Cell Spacer (x12). Subsystem: Battery. Material: expanded polypropylene. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1088",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "expanded polypropylene",
+    "mass_g": 28,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061"
+  ]
+}

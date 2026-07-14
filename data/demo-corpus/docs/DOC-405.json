@@ -1,0 +1,20 @@
+{
+  "id": "DOC-405",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Risk Register",
+  "text": "# K-200 Airframe Risk Register\n\nDocument number: MD-DOC-405-A. Revision: A. Type: analysis. Author: Tyler Moss. Created: 2024-04-04. Last modified: 2025-02-06. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1093.",
+  "structured": {
+    "doc_number": "MD-DOC-405-A",
+    "revision": "A",
+    "doc_type": "analysis",
+    "author": "E14",
+    "created": "2024-04-04",
+    "last_modified": "2025-02-06",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1093"
+  ]
+}

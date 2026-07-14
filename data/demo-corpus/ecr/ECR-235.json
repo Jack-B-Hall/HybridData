@@ -1,0 +1,36 @@
+{
+  "id": "ECR-235",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Airframe \u2014 update P-1142 per KES-107",
+  "text": "Engineering Change Request ECR-235. Subsystem: Airframe. Affected parts: P-1142, P-1150, P-1149. Linked issues: KES-107, KES-076, KES-040. Raised by: Priya Nair on 2025-03-29. Status: Approved.",
+  "structured": {
+    "raised_by": "E05",
+    "raised_date": "2025-03-29",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1142",
+      "P-1150",
+      "P-1149"
+    ],
+    "affected_docs": [
+      "DOC-443"
+    ],
+    "jira_issues": [
+      "KES-107",
+      "KES-076",
+      "KES-040"
+    ],
+    "approver": "E05",
+    "approved_date": "2025-04-27"
+  },
+  "refs": [
+    "P-1142",
+    "P-1150",
+    "P-1149",
+    "KES-107",
+    "KES-076",
+    "KES-040",
+    "DOC-443"
+  ]
+}

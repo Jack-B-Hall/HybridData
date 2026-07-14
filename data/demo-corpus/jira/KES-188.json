@@ -1,0 +1,30 @@
+{
+  "id": "KES-188",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate interface control document",
+  "text": "Story: Integrate interface control document. Reporter: Sam Dreher. Assignee: Lena Okafor. Status: Open. Priority: Low. Created: 2025-08-14.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E03",
+    "created": "2025-08-14",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-406",
+    "KES-006"
+  ]
+}

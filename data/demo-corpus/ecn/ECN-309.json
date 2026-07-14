@@ -1,0 +1,23 @@
+{
+  "id": "ECN-309",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-209",
+  "text": "Engineering Change Notice ECN-309. Implements ECR-209. Approved by Lena Okafor on 2024-09-18. Affected parts: P-1062. Updated documents: DOC-480.",
+  "structured": {
+    "ecr_id": "ECR-209",
+    "approved_by": "E03",
+    "approved_date": "2024-09-18",
+    "affected_parts": [
+      "P-1062"
+    ],
+    "affected_docs": [
+      "DOC-480"
+    ]
+  },
+  "refs": [
+    "ECR-209",
+    "P-1062",
+    "DOC-480"
+  ]
+}

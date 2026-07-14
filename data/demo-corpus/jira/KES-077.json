@@ -1,0 +1,29 @@
+{
+  "id": "KES-077",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Gimbal jitter on attitude manoeuvre",
+  "text": "Bug: Gimbal jitter on attitude manoeuvre. Reporter: Tobias Wren. Assignee: Aisha Mbeki. Status: Open. Priority: High. Created: 2024-06-02.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E10",
+    "created": "2024-06-02",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "KES-003"
+  ]
+}

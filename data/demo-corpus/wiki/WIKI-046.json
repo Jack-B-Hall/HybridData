@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-046",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: Propulsion Milestone 2",
+  "text": "# Action Items: Propulsion Milestone 2\n\n**Attendees:** Nina Schulz, Rowan Ellery, Tobias Wren, Aisha Mbeki\n\n## Summary\n\nThis page covers the mission planning workflow for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tobias Wren on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2024-09-09",
+    "last_modified": "2024-09-10",
+    "last_modified_by": "E06"
+  },
+  "refs": [
+    "ECR-203",
+    "DOC-477",
+    "DOC-407"
+  ]
+}

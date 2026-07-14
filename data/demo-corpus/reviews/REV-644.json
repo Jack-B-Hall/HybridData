@@ -1,0 +1,26 @@
+{
+  "id": "REV-644",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-415: REV-644",
+  "text": "# Review Record REV-644\n\nDocument: DOC-415. Reviewer: Rowan Ellery. Date: 2024-05-07. Overall disposition: Approved.\n\n## Comments\n\n**C01** (Felix Herrera): Section 8.5: The specification should clarify the interface requirement for DOC-415. Recommend updating the acceptance criteria table. \u2014 *Noted*",
+  "structured": {
+    "doc_ref": "DOC-415",
+    "reviewer": "E13",
+    "review_date": "2024-05-07",
+    "status": "Closed",
+    "overall_disposition": "Approved",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E09",
+        "text": "Section 8.5: The specification should clarify the interface requirement for DOC-415. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-415"
+  ]
+}

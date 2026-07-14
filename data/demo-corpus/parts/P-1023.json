@@ -1,0 +1,21 @@
+{
+  "id": "P-1023",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Antenna Fairing \u2014 Starboard",
+  "text": "Antenna Fairing \u2014 Starboard. Subsystem: Airframe. Material: fibreglass. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1023",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "fibreglass",
+    "mass_g": 22,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-518"
+  ]
+}

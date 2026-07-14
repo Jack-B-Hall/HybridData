@@ -1,0 +1,29 @@
+{
+  "id": "KES-073",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Rowan Ellery. Assignee: Nina Schulz. Status: Done. Priority: Medium. Created: 2023-09-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E13",
+    "assignee": "E12",
+    "created": "2023-09-24",
+    "resolved": "2024-01-13",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

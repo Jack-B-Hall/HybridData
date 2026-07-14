@@ -1,0 +1,18 @@
+{
+  "id": "P-1045",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Thermal Pad \u2014 ESC (set of 4)",
+  "text": "Thermal Pad \u2014 ESC (set of 4). Subsystem: Propulsion. Material: graphite, 1mm. Mass: 12g. Manufactured by ThermalTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1045",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "graphite, 1mm",
+    "mass_g": 12,
+    "manufacturer": "ThermalTech",
+    "parent_id": null
+  },
+  "refs": []
+}

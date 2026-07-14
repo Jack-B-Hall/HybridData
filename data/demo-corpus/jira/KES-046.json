@@ -1,0 +1,29 @@
+{
+  "id": "KES-046",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Sam Dreher. Assignee: Felix Herrera. Status: Done. Priority: Medium. Created: 2023-03-11.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E09",
+    "created": "2023-03-11",
+    "resolved": "2023-04-12",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "KES-006"
+  ]
+}

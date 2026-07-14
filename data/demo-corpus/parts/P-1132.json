@@ -1,0 +1,20 @@
+{
+  "id": "P-1132",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Antenna Cable \u2014 Starboard",
+  "text": "Antenna Cable \u2014 Starboard. Subsystem: Comms/Datalink. Material: SMA-SMA LMR200, 300mm. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1132",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "SMA-SMA LMR200, 300mm",
+    "mass_g": 22,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-520"
+  ]
+}

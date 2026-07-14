@@ -1,0 +1,28 @@
+{
+  "id": "DRW-508",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-508: Payload Bay Integration",
+  "text": "Drawing MD-DRW-508 Rev C \u2014 Payload Bay Integration\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1147, P-1148, P-1149, P-1154.\n4. Drawn by Cass Doyle, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-508",
+    "revision": "C",
+    "drawn_by": "E07",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-10-10",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1147",
+      "P-1148",
+      "P-1149",
+      "P-1154"
+    ]
+  },
+  "refs": [
+    "P-1147",
+    "P-1148",
+    "P-1149",
+    "P-1154"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "DOC-462",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Sonar System Interface Control Document v2.0",
+  "text": "# K-200 Sonar System Interface Control Document\n\nDocument number: MD-DOC-462-B. Revision: B. Type: ICD. Author: Cass Doyle. Created: 2023-08-01. Last modified: 2024-10-15. Status: Released.\n\n## Change History\n- Rev A: Initial sonar ICD for DepthWave transducer (2023-08-01)\n- Rev B: Updated for AquaSound Corp transducer (P-1148 Rev B) per ECN-315 / ECR-218 (2024-10-15)\n\n## \u00a72 Transducer \u2014 P-1148 Rev B (AquaSound Corp)\n\nSupplier: AquaSound Corp. Frequency range: 100\u2013400kHz broadband. Centre frequency: 200kHz. Frequency stability: \u00b11.5kHz over operating temperature (-10\u00b0C to +50\u00b0C). Depth rating: 30m. Connector: IP68 Subconn circular. DNV-GL certified.\n\nThe original DepthWave supplier was replaced after KES-158 (frequency drift bug) documented 16kHz drift over thermal soak. Vendor selection rationale: WIKI-045 (Sonar Vendor Selection Meeting, 2024-08-29). Change authority: ECN-315.\n\n## \u00a76 Sonar Mounting\n\n### \u00a76.1 Mounting Bracket\n\nSonar transducer P-1148 is mounted on bracket P-1149 (Sonar Mounting Bracket, aluminium 6061-T6). See DRW-517 for full mounting drawing.\n\n### \u00a76.2 Cant Angle \u2014 Critical Design Parameter\n\nThe sonar mounting bracket (P-1149) positions the transducer at a 7\u00b0 downward cant relative to the drone belly axis. This angle is a critical design parameter. The transducer acoustic near-field null zone extends approximately 0.45m from the transducer face. At 0\u00b0 cant, this null zone coincides with the minimum operational depth of 0.5m. The 7\u00b0 cant shifts the null zone to approximately 1.2m depth, clearing the operational envelope. This was validated during November 2024 pool testing (KES-156) and documented by Cass Doyle in REV-641 (review of DRW-517). The cant angle is fixed in hardware (P-1149 bracket geometry) \u2014 if this angle is changed, the sonar performance model must be re-validated and new pool tests conducted.\n\n## \u00a77 Signal Processing\n\nSonar signal processor: P-1147. Driver firmware: SRC-011 (sonar_driver.c). DSP filter centre: 200kHz \u00b12kHz (tightened from \u00b120kHz in Rev A to match AquaSound stability).",
+  "structured": {
+    "doc_number": "MD-DOC-462-B",
+    "revision": "B",
+    "doc_type": "ICD",
+    "author": "E07",
+    "created": "2023-08-01",
+    "last_modified": "2024-10-15",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1148",
+    "P-1149",
+    "P-1147",
+    "SRC-011",
+    "ECR-218",
+    "ECN-315",
+    "KES-156",
+    "KES-158",
+    "WIKI-045",
+    "DRW-517",
+    "REV-641"
+  ]
+}

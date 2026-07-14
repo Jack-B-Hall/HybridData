@@ -1,0 +1,23 @@
+{
+  "id": "ECN-324",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-224",
+  "text": "Engineering Change Notice ECN-324. Implements ECR-224. Approved by Tobias Wren on 2025-06-26. Affected parts: P-1019. Updated documents: DOC-435.",
+  "structured": {
+    "ecr_id": "ECR-224",
+    "approved_by": "E06",
+    "approved_date": "2025-06-26",
+    "affected_parts": [
+      "P-1019"
+    ],
+    "affected_docs": [
+      "DOC-435"
+    ]
+  },
+  "refs": [
+    "ECR-224",
+    "P-1019",
+    "DOC-435"
+  ]
+}

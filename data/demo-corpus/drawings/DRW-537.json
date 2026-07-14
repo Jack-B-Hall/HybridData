@@ -1,0 +1,26 @@
+{
+  "id": "DRW-537",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-537: Camera Harness Routing",
+  "text": "Drawing MD-DRW-537 Rev B \u2014 Camera Harness Routing\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1152, P-1161, P-1162.\n4. Drawn by Cass Doyle, checked by Rowan Ellery, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-537",
+    "revision": "B",
+    "drawn_by": "E07",
+    "checked_by": "E13",
+    "approved_by": "E09",
+    "date": "2025-08-03",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1152",
+      "P-1161",
+      "P-1162"
+    ]
+  },
+  "refs": [
+    "P-1152",
+    "P-1161",
+    "P-1162"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-038",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Jordan Kim. Assignee: Tobias Wren. Status: In Progress. Priority: Medium. Created: 2023-12-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E06",
+    "created": "2023-12-09",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

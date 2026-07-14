@@ -1,0 +1,24 @@
+{
+  "id": "WIKI-045",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Sonar Vendor Selection Meeting \u2014 2024-08-29",
+  "text": "# Sonar Vendor Selection Meeting \u2014 2024-08-29\n\n**Space:** K200  \n**Meeting type:** Supplier Selection Review  \n**Attendees:** Cass Doyle (Payload), Felix Herrera (Integration), Aisha Mbeki (Test), Dr. Rhea Voss (CSE), Nina Schulz (Quality)  \n**Chair:** Cass Doyle  \n**Minutes recorded by:** Nina Schulz\n\n---\n\n## Background\n\nThe original sonar transducer supplier (DepthWave Systems) was selected at programme start in 2023 and supplied the initial P-1148 specification. During the first sonar integration test series (KES-156), the DepthWave unit exhibited unacceptable frequency drift: the centre frequency shifted from the specified 200kHz to 184kHz over a 2-hour thermal soak at 35\u00b0C. This was documented in KES-158 (frequency drift bug). The sonar signal processor (P-1147) and its firmware were tuned to a 200kHz centre frequency and cannot compensate for a 16kHz drift without firmware rework and re-qualification.\n\nThe engineering team evaluated two alternative suppliers: AquaSound Corp and MarineSpec Ltd.\n\n## Supplier Evaluation Summary\n\n| Criterion | DepthWave (original) | AquaSound Corp | MarineSpec Ltd |\n|---|---|---|---|\n| Centre frequency stability | \u00b116kHz over temp (FAIL) | \u00b11.5kHz over temp | \u00b13kHz over temp |\n| Broadband range | 100\u2013300kHz | 100\u2013400kHz | 120\u2013350kHz |\n| Depth rating | 20m | 30m | 25m |\n| Lead time | 6 weeks | 10 weeks | 8 weeks |\n| IP68 connector | No | Yes | Yes |\n| Price per unit | $2,100 AUD | $3,400 AUD | $2,900 AUD |\n| Existing qualification data | None | ITAR-free, DNV-GL cert | None |\n\n## Discussion\n\nCass Doyle recommended AquaSound Corp. The broader frequency range (100\u2013400kHz) is a bonus for future multi-frequency operation. The DNV-GL certification significantly reduces the qualification test burden. The 10-week lead time is manageable if ECR-218 is raised immediately.\n\nDr. Voss approved the selection subject to Cass Doyle confirming the O-ring flange dimensions match P-1149 mounting bracket (DRW-517) \u2014 confirmed in the meeting.\n\nNina Schulz noted that the sonar mounting bracket (P-1149, DRW-517) and the sonar ICD (DOC-462) will both need updating for the AquaSound interface.\n\n## Decision\n\n**AGREED:** Change sonar transducer from DepthWave to AquaSound Corp (P-1148 Rev B).\n\n- Decision maker: Cass Doyle (payload lead), approved by Dr. Rhea Voss (CSE)\n- Rationale: DepthWave frequency drift (KES-158) cannot be tolerated; AquaSound has superior stability, broader bandwidth, and DNV-GL qualification data\n- ECR to be raised: ECR-218 (Cass Doyle)\n- Documents to update: DOC-462 (Sonar ICD), DRW-517 (mounting drawing \u2014 O-ring interface check complete)\n- Firmware: SRC-011 sonar_driver.c DSP filter tuning to be updated by Cass Doyle\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-218 for sonar vendor change | Cass Doyle | 2024-09-05 |\n| A2 | Order 3 AquaSound P-1148 units for qualification | Cass Doyle | 2024-09-10 |\n| A3 | Update DOC-462 Sonar ICD for AquaSound interface | Cass Doyle | 2024-10-15 |\n| A4 | Update SRC-011 DSP filter for AquaSound frequency response | Cass Doyle | 2024-10-30 |\n| A5 | Update DRW-517 drawing notes (confirmed compatible) | Tobias Wren | 2024-09-20 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2024-08-29",
+    "last_modified": "2024-08-30",
+    "last_modified_by": "E12"
+  },
+  "refs": [
+    "KES-156",
+    "KES-158",
+    "ECR-218",
+    "DOC-462",
+    "DRW-517",
+    "P-1148",
+    "P-1149",
+    "SRC-011"
+  ]
+}

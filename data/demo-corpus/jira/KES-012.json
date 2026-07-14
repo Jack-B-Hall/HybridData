@@ -1,0 +1,24 @@
+{
+  "id": "KES-012",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Thermal management validation",
+  "text": "Epic: Thermal management validation. Reporter: Priya Nair. Assignee: Marcus Thaine. Status: Done. Priority: High. Created: 2024-10-27.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E02",
+    "created": "2024-10-27",
+    "resolved": "2024-12-27",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-473"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ECN-327",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-227",
+  "text": "Engineering Change Notice ECN-327. Implements ECR-227. Approved by Lena Okafor on 2023-10-09. Affected parts: P-1115, P-1143. Updated documents: DOC-414, DOC-404.",
+  "structured": {
+    "ecr_id": "ECR-227",
+    "approved_by": "E03",
+    "approved_date": "2023-10-09",
+    "affected_parts": [
+      "P-1115",
+      "P-1143"
+    ],
+    "affected_docs": [
+      "DOC-414",
+      "DOC-404"
+    ]
+  },
+  "refs": [
+    "ECR-227",
+    "P-1115",
+    "P-1143",
+    "DOC-414",
+    "DOC-404"
+  ]
+}

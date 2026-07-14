@@ -1,0 +1,29 @@
+{
+  "id": "KES-081",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Lena Okafor. Assignee: Tobias Wren. Status: Open. Priority: High. Created: 2024-04-17.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E06",
+    "created": "2024-04-17",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

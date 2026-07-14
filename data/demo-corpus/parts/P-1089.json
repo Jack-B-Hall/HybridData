@@ -1,0 +1,20 @@
+{
+  "id": "P-1089",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Pressure Relief Valve",
+  "text": "Pressure Relief Valve. Subsystem: Battery. Material: spring-loaded, 1.5 bar, IP67. Mass: 9g. Manufactured by ReliefsRUS. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1089",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "spring-loaded, 1.5 bar, IP67",
+    "mass_g": 9,
+    "manufacturer": "ReliefsRUS",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-033",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Marcus Thaine. Assignee: Marcus Thaine. Status: Done. Priority: Low. Created: 2025-09-22.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E02",
+    "assignee": "E02",
+    "created": "2025-09-22",
+    "resolved": "2025-12-05",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "KES-011"
+  ]
+}

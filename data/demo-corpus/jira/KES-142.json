@@ -1,0 +1,29 @@
+{
+  "id": "KES-142",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify ICD rev B",
+  "text": "Story: Verify ICD rev B. Reporter: Jordan Kim. Assignee: Rowan Ellery. Status: Done. Priority: High. Created: 2024-06-25.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E13",
+    "created": "2024-06-25",
+    "resolved": "2024-08-21",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

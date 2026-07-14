@@ -1,0 +1,23 @@
+{
+  "id": "ECN-304",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-204",
+  "text": "Engineering Change Notice ECN-304. Implements ECR-204. Approved by Marcus Thaine on 2025-08-07. Affected parts: P-1172. Updated documents: DOC-401.",
+  "structured": {
+    "ecr_id": "ECR-204",
+    "approved_by": "E02",
+    "approved_date": "2025-08-07",
+    "affected_parts": [
+      "P-1172"
+    ],
+    "affected_docs": [
+      "DOC-401"
+    ]
+  },
+  "refs": [
+    "ECR-204",
+    "P-1172",
+    "DOC-401"
+  ]
+}

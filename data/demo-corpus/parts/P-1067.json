@@ -1,0 +1,22 @@
+{
+  "id": "P-1067",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Mounting Bracket",
+  "text": "Battery Mounting Bracket. Subsystem: Battery. Material: aluminium 6061-T6. Mass: 68g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1067",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6",
+    "mass_g": 68,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-503",
+    "DRW-521"
+  ]
+}

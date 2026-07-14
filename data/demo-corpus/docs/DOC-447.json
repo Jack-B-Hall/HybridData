@@ -1,0 +1,21 @@
+{
+  "id": "DOC-447",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Environmental Test Report",
+  "text": "# K-200 GCS Environmental Test Report\n\nDocument number: MD-DOC-447-E. Revision: E. Type: risk-register. Author: Priya Nair. Created: 2023-04-01. Last modified: 2023-09-03. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1112.",
+  "structured": {
+    "doc_number": "MD-DOC-447-E",
+    "revision": "E",
+    "doc_type": "risk-register",
+    "author": "E05",
+    "created": "2023-04-01",
+    "last_modified": "2023-09-03",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1112",
+    "ECR-220"
+  ]
+}

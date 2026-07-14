@@ -1,0 +1,21 @@
+{
+  "id": "DOC-438",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Maintenance Procedure",
+  "text": "# K-200 GCS Maintenance Procedure\n\nDocument number: MD-DOC-438-D. Revision: D. Type: manual. Author: Tyler Moss. Created: 2023-09-07. Last modified: 2024-08-23. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1106, P-1158.",
+  "structured": {
+    "doc_number": "MD-DOC-438-D",
+    "revision": "D",
+    "doc_type": "manual",
+    "author": "E14",
+    "created": "2023-09-07",
+    "last_modified": "2024-08-23",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1106",
+    "P-1158"
+  ]
+}

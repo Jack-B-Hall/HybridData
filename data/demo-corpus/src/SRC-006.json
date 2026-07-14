@@ -1,0 +1,60 @@
+{
+  "id": "SRC-006",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/gnc_common.py \u2014 Nav/GNC",
+  "text": "# gnc_common.py \u2014 Kestrel K-200 Nav/GNC\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gnc_common",
+    "language": "Python",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/gnc_common.py",
+    "primary_author": "E04",
+    "commit_log": [
+      {
+        "hash": "ef70643",
+        "author": "E14",
+        "date": "2024-01-23",
+        "message": "Initial gnc_common [KES-003]",
+        "kes_ref": "KES-003"
+      },
+      {
+        "hash": "3e63bad",
+        "author": "E08",
+        "date": "2024-01-24",
+        "message": "Update gnc_common [KES-141]",
+        "kes_ref": "KES-141"
+      },
+      {
+        "hash": "63ceca4",
+        "author": "E03",
+        "date": "2024-02-08",
+        "message": "Update gnc_common [KES-068]",
+        "kes_ref": "KES-068"
+      },
+      {
+        "hash": "6d24a94",
+        "author": "E06",
+        "date": "2024-03-27",
+        "message": "Update gnc_common [KES-137]",
+        "kes_ref": "KES-137"
+      },
+      {
+        "hash": "52f0f42",
+        "author": "E05",
+        "date": "2024-05-06",
+        "message": "Update gnc_common [KES-126]",
+        "kes_ref": "KES-126"
+      }
+    ]
+  },
+  "refs": [
+    "KES-003",
+    "KES-141",
+    "KES-068",
+    "KES-137",
+    "KES-126",
+    "DOC-457",
+    "DOC-402"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1032",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "ESC 60A Original",
+  "text": "ESC 60A Original. Subsystem: Propulsion. Material: MOSFET, aluminium heatsink. Mass: 95g. Manufactured by ControlAir Ltd. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1032",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "MOSFET, aluminium heatsink",
+    "mass_g": 95,
+    "manufacturer": "ControlAir Ltd",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-504"
+  ]
+}

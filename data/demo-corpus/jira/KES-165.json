@@ -1,0 +1,30 @@
+{
+  "id": "KES-165",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Tyler Moss. Assignee: Lena Okafor. Status: Open. Priority: Medium. Created: 2025-11-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E03",
+    "created": "2025-11-18",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-057",
+    "KES-011"
+  ]
+}

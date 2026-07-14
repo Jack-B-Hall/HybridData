@@ -1,0 +1,31 @@
+{
+  "id": "KES-145",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Jordan Kim. Assignee: Lena Okafor. Status: In Progress. Priority: Low. Created: 2025-11-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E08",
+    "assignee": "E03",
+    "created": "2025-11-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-429",
+    "DOC-414",
+    "KES-010"
+  ]
+}

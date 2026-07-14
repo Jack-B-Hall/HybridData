@@ -1,0 +1,26 @@
+{
+  "id": "DRW-518",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-518: Nose Cone Assembly",
+  "text": "Drawing MD-DRW-518 Rev C \u2014 Nose Cone Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1004, P-1022, P-1023.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-518",
+    "revision": "C",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-04-22",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1004",
+      "P-1022",
+      "P-1023"
+    ]
+  },
+  "refs": [
+    "P-1004",
+    "P-1022",
+    "P-1023"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-055",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Priya Nair. Assignee: Felix Herrera. Status: Done. Priority: High. Created: 2024-11-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E09",
+    "created": "2024-11-09",
+    "resolved": "2025-01-17",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

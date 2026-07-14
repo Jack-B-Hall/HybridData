@@ -1,0 +1,18 @@
+{
+  "id": "P-1139",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Radio Wiring Harness",
+  "text": "Radio Wiring Harness. Subsystem: Comms/Datalink. Material: JST-GH 6-pin, 250mm. Mass: 16g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1139",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "JST-GH 6-pin, 250mm",
+    "mass_g": 16,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

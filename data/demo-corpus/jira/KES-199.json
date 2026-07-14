@@ -1,0 +1,29 @@
+{
+  "id": "KES-199",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Priya Nair. Assignee: Nina Schulz. Status: In Progress. Priority: High. Created: 2024-08-26.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E12",
+    "created": "2024-08-26",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "KES-015"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ECN-301",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Configuration Baseline \u2014 K-200 System Architecture v1.0 (per DOC-401)",
+  "text": "Engineering Change Notice ECN-301. Programme configuration baseline.\nApproved by: Dr. Rhea Voss, 2023-04-15.\n\nThis ECN formally establishes the K-200 System Architecture configuration baseline as defined in DOC-401 (System Architecture Document v1.0).\n\nKey baseline parameters:\n1. Autonomy level: SAE Level 3 conditional automation (per customer RFT-K200-002 requirement, recorded in WIKI-003 kick-off meeting and REV-631 review comments)\n2. MTOW: 8kg\n3. Endurance target: 60 minutes minimum at cruise\n4. Battery chemistry baseline: LiPo (subject to thermal risk note in WIKI-003) \u2014 subsequently changed by ECN-312\n5. Propulsion: quad-pusher, 4x motors (subsequently P-1031, changed by ECN-318 to P-1041)\n6. Comms: 900MHz FHSS, 15km range (P-1125, subsequently upgraded by ECN-322 to P-1126 with encryption)\n7. GNC: single-string FCU (P-1091), BVLOS open-water operations only\n8. Redundancy: hardware fail-safe RTL if datalink lost >10s\n\nThis baseline is the reference against which all subsequent ECRs and ECNs are compared.",
+  "structured": {
+    "ecr_id": "ECR-201",
+    "approved_by": "E01",
+    "approved_date": "2023-04-15",
+    "affected_parts": [
+      "P-1091",
+      "P-1125"
+    ],
+    "affected_docs": [
+      "DOC-401"
+    ]
+  },
+  "refs": [
+    "DOC-401",
+    "WIKI-003",
+    "REV-631",
+    "KES-001",
+    "P-1091",
+    "P-1125"
+  ]
+}

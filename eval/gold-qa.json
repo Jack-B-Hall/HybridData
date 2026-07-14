@@ -1,0 +1,327 @@
+[
+  {
+    "id": "Q01",
+    "category": "provenance",
+    "question": "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
+    "gold_answer": "The battery chemistry was changed following a LiPo thermal runaway event (KES-208) on 8 September 2023 during a hot-day endurance test. This was the second thermal anomaly on the P-1062 cell assembly. The decision was made at the Battery Chemistry Design Review (WIKI-052, 2023-10-05) by Dr. Rhea Voss, Chief Systems Engineer. The primary drivers were: (1) IEC 62133-2 compliance requirements for BVLOS maritime operations, which the customer's safety case explicitly prohibits with LiPo chemistry due to salt-water submersion risk; and (2) the pattern of two thermal events. The 12% energy density reduction (75 min → 66 min endurance) was acceptable as it remains above the 60-minute minimum. ECR-214 was raised by Lena Okafor and approved via ECN-312.",
+    "required_citation_ids": ["KES-208", "WIKI-052", "ECR-214", "ECN-312"],
+    "trail_id": "T-01"
+  },
+  {
+    "id": "Q02",
+    "category": "provenance",
+    "question": "Who approved ECN-312 (battery chemistry change) and what was the formal rationale recorded in the ECR?",
+    "gold_answer": "ECN-312 was approved by Dr. Rhea Voss on 2023-10-19. ECR-214 (the change request it implements) was raised by Lena Okafor on 2023-10-12. The formal rationale in ECR-214 cites: the thermal runaway event KES-208, the IEC 62133-2 compliance requirement for BVLOS maritime operations, the LiPo salt-water submersion risk, and the acceptable endurance reduction (66 min vs 60 min minimum). The trade study was presented at WIKI-052. LiFePO4 was chosen over LTO because LTO's energy density was too low to meet the 60-minute requirement within the 8kg MTOW.",
+    "required_citation_ids": ["ECR-214", "ECN-312", "WIKI-052"],
+    "trail_id": "T-01"
+  },
+  {
+    "id": "Q03",
+    "category": "provenance",
+    "question": "What events triggered the decision to replace the propulsion motors in ECR-221?",
+    "gold_answer": "Two thermal events in April 2024 triggered ECR-221. KES-187 (2024-04-02): the fwd-port TorqueDrive 4012 490KV motor (P-1031) reached 108°C winding temperature during a 45-minute endurance run at 30°C ambient — 23°C above the rated maximum of 85°C continuous. KES-188 (2024-04-08): repeated ESC overcurrent on fwd-stbd motor due to thermal throttling causing sync loss. Root cause was insufficient stator-to-case thermal conductivity in the 4012 490KV winding design. The motors were selected in 2023 without a hot-day endurance test. An emergency design review was held at WIKI-031 (2024-04-10) where Dr. Voss decided to replace P-1031/P-1032 with P-1041/P-1042.",
+    "required_citation_ids": ["KES-187", "KES-188", "WIKI-031", "ECR-221"],
+    "trail_id": "T-02"
+  },
+  {
+    "id": "Q04",
+    "category": "provenance",
+    "question": "Why was the sonar transducer vendor changed from the original supplier to AquaSound Corp?",
+    "gold_answer": "The original DepthWave Systems transducer exhibited unacceptable frequency drift: its centre frequency shifted from the specified 200kHz to 184kHz — a 16kHz drift — over a 2-hour thermal soak at 35°C (documented as KES-158 during integration testing KES-156). The sonar signal processor (P-1147) DSP filter in SRC-011 is tuned to 200kHz ±2kHz and cannot compensate for a 16kHz drift without a full redesign and re-qualification. The vendor evaluation at WIKI-045 (2024-08-29) selected AquaSound Corp for its ±1.5kHz frequency stability, broader bandwidth (100–400kHz), deeper depth rating (30m), DNV-GL certification, and IP68 connector. ECR-218 was raised by Cass Doyle.",
+    "required_citation_ids": ["KES-156", "KES-158", "WIKI-045", "ECR-218"],
+    "trail_id": "T-04"
+  },
+  {
+    "id": "Q05",
+    "category": "provenance",
+    "question": "What led to the decision to refactor the GCS software architecture (ECR-225)?",
+    "gold_answer": "Three converging problems drove ECR-225. First, the monolithic SRC-001 gcs_main.py grew to 8,400 lines with telemetry, commands, maps, and mission planning in a single synchronous event loop — unmaintainable. Second, integration of the AES-256-GCM encryption stack (P-1127 FPGA, KES-201) caused 800ms–2s UI freezes because the synchronous v1 dispatch blocked the UI thread during hardware encryption operations. Third, the MAVLink protocol was tightly coupled to the UI layer, making DOC-471 Comms ICD Rev C updates very difficult. The design review was at WIKI-058 (2024-10-15). ECR-225 was raised by Jordan Kim, approved by Felix Herrera. The v2 architecture uses an asyncio Python backend (SRC-024) with a WebSocket API to a Vue.js frontend.",
+    "required_citation_ids": ["KES-173", "KES-175", "WIKI-058", "ECR-225", "DOC-479"],
+    "trail_id": "T-07"
+  },
+  {
+    "id": "Q06",
+    "category": "provenance",
+    "question": "In which meeting was the decision to switch to LiFePO4 made, and who made it?",
+    "gold_answer": "The decision was made at the Battery Chemistry Design Review meeting documented in WIKI-052, held on 2023-10-05. Dr. Rhea Voss, Chief Systems Engineer, was the decision maker. The meeting was convened following the LiPo thermal runaway event KES-208. Other attendees included Lena Okafor (Power), Felix Herrera (Integration), Aisha Mbeki (Test), Rowan Ellery (Electrical), and Nina Schulz (Quality).",
+    "required_citation_ids": ["WIKI-052"],
+    "trail_id": "T-01"
+  },
+  {
+    "id": "Q07",
+    "category": "provenance",
+    "question": "What was the technical justification for replacing the IMU module with the ADIS16505-2 (P-1093)?",
+    "gold_answer": "The ICM-42688-P (P-1092 original IMU) had a MEMS resonant frequency of 4.8kHz which coincided with motor vibration harmonics from the P-1041 motors at mid-throttle settings, causing attitude estimation errors up to 2.1° in roll. This violated the 0.5° attitude accuracy requirement in DOC-455 (GNC ICD). The ADIS16505-2 (P-1093) has a resonant frequency of 18kHz — well above the motor harmonic range — and its vibration rectification error is 8x better (0.006 vs 0.05°/s/g²). This was identified in flight test campaign phase 1 (DOC-467) and the decision was made at WIKI-067 (GNC Sensor Suite Design Review, 2024-12-03). ECR-228 was raised by Sam Dreher.",
+    "required_citation_ids": ["DOC-455", "DOC-467", "WIKI-067", "ECR-228", "P-1092", "P-1093"],
+    "trail_id": "T-03"
+  },
+  {
+    "id": "Q08",
+    "category": "provenance",
+    "question": "Why was the comms datalink encryption module added, and what security event triggered it?",
+    "gold_answer": "A penetration test conducted in December 2024 (report MD-SEC-2024-11) found that the K-200's unencrypted FreeWave P-1125 datalink was vulnerable to command injection — an attacker with a compatible radio could inject spoofed command packets. This was escalated as KES-201. The customer's contract security addendum (KES-203) required AES-256-GCM end-to-end encryption on all command and telemetry traffic by programme milestone M4 (March 2025). The encryption architecture was agreed at WIKI-071 (2025-01-22). ECR-229 covered both the P-1127 FPGA encryption module addition and the radio upgrade from P-1125 (500kbps) to P-1126 (2Mbps) to accommodate the encryption overhead.",
+    "required_citation_ids": ["KES-201", "KES-203", "WIKI-071", "ECR-229", "P-1127"],
+    "trail_id": "T-05"
+  },
+  {
+    "id": "Q09",
+    "category": "provenance",
+    "question": "What was the rationale for changing the wing skin material from CFRP to hybrid carbon-aramid composite?",
+    "gold_answer": "The original CFRP (0°/90°) wing skins (P-1008, P-1009) delaminated at the wing root bond line after 12 hours of simulated motor vibration loading during a ground vibration test in June 2023 (KES-045). Material coupon tests in the KES-042 wing skin trade study evaluated three options. The hybrid carbon-aramid composite (CFRP weave + Kevlar® ±45° interlayer) showed no delamination at 100 hours — the interlayer provides crack arrest. The design review was at WIKI-017 (2023-08-22). ECR-207 was raised by Tobias Wren and approved by Dr. Rhea Voss. The +50g mass penalty was acceptable given the 340g system margin.",
+    "required_citation_ids": ["KES-042", "KES-045", "WIKI-017", "ECR-207"],
+    "trail_id": "T-06"
+  },
+  {
+    "id": "Q10",
+    "category": "provenance",
+    "question": "Who raised ECR-228 and what was the technical justification for bundling both the IMU and GPS antenna changes in one ECR?",
+    "gold_answer": "ECR-228 was raised by Sam Dreher (Nav/GNC Software Lead) on 2024-12-10. The two changes were bundled based on Felix Herrera's suggestion at WIKI-067, because both were identified in the same flight test campaign (DOC-467), both were required to achieve the 0.5° attitude accuracy requirement in DOC-455, and both needed the same qualification flight test series. Bundling them in one ECR (ECN-326) simplified the change management and the test campaign. The IMU change (P-1092→P-1093) addressed vibration errors; the GPS antenna change (P-1097→P-1098) addressed sky-view dropouts at roll angles >15°.",
+    "required_citation_ids": ["ECR-228", "WIKI-067", "DOC-455", "DOC-467"],
+    "trail_id": "T-03"
+  },
+  {
+    "id": "Q11",
+    "category": "dependency",
+    "question": "Which source code modules depend on the BMS module P-1075?",
+    "gold_answer": "SRC-003 (bms_monitor.py) is the primary code module that directly interfaces with the BMS module P-1075. It reads BMS state including SOC, cell temperatures, and fault flags, and feeds the power manager. SRC-004 (power_manager.py) depends on SRC-003's output. The BMS SOC limits (18%/82%) implemented in P-1075 hardware are the binding constraint that SRC-003 monitors but cannot override — a design decision explained in REV-623 and WIKI-014.",
+    "required_citation_ids": ["P-1075", "SRC-003"],
+    "trail_id": "T-09"
+  },
+  {
+    "id": "Q12",
+    "category": "dependency",
+    "question": "What documents are impacted by a change to the GPS antenna module P-1097 or P-1098?",
+    "gold_answer": "A change to the GPS antenna module impacts: DOC-456 (GPS Performance Specification — must reflect the antenna's C/N0 performance and frequency band support), DOC-455 (GNC ICD — references the GPS antenna in the sensor interface section), DOC-467 (Flight Test Report — must be re-run after any sensor change to re-validate attitude accuracy), and DRW-534 (GPS Antenna Installation drawing — must be updated for any form-factor change). SRC-009 (gps_driver.c) would also require update if the GPS receiver protocol or L5 band support changes. This is captured in ECN-326 which documents all the updates made when P-1097 was replaced by P-1098.",
+    "required_citation_ids": ["DOC-456", "DOC-455", "DOC-467", "SRC-009", "ECN-326"],
+    "trail_id": "T-22"
+  },
+  {
+    "id": "Q13",
+    "category": "dependency",
+    "question": "What is the dependency chain from the sonar transducer P-1148 to the GCS software?",
+    "gold_answer": "The chain is: P-1148 (sonar transducer, AquaSound Corp, 100–400kHz) → SRC-011 (sonar_driver.c — DSP filter processes transducer output, tuned to 200kHz ±2kHz) → SRC-012 (sonar_pipeline.py — processes sonar returns into depth map) → DOC-462 (Sonar System ICD — defines the data format output from SRC-011 to SRC-012) → GCS: SRC-024 (gcs_ui_backend.py) receives sonar data via the drone telemetry stream. The mounting configuration (P-1149 bracket, 7° cant) is also a critical dependency — documented in DOC-462 §6.2 and REV-641.",
+    "required_citation_ids": ["P-1148", "SRC-011", "DOC-462", "SRC-024"],
+    "trail_id": "T-11"
+  },
+  {
+    "id": "Q14",
+    "category": "dependency",
+    "question": "Which parts, firmware modules, and ICDs reference the motor/ESC controller board P-1044?",
+    "gold_answer": "P-1044 (Motor/ESC Controller Board) interfaces with: the motors P-1041 (4x) via CAN bus, the ESCs P-1042 (4x), the RPM sensors P-1046, the motor thermal sensors P-1047, and the autopilot FCU P-1091 (CAN bus). The firmware in SRC-026 (motor_controller.c) and SRC-027 (esc_driver.c) run on and interface with P-1044. DOC-445 (Motor Qualification Test Report) documents the P-1044 thermal logging that confirmed P-1031 reached 108°C. P-1044 is also referenced in DRW-504 (Propulsion Installation) and DRW-539 (Motor v2 Installation).",
+    "required_citation_ids": ["P-1044", "SRC-026", "DOC-445"],
+    "trail_id": "T-13"
+  },
+  {
+    "id": "Q15",
+    "category": "dependency",
+    "question": "Which source module implements the navigation filter that uses the IMU P-1093, and what does it depend on?",
+    "gold_answer": "SRC-007 (nav_filter.c) implements the EKF navigation filter that fuses data from the IMU (P-1093, via SPI), GPS (P-1094/P-1098), barometer (P-1095), magnetometer (P-1096), and air data computer (P-1101). The filter was updated from the ICM-42688-P SPI interface to the ADIS16505-2 SPI interface (different register map, different output data rate handling) per ECN-326 by Dev Patel. Its performance is specified in DOC-455 (GNC ICD) and validated in DOC-467 (Flight Test Report). SRC-007 is depended upon by SRC-010 (gnc_autopilot.c) and SRC-008 (attitude_estimator.c).",
+    "required_citation_ids": ["SRC-007", "P-1093", "DOC-455", "DOC-467"],
+    "trail_id": "T-10"
+  },
+  {
+    "id": "Q16",
+    "category": "dependency",
+    "question": "Which documents must be updated if the main battery connector P-1064 is changed?",
+    "gold_answer": "A change to P-1064 (Battery Connector Main, currently AS150 gold 150A) would impact: DOC-421 (Battery System Specification — §4 references the connector type and current rating), DOC-431 (BMS Safety Specification — §4.4 references P-1064 for the emergency disconnect procedure and confirms interrupt-under-load capability at 50A), and P-1079 (Battery Wiring Harness — the harness crimp terminations are sized for the AS150 connector). REV-623 comment C03 (Dr. Voss) specifically flagged checking the AS150 interrupt-under-load specification, indicating this is a safety-relevant detail. DRW-515 (Power Distribution Wiring) would also need updating.",
+    "required_citation_ids": ["P-1064", "DOC-421", "DOC-431", "REV-623"],
+    "trail_id": "T-09"
+  },
+  {
+    "id": "Q17",
+    "category": "dependency",
+    "question": "What is the full dependency chain from the radio transceiver P-1125/P-1126 to the GCS software?",
+    "gold_answer": "The chain is: P-1126 (radio transceiver, 2Mbps dual-band) → P-1121 (datalink controller board, SPI bridge) → P-1127 (encryption FPGA module, AES-256-GCM) → SRC-018 (encryption_handler.c, drives the FPGA) → P-1167 (GCS Radio Unit, paired to P-1126) → SRC-024 (gcs_ui_backend.py, asyncio backend that calls SRC-018 via ctypes for session key management). DOC-471 (Comms ICD Rev C) and DOC-472 (Protocol Spec Rev B) define the interface at each layer. The original P-1125 (500kbps) was replaced by P-1126 per ECN-322 to accommodate encryption overhead.",
+    "required_citation_ids": ["P-1126", "P-1127", "SRC-018", "SRC-024", "DOC-471"],
+    "trail_id": "T-12"
+  },
+  {
+    "id": "Q18",
+    "category": "dependency",
+    "question": "Which test documents reference the gimbal controller board P-1158?",
+    "gold_answer": "P-1158 (Gimbal Controller Board, SimpleBGC 32-bit extended) is referenced in: DOC-449 (Payload System ICD Rev B — §3 specifies the P-1158 serial interface and provides the ±0.5° jitter requirement verified against this controller; also documents the flight test result of ±0.09° jitter achieved in 2024-08-22 flight tests). ECN-313 (Approved Change Notice) lists P-1158 as a changed part and records the qualification result. SRC-021 (gimbal_driver.py) is the software driver that interfaces P-1158. DRW-519 (Gimbal Mount Detail) and DRW-536 (Gimbal Controller PCB) also reference P-1158.",
+    "required_citation_ids": ["P-1158", "DOC-449", "ECN-313", "SRC-021"],
+    "trail_id": "T-14"
+  },
+  {
+    "id": "Q19",
+    "category": "dependency",
+    "question": "What parts and code modules implement the functionality specified in DOC-455 (GNC ICD)?",
+    "gold_answer": "DOC-455 (GNC ICD Rev B) specifies the GNC sensor interface and performance requirements. The implementing parts are: P-1093 (ADIS16505-2 IMU), P-1094 (GPS receiver), P-1095 (barometer), P-1096 (magnetometer), P-1097/P-1098 (GPS antenna), P-1099 (pitot-static tube), P-1100 (AHRS), P-1101 (air data computer), and P-1091 (autopilot FCU). The implementing code modules are: SRC-007 (nav_filter.c — EKF), SRC-008 (attitude_estimator.c), SRC-009 (gps_driver.c), SRC-010 (gnc_autopilot.c), and SRC-028 (servo_driver.c). The 0.5° attitude accuracy requirement in DOC-455 is validated by DOC-467 (Flight Test Report).",
+    "required_citation_ids": ["DOC-455", "P-1093", "P-1091", "SRC-007", "SRC-009", "DOC-467"],
+    "trail_id": "T-10"
+  },
+  {
+    "id": "Q20",
+    "category": "dependency",
+    "question": "What downstream code modules, ICDs, and test reports depend on the GPS driver SRC-009?",
+    "gold_answer": "SRC-009 (gps_driver.c) outputs position, velocity, and integrity data to: SRC-007 (nav_filter.c — consumes GPS position and velocity in the EKF), SRC-010 (gnc_autopilot.c — uses position for waypoint navigation), and SRC-016 (flight_log.py — logs GPS data per the schema in DOC-481). The interface contract for SRC-009's outputs is in DOC-455 (GNC ICD). The GPS subsystem performance is specified in DOC-456 (GPS Performance Specification Rev B) and validated in DOC-467 (Flight Test Report). SRC-009 was updated per ECN-326 to support L5 band from the P-1098 helical antenna.",
+    "required_citation_ids": ["SRC-009", "SRC-007", "DOC-455", "DOC-456", "DOC-467", "ECN-326"],
+    "trail_id": "T-15"
+  },
+  {
+    "id": "Q21",
+    "category": "impact",
+    "question": "If the IMU module P-1092 is replaced with a new model, what parts, firmware modules, ICDs, and test reports need to be updated?",
+    "gold_answer": "Based on the ECR-228/ECN-326 change that replaced P-1092 with P-1093, the full impact is: Parts — P-1092 obsoleted, P-1093 introduced; P-1103 (IMU vibration damper) must be checked for fit compatibility (was compatible with P-1093). Firmware — SRC-007 (nav_filter.c) requires driver rewrite for new IMU's SPI register map and output data rate; SRC-008 (attitude_estimator.c) may require tuning. ICDs — DOC-455 (GNC ICD) must be updated for the new IMU interface. Test reports — DOC-467 (Flight Test Report) must be re-run after the change to re-validate attitude accuracy against the DOC-455 0.5° requirement. Drawings — DRW-526 (IMU & Baro Installation) and DRW-538 (IMU v2 Installation) must be updated for any form-factor difference. Flight test records — a new qualification flight test campaign (per DOC-467 protocol) is required before operational release.",
+    "required_citation_ids": ["ECR-228", "P-1092", "P-1093", "SRC-007", "DOC-455", "DOC-467"],
+    "trail_id": "T-17"
+  },
+  {
+    "id": "Q22",
+    "category": "impact",
+    "question": "If the battery pack voltage specification changes (e.g. moving to a different cell chemistry), what other parts, code modules, and ICDs are affected?",
+    "gold_answer": "Based on the ECR-214 LiPo→LiFePO4 change, a battery voltage spec change propagates to: P-1062 (cell assembly — must be replaced); P-1075 (BMS module — charge/discharge profiles and hardware SOC limits must be reconfigured for the new chemistry's voltage curves); P-1044 (motor/ESC controller — voltage input range must be verified compatible with new nominal pack voltage); P-1079 (battery wiring harness — current rating depends on voltage); P-1064 (battery connector — interrupt-under-load rating must be re-verified per DOC-431 §4.4). DOC-421 (Battery System Specification) requires full update. SRC-003 (bms_monitor.py) requires update for new OCV-to-SOC lookup tables. SRC-004 (power_manager.py) power budget calculations must be updated.",
+    "required_citation_ids": ["ECR-214", "P-1062", "P-1075", "DOC-421", "SRC-003"],
+    "trail_id": "T-18"
+  },
+  {
+    "id": "Q23",
+    "category": "impact",
+    "question": "What would be the full impact of changing the sonar operating frequency (e.g. from 200kHz to 300kHz centre)?",
+    "gold_answer": "Changing the sonar operating frequency would impact: P-1148 (sonar transducer — AquaSound Corp unit supports 100–400kHz broadband, so a new centre frequency may be feasible without changing the transducer, but acoustic efficiency at the new frequency must be verified); SRC-011 (sonar_driver.c — the DSP filter centre frequency is hardcoded to 200kHz ±2kHz and must be rewritten and re-tuned); P-1147 (sonar signal processor — FPGA design may need filter coefficient update); DOC-462 (Sonar System ICD — centre frequency specification in §2 must be updated); DOC-468 (Sonar Performance Test Report — full re-validation required at new frequency); DRW-517 (sonar mounting — the 7° cant angle rationale from REV-641 is linked to null zone depth at the current frequency and near-field distance; null zone geometry changes with frequency and must be re-validated). Pool tests (per KES-156 protocol) would be required to re-validate the null zone at the new frequency.",
+    "required_citation_ids": ["P-1148", "SRC-011", "DOC-462", "DOC-468", "DRW-517", "REV-641"],
+    "trail_id": "T-19"
+  },
+  {
+    "id": "Q24",
+    "category": "impact",
+    "question": "A new wing spar design requires changing the wing skin P-1008. What else needs to change?",
+    "gold_answer": "A wing skin change (P-1008) based on the ECR-207 precedent would require: P-1009 (starboard wing skin — typically changed in parallel with port skin for symmetry and matched stiffness); DOC-409 (Structural Specification — §3 specifies the wing skin layup and material; must be updated for any material or layup change); DOC-407 (Airframe Loads Analysis — must be re-run for any stiffness change; the hybrid composite was 8% less stiff than CFRP and flutter margins had to be re-verified); DRW-502 (Wing Skin & Spar Assembly drawing — layup schedule on Sheet 2 must be updated). If mass changes significantly, DOC-401 mass budget and the system mass margin must also be updated. The wing root bond line is the failure mode to check: the ECR-207 change was specifically motivated by delamination at the bond line (KES-045).",
+    "required_citation_ids": ["P-1008", "P-1009", "DOC-409", "DOC-407", "DRW-502", "KES-045"],
+    "trail_id": "T-20"
+  },
+  {
+    "id": "Q25",
+    "category": "impact",
+    "question": "What is the full impact of the comms bandwidth increase implemented in ECR-229?",
+    "gold_answer": "ECR-229 impacted 9+ artifacts. Parts: P-1125 (radio, 500kbps) obsoleted; P-1126 (radio, 2Mbps dual-band) introduced; P-1127 (AES-256-GCM FPGA encryption module) added to BOM; P-1167 (GCS Radio Unit) swapped to FreeWave GXM paired with P-1126. Software: SRC-018 (encryption_handler.c) implemented the FPGA interface; SRC-024 (gcs_ui_backend.py) updated for encrypted session protocol. Documents: DOC-471 (Comms ICD) updated to Rev C with encryption framing; DOC-472 (Protocol Spec) updated to Rev B. Drawings: DRW-531 (Enhanced Antenna Mount) updated for P-1126 form factor. The GCS antennas (P-1165, P-1166) and the aircraft antenna mounts (P-1133) did not change. Security approval: customer security team cleared the design (MD-SEC-2025-01).",
+    "required_citation_ids": ["ECR-229", "P-1125", "P-1126", "P-1127", "DOC-471", "SRC-018", "SRC-024"],
+    "trail_id": "T-21"
+  },
+  {
+    "id": "Q26",
+    "category": "impact",
+    "question": "What would changing the GPS module P-1097 to a different vendor affect?",
+    "gold_answer": "Changing the GPS antenna (P-1097 or its successor P-1098) would affect: SRC-009 (gps_driver.c — any change in frequency band support, connector pinout, or protocol requires a driver update; when P-1097 was replaced by P-1098, L5 band support was added); DOC-456 (GPS Performance Specification — C/N0 performance, elevation mask, frequency bands must be updated); DOC-455 (GNC ICD — GPS antenna interface section must reflect new part); DOC-467 (Flight Test Report — GPS reliability must be re-validated); DRW-534 (GPS antenna installation drawing — form factor and mounting holes); P-1102 (GPS antenna mount — must be checked for fit compatibility). A patch antenna change to helical also required P-1117 (ground plane plate) verification.",
+    "required_citation_ids": ["P-1097", "P-1098", "SRC-009", "DOC-456", "DOC-455", "DOC-467"],
+    "trail_id": "T-22"
+  },
+  {
+    "id": "Q27",
+    "category": "impact",
+    "question": "If the BMS module P-1075 SOC threshold limits need to be changed, what documentation and testing is required?",
+    "gold_answer": "According to REV-623 (Dr. Rhea Voss's review of DOC-431, comment C01 and C02), changing the SOC limits requires: (1) Re-running the full thermal model using the BlackHat2023 bench-test dataset (BT-2023-03-12) to verify the new limits maintain adequate safety margin against cell reversal (floor) and lithium plating (ceiling). (2) New calorimetry testing to demonstrate the plating risk is mitigated at the new ceiling, or testing to verify cell reversal margins at the new floor. (3) A formal ECR (following the ECR-209 precedent) with CSE approval. (4) Updating DOC-431 (BMS Safety Specification §4.3) with the new rationale. (5) Updating P-1075 hardware (the limits are in hardware lockout, not just firmware — per the WIKI-014 architecture decision). Testing must be conducted by Aisha Mbeki (Test & Verification Lead per REV-623 C01). Note: Dr. Voss who specified these limits has departed; her rationale is only in REV-623.",
+    "required_citation_ids": ["REV-623", "DOC-431", "P-1075", "WIKI-014", "ECR-209"],
+    "trail_id": "T-23"
+  },
+  {
+    "id": "Q28",
+    "category": "impact",
+    "question": "How many artifacts reference the sonar transducer P-1148, and what systems depend on it?",
+    "gold_answer": "P-1148 is directly referenced in: ECR-218 (vendor change ECR), ECN-315 (approved change), DOC-462 (Sonar System ICD — primary interface spec), DOC-468 (Sonar Performance Test Report), DRW-517 (Sonar Transducer Mounting — 7° cant angle design), P-1149 (Sonar Mounting Bracket — physically mates with P-1148), P-1150 (Sonar Dome — acoustic window over P-1148), P-1151 (Sonar Cable Harness — connects P-1148 to P-1147), REV-641 (Cass Doyle review of DRW-517 — contains critical cant angle rationale), KES-156 (integration testing story), KES-158 (frequency drift bug). Dependent systems: the sonar signal processing chain (SRC-011 → SRC-012 → GCS sonar overlay), and the payload system ICD (DOC-449). At least 11 artifacts reference P-1148 directly.",
+    "required_citation_ids": ["P-1148", "DOC-462", "DRW-517", "REV-641", "ECR-218"],
+    "trail_id": "T-25"
+  },
+  {
+    "id": "Q29",
+    "category": "impact",
+    "question": "What was the full system impact of the ECR-214 battery chemistry change?",
+    "gold_answer": "ECR-214 (LiPo → LiFePO4) impacted: Parts — P-1062 (cell assembly updated to Rev C, new supplier CellCore Technologies); P-1075 (BMS module Rev C, charge/discharge profiles rewritten for LiFePO4 voltage curves). The P-1064, P-1079, P-1061, P-1067, and P-1069 were not changed. Documents — DOC-421 (Battery System Specification, full rewrite to Rev C). Code — SRC-003 (bms_monitor.py, SOC-to-voltage lookup updated). System level — endurance reduced from ~75 min to ~66 min (12% energy density reduction). Mass — unchanged (same form factor). Qualification — full IEC 62133-2 cell-level and pack-level qualification required and completed by December 2023. The SOC limits (18%/82% hardware lockout on P-1075 per ECR-209) were carried forward unchanged — they are chemistry-independent safety limits.",
+    "required_citation_ids": ["ECR-214", "ECN-312", "P-1062", "P-1075", "DOC-421", "KES-208"],
+    "trail_id": "T-18"
+  },
+  {
+    "id": "Q30",
+    "category": "impact",
+    "question": "If the gimbal assembly P-1154 is redesigned, which ICDs, code modules, and test plans need review?",
+    "gold_answer": "Based on ECR-216 precedent: DOC-449 (Payload System ICD — §3 specifies the gimbal interface, performance requirements including ±0.5° jitter, and acceptance test criteria; must be updated for any new gimbal controller interface or axis configuration). SRC-021 (gimbal_driver.py — the driver is tightly coupled to the P-1158 SimpleBGC 32-bit serial protocol; a new controller would require a driver rewrite). DRW-519 (Gimbal Mount Detail — mechanical interface to the payload bay payload rails P-1024/P-1025). DOC-407 (Airframe Loads Analysis — resonant frequency of the new gimbal design must be checked against the airframe wing flutter mode at 8–9Hz, which was the root cause of the original GimbalTech rejection). Flight tests to verify jitter performance against DOC-449 acceptance criteria (±0.5° requirement) are required before operational release.",
+    "required_citation_ids": ["P-1154", "DOC-449", "SRC-021", "DOC-407", "ECR-216"],
+    "trail_id": "T-08"
+  },
+  {
+    "id": "Q31",
+    "category": "lookup",
+    "question": "What is the current revision of the Battery System Specification (DOC-421)?",
+    "gold_answer": "DOC-421 (Battery System Specification) is at Revision C, last modified 2023-12-14. The revision history is: Rev A — initial LiPo baseline (2023-04-01); Rev B — BMS SOC limits updated per ECR-209 (2023-07-18); Rev C — LiFePO4 chemistry transition per ECN-312 / ECR-214 (2023-12-14). Author: Lena Okafor.",
+    "required_citation_ids": ["DOC-421"],
+    "trail_id": null
+  },
+  {
+    "id": "Q32",
+    "category": "lookup",
+    "question": "Who is the author of the GNC ICD (DOC-455) and what revision is it currently at?",
+    "gold_answer": "DOC-455 (K-200 GNC Interface Control Document) is authored by Sam Dreher (Nav/GNC Software Lead) and is currently at Revision B (last modified 2025-02-15). Rev A was the initial GNC ICD (2023-05-01); Rev B was updated for the sensor suite upgrade ECN-326, covering the P-1093 IMU and P-1098 GPS antenna.",
+    "required_citation_ids": ["DOC-455"],
+    "trail_id": null
+  },
+  {
+    "id": "Q33",
+    "category": "lookup",
+    "question": "What is the part number, manufacturer, and key specification of the current replacement IMU module?",
+    "gold_answer": "The current IMU is P-1093 (IMU Module — Enhanced). Manufacturer: Analog Devices. Specification: ADIS16505-2, ±500dps tactical grade, resonant frequency 18kHz, vibration rectification error 0.006°/s/g². It replaces P-1092 (ICM-42688-P by InvenSense) which was obsoleted per ECN-326 / ECR-228 due to its 4.8kHz resonant frequency causing attitude errors at motor vibration harmonics. Interface: SPI. Driver: SRC-007 (nav_filter.c).",
+    "required_citation_ids": ["P-1093", "ECN-326"],
+    "trail_id": null
+  },
+  {
+    "id": "Q34",
+    "category": "lookup",
+    "question": "How many ECRs are currently in Approved status?",
+    "gold_answer": "Based on the corpus, the following named ECRs are in Approved status: ECR-207, ECR-209, ECR-214, ECR-216, ECR-218, ECR-221, ECR-225, ECR-228, ECR-229. The majority of the 35 ECRs in the corpus are in Approved status, with a small number in Rejected or In Review. An exact count requires querying the corpus; the gold trail ECRs listed above are all confirmed Approved.",
+    "required_citation_ids": ["ECR-207", "ECR-214", "ECR-221"],
+    "trail_id": null
+  },
+  {
+    "id": "Q35",
+    "category": "lookup",
+    "question": "What is the status of Jira issue KES-187?",
+    "gold_answer": "KES-187 is a Critical priority Bug, status Done, resolved 2024-04-22. It documents the motor P-1031 fwd-port thermal cutout during a 45-minute endurance run on 2 April 2024 at 30°C ambient. Reporter: Aisha Mbeki. Assignee: Marcus Thaine. The issue was closed upon approval of ECN-318 (motor replacement change notice). It is linked to KES-188 (related ESC overcurrent event) and ECR-221.",
+    "required_citation_ids": ["KES-187"],
+    "trail_id": null
+  },
+  {
+    "id": "Q36",
+    "category": "negative",
+    "question": "What was the peak cell temperature measured during the LiPo thermal runaway event in KES-208?",
+    "gold_answer": "This information is not recorded in the corpus. KES-208 documents that the BMS (P-1075) triggered the emergency disconnect at 82°C cell temperature, but this is the BMS protection threshold at which disconnect occurred — not the peak temperature the cells reached during venting. The actual peak temperature during venting is not documented in any corpus artifact.",
+    "required_citation_ids": [],
+    "trail_id": null,
+    "is_unanswerable": true
+  },
+  {
+    "id": "Q37",
+    "category": "negative",
+    "question": "What firmware version is currently installed on the encryption FPGA module P-1127?",
+    "gold_answer": "The firmware version of the P-1127 FPGA encryption module is not tracked in any corpus artifact. The corpus documents the hardware specification (Lattice iCE40, AES-256-GCM), the software interface (SRC-018 encryption_handler.c), and the protocol requirements (DOC-471, DOC-472), but no artifact records the specific FPGA bitstream version number. Firmware versioning for P-1127 is not in the PLM, Jira, or SCM records in the corpus.",
+    "required_citation_ids": [],
+    "trail_id": null,
+    "is_unanswerable": true
+  },
+  {
+    "id": "Q38",
+    "category": "negative",
+    "question": "Who is the customer programme manager overseeing the K-200 programme from the customer organisation?",
+    "gold_answer": "The customer organisation's programme manager is not identified in any corpus artifact. The corpus references the customer through requirement documents (RFT-K200-002, KES-203 contract security addendum) and a penetration test report (MD-SEC-2024-11), but the customer organisation itself is not named and no customer-side personnel are identified anywhere in the corpus.",
+    "required_citation_ids": [],
+    "trail_id": null,
+    "is_unanswerable": true
+  },
+  {
+    "id": "Q39",
+    "category": "negative",
+    "question": "What is the MTBF (mean time between failures) specification for the enhanced BLDC motor P-1041?",
+    "gold_answer": "The MTBF specification for P-1041 is not recorded in any corpus artifact. DOC-445 (Motor Qualification Test Report) documents thermal performance and endurance test results (3 x 90-minute flights), but does not include a reliability or MTBF specification. No reliability data for P-1041 appears in any ECR, ECN, DOC, or WIKI artifact in the corpus.",
+    "required_citation_ids": [],
+    "trail_id": null,
+    "is_unanswerable": true
+  },
+  {
+    "id": "Q40",
+    "category": "negative",
+    "question": "What is the cable routing path for the sonar cable harness P-1151 through the payload bay?",
+    "gold_answer": "The physical cable routing path of P-1151 (Sonar Cable Harness) through the payload bay is not documented in any corpus artifact. DRW-517 shows the sonar transducer mounting and DRW-508 shows the payload bay integration, but neither drawing documents the specific routing path of the harness P-1151 from the transducer (P-1148) to the sonar signal processor (P-1147). The corpus contains no harness routing diagram or installation procedure for this specific harness.",
+    "required_citation_ids": [],
+    "trail_id": null,
+    "is_unanswerable": true
+  }
+]

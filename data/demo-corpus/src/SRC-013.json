@@ -1,0 +1,52 @@
+{
+  "id": "SRC-013",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/camera_driver.py \u2014 Payload",
+  "text": "# camera_driver.py \u2014 Kestrel K-200 Payload\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "camera_driver",
+    "language": "Python",
+    "subsystem": "Payload",
+    "file_path": "payload/camera_driver.py",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "3c16ebb",
+        "author": "E05",
+        "date": "2024-01-23",
+        "message": "Initial camera_driver [KES-150]",
+        "kes_ref": "KES-150"
+      },
+      {
+        "hash": "7ebd1a0",
+        "author": "E04",
+        "date": "2024-03-14",
+        "message": "Update camera_driver [KES-124]",
+        "kes_ref": "KES-124"
+      },
+      {
+        "hash": "10c5d6d",
+        "author": "E09",
+        "date": "2024-05-05",
+        "message": "Update camera_driver [KES-148]",
+        "kes_ref": "KES-148"
+      },
+      {
+        "hash": "bdeaa08",
+        "author": "E05",
+        "date": "2024-06-30",
+        "message": "Update camera_driver [KES-198]",
+        "kes_ref": "KES-198"
+      }
+    ]
+  },
+  "refs": [
+    "KES-150",
+    "KES-124",
+    "KES-148",
+    "KES-198",
+    "DOC-441",
+    "DOC-470"
+  ]
+}

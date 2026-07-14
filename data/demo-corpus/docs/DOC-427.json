@@ -1,0 +1,21 @@
+{
+  "id": "DOC-427",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Design Analysis",
+  "text": "# K-200 Comms/Datalink Design Analysis\n\nDocument number: MD-DOC-427-C. Revision: C. Type: design-note. Author: Sam Dreher. Created: 2025-01-19. Last modified: 2025-04-26. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1038, P-1083.",
+  "structured": {
+    "doc_number": "MD-DOC-427-C",
+    "revision": "C",
+    "doc_type": "design-note",
+    "author": "E04",
+    "created": "2025-01-19",
+    "last_modified": "2025-04-26",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1038",
+    "P-1083"
+  ]
+}

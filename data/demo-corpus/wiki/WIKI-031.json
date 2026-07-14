@@ -1,0 +1,25 @@
+{
+  "id": "WIKI-031",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Propulsion Thermal Review Meeting \u2014 2024-04-10",
+  "text": "# Propulsion Thermal Review Meeting \u2014 2024-04-10\n\n**Space:** K200  \n**Meeting type:** Emergency Technical Review  \n**Attendees:** Marcus Thaine (Propulsion Lead), Dr. Rhea Voss (CSE), Aisha Mbeki (Test), Tyler Moss (Firmware), Felix Herrera (Integration), Rowan Ellery (Electrical)  \n**Chair:** Marcus Thaine  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nThis emergency review was convened following two motor thermal events in the same week: KES-187 (fwd-port motor P-1031 thermal cutout during a 45-minute endurance run, 2 April 2024) and KES-188 (repeated ESC overcurrent on fwd-stbd motor P-1031, 8 April 2024). Both events occurred during warm-weather testing at ambient temperatures of 28\u201332\u00b0C. The original TorqueDrive 4012 490KV motors (P-1031) have shown a pattern of thermal issues that the thermal pads (P-1045) and standard heatsinks (P-1040 ESC mounting plate) are not adequately managing.\n\n## Root Cause Summary\n\nMarcus Thaine presented the thermal analysis. Key findings:\n\n1. The P-1031 motor stator winding temperature was reaching 95\u2013105\u00b0C during sustained hover at 28\u00b0C ambient, against a rating of 85\u00b0C maximum continuous.\n2. The ESC (P-1032, ControlAir 60A) was throttling at 35\u00b0C case temperature due to its internal protection \u2014 cutting power to the motor and causing the observed overcurrent oscillation.\n3. The root cause is insufficient thermal mass and poor stator-to-case conductivity in the 4012 490KV winding design. The motor was selected in 2023 without a hot-day endurance test, relying on the manufacturer's datasheet rating.\n\nTyler Moss confirmed the motor controller board (P-1044) thermal logging data showing temperatures up to 108\u00b0C at the motor windings.\n\n## Options Considered\n\n1. **Add external motor cooling (fans/ducts):** Rejected \u2014 adds ~120g per motor location, structural impact to P-1012 motor mounts.\n2. **Limit operations to <25\u00b0C ambient:** Rejected \u2014 customer requirement specifies 40\u00b0C maximum ambient operating temperature.\n3. **Replace with TorqueDrive 4014 420KV enhanced (P-1041):** Preferred \u2014 new winding geometry reduces stator temperature by ~18\u00b0C at same operating point. Paired with 80A ESC (P-1042) and enhanced heatsink (P-1051).\n\n## Decision\n\n**AGREED:** Replace all four P-1031 motors and P-1032 ESCs with P-1041 / P-1042 across the entire airframe.\n\n- Decision maker: Dr. Rhea Voss (CSE approval required for parts changes)\n- Rationale: KES-187 and KES-188 demonstrate that P-1031 cannot meet the 40\u00b0C ambient temperature requirement; customer requirement is non-negotiable\n- ECR to be raised: ECR-221 (Marcus Thaine to raise by 2024-04-15)\n- Qualification test: Motor qualification to be documented in DOC-445\n- Motor mount (P-1012) compatibility confirmed by Tobias Wren (verbal, to be documented)\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-221 for motor and ESC replacement | Marcus Thaine | 2024-04-15 |\n| A2 | Procure 8x P-1041 and 8x P-1042 for qualification | Marcus Thaine | 2024-04-22 |\n| A3 | Run thermal qualification test per DOC-445 | Aisha Mbeki | 2024-05-30 |\n| A4 | Update DRW-539 motor installation drawing | Tobias Wren | 2024-05-15 |\n| A5 | Update motor controller firmware for P-1041 KV rating | Tyler Moss | 2024-05-10 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E09",
+    "created_date": "2024-04-10",
+    "last_modified": "2024-04-11",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "KES-187",
+    "KES-188",
+    "ECR-221",
+    "DOC-445",
+    "P-1031",
+    "P-1041",
+    "P-1042",
+    "P-1044",
+    "P-1012"
+  ]
+}

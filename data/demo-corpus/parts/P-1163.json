@@ -1,0 +1,20 @@
+{
+  "id": "P-1163",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Laptop \u2014 Ruggedised",
+  "text": "GCS Laptop \u2014 Ruggedised. Subsystem: GCS. Material: Panasonic Toughbook 55, i7. Mass: 2200g. Manufactured by PanasonicAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1163",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "Panasonic Toughbook 55, i7",
+    "mass_g": 2200,
+    "manufacturer": "PanasonicAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-509"
+  ]
+}

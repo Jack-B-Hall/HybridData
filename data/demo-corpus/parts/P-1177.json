@@ -1,0 +1,18 @@
+{
+  "id": "P-1177",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Situational Camera",
+  "text": "GCS Situational Camera. Subsystem: GCS. Material: Logitech C920, HD 1080p. Mass: 162g. Manufactured by LogitechAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1177",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "Logitech C920, HD 1080p",
+    "mass_g": 162,
+    "manufacturer": "LogitechAU",
+    "parent_id": null
+  },
+  "refs": []
+}

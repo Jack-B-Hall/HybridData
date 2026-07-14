@@ -1,0 +1,31 @@
+{
+  "id": "KES-105",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Camera overexposure in high-sun",
+  "text": "Bug: Camera overexposure in high-sun. Reporter: Jordan Kim. Assignee: Dev Patel. Status: Done. Priority: Medium. Created: 2024-07-20.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E11",
+    "created": "2024-07-20",
+    "resolved": "2024-11-12",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-476",
+    "DOC-475",
+    "KES-014"
+  ]
+}

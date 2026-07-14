@@ -1,0 +1,28 @@
+{
+  "id": "DRW-528",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-528: GCS Pelican Case Layout",
+  "text": "Drawing MD-DRW-528 Rev C \u2014 GCS Pelican Case Layout\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1175, P-1168, P-1169, P-1170.\n4. Drawn by Rowan Ellery, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-528",
+    "revision": "C",
+    "drawn_by": "E13",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2024-12-05",
+    "subsystem": "GCS",
+    "referenced_parts": [
+      "P-1175",
+      "P-1168",
+      "P-1169",
+      "P-1170"
+    ]
+  },
+  "refs": [
+    "P-1175",
+    "P-1168",
+    "P-1169",
+    "P-1170"
+  ]
+}

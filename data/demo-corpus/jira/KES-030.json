@@ -1,0 +1,29 @@
+{
+  "id": "KES-030",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement hardware design review",
+  "text": "Story: Implement hardware design review. Reporter: Lena Okafor. Assignee: Marcus Thaine. Status: Done. Priority: High. Created: 2023-02-19.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E02",
+    "created": "2023-02-19",
+    "resolved": "2023-03-12",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

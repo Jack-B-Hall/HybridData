@@ -1,0 +1,20 @@
+{
+  "id": "P-1115",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "FCU Telemetry Module",
+  "text": "FCU Telemetry Module. Subsystem: Nav/GNC. Material: SiK radio 915MHz, 100mW. Mass: 14g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1115",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "SiK radio 915MHz, 100mW",
+    "mass_g": 14,
+    "manufacturer": "HolybrozAU",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091"
+  ]
+}

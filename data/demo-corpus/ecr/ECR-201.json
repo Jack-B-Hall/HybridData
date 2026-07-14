@@ -1,0 +1,36 @@
+{
+  "id": "ECR-201",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Systems \u2014 update P-1039 per KES-157",
+  "text": "Engineering Change Request ECR-201. Subsystem: Systems. Affected parts: P-1039, P-1156, P-1132, P-1036. Linked issues: KES-157, KES-082. Raised by: Sam Dreher on 2025-02-28. Status: Approved.",
+  "structured": {
+    "raised_by": "E04",
+    "raised_date": "2025-02-28",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1039",
+      "P-1156",
+      "P-1132",
+      "P-1036"
+    ],
+    "affected_docs": [
+      "DOC-451"
+    ],
+    "jira_issues": [
+      "KES-157",
+      "KES-082"
+    ],
+    "approver": "E12",
+    "approved_date": "2025-04-21"
+  },
+  "refs": [
+    "P-1039",
+    "P-1156",
+    "P-1132",
+    "P-1036",
+    "KES-157",
+    "KES-082",
+    "DOC-451"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-044",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Marcus Thaine. Assignee: Tobias Wren. Status: Done. Priority: High. Created: 2025-02-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E02",
+    "assignee": "E06",
+    "created": "2025-02-04",
+    "resolved": "2025-05-26",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-046",
+    "KES-005"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "KES-011",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Flight test campaign phase 2",
+  "text": "Epic: Flight test campaign phase 2. Reporter: Rowan Ellery. Assignee: Tyler Moss. Status: In Progress. Priority: High. Created: 2024-04-13.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E13",
+    "assignee": "E14",
+    "created": "2024-04-13",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

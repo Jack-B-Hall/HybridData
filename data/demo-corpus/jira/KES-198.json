@@ -1,0 +1,29 @@
+{
+  "id": "KES-198",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Tyler Moss. Assignee: Sam Dreher. Status: Done. Priority: Medium. Created: 2025-11-07.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E04",
+    "created": "2025-11-07",
+    "resolved": "2026-01-22",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "KES-001"
+  ]
+}

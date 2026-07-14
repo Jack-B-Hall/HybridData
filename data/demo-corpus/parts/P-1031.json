@@ -1,0 +1,20 @@
+{
+  "id": "P-1031",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "BLDC Motor v1 (obsolete)",
+  "text": "BLDC Motor v1 (obsolete). Subsystem: Propulsion. Material: brushless DC, 4012 490KV. Mass: 185g. Manufactured by TorqueDrive Systems. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1031",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "brushless DC, 4012 490KV",
+    "mass_g": 185,
+    "manufacturer": "TorqueDrive Systems",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-504"
+  ]
+}

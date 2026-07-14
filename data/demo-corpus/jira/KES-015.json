@@ -1,0 +1,24 @@
+{
+  "id": "KES-015",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Risk register management",
+  "text": "Epic: Risk register management. Reporter: Jordan Kim. Assignee: Priya Nair. Status: In Progress. Priority: High. Created: 2023-10-30.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E05",
+    "created": "2023-10-30",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "WIKI-007"
+  ]
+}

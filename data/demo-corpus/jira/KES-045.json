@@ -1,0 +1,29 @@
+{
+  "id": "KES-045",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Rowan Ellery. Assignee: Lena Okafor. Status: Done. Priority: Low. Created: 2025-01-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E13",
+    "assignee": "E03",
+    "created": "2025-01-13",
+    "resolved": "2025-05-02",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

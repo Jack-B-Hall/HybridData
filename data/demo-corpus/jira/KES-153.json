@@ -1,0 +1,32 @@
+{
+  "id": "KES-153",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Tobias Wren. Assignee: Tobias Wren. Status: In Progress. Priority: Medium. Created: 2024-11-21.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E06",
+    "assignee": "E06",
+    "created": "2024-11-21",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-456",
+    "DOC-423",
+    "WIKI-069",
+    "KES-005"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-118",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate maintenance manual section",
+  "text": "Story: Integrate maintenance manual section. Reporter: Felix Herrera. Assignee: Nina Schulz. Status: Open. Priority: Medium. Created: 2025-01-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E09",
+    "assignee": "E12",
+    "created": "2025-01-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

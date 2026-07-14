@@ -1,0 +1,22 @@
+{
+  "id": "KES-018",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Hardware configuration management",
+  "text": "Epic: Hardware configuration management. Reporter: Rowan Ellery. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2023-09-11.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E13",
+    "assignee": "E14",
+    "created": "2023-09-11",
+    "resolved": "2023-12-17",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

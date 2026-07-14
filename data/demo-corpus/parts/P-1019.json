@@ -1,0 +1,21 @@
+{
+  "id": "P-1019",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Avionics Bay Structure",
+  "text": "Avionics Bay Structure. Subsystem: Airframe. Material: aluminium 7075-T6. Mass: 210g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1019",
+    "revision": "B",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "aluminium 7075-T6",
+    "mass_g": 210,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-501"
+  ]
+}

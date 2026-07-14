@@ -1,0 +1,30 @@
+{
+  "id": "KES-189",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Datalink re-connect delay after power cycle",
+  "text": "Bug: Datalink re-connect delay after power cycle. Reporter: Dev Patel. Assignee: Felix Herrera. Status: Done. Priority: Medium. Created: 2025-09-15.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E09",
+    "created": "2025-09-15",
+    "resolved": "2025-10-27",
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-437",
+    "KES-010"
+  ]
+}

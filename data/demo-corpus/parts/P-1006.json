@@ -1,0 +1,21 @@
+{
+  "id": "P-1006",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Landing Skid \u2014 Forward",
+  "text": "Landing Skid \u2014 Forward. Subsystem: Airframe. Material: glass fibre composite. Mass: 95g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1006",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "glass fibre composite",
+    "mass_g": 95,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-505"
+  ]
+}

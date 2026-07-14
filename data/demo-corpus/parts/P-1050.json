@@ -1,0 +1,18 @@
+{
+  "id": "P-1050",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Propeller Washer (x4)",
+  "text": "Propeller Washer (x4). Subsystem: Propulsion. Material: stainless steel. Mass: 6g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1050",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "stainless steel",
+    "mass_g": 6,
+    "manufacturer": "PropTech GmbH",
+    "parent_id": null
+  },
+  "refs": []
+}

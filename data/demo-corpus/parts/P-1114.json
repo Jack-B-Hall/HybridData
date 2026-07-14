@@ -1,0 +1,20 @@
+{
+  "id": "P-1114",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "FCU SD Card Module",
+  "text": "FCU SD Card Module. Subsystem: Nav/GNC. Material: micro-SD slot, 128GB UHS-I. Mass: 5g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1114",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "micro-SD slot, 128GB UHS-I",
+    "mass_g": 5,
+    "manufacturer": "HolybrozAU",
+    "parent_id": "P-1091"
+  },
+  "refs": [
+    "P-1091"
+  ]
+}

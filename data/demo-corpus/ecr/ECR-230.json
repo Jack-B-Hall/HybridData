@@ -1,0 +1,34 @@
+{
+  "id": "ECR-230",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Comms/Datalink \u2014 update P-1119 per KES-106",
+  "text": "Engineering Change Request ECR-230. Subsystem: Comms/Datalink. Affected parts: P-1119, P-1015. Linked issues: KES-106, KES-107, KES-143. Raised by: Priya Nair on 2025-07-17. Status: Approved.",
+  "structured": {
+    "raised_by": "E05",
+    "raised_date": "2025-07-17",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1119",
+      "P-1015"
+    ],
+    "affected_docs": [
+      "DOC-450"
+    ],
+    "jira_issues": [
+      "KES-106",
+      "KES-107",
+      "KES-143"
+    ],
+    "approver": "E05",
+    "approved_date": "2025-08-07"
+  },
+  "refs": [
+    "P-1119",
+    "P-1015",
+    "KES-106",
+    "KES-107",
+    "KES-143",
+    "DOC-450"
+  ]
+}

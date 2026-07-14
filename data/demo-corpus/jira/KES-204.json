@@ -1,0 +1,29 @@
+{
+  "id": "KES-204",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Sam Dreher. Assignee: Jordan Kim. Status: Open. Priority: Low. Created: 2023-06-20.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E08",
+    "created": "2023-06-20",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "KES-003"
+  ]
+}

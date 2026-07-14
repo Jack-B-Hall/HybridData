@@ -1,0 +1,15 @@
+{
+  "id": "WIKI-048",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Nav/GNC Design Review \u2014 2024-06-12",
+  "text": "# Nav/GNC Design Review \u2014 2024-06-12\n\n**Attendees:** Lena Okafor, Rowan Ellery\n\n## Summary\n\nThis page covers the thermal management approach for the Nav/GNC subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Dev Patel on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2024-06-12",
+    "last_modified": "2024-08-12",
+    "last_modified_by": "E11"
+  },
+  "refs": []
+}

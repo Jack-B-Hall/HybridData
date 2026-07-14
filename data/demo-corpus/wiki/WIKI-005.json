@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-005",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Payload Integration Planning \u2014 2023-03-07",
+  "text": "# Payload Integration Planning \u2014 2023-03-07\n\n**Attendees:** Dev Patel, Felix Herrera, Tyler Moss\n\n## Summary\n\nThis page covers the supplier evaluation results for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Marcus Thaine on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E04",
+    "created_date": "2023-03-07",
+    "last_modified": "2023-05-01",
+    "last_modified_by": "E02"
+  },
+  "refs": [
+    "ECR-213",
+    "ECR-210",
+    "KES-023"
+  ]
+}

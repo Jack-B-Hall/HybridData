@@ -1,0 +1,31 @@
+{
+  "id": "KES-096",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate test coverage matrix",
+  "text": "Story: Validate test coverage matrix. Reporter: Dev Patel. Assignee: Rowan Ellery. Status: Done. Priority: Medium. Created: 2025-07-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E13",
+    "created": "2025-07-13",
+    "resolved": "2025-08-27",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-482",
+    "DOC-463",
+    "KES-016"
+  ]
+}

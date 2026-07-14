@@ -1,0 +1,15 @@
+{
+  "id": "WIKI-024",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "GCS Design Review \u2014 2023-07-21",
+  "text": "# GCS Design Review \u2014 2023-07-21\n\n**Attendees:** Marcus Thaine, Lena Okafor\n\n## Summary\n\nThis page covers the waterproofing philosophy for the GCS subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Marcus Thaine on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2023-07-21",
+    "last_modified": "2023-10-06",
+    "last_modified_by": "E02"
+  },
+  "refs": []
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1068",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Compression Pad \u2014 Battery",
+  "text": "Compression Pad \u2014 Battery. Subsystem: Battery. Material: expanded PTFE foam. Mass: 22g. Manufactured by SealTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1068",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "expanded PTFE foam",
+    "mass_g": 22,
+    "manufacturer": "SealTech",
+    "parent_id": "P-1061"
+  },
+  "refs": [
+    "P-1061",
+    "DRW-521"
+  ]
+}

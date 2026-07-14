@@ -1,0 +1,30 @@
+{
+  "id": "ECR-204",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: GCS \u2014 update P-1175 per KES-147",
+  "text": "Engineering Change Request ECR-204. Subsystem: GCS. Affected parts: P-1175, P-1063. Linked issues: KES-147. Raised by: Dev Patel on 2024-12-04. Status: In Review.",
+  "structured": {
+    "raised_by": "E11",
+    "raised_date": "2024-12-04",
+    "status": "In Review",
+    "affected_parts": [
+      "P-1175",
+      "P-1063"
+    ],
+    "affected_docs": [
+      "DOC-425"
+    ],
+    "jira_issues": [
+      "KES-147"
+    ],
+    "approver": "E02",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1175",
+    "P-1063",
+    "KES-147",
+    "DOC-425"
+  ]
+}

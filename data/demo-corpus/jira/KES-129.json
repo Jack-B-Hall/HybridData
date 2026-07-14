@@ -1,0 +1,29 @@
+{
+  "id": "KES-129",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify software design document",
+  "text": "Story: Qualify software design document. Reporter: Felix Herrera. Assignee: Rowan Ellery. Status: Open. Priority: Low. Created: 2023-08-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E09",
+    "assignee": "E13",
+    "created": "2023-08-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "KES-005"
+  ]
+}

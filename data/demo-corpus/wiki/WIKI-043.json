@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-043",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Systems Technical Note: gimbal stabilisation technology",
+  "text": "# Systems Technical Note: gimbal stabilisation technology\n\n**Attendees:** Dev Patel, Priya Nair, Tyler Moss, Felix Herrera\n\n## Summary\n\nThis page covers the gimbal stabilisation technology for the Systems subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tobias Wren on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E14",
+    "created_date": "2024-11-09",
+    "last_modified": "2024-12-06",
+    "last_modified_by": "E06"
+  },
+  "refs": [
+    "DOC-414",
+    "DOC-479"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1051",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "ESC Heatsink Enhanced (x4)",
+  "text": "ESC Heatsink Enhanced (x4). Subsystem: Propulsion. Material: copper, fins. Mass: 48g. Manufactured by ThermalTech. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1051",
+    "revision": "B",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "copper, fins",
+    "mass_g": 48,
+    "manufacturer": "ThermalTech",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-533"
+  ]
+}

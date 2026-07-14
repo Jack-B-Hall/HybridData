@@ -1,0 +1,30 @@
+{
+  "id": "KES-152",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Marcus Thaine. Assignee: Priya Nair. Status: Open. Priority: Low. Created: 2025-04-08.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E02",
+    "assignee": "E05",
+    "created": "2025-04-08",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-027",
+    "KES-010"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1147",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Sonar Signal Processor",
+  "text": "Sonar Signal Processor. Subsystem: Payload. Material: PCB, FPGA + DSP, 50MHz clock. Mass: 148g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1147",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "PCB, FPGA + DSP, 50MHz clock",
+    "mass_g": 148,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-508",
+    "DRW-524"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ECR-220",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Integration \u2014 update P-1030 per KES-024",
+  "text": "Engineering Change Request ECR-220. Subsystem: Integration. Affected parts: P-1030, P-1175, P-1053, P-1150. Linked issues: KES-024, KES-131. Raised by: Sam Dreher on 2023-08-16. Status: Approved.",
+  "structured": {
+    "raised_by": "E04",
+    "raised_date": "2023-08-16",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1030",
+      "P-1175",
+      "P-1053",
+      "P-1150"
+    ],
+    "affected_docs": [
+      "DOC-408",
+      "DOC-459"
+    ],
+    "jira_issues": [
+      "KES-024",
+      "KES-131"
+    ],
+    "approver": "E04",
+    "approved_date": "2023-09-22"
+  },
+  "refs": [
+    "P-1030",
+    "P-1175",
+    "P-1053",
+    "P-1150",
+    "KES-024",
+    "KES-131",
+    "DOC-408",
+    "DOC-459"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1053",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Cable \u2014 Aft Port",
+  "text": "Motor Cable \u2014 Aft Port. Subsystem: Propulsion. Material: silicone 14AWG, 400mm. Mass: 32g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1053",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "silicone 14AWG, 400mm",
+    "mass_g": 32,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-525"
+  ]
+}

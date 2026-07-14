@@ -1,0 +1,29 @@
+{
+  "id": "KES-061",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Sam Dreher. Assignee: Tyler Moss. Status: Open. Priority: Low. Created: 2025-09-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E14",
+    "created": "2025-09-18",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-015",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-015"
+      }
+    ]
+  },
+  "refs": [
+    "KES-015"
+  ]
+}

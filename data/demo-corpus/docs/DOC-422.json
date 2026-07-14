@@ -1,0 +1,22 @@
+{
+  "id": "DOC-422",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Integration Maintenance Procedure",
+  "text": "# K-200 Integration Maintenance Procedure\n\nDocument number: MD-DOC-422-C. Revision: C. Type: manual. Author: Tobias Wren. Created: 2025-04-04. Last modified: 2026-02-06. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Integration subsystem of the Kestrel K-200. Referenced parts: P-1139, P-1011, P-1113.",
+  "structured": {
+    "doc_number": "MD-DOC-422-C",
+    "revision": "C",
+    "doc_type": "manual",
+    "author": "E06",
+    "created": "2025-04-04",
+    "last_modified": "2026-02-06",
+    "status": "Released",
+    "subsystem": "Integration"
+  },
+  "refs": [
+    "P-1139",
+    "P-1011",
+    "P-1113"
+  ]
+}

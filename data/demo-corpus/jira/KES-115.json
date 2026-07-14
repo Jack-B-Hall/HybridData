@@ -1,0 +1,31 @@
+{
+  "id": "KES-115",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Sam Dreher. Assignee: Priya Nair. Status: Done. Priority: High. Created: 2025-08-21.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E05",
+    "created": "2025-08-21",
+    "resolved": "2025-11-20",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-486",
+    "DOC-402",
+    "KES-019"
+  ]
+}

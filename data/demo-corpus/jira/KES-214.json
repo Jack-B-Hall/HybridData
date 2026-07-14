@@ -1,0 +1,31 @@
+{
+  "id": "KES-214",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Aisha Mbeki. Assignee: Priya Nair. Status: Open. Priority: Medium. Created: 2023-11-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E10",
+    "assignee": "E05",
+    "created": "2023-11-04",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-009",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-450",
+    "DOC-479",
+    "KES-009"
+  ]
+}

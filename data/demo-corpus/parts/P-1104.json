@@ -1,0 +1,21 @@
+{
+  "id": "P-1104",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "FCU Enclosure",
+  "text": "FCU Enclosure. Subsystem: Nav/GNC. Material: aluminium 6061-T6, EMI shielded. Mass: 98g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1104",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6, EMI shielded",
+    "mass_g": 98,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-506",
+    "DRW-516"
+  ]
+}

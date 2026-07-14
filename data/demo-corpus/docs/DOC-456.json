@@ -1,0 +1,24 @@
+{
+  "id": "DOC-456",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GCS Subsystem Specification",
+  "text": "# K-200 GCS Subsystem Specification\n\nDocument number: MD-DOC-456-F. Revision: F. Type: specification. Author: Tobias Wren. Created: 2024-01-02. Last modified: 2024-03-16. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the GCS subsystem of the Kestrel K-200. Referenced parts: P-1003, P-1095, P-1052, P-1075.",
+  "structured": {
+    "doc_number": "MD-DOC-456-F",
+    "revision": "F",
+    "doc_type": "specification",
+    "author": "E06",
+    "created": "2024-01-02",
+    "last_modified": "2024-03-16",
+    "status": "Released",
+    "subsystem": "GCS"
+  },
+  "refs": [
+    "P-1003",
+    "P-1095",
+    "P-1052",
+    "P-1075",
+    "KES-160"
+  ]
+}

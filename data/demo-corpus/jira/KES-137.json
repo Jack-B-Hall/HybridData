@@ -1,0 +1,30 @@
+{
+  "id": "KES-137",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Tyler Moss. Assignee: Rowan Ellery. Status: Done. Priority: Low. Created: 2024-09-28.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E14",
+    "assignee": "E13",
+    "created": "2024-09-28",
+    "resolved": "2024-12-05",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-002",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-002"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-062",
+    "KES-002"
+  ]
+}

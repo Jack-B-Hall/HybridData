@@ -1,0 +1,52 @@
+{
+  "id": "SRC-002",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gcs/gcs_telemetry.py \u2014 GCS",
+  "text": "# gcs_telemetry.py \u2014 Kestrel K-200 GCS\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gcs_telemetry",
+    "language": "Python",
+    "subsystem": "GCS",
+    "file_path": "gcs/gcs_telemetry.py",
+    "primary_author": "E08",
+    "commit_log": [
+      {
+        "hash": "71850a6",
+        "author": "E04",
+        "date": "2023-04-29",
+        "message": "Initial gcs_telemetry [KES-176]",
+        "kes_ref": "KES-176"
+      },
+      {
+        "hash": "9483795",
+        "author": "E08",
+        "date": "2023-05-06",
+        "message": "Update gcs_telemetry [KES-084]",
+        "kes_ref": "KES-084"
+      },
+      {
+        "hash": "6c5679f",
+        "author": "E05",
+        "date": "2023-06-07",
+        "message": "Update gcs_telemetry [KES-109]",
+        "kes_ref": "KES-109"
+      },
+      {
+        "hash": "bc8d3cb",
+        "author": "E03",
+        "date": "2023-07-21",
+        "message": "Update gcs_telemetry [KES-059]",
+        "kes_ref": "KES-059"
+      }
+    ]
+  },
+  "refs": [
+    "KES-176",
+    "KES-084",
+    "KES-109",
+    "KES-059",
+    "DOC-461",
+    "DOC-402"
+  ]
+}

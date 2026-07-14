@@ -1,0 +1,29 @@
+{
+  "id": "ECN-335",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-235",
+  "text": "Engineering Change Notice ECN-335. Implements ECR-235. Approved by Jordan Kim on 2024-06-14. Affected parts: P-1153, P-1035, P-1077. Updated documents: DOC-478, DOC-489.",
+  "structured": {
+    "ecr_id": "ECR-235",
+    "approved_by": "E08",
+    "approved_date": "2024-06-14",
+    "affected_parts": [
+      "P-1153",
+      "P-1035",
+      "P-1077"
+    ],
+    "affected_docs": [
+      "DOC-478",
+      "DOC-489"
+    ]
+  },
+  "refs": [
+    "ECR-235",
+    "P-1153",
+    "P-1035",
+    "P-1077",
+    "DOC-478",
+    "DOC-489"
+  ]
+}

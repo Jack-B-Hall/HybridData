@@ -1,0 +1,63 @@
+{
+  "id": "REV-631",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-401: System Architecture Document v1.0 \u2014 REV-631",
+  "text": "# Review Record REV-631\n\nDocument: DOC-401 (System Architecture Document v1.0). Reviewer: Dr. Rhea Voss (Chief Systems Engineer). Date: 2023-03-28. Overall disposition: Approved with comments.\n\nStatus: Closed.\n\n## Comments\n\n**C01** (Dr. Rhea Voss): Section 3.2 \u2014 Autonomy level selection. The document records our decision to target SAE Level 3 autonomy (conditional automation) rather than Level 4. This was not purely a technical decision. During the WIKI-003 kick-off meeting (Feb 2023) we had a specific customer requirement (Ref: customer RFT-K200-002) that prohibited fully autonomous navigation in mixed-traffic maritime zones without a human supervisory override. The rationale for Level 3 must be stated explicitly in DOC-401 \u00a73.2 so that future engineers do not attempt to re-litigate this as a cost-saving measure. The regulatory constraint is real and binds the architecture. ECN-301 captures the formal configuration baseline. \u2014 *Action required*\n\n**C02** (Dr. Rhea Voss): Section 4.1 \u2014 Redundancy philosophy. I am approving the single-string GNC architecture (no FCU redundancy) on the condition that the mission profile is restricted to BVLOS operations over open water only, with a safe-return-to-launch fail-safe. The rationale: adding a second FCU (P-1091 duplicate) would add ~300g and exceed the 8kg MTOW constraint. This trade was discussed at WIKI-003 and is documented in the risk register under R-GNC-004. Anyone proposing to extend K-200 operations to urban or littoral zones must revisit this trade. The current architecture is NOT safe for operations near infrastructure. \u2014 *Action required*\n\n**C03** (Dr. Rhea Voss): Section 5.3 \u2014 Datalink range. The 15km datalink range requirement drives the choice of 900MHz band and the 1W transmit power in P-1125. This is the tightest constraint on the comms architecture. If the range requirement ever increases, the antenna gain, frequency, or power budget must all be re-analysed. Do not change P-1125 without also updating DOC-471 (Comms ICD) and the link budget in DOC-401 \u00a75.3. \u2014 *Noted*\n\n**C04** (Dr. Rhea Voss): Section 7 \u2014 Weight budget. The current mass allocation shows 340g margin at MTOW 8kg. This is uncomfortably tight. I have flagged this as a programme risk (R-SYS-001 in the risk register). The margin must not be eroded by scope creep in payload or battery. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-401",
+    "reviewer": "E01",
+    "review_date": "2023-03-28",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E01",
+        "text": "Section 3.2 \u2014 SAE Level 3 autonomy was chosen due to customer RFT-K200-002 prohibiting fully autonomous navigation in mixed-traffic maritime zones. Rationale from WIKI-003 kick-off meeting must be preserved in DOC-401 \u00a73.2. ECN-301 captures the formal baseline.",
+        "disposition": "Action required",
+        "refs": [
+          "WIKI-003",
+          "ECN-301",
+          "DOC-401"
+        ]
+      },
+      {
+        "comment_id": "C02",
+        "author": "E01",
+        "text": "Section 4.1 \u2014 Single-string GNC architecture approved only for BVLOS open-water operations. Adding second FCU (P-1091) exceeds 8kg MTOW. Trade documented in WIKI-003 and risk register R-GNC-004. Urban/littoral extension requires architecture review.",
+        "disposition": "Action required",
+        "refs": [
+          "P-1091",
+          "WIKI-003"
+        ]
+      },
+      {
+        "comment_id": "C03",
+        "author": "E01",
+        "text": "Section 5.3 \u2014 15km range drives 900MHz / 1W choice in P-1125. Any range increase requires re-analysis of antenna, frequency, and power budget. DOC-471 must be updated together with DOC-401 \u00a75.3.",
+        "disposition": "Noted",
+        "refs": [
+          "P-1125",
+          "DOC-471"
+        ]
+      },
+      {
+        "comment_id": "C04",
+        "author": "E01",
+        "text": "Section 7 \u2014 340g mass margin is tight. Flagged as programme risk R-SYS-001.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-401",
+    "WIKI-003",
+    "ECN-301",
+    "P-1091",
+    "P-1125",
+    "DOC-471",
+    "KES-001"
+  ]
+}

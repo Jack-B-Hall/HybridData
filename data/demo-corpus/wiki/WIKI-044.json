@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-044",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2023-09-26",
+  "text": "# Risk Review Meeting \u2014 2023-09-26\n\n**Attendees:** Priya Nair, Rowan Ellery, Jordan Kim\n\n## Summary\n\nThis page covers the sonar frequency range for the Integration subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Rowan Ellery on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E14",
+    "created_date": "2023-09-26",
+    "last_modified": "2023-10-03",
+    "last_modified_by": "E13"
+  },
+  "refs": [
+    "DOC-441",
+    "DOC-471",
+    "DOC-407",
+    "KES-052",
+    "KES-159"
+  ]
+}

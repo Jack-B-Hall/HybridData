@@ -1,0 +1,29 @@
+{
+  "id": "KES-174",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Rowan Ellery. Assignee: Nina Schulz. Status: Open. Priority: Medium. Created: 2025-07-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E13",
+    "assignee": "E12",
+    "created": "2025-07-10",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "KES-012"
+  ]
+}

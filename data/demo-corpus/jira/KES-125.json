@@ -1,0 +1,29 @@
+{
+  "id": "KES-125",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Rowan Ellery. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2024-07-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E13",
+    "assignee": "E14",
+    "created": "2024-07-09",
+    "resolved": "2024-10-01",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "KES-012"
+  ]
+}

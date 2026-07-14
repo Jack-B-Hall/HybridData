@@ -1,0 +1,30 @@
+{
+  "id": "KES-186",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Jordan Kim. Assignee: Lena Okafor. Status: In Progress. Priority: High. Created: 2024-12-26.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E03",
+    "created": "2024-12-26",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-475",
+    "KES-001"
+  ]
+}

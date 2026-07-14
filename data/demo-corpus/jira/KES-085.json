@@ -1,0 +1,31 @@
+{
+  "id": "KES-085",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Tobias Wren. Assignee: Priya Nair. Status: In Progress. Priority: Medium. Created: 2025-01-28.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E06",
+    "assignee": "E05",
+    "created": "2025-01-28",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-007",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-007"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-469",
+    "WIKI-006",
+    "KES-007"
+  ]
+}

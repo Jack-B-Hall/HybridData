@@ -1,0 +1,18 @@
+{
+  "id": "P-1164",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Display \u2014 Secondary",
+  "text": "GCS Display \u2014 Secondary. Subsystem: GCS. Material: 10\" sunlight readable, 1500 nit. Mass: 580g. Manufactured by BrightTech. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1164",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "10\" sunlight readable, 1500 nit",
+    "mass_g": 580,
+    "manufacturer": "BrightTech",
+    "parent_id": null
+  },
+  "refs": []
+}

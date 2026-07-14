@@ -1,0 +1,25 @@
+{
+  "id": "DOC-457",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Systems Interface Control Document",
+  "text": "# K-200 Systems Interface Control Document\n\nDocument number: MD-DOC-457-F. Revision: F. Type: ICD. Author: Priya Nair. Created: 2024-05-21. Last modified: 2024-12-25. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Systems subsystem of the Kestrel K-200. Referenced parts: P-1051, P-1140, P-1063, P-1039.",
+  "structured": {
+    "doc_number": "MD-DOC-457-F",
+    "revision": "F",
+    "doc_type": "ICD",
+    "author": "E05",
+    "created": "2024-05-21",
+    "last_modified": "2024-12-25",
+    "status": "Released",
+    "subsystem": "Systems"
+  },
+  "refs": [
+    "P-1051",
+    "P-1140",
+    "P-1063",
+    "P-1039",
+    "ECR-202",
+    "ECR-215"
+  ]
+}

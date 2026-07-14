@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-050",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Decision Record: sensor fusion algorithm choice",
+  "text": "# Decision Record: sensor fusion algorithm choice\n\n**Attendees:** Lena Okafor, Priya Nair, Dev Patel\n\n## Summary\n\nThis page covers the sensor fusion algorithm choice for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Dev Patel on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E08",
+    "created_date": "2024-01-10",
+    "last_modified": "2024-01-21",
+    "last_modified_by": "E11"
+  },
+  "refs": [
+    "DOC-469",
+    "DOC-401",
+    "DOC-481",
+    "KES-176"
+  ]
+}

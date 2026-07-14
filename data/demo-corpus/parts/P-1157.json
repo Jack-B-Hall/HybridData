@@ -1,0 +1,21 @@
+{
+  "id": "P-1157",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Gimbal Motor \u2014 Yaw",
+  "text": "Gimbal Motor \u2014 Yaw. Subsystem: Payload. Material: hollow-shaft BLDC, 28mm. Mass: 45g. Manufactured by GB-Systems. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PAY-1157",
+    "revision": "B",
+    "subsystem": "Payload",
+    "part_class": "COTS",
+    "material": "hollow-shaft BLDC, 28mm",
+    "mass_g": 45,
+    "manufacturer": "GB-Systems",
+    "parent_id": "P-1154"
+  },
+  "refs": [
+    "P-1154",
+    "DRW-519"
+  ]
+}

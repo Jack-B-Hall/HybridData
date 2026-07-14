@@ -1,0 +1,25 @@
+{
+  "id": "DOC-461",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Risk Register",
+  "text": "# K-200 Battery Risk Register\n\nDocument number: MD-DOC-461-G. Revision: G. Type: analysis. Author: Dev Patel. Created: 2024-03-29. Last modified: 2024-11-04. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1022, P-1149, P-1025, P-1130.",
+  "structured": {
+    "doc_number": "MD-DOC-461-G",
+    "revision": "G",
+    "doc_type": "analysis",
+    "author": "E11",
+    "created": "2024-03-29",
+    "last_modified": "2024-11-04",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1022",
+    "P-1149",
+    "P-1025",
+    "P-1130",
+    "ECR-205",
+    "ECR-204"
+  ]
+}

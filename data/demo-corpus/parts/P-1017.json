@@ -1,0 +1,20 @@
+{
+  "id": "P-1017",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Wiring Harness Bracket \u2014 Airframe",
+  "text": "Wiring Harness Bracket \u2014 Airframe. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 34g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1017",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6",
+    "mass_g": 34,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001"
+  ]
+}

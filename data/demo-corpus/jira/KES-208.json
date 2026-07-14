@@ -1,0 +1,37 @@
+{
+  "id": "KES-208",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] LiPo thermal runaway on P-1062 during hot-day endurance test",
+  "text": "Bug KES-208. Reporter: Aisha Mbeki (Test & Verification Lead). Assignee: Lena Okafor (Battery & Power). Status: Done. Priority: Critical. Created: 2023-09-08. Resolved: 2023-10-19.\n\nDescription: During the 8 September 2023 hot-day endurance test (ambient temperature 34\u00b0C, full payload, 75-minute mission profile), the P-1062 battery cell assembly (LiPo 6S2P) experienced a thermal runaway event at T+47 minutes. The BMS (P-1075) triggered the emergency disconnect at 82\u00b0C cell temperature, which is within the BMS protection range, but the cells had already begun venting. Post-event inspection confirmed one cell in the pack had vented and another showed measurable deformation. No fire occurred; the battery enclosure (P-1061) contained the event.\n\nThis is the second thermal anomaly on P-1062 cells \u2014 the first was a minor cell swelling event in March 2023 noted in the lab log but not escalated to a Jira issue.\n\nAcceptance criteria for closure: Battery chemistry change ECR-214 approved and ECN-312 issued.\n\nLinked to: ECR-214 (battery chemistry change), WIKI-052 (design review meeting), ECN-312 (approved change).",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Done",
+    "priority": "Critical",
+    "reporter": "E10",
+    "assignee": "E03",
+    "created": "2023-09-08",
+    "resolved": "2023-10-19",
+    "labels": [
+      "battery",
+      "safety",
+      "thermal"
+    ],
+    "parent_id": null,
+    "linked_issues": [
+      {
+        "type": "triggers",
+        "target": "ECR-214"
+      }
+    ]
+  },
+  "refs": [
+    "P-1062",
+    "P-1075",
+    "P-1061",
+    "ECR-214",
+    "ECN-312",
+    "WIKI-052",
+    "DOC-421"
+  ]
+}

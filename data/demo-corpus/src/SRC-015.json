@@ -1,0 +1,44 @@
+{
+  "id": "SRC-015",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/payload_manager.py \u2014 Payload",
+  "text": "# payload_manager.py \u2014 Kestrel K-200 Payload\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "payload_manager",
+    "language": "Python",
+    "subsystem": "Payload",
+    "file_path": "payload/payload_manager.py",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "5e1a655",
+        "author": "E09",
+        "date": "2023-11-13",
+        "message": "Initial payload_manager [KES-069]",
+        "kes_ref": "KES-069"
+      },
+      {
+        "hash": "c25dc97",
+        "author": "E02",
+        "date": "2023-12-22",
+        "message": "Update payload_manager [KES-168]",
+        "kes_ref": "KES-168"
+      },
+      {
+        "hash": "35cd10f",
+        "author": "E05",
+        "date": "2024-02-20",
+        "message": "Update payload_manager [KES-210]",
+        "kes_ref": "KES-210"
+      }
+    ]
+  },
+  "refs": [
+    "KES-069",
+    "KES-168",
+    "KES-210",
+    "DOC-419",
+    "DOC-437"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "WIKI-028",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Risk Review Meeting \u2014 2023-12-24",
+  "text": "# Risk Review Meeting \u2014 2023-12-24\n\n**Attendees:** Tobias Wren, Jordan Kim\n\n## Summary\n\nThis page covers the sonar frequency range for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Priya Nair on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E13",
+    "created_date": "2023-12-24",
+    "last_modified": "2024-02-21",
+    "last_modified_by": "E05"
+  },
+  "refs": [
+    "DOC-407",
+    "DOC-413"
+  ]
+}

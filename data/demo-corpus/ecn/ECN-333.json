@@ -1,0 +1,27 @@
+{
+  "id": "ECN-333",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-233",
+  "text": "Engineering Change Notice ECN-333. Implements ECR-233. Approved by Aisha Mbeki on 2024-11-29. Affected parts: P-1051, P-1118, P-1028. Updated documents: DOC-439.",
+  "structured": {
+    "ecr_id": "ECR-233",
+    "approved_by": "E10",
+    "approved_date": "2024-11-29",
+    "affected_parts": [
+      "P-1051",
+      "P-1118",
+      "P-1028"
+    ],
+    "affected_docs": [
+      "DOC-439"
+    ]
+  },
+  "refs": [
+    "ECR-233",
+    "P-1051",
+    "P-1118",
+    "P-1028",
+    "DOC-439"
+  ]
+}

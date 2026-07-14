@@ -1,0 +1,25 @@
+{
+  "id": "DOC-490",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Qualification Test Report",
+  "text": "# K-200 Comms/Datalink Qualification Test Report\n\nDocument number: MD-DOC-490-B. Revision: B. Type: test-report. Author: Tyler Moss. Created: 2024-08-07. Last modified: 2025-01-19. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1077, P-1061, P-1025.",
+  "structured": {
+    "doc_number": "MD-DOC-490-B",
+    "revision": "B",
+    "doc_type": "test-report",
+    "author": "E14",
+    "created": "2024-08-07",
+    "last_modified": "2025-01-19",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1077",
+    "P-1061",
+    "P-1025",
+    "ECR-210",
+    "ECR-204",
+    "KES-110"
+  ]
+}

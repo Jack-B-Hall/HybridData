@@ -1,0 +1,24 @@
+{
+  "id": "DOC-464",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Subsystem Specification",
+  "text": "# K-200 Payload Subsystem Specification\n\nDocument number: MD-DOC-464-G. Revision: G. Type: specification. Author: Jordan Kim. Created: 2024-03-23. Last modified: 2024-06-22. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1054, P-1116, P-1079.",
+  "structured": {
+    "doc_number": "MD-DOC-464-G",
+    "revision": "G",
+    "doc_type": "specification",
+    "author": "E08",
+    "created": "2024-03-23",
+    "last_modified": "2024-06-22",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1054",
+    "P-1116",
+    "P-1079",
+    "ECR-206",
+    "KES-176"
+  ]
+}

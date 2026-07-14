@@ -1,0 +1,30 @@
+{
+  "id": "DRW-522",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-522: Servo Installation",
+  "text": "Drawing MD-DRW-522 Rev B \u2014 Servo Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1107, P-1108, P-1109, P-1110, P-1111.\n4. Drawn by Rowan Ellery, checked by Tobias Wren, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-522",
+    "revision": "B",
+    "drawn_by": "E13",
+    "checked_by": "E06",
+    "approved_by": "E09",
+    "date": "2024-06-12",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1107",
+      "P-1108",
+      "P-1109",
+      "P-1110",
+      "P-1111"
+    ]
+  },
+  "refs": [
+    "P-1107",
+    "P-1108",
+    "P-1109",
+    "P-1110",
+    "P-1111"
+  ]
+}

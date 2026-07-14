@@ -1,0 +1,30 @@
+{
+  "id": "KES-117",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Create verification matrix",
+  "text": "Story: Create verification matrix. Reporter: Tyler Moss. Assignee: Tobias Wren. Status: In Progress. Priority: Low. Created: 2025-08-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E14",
+    "assignee": "E06",
+    "created": "2025-08-12",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-050",
+    "KES-014"
+  ]
+}

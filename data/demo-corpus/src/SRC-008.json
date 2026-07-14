@@ -1,0 +1,44 @@
+{
+  "id": "SRC-008",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/attitude_estimator.c \u2014 Nav/GNC",
+  "text": "/* attitude_estimator.c \u2014 Kestrel K-200 Nav/GNC\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "attitude_estimator",
+    "language": "C",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/attitude_estimator.c",
+    "primary_author": "E11",
+    "commit_log": [
+      {
+        "hash": "3f3b1a3",
+        "author": "E10",
+        "date": "2025-12-17",
+        "message": "Initial attitude_estimator [KES-198]",
+        "kes_ref": "KES-198"
+      },
+      {
+        "hash": "e2bb817",
+        "author": "E06",
+        "date": "2026-01-11",
+        "message": "Update attitude_estimator [KES-175]",
+        "kes_ref": "KES-175"
+      },
+      {
+        "hash": "ed31a52",
+        "author": "E08",
+        "date": "2026-01-31",
+        "message": "Update attitude_estimator [KES-051]",
+        "kes_ref": "KES-051"
+      }
+    ]
+  },
+  "refs": [
+    "KES-198",
+    "KES-175",
+    "KES-051",
+    "DOC-436",
+    "DOC-475"
+  ]
+}

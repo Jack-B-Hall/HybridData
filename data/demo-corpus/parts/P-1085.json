@@ -1,0 +1,18 @@
+{
+  "id": "P-1085",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Thermal Sensor \u2014 Battery",
+  "text": "Thermal Sensor \u2014 Battery. Subsystem: Battery. Material: NTC 10k, waterproof probe. Mass: 10g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1085",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "NTC 10k, waterproof probe",
+    "mass_g": 10,
+    "manufacturer": "SenseCo",
+    "parent_id": null
+  },
+  "refs": []
+}

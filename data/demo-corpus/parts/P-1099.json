@@ -1,0 +1,20 @@
+{
+  "id": "P-1099",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Pitot-Static Tube",
+  "text": "Pitot-Static Tube. Subsystem: Nav/GNC. Material: stainless, heated, IP67. Mass: 45g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1099",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "stainless, heated, IP67",
+    "mass_g": 45,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-523"
+  ]
+}

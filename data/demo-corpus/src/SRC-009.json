@@ -1,0 +1,60 @@
+{
+  "id": "SRC-009",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/gps_driver.c \u2014 Nav/GNC",
+  "text": "/* gps_driver.c \u2014 Kestrel K-200 Nav/GNC\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "gps_driver",
+    "language": "C",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/gps_driver.c",
+    "primary_author": "E11",
+    "commit_log": [
+      {
+        "hash": "f9bb2c3",
+        "author": "E02",
+        "date": "2023-08-21",
+        "message": "Initial gps_driver [KES-063]",
+        "kes_ref": "KES-063"
+      },
+      {
+        "hash": "9efa0ab",
+        "author": "E13",
+        "date": "2023-09-22",
+        "message": "Update gps_driver [KES-024]",
+        "kes_ref": "KES-024"
+      },
+      {
+        "hash": "758a5eb",
+        "author": "E04",
+        "date": "2023-11-12",
+        "message": "Update gps_driver [KES-028]",
+        "kes_ref": "KES-028"
+      },
+      {
+        "hash": "52e774b",
+        "author": "E09",
+        "date": "2023-11-14",
+        "message": "Update gps_driver [KES-177]",
+        "kes_ref": "KES-177"
+      },
+      {
+        "hash": "857d9d2",
+        "author": "E04",
+        "date": "2023-11-27",
+        "message": "Update gps_driver [KES-146]",
+        "kes_ref": "KES-146"
+      }
+    ]
+  },
+  "refs": [
+    "KES-063",
+    "KES-024",
+    "KES-028",
+    "KES-177",
+    "KES-146",
+    "DOC-468",
+    "DOC-420"
+  ]
+}

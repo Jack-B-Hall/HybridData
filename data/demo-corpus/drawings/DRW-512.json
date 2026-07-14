@@ -1,0 +1,26 @@
+{
+  "id": "DRW-512",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-512: Tailboom & Control Surface",
+  "text": "Drawing MD-DRW-512 Rev B \u2014 Tailboom & Control Surface\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1005, P-1016, P-1018.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-512",
+    "revision": "B",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-07-14",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1005",
+      "P-1016",
+      "P-1018"
+    ]
+  },
+  "refs": [
+    "P-1005",
+    "P-1016",
+    "P-1018"
+  ]
+}

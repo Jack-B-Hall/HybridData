@@ -1,0 +1,30 @@
+{
+  "id": "KES-185",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Dev Patel. Assignee: Dev Patel. Status: Done. Priority: Low. Created: 2023-03-02.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E11",
+    "assignee": "E11",
+    "created": "2023-03-02",
+    "resolved": "2023-04-30",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-050",
+    "KES-018"
+  ]
+}

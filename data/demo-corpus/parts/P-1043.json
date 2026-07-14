@@ -1,0 +1,18 @@
+{
+  "id": "P-1043",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Propeller Guard Assembly",
+  "text": "Propeller Guard Assembly. Subsystem: Propulsion. Material: HDPE. Mass: 120g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PRO-1043",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "custom",
+    "material": "HDPE",
+    "mass_g": 120,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

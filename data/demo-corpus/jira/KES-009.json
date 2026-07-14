@@ -1,0 +1,22 @@
+{
+  "id": "KES-009",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Waterproofing and IP67 verification",
+  "text": "Epic: Waterproofing and IP67 verification. Reporter: Jordan Kim. Assignee: Priya Nair. Status: In Progress. Priority: High. Created: 2024-07-19.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E08",
+    "assignee": "E05",
+    "created": "2024-07-19",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

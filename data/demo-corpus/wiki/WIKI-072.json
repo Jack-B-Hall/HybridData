@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-072",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Airframe Design Review \u2014 2025-06-20",
+  "text": "# Airframe Design Review \u2014 2025-06-20\n\n**Attendees:** Felix Herrera, Sam Dreher, Lena Okafor, Priya Nair\n\n## Summary\n\nThis page covers the waterproofing philosophy for the Airframe subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Felix Herrera on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2025-06-20",
+    "last_modified": "2025-08-30",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "DOC-472",
+    "DOC-462",
+    "KES-148",
+    "KES-089"
+  ]
+}

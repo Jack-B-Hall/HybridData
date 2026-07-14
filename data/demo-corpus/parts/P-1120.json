@@ -1,0 +1,18 @@
+{
+  "id": "P-1120",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "FCU Programming Cable",
+  "text": "FCU Programming Cable. Subsystem: Nav/GNC. Material: USB-C to JST-GH UART. Mass: 8g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1120",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "USB-C to JST-GH UART",
+    "mass_g": 8,
+    "manufacturer": "HolybrozAU",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,26 @@
+{
+  "id": "DRW-530",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-530: Sonar Dome Integration",
+  "text": "Drawing MD-DRW-530 Rev E \u2014 Sonar Dome Integration\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1149, P-1150, P-1151.\n4. Drawn by Cass Doyle, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-530",
+    "revision": "E",
+    "drawn_by": "E07",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2025-02-14",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1149",
+      "P-1150",
+      "P-1151"
+    ]
+  },
+  "refs": [
+    "P-1149",
+    "P-1150",
+    "P-1151"
+  ]
+}

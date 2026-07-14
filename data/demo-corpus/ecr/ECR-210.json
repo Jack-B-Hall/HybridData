@@ -1,0 +1,30 @@
+{
+  "id": "ECR-210",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Airframe \u2014 update P-1106 per KES-184",
+  "text": "Engineering Change Request ECR-210. Subsystem: Airframe. Affected parts: P-1106. Linked issues: KES-184, KES-121. Raised by: Dev Patel on 2023-10-18. Status: Approved.",
+  "structured": {
+    "raised_by": "E11",
+    "raised_date": "2023-10-18",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1106"
+    ],
+    "affected_docs": [
+      "DOC-488"
+    ],
+    "jira_issues": [
+      "KES-184",
+      "KES-121"
+    ],
+    "approver": "E04",
+    "approved_date": "2023-10-23"
+  },
+  "refs": [
+    "P-1106",
+    "KES-184",
+    "KES-121",
+    "DOC-488"
+  ]
+}

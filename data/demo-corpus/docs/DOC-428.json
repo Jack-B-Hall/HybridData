@@ -1,0 +1,24 @@
+{
+  "id": "DOC-428",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Payload Acceptance Test Procedure",
+  "text": "# K-200 Payload Acceptance Test Procedure\n\nDocument number: MD-DOC-428-C. Revision: C. Type: procedure. Author: Rowan Ellery. Created: 2024-03-09. Last modified: 2024-12-14. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Payload subsystem of the Kestrel K-200. Referenced parts: P-1148, P-1162.",
+  "structured": {
+    "doc_number": "MD-DOC-428-C",
+    "revision": "C",
+    "doc_type": "procedure",
+    "author": "E13",
+    "created": "2024-03-09",
+    "last_modified": "2024-12-14",
+    "status": "Released",
+    "subsystem": "Payload"
+  },
+  "refs": [
+    "P-1148",
+    "P-1162",
+    "ECR-225",
+    "ECR-229",
+    "KES-204"
+  ]
+}

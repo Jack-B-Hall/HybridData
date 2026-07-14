@@ -1,0 +1,22 @@
+{
+  "id": "DRW-524",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-524: Sonar Signal Processor PCB",
+  "text": "Drawing MD-DRW-524 Rev D \u2014 Sonar Signal Processor PCB\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1147.\n4. Drawn by Rowan Ellery, checked by Cass Doyle, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-524",
+    "revision": "D",
+    "drawn_by": "E13",
+    "checked_by": "E07",
+    "approved_by": "E09",
+    "date": "2024-08-02",
+    "subsystem": "Payload",
+    "referenced_parts": [
+      "P-1147"
+    ]
+  },
+  "refs": [
+    "P-1147"
+  ]
+}

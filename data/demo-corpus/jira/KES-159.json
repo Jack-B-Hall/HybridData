@@ -1,0 +1,31 @@
+{
+  "id": "KES-159",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Priya Nair. Assignee: Lena Okafor. Status: In Progress. Priority: High. Created: 2023-11-15.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E03",
+    "created": "2023-11-15",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-478",
+    "WIKI-010",
+    "KES-005"
+  ]
+}

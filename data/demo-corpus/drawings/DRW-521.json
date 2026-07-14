@@ -1,0 +1,28 @@
+{
+  "id": "DRW-521",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-521: Battery Retention System",
+  "text": "Drawing MD-DRW-521 Rev A \u2014 Battery Retention System\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1067, P-1068, P-1069, P-1061.\n4. Drawn by Tobias Wren, checked by Lena Okafor, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-521",
+    "revision": "A",
+    "drawn_by": "E06",
+    "checked_by": "E03",
+    "approved_by": "E01",
+    "date": "2024-05-09",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1067",
+      "P-1068",
+      "P-1069",
+      "P-1061"
+    ]
+  },
+  "refs": [
+    "P-1067",
+    "P-1068",
+    "P-1069",
+    "P-1061"
+  ]
+}

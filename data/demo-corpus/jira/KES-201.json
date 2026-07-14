@@ -1,0 +1,41 @@
+{
+  "id": "KES-201",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Comms datalink encryption upgrade \u2014 AES-256-GCM",
+  "text": "Epic KES-201. Reporter: Priya Nair (Comms/Datalink Engineer). Assignee: Priya Nair. Status: Done. Priority: High. Created: 2025-01-10. Resolved: 2025-03-01.\n\nDescription: End-to-end AES-256-GCM encryption for the K-200 command and telemetry datalink, required by customer contract security addendum (ref KES-203) by milestone M4 (March 2025).\n\nBackground: December 2024 penetration test (MD-SEC-2024-11) found the unencrypted FreeWave P-1125 datalink vulnerable to command injection. This epic covers the hardware (P-1127 FPGA encryption module), the radio upgrade (P-1125 \u2192 P-1126 for bandwidth headroom), the firmware implementation (SRC-018), the GCS protocol stack update (SRC-024), and the ICD updates (DOC-471, DOC-472).\n\nDesign review: WIKI-071 (Comms Encryption Upgrade Review, 2025-01-22).\nECR: ECR-229. ECN: ECN-322 (approved 2025-02-05).\n\nSub-stories: KES-203 (AES-256 implementation), KES-203 contract requirement story.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E05",
+    "assignee": "E05",
+    "created": "2025-01-10",
+    "resolved": "2025-03-01",
+    "labels": [
+      "comms",
+      "security",
+      "encryption"
+    ],
+    "parent_id": null,
+    "linked_issues": [
+      {
+        "type": "is-parent-of",
+        "target": "KES-203"
+      }
+    ]
+  },
+  "refs": [
+    "P-1125",
+    "P-1126",
+    "P-1127",
+    "DOC-471",
+    "DOC-472",
+    "ECR-229",
+    "ECN-322",
+    "SRC-018",
+    "SRC-024",
+    "WIKI-071",
+    "KES-203"
+  ]
+}

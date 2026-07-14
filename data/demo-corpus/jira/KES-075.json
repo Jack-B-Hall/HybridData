@@ -1,0 +1,29 @@
+{
+  "id": "KES-075",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review configuration baseline",
+  "text": "Story: Review configuration baseline. Reporter: Felix Herrera. Assignee: Jordan Kim. Status: Open. Priority: High. Created: 2025-08-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E09",
+    "assignee": "E08",
+    "created": "2025-08-18",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-004",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-004"
+      }
+    ]
+  },
+  "refs": [
+    "KES-004"
+  ]
+}

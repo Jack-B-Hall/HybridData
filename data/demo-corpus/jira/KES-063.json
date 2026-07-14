@@ -1,0 +1,30 @@
+{
+  "id": "KES-063",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Servo oscillation in gusty conditions",
+  "text": "Bug: Servo oscillation in gusty conditions. Reporter: Jordan Kim. Assignee: Dev Patel. Status: In Progress. Priority: Medium. Created: 2023-07-04.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E11",
+    "created": "2023-07-04",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-450",
+    "KES-011"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "P-1008",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Wing Skin \u2014 Port",
+  "text": "Wing Skin \u2014 Port. Subsystem: Airframe. Material: hybrid carbon-aramid composite. Mass: 145g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1008",
+    "revision": "C",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "hybrid carbon-aramid composite",
+    "mass_g": 145,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001",
+    "DRW-502"
+  ]
+}

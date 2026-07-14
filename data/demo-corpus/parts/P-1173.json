@@ -1,0 +1,18 @@
+{
+  "id": "P-1173",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS USB Hub",
+  "text": "GCS USB Hub. Subsystem: GCS. Material: 7-port USB 3.0, surge-protected. Mass: 68g. Manufactured by Belkin. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1173",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "7-port USB 3.0, surge-protected",
+    "mass_g": 68,
+    "manufacturer": "Belkin",
+    "parent_id": null
+  },
+  "refs": []
+}

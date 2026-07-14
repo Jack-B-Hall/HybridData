@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-077",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Payload Integration Planning \u2014 2024-12-27",
+  "text": "# Payload Integration Planning \u2014 2024-12-27\n\n**Attendees:** Sam Dreher, Felix Herrera, Dev Patel\n\n## Summary\n\nThis page covers the GCS display layout for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Jordan Kim on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E08",
+    "created_date": "2024-12-27",
+    "last_modified": "2025-02-01",
+    "last_modified_by": "E08"
+  },
+  "refs": [
+    "ECR-230"
+  ]
+}

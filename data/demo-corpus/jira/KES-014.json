@@ -1,0 +1,25 @@
+{
+  "id": "KES-014",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] WPPR documentation cycle 2",
+  "text": "Epic: WPPR documentation cycle 2. Reporter: Sam Dreher. Assignee: Tobias Wren. Status: In Progress. Priority: High. Created: 2023-11-01.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E06",
+    "created": "2023-11-01",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-475",
+    "DOC-455"
+  ]
+}

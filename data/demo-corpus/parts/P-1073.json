@@ -1,0 +1,20 @@
+{
+  "id": "P-1073",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Inrush Limiter \u2014 Main Bus",
+  "text": "Inrush Limiter \u2014 Main Bus. Subsystem: Battery. Material: NTC 47R inrush limiter. Mass: 9g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1073",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "NTC 47R inrush limiter",
+    "mass_g": 9,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-527"
+  ]
+}

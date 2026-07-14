@@ -1,0 +1,28 @@
+{
+  "id": "DRW-529",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-529: Payload Rail System",
+  "text": "Drawing MD-DRW-529 Rev D \u2014 Payload Rail System\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1024, P-1025, P-1159, P-1160.\n4. Drawn by Tobias Wren, checked by Cass Doyle, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-529",
+    "revision": "D",
+    "drawn_by": "E06",
+    "checked_by": "E07",
+    "approved_by": "E09",
+    "date": "2025-01-08",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1024",
+      "P-1025",
+      "P-1159",
+      "P-1160"
+    ]
+  },
+  "refs": [
+    "P-1024",
+    "P-1025",
+    "P-1159",
+    "P-1160"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "SRC-010",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gnc/gnc_autopilot.c \u2014 Nav/GNC",
+  "text": "/* gnc_autopilot.c \u2014 Kestrel K-200 Nav/GNC\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "gnc_autopilot",
+    "language": "C",
+    "subsystem": "Nav/GNC",
+    "file_path": "gnc/gnc_autopilot.c",
+    "primary_author": "E04",
+    "commit_log": [
+      {
+        "hash": "50a620d",
+        "author": "E11",
+        "date": "2024-07-26",
+        "message": "Initial gnc_autopilot [KES-068]",
+        "kes_ref": "KES-068"
+      },
+      {
+        "hash": "51fd3ac",
+        "author": "E05",
+        "date": "2024-09-14",
+        "message": "Update gnc_autopilot [KES-159]",
+        "kes_ref": "KES-159"
+      },
+      {
+        "hash": "5a181d2",
+        "author": "E06",
+        "date": "2024-09-24",
+        "message": "Update gnc_autopilot [KES-157]",
+        "kes_ref": "KES-157"
+      },
+      {
+        "hash": "130a679",
+        "author": "E05",
+        "date": "2024-11-19",
+        "message": "Update gnc_autopilot [KES-009]",
+        "kes_ref": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "KES-068",
+    "KES-159",
+    "KES-157",
+    "KES-009",
+    "DOC-476",
+    "DOC-433"
+  ]
+}

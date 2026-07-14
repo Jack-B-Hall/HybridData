@@ -1,0 +1,29 @@
+{
+  "id": "KES-179",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Marcus Thaine. Assignee: Jordan Kim. Status: Done. Priority: High. Created: 2023-08-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E02",
+    "assignee": "E08",
+    "created": "2023-08-10",
+    "resolved": "2023-12-05",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

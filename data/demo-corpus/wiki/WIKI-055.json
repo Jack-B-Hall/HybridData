@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-055",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Programme Status Gate 2 \u2014 2024-11-28",
+  "text": "# Programme Status Gate 2 \u2014 2024-11-28\n\n**Attendees:** Marcus Thaine, Dev Patel, Aisha Mbeki, Rowan Ellery\n\n## Summary\n\nThis page covers the EMC mitigation strategy for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Sam Dreher on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E04",
+    "created_date": "2024-11-28",
+    "last_modified": "2024-12-27",
+    "last_modified_by": "E04"
+  },
+  "refs": [
+    "DOC-424"
+  ]
+}

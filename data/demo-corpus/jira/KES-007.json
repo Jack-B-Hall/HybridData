@@ -1,0 +1,24 @@
+{
+  "id": "KES-007",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Ground control station development",
+  "text": "Epic: Ground control station development. Reporter: Nina Schulz. Assignee: Priya Nair. Status: In Progress. Priority: High. Created: 2023-06-11.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E12",
+    "assignee": "E05",
+    "created": "2023-06-11",
+    "resolved": null,
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-438"
+  ]
+}

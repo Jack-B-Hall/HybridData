@@ -1,0 +1,1635 @@
+{
+  "id": "K-200",
+  "title": "Kestrel K-200 (product)",
+  "subsystem": "Product",
+  "text": "Autonomous maritime survey drone. Top-level product assembly.",
+  "children": [
+    {
+      "id": "P-1001",
+      "title": "Fuselage Main Body",
+      "subsystem": "Airframe",
+      "material": "CFRP",
+      "mass_g": 1240,
+      "text": "Fuselage Main Body. Subsystem: Airframe. Material: CFRP. Mass: 1240g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+      "children": [
+        {
+          "id": "P-1002",
+          "title": "Wing Spar \u2014 Port",
+          "subsystem": "Airframe",
+          "material": "aluminium 7075-T6",
+          "mass_g": 310,
+          "text": "Wing Spar \u2014 Port. Subsystem: Airframe. Material: aluminium 7075-T6. Mass: 310g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1003",
+          "title": "Wing Spar \u2014 Starboard",
+          "subsystem": "Airframe",
+          "material": "aluminium 7075-T6",
+          "mass_g": 310,
+          "text": "Wing Spar \u2014 Starboard. Subsystem: Airframe. Material: aluminium 7075-T6. Mass: 310g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1004",
+          "title": "Nose Cone Assembly",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 180,
+          "text": "Nose Cone Assembly. Subsystem: Airframe. Material: CFRP. Mass: 180g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1005",
+          "title": "Tail Boom",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 220,
+          "text": "Tail Boom. Subsystem: Airframe. Material: CFRP. Mass: 220g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": [
+            {
+              "id": "P-1016",
+              "title": "Elevator Assembly",
+              "subsystem": "Airframe",
+              "material": "CFRP",
+              "mass_g": 55,
+              "text": "Elevator Assembly. Subsystem: Airframe. Material: CFRP. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+              "children": []
+            },
+            {
+              "id": "P-1018",
+              "title": "Rudder Assembly",
+              "subsystem": "Airframe",
+              "material": "CFRP",
+              "mass_g": 48,
+              "text": "Rudder Assembly. Subsystem: Airframe. Material: CFRP. Mass: 48g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "P-1006",
+          "title": "Landing Skid \u2014 Forward",
+          "subsystem": "Airframe",
+          "material": "glass fibre composite",
+          "mass_g": 95,
+          "text": "Landing Skid \u2014 Forward. Subsystem: Airframe. Material: glass fibre composite. Mass: 95g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1007",
+          "title": "Landing Skid \u2014 Aft",
+          "subsystem": "Airframe",
+          "material": "glass fibre composite",
+          "mass_g": 95,
+          "text": "Landing Skid \u2014 Aft. Subsystem: Airframe. Material: glass fibre composite. Mass: 95g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1008",
+          "title": "Wing Skin \u2014 Port",
+          "subsystem": "Airframe",
+          "material": "hybrid carbon-aramid composite",
+          "mass_g": 145,
+          "text": "Wing Skin \u2014 Port. Subsystem: Airframe. Material: hybrid carbon-aramid composite. Mass: 145g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1009",
+          "title": "Wing Skin \u2014 Starboard",
+          "subsystem": "Airframe",
+          "material": "hybrid carbon-aramid composite",
+          "mass_g": 145,
+          "text": "Wing Skin \u2014 Starboard. Subsystem: Airframe. Material: hybrid carbon-aramid composite. Mass: 145g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1010",
+          "title": "Aileron \u2014 Port",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 62,
+          "text": "Aileron \u2014 Port. Subsystem: Airframe. Material: CFRP. Mass: 62g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1011",
+          "title": "Aileron \u2014 Starboard",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 62,
+          "text": "Aileron \u2014 Starboard. Subsystem: Airframe. Material: CFRP. Mass: 62g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1012",
+          "title": "Motor Mount \u2014 Aft Port",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 88,
+          "text": "Motor Mount \u2014 Aft Port. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 88g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1013",
+          "title": "Motor Mount \u2014 Aft Starboard",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 88,
+          "text": "Motor Mount \u2014 Aft Starboard. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 88g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1014",
+          "title": "Motor Mount \u2014 Fwd Port",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 88,
+          "text": "Motor Mount \u2014 Fwd Port. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 88g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1015",
+          "title": "Motor Mount \u2014 Fwd Starboard",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 88,
+          "text": "Motor Mount \u2014 Fwd Starboard. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 88g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1017",
+          "title": "Wiring Harness Bracket \u2014 Airframe",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 34,
+          "text": "Wiring Harness Bracket \u2014 Airframe. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 34g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1019",
+          "title": "Avionics Bay Structure",
+          "subsystem": "Airframe",
+          "material": "aluminium 7075-T6",
+          "mass_g": 210,
+          "text": "Avionics Bay Structure. Subsystem: Airframe. Material: aluminium 7075-T6. Mass: 210g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1020",
+          "title": "Hatch \u2014 Battery Bay",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 72,
+          "text": "Hatch \u2014 Battery Bay. Subsystem: Airframe. Material: CFRP. Mass: 72g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1021",
+          "title": "Hatch \u2014 Payload Bay",
+          "subsystem": "Airframe",
+          "material": "CFRP",
+          "mass_g": 68,
+          "text": "Hatch \u2014 Payload Bay. Subsystem: Airframe. Material: CFRP. Mass: 68g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1022",
+          "title": "Antenna Fairing \u2014 Port",
+          "subsystem": "Airframe",
+          "material": "fibreglass",
+          "mass_g": 22,
+          "text": "Antenna Fairing \u2014 Port. Subsystem: Airframe. Material: fibreglass. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1023",
+          "title": "Antenna Fairing \u2014 Starboard",
+          "subsystem": "Airframe",
+          "material": "fibreglass",
+          "mass_g": 22,
+          "text": "Antenna Fairing \u2014 Starboard. Subsystem: Airframe. Material: fibreglass. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1024",
+          "title": "Payload Rail \u2014 Port",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 55,
+          "text": "Payload Rail \u2014 Port. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1025",
+          "title": "Payload Rail \u2014 Starboard",
+          "subsystem": "Airframe",
+          "material": "aluminium 6061-T6",
+          "mass_g": 55,
+          "text": "Payload Rail \u2014 Starboard. Subsystem: Airframe. Material: aluminium 6061-T6. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1026",
+          "title": "Drain Plug",
+          "subsystem": "Airframe",
+          "material": "neoprene/brass",
+          "mass_g": 8,
+          "text": "Drain Plug. Subsystem: Airframe. Material: neoprene/brass. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1027",
+          "title": "Ballast Weight \u2014 Forward",
+          "subsystem": "Airframe",
+          "material": "lead alloy",
+          "mass_g": 50,
+          "text": "Ballast Weight \u2014 Forward. Subsystem: Airframe. Material: lead alloy. Mass: 50g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1028",
+          "title": "Ballast Weight \u2014 Aft",
+          "subsystem": "Airframe",
+          "material": "lead alloy",
+          "mass_g": 50,
+          "text": "Ballast Weight \u2014 Aft. Subsystem: Airframe. Material: lead alloy. Mass: 50g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1029",
+          "title": "Tie-Down Ring \u2014 Forward",
+          "subsystem": "Airframe",
+          "material": "stainless steel 316",
+          "mass_g": 18,
+          "text": "Tie-Down Ring \u2014 Forward. Subsystem: Airframe. Material: stainless steel 316. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1030",
+          "title": "Tie-Down Ring \u2014 Aft",
+          "subsystem": "Airframe",
+          "material": "stainless steel 316",
+          "mass_g": 18,
+          "text": "Tie-Down Ring \u2014 Aft. Subsystem: Airframe. Material: stainless steel 316. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1067",
+          "title": "Battery Mounting Bracket",
+          "subsystem": "Battery",
+          "material": "aluminium 6061-T6",
+          "mass_g": 68,
+          "text": "Battery Mounting Bracket. Subsystem: Battery. Material: aluminium 6061-T6. Mass: 68g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": [
+            {
+              "id": "P-1069",
+              "title": "Battery Retention Strap (x2)",
+              "subsystem": "Battery",
+              "material": "nylon webbing, QD buckle",
+              "mass_g": 30,
+              "text": "Battery Retention Strap (x2). Subsystem: Battery. Material: nylon webbing, QD buckle. Mass: 30g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P-1031",
+      "title": "BLDC Motor v1 (obsolete)",
+      "subsystem": "Propulsion",
+      "material": "brushless DC, 4012 490KV",
+      "mass_g": 185,
+      "text": "BLDC Motor v1 (obsolete). Subsystem: Propulsion. Material: brushless DC, 4012 490KV. Mass: 185g. Manufactured by TorqueDrive Systems. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1032",
+      "title": "ESC 60A Original",
+      "subsystem": "Propulsion",
+      "material": "MOSFET, aluminium heatsink",
+      "mass_g": 95,
+      "text": "ESC 60A Original. Subsystem: Propulsion. Material: MOSFET, aluminium heatsink. Mass: 95g. Manufactured by ControlAir Ltd. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1033",
+      "title": "Propeller Fwd CW 15x5.5",
+      "subsystem": "Propulsion",
+      "material": "carbon fibre",
+      "mass_g": 42,
+      "text": "Propeller Fwd CW 15x5.5. Subsystem: Propulsion. Material: carbon fibre. Mass: 42g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1034",
+      "title": "Propeller Fwd CCW 15x5.5",
+      "subsystem": "Propulsion",
+      "material": "carbon fibre",
+      "mass_g": 42,
+      "text": "Propeller Fwd CCW 15x5.5. Subsystem: Propulsion. Material: carbon fibre. Mass: 42g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1035",
+      "title": "Propeller Aft CW 15x5.5",
+      "subsystem": "Propulsion",
+      "material": "carbon fibre",
+      "mass_g": 42,
+      "text": "Propeller Aft CW 15x5.5. Subsystem: Propulsion. Material: carbon fibre. Mass: 42g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1036",
+      "title": "Propeller Aft CCW 15x5.5",
+      "subsystem": "Propulsion",
+      "material": "carbon fibre",
+      "mass_g": 42,
+      "text": "Propeller Aft CCW 15x5.5. Subsystem: Propulsion. Material: carbon fibre. Mass: 42g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1037",
+      "title": "Motor Cable \u2014 Fwd Port",
+      "subsystem": "Propulsion",
+      "material": "silicone 14AWG, 300mm",
+      "mass_g": 28,
+      "text": "Motor Cable \u2014 Fwd Port. Subsystem: Propulsion. Material: silicone 14AWG, 300mm. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1038",
+      "title": "Motor Cable \u2014 Fwd Starboard",
+      "subsystem": "Propulsion",
+      "material": "silicone 14AWG, 300mm",
+      "mass_g": 28,
+      "text": "Motor Cable \u2014 Fwd Starboard. Subsystem: Propulsion. Material: silicone 14AWG, 300mm. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1039",
+      "title": "Propeller Adapter Set",
+      "subsystem": "Propulsion",
+      "material": "aluminium 6061",
+      "mass_g": 22,
+      "text": "Propeller Adapter Set. Subsystem: Propulsion. Material: aluminium 6061. Mass: 22g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1040",
+      "title": "ESC Mounting Plate",
+      "subsystem": "Propulsion",
+      "material": "aluminium 6061-T6",
+      "mass_g": 36,
+      "text": "ESC Mounting Plate. Subsystem: Propulsion. Material: aluminium 6061-T6. Mass: 36g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1041",
+      "title": "BLDC Motor v2 Enhanced",
+      "subsystem": "Propulsion",
+      "material": "brushless DC, 4014 420KV, enhanced thermal dissipation",
+      "mass_g": 198,
+      "text": "BLDC Motor v2 Enhanced. Subsystem: Propulsion. Material: brushless DC, 4014 420KV, enhanced thermal dissipation. Mass: 198g. Manufactured by TorqueDrive Systems. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1042",
+      "title": "ESC 80A Enhanced",
+      "subsystem": "Propulsion",
+      "material": "MOSFET, copper heatsink",
+      "mass_g": 108,
+      "text": "ESC 80A Enhanced. Subsystem: Propulsion. Material: MOSFET, copper heatsink. Mass: 108g. Manufactured by ControlAir Ltd. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1043",
+      "title": "Propeller Guard Assembly",
+      "subsystem": "Propulsion",
+      "material": "HDPE",
+      "mass_g": 120,
+      "text": "Propeller Guard Assembly. Subsystem: Propulsion. Material: HDPE. Mass: 120g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1044",
+      "title": "Motor/ESC Controller Board",
+      "subsystem": "Propulsion",
+      "material": "PCB, STM32, CAN bus",
+      "mass_g": 65,
+      "text": "Motor/ESC Controller Board. Subsystem: Propulsion. Material: PCB, STM32, CAN bus. Mass: 65g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1045",
+      "title": "Thermal Pad \u2014 ESC (set of 4)",
+      "subsystem": "Propulsion",
+      "material": "graphite, 1mm",
+      "mass_g": 12,
+      "text": "Thermal Pad \u2014 ESC (set of 4). Subsystem: Propulsion. Material: graphite, 1mm. Mass: 12g. Manufactured by ThermalTech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1046",
+      "title": "RPM Sensor (set of 4)",
+      "subsystem": "Propulsion",
+      "material": "hall-effect",
+      "mass_g": 16,
+      "text": "RPM Sensor (set of 4). Subsystem: Propulsion. Material: hall-effect. Mass: 16g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1047",
+      "title": "Motor Thermal Sensor (set of 4)",
+      "subsystem": "Propulsion",
+      "material": "NTC thermistor 10k",
+      "mass_g": 14,
+      "text": "Motor Thermal Sensor (set of 4). Subsystem: Propulsion. Material: NTC thermistor 10k. Mass: 14g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1048",
+      "title": "Vibration Isolator \u2014 Motor (x4)",
+      "subsystem": "Propulsion",
+      "material": "silicone rubber M4",
+      "mass_g": 20,
+      "text": "Vibration Isolator \u2014 Motor (x4). Subsystem: Propulsion. Material: silicone rubber M4. Mass: 20g. Manufactured by IsolaTech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1049",
+      "title": "Propeller Locking Nut (x4)",
+      "subsystem": "Propulsion",
+      "material": "aluminium self-locking",
+      "mass_g": 8,
+      "text": "Propeller Locking Nut (x4). Subsystem: Propulsion. Material: aluminium self-locking. Mass: 8g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1050",
+      "title": "Propeller Washer (x4)",
+      "subsystem": "Propulsion",
+      "material": "stainless steel",
+      "mass_g": 6,
+      "text": "Propeller Washer (x4). Subsystem: Propulsion. Material: stainless steel. Mass: 6g. Manufactured by PropTech GmbH. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1051",
+      "title": "ESC Heatsink Enhanced (x4)",
+      "subsystem": "Propulsion",
+      "material": "copper, fins",
+      "mass_g": 48,
+      "text": "ESC Heatsink Enhanced (x4). Subsystem: Propulsion. Material: copper, fins. Mass: 48g. Manufactured by ThermalTech. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1052",
+      "title": "Motor Mounting Screw Set",
+      "subsystem": "Propulsion",
+      "material": "M3 stainless, set of 16",
+      "mass_g": 12,
+      "text": "Motor Mounting Screw Set. Subsystem: Propulsion. Material: M3 stainless, set of 16. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1053",
+      "title": "Motor Cable \u2014 Aft Port",
+      "subsystem": "Propulsion",
+      "material": "silicone 14AWG, 400mm",
+      "mass_g": 32,
+      "text": "Motor Cable \u2014 Aft Port. Subsystem: Propulsion. Material: silicone 14AWG, 400mm. Mass: 32g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1054",
+      "title": "Motor Cable \u2014 Aft Starboard",
+      "subsystem": "Propulsion",
+      "material": "silicone 14AWG, 400mm",
+      "mass_g": 32,
+      "text": "Motor Cable \u2014 Aft Starboard. Subsystem: Propulsion. Material: silicone 14AWG, 400mm. Mass: 32g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1055",
+      "title": "Motor Programming Card",
+      "subsystem": "Propulsion",
+      "material": "USB interface",
+      "mass_g": 18,
+      "text": "Motor Programming Card. Subsystem: Propulsion. Material: USB interface. Mass: 18g. Manufactured by ControlAir Ltd. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1056",
+      "title": "Inrush Limiter \u2014 Motor Bus",
+      "subsystem": "Propulsion",
+      "material": "NTC inrush limiter 22R",
+      "mass_g": 10,
+      "text": "Inrush Limiter \u2014 Motor Bus. Subsystem: Propulsion. Material: NTC inrush limiter 22R. Mass: 10g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1057",
+      "title": "Motor Protection Diode (x4)",
+      "subsystem": "Propulsion",
+      "material": "Schottky 100V 10A",
+      "mass_g": 8,
+      "text": "Motor Protection Diode (x4). Subsystem: Propulsion. Material: Schottky 100V 10A. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1058",
+      "title": "Motor Cable Clamp Set",
+      "subsystem": "Propulsion",
+      "material": "nylon PA6",
+      "mass_g": 16,
+      "text": "Motor Cable Clamp Set. Subsystem: Propulsion. Material: nylon PA6. Mass: 16g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1059",
+      "title": "Motor Connector XT60 (x4 pairs)",
+      "subsystem": "Propulsion",
+      "material": "XT60 gold plated",
+      "mass_g": 14,
+      "text": "Motor Connector XT60 (x4 pairs). Subsystem: Propulsion. Material: XT60 gold plated. Mass: 14g. Manufactured by AmassConnect. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1060",
+      "title": "Motor Data Cable Harness",
+      "subsystem": "Propulsion",
+      "material": "JST-GH 4-pin, 200mm",
+      "mass_g": 18,
+      "text": "Motor Data Cable Harness. Subsystem: Propulsion. Material: JST-GH 4-pin, 200mm. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1061",
+      "title": "Battery Enclosure",
+      "subsystem": "Battery",
+      "material": "aluminium 6061-T6, IP67",
+      "mass_g": 310,
+      "text": "Battery Enclosure. Subsystem: Battery. Material: aluminium 6061-T6, IP67. Mass: 310g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": [
+        {
+          "id": "P-1063",
+          "title": "Battery Enclosure Lid",
+          "subsystem": "Battery",
+          "material": "aluminium 6061-T6, IP67 seal",
+          "mass_g": 95,
+          "text": "Battery Enclosure Lid. Subsystem: Battery. Material: aluminium 6061-T6, IP67 seal. Mass: 95g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1066",
+          "title": "Heat Spreader \u2014 Battery",
+          "subsystem": "Battery",
+          "material": "copper 2mm",
+          "mass_g": 145,
+          "text": "Heat Spreader \u2014 Battery. Subsystem: Battery. Material: copper 2mm. Mass: 145g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1068",
+          "title": "Compression Pad \u2014 Battery",
+          "subsystem": "Battery",
+          "material": "expanded PTFE foam",
+          "mass_g": 22,
+          "text": "Compression Pad \u2014 Battery. Subsystem: Battery. Material: expanded PTFE foam. Mass: 22g. Manufactured by SealTech. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1070",
+          "title": "Battery Venting Membrane",
+          "subsystem": "Battery",
+          "material": "PTFE, 0.1 \u03bcm",
+          "mass_g": 8,
+          "text": "Battery Venting Membrane. Subsystem: Battery. Material: PTFE, 0.1 \u03bcm. Mass: 8g. Manufactured by GoreTech. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1088",
+          "title": "Battery Cell Spacer (x12)",
+          "subsystem": "Battery",
+          "material": "expanded polypropylene",
+          "mass_g": 28,
+          "text": "Battery Cell Spacer (x12). Subsystem: Battery. Material: expanded polypropylene. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+          "children": []
+        },
+        {
+          "id": "P-1089",
+          "title": "Pressure Relief Valve",
+          "subsystem": "Battery",
+          "material": "spring-loaded, 1.5 bar, IP67",
+          "mass_g": 9,
+          "text": "Pressure Relief Valve. Subsystem: Battery. Material: spring-loaded, 1.5 bar, IP67. Mass: 9g. Manufactured by ReliefsRUS. Revision A. Part class: COTS.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "P-1062",
+      "title": "Battery Cell Assembly \u2014 LiFePO4",
+      "subsystem": "Battery",
+      "material": "LiFePO4, 6S2P 22.2V 20Ah",
+      "mass_g": 1820,
+      "text": "Battery Cell Assembly \u2014 LiFePO4. Subsystem: Battery. Material: LiFePO4, 6S2P 22.2V 20Ah. Mass: 1820g. Manufactured by CellCore Technologies. Revision C. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1064",
+      "title": "Battery Connector \u2014 Main",
+      "subsystem": "Battery",
+      "material": "AS150 gold 150A",
+      "mass_g": 18,
+      "text": "Battery Connector \u2014 Main. Subsystem: Battery. Material: AS150 gold 150A. Mass: 18g. Manufactured by AmassConnect. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1065",
+      "title": "Charge Connector",
+      "subsystem": "Battery",
+      "material": "XT90-S anti-spark",
+      "mass_g": 12,
+      "text": "Charge Connector. Subsystem: Battery. Material: XT90-S anti-spark. Mass: 12g. Manufactured by AmassConnect. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1071",
+      "title": "Battery Indicator LED Assembly",
+      "subsystem": "Battery",
+      "material": "PCB, 4x RGB LED, waterproof",
+      "mass_g": 12,
+      "text": "Battery Indicator LED Assembly. Subsystem: Battery. Material: PCB, 4x RGB LED, waterproof. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1072",
+      "title": "Main Fuse 50A",
+      "subsystem": "Battery",
+      "material": "blade fuse 58V 50A",
+      "mass_g": 10,
+      "text": "Main Fuse 50A. Subsystem: Battery. Material: blade fuse 58V 50A. Mass: 10g. Manufactured by LittelfuseAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1073",
+      "title": "Inrush Limiter \u2014 Main Bus",
+      "subsystem": "Battery",
+      "material": "NTC 47R inrush limiter",
+      "mass_g": 9,
+      "text": "Inrush Limiter \u2014 Main Bus. Subsystem: Battery. Material: NTC 47R inrush limiter. Mass: 9g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1074",
+      "title": "Fuse Holder",
+      "subsystem": "Battery",
+      "material": "ATC/ATO holder, waterproof",
+      "mass_g": 14,
+      "text": "Fuse Holder. Subsystem: Battery. Material: ATC/ATO holder, waterproof. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1075",
+      "title": "BMS Module",
+      "subsystem": "Battery",
+      "material": "PCB, TI BQ77PL900 based, 6S",
+      "mass_g": 95,
+      "text": "BMS Module. Subsystem: Battery. Material: PCB, TI BQ77PL900 based, 6S. Mass: 95g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1076",
+      "title": "Power Distribution Board",
+      "subsystem": "Battery",
+      "material": "PCB, 4-layer, copper 2oz",
+      "mass_g": 72,
+      "text": "Power Distribution Board. Subsystem: Battery. Material: PCB, 4-layer, copper 2oz. Mass: 72g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1077",
+      "title": "Current Sensor",
+      "subsystem": "Battery",
+      "material": "Hall-effect, ACS758 200A",
+      "mass_g": 18,
+      "text": "Current Sensor. Subsystem: Battery. Material: Hall-effect, ACS758 200A. Mass: 18g. Manufactured by AllegroAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1078",
+      "title": "Voltage Divider Board",
+      "subsystem": "Battery",
+      "material": "PCB, precision resistor divider",
+      "mass_g": 12,
+      "text": "Voltage Divider Board. Subsystem: Battery. Material: PCB, precision resistor divider. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1079",
+      "title": "Battery Wiring Harness",
+      "subsystem": "Battery",
+      "material": "silicone 10AWG, crimped lugs",
+      "mass_g": 185,
+      "text": "Battery Wiring Harness. Subsystem: Battery. Material: silicone 10AWG, crimped lugs. Mass: 185g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1080",
+      "title": "BMS Heatsink",
+      "subsystem": "Battery",
+      "material": "aluminium extrusion",
+      "mass_g": 38,
+      "text": "BMS Heatsink. Subsystem: Battery. Material: aluminium extrusion. Mass: 38g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1081",
+      "title": "BMS Enclosure",
+      "subsystem": "Battery",
+      "material": "aluminium 6061-T6",
+      "mass_g": 52,
+      "text": "BMS Enclosure. Subsystem: Battery. Material: aluminium 6061-T6. Mass: 52g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1082",
+      "title": "Overvoltage Protection Module",
+      "subsystem": "Battery",
+      "material": "PCB, TVS + MOSFET",
+      "mass_g": 22,
+      "text": "Overvoltage Protection Module. Subsystem: Battery. Material: PCB, TVS + MOSFET. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1083",
+      "title": "Battery Bay Fan",
+      "subsystem": "Battery",
+      "material": "axial 40mm 5V brushless",
+      "mass_g": 18,
+      "text": "Battery Bay Fan. Subsystem: Battery. Material: axial 40mm 5V brushless. Mass: 18g. Manufactured by SanyoDenki. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1084",
+      "title": "Fan Controller PCB",
+      "subsystem": "Battery",
+      "material": "PCB, PWM temp control",
+      "mass_g": 14,
+      "text": "Fan Controller PCB. Subsystem: Battery. Material: PCB, PWM temp control. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1085",
+      "title": "Thermal Sensor \u2014 Battery",
+      "subsystem": "Battery",
+      "material": "NTC 10k, waterproof probe",
+      "mass_g": 10,
+      "text": "Thermal Sensor \u2014 Battery. Subsystem: Battery. Material: NTC 10k, waterproof probe. Mass: 10g. Manufactured by SenseCo. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1086",
+      "title": "Temperature Runaway Detector",
+      "subsystem": "Battery",
+      "material": "PCB, analog comparator",
+      "mass_g": 16,
+      "text": "Temperature Runaway Detector. Subsystem: Battery. Material: PCB, analog comparator. Mass: 16g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1087",
+      "title": "EEPROM Battery Log",
+      "subsystem": "Battery",
+      "material": "I2C EEPROM 64kB, 1M cycles",
+      "mass_g": 6,
+      "text": "EEPROM Battery Log. Subsystem: Battery. Material: I2C EEPROM 64kB, 1M cycles. Mass: 6g. Manufactured by Atmel. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1090",
+      "title": "BMS Programming Cable",
+      "subsystem": "Battery",
+      "material": "USB-C to UART bridge",
+      "mass_g": 12,
+      "text": "BMS Programming Cable. Subsystem: Battery. Material: USB-C to UART bridge. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1091",
+      "title": "Autopilot FCU",
+      "subsystem": "Nav/GNC",
+      "material": "Pixhawk 6X, STM32H7",
+      "mass_g": 102,
+      "text": "Autopilot FCU. Subsystem: Nav/GNC. Material: Pixhawk 6X, STM32H7. Mass: 102g. Manufactured by HolybrozAU. Revision B. Part class: COTS.",
+      "children": [
+        {
+          "id": "P-1092",
+          "title": "IMU Module \u2014 Original (obsolete)",
+          "subsystem": "Nav/GNC",
+          "material": "ICM-42688-P, \u00b116g/\u00b12000dps",
+          "mass_g": 8,
+          "text": "IMU Module \u2014 Original (obsolete). Subsystem: Nav/GNC. Material: ICM-42688-P, \u00b116g/\u00b12000dps. Mass: 8g. Manufactured by InvenSense. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1093",
+          "title": "IMU Module \u2014 Enhanced",
+          "subsystem": "Nav/GNC",
+          "material": "ADIS16505-2, \u00b1500dps tactical grade",
+          "mass_g": 16,
+          "text": "IMU Module \u2014 Enhanced. Subsystem: Nav/GNC. Material: ADIS16505-2, \u00b1500dps tactical grade. Mass: 16g. Manufactured by Analog Devices. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1094",
+          "title": "GPS Receiver Board",
+          "subsystem": "Nav/GNC",
+          "material": "u-blox F9P RTK dual-band",
+          "mass_g": 32,
+          "text": "GPS Receiver Board. Subsystem: Nav/GNC. Material: u-blox F9P RTK dual-band. Mass: 32g. Manufactured by u-blox. Revision B. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1095",
+          "title": "Barometer Module",
+          "subsystem": "Nav/GNC",
+          "material": "MS5611-01BA03, 10cm resolution",
+          "mass_g": 5,
+          "text": "Barometer Module. Subsystem: Nav/GNC. Material: MS5611-01BA03, 10cm resolution. Mass: 5g. Manufactured by TE Connectivity. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1096",
+          "title": "Magnetometer",
+          "subsystem": "Nav/GNC",
+          "material": "RM3100 industrial grade",
+          "mass_g": 6,
+          "text": "Magnetometer. Subsystem: Nav/GNC. Material: RM3100 industrial grade. Mass: 6g. Manufactured by PNI Sensor. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1103",
+          "title": "IMU Vibration Damper (x4)",
+          "subsystem": "Nav/GNC",
+          "material": "silicone, M3, 50Hz",
+          "mass_g": 12,
+          "text": "IMU Vibration Damper (x4). Subsystem: Nav/GNC. Material: silicone, M3, 50Hz. Mass: 12g. Manufactured by IsolaTech. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1114",
+          "title": "FCU SD Card Module",
+          "subsystem": "Nav/GNC",
+          "material": "micro-SD slot, 128GB UHS-I",
+          "mass_g": 5,
+          "text": "FCU SD Card Module. Subsystem: Nav/GNC. Material: micro-SD slot, 128GB UHS-I. Mass: 5g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1115",
+          "title": "FCU Telemetry Module",
+          "subsystem": "Nav/GNC",
+          "material": "SiK radio 915MHz, 100mW",
+          "mass_g": 14,
+          "text": "FCU Telemetry Module. Subsystem: Nav/GNC. Material: SiK radio 915MHz, 100mW. Mass: 14g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "P-1097",
+      "title": "GPS Antenna Module \u2014 Original",
+      "subsystem": "Nav/GNC",
+      "material": "patch antenna, L1/L2, 35dB LNA",
+      "mass_g": 28,
+      "text": "GPS Antenna Module \u2014 Original. Subsystem: Nav/GNC. Material: patch antenna, L1/L2, 35dB LNA. Mass: 28g. Manufactured by TallysmansAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1098",
+      "title": "GPS Antenna Module \u2014 v2",
+      "subsystem": "Nav/GNC",
+      "material": "helical antenna, L1/L2/L5, 40dB LNA, IP68",
+      "mass_g": 34,
+      "text": "GPS Antenna Module \u2014 v2. Subsystem: Nav/GNC. Material: helical antenna, L1/L2/L5, 40dB LNA, IP68. Mass: 34g. Manufactured by TallysmansAU. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1099",
+      "title": "Pitot-Static Tube",
+      "subsystem": "Nav/GNC",
+      "material": "stainless, heated, IP67",
+      "mass_g": 45,
+      "text": "Pitot-Static Tube. Subsystem: Nav/GNC. Material: stainless, heated, IP67. Mass: 45g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1100",
+      "title": "AHRS Unit",
+      "subsystem": "Nav/GNC",
+      "material": "SBG Ellipse-N, 0.05\u00b0 pitch",
+      "mass_g": 195,
+      "text": "AHRS Unit. Subsystem: Nav/GNC. Material: SBG Ellipse-N, 0.05\u00b0 pitch. Mass: 195g. Manufactured by SBG Systems. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1101",
+      "title": "Air Data Computer",
+      "subsystem": "Nav/GNC",
+      "material": "PCB, STM32, pitot + baro",
+      "mass_g": 42,
+      "text": "Air Data Computer. Subsystem: Nav/GNC. Material: PCB, STM32, pitot + baro. Mass: 42g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1102",
+      "title": "GPS Antenna Mount",
+      "subsystem": "Nav/GNC",
+      "material": "CFRP, top-deck mounting",
+      "mass_g": 18,
+      "text": "GPS Antenna Mount. Subsystem: Nav/GNC. Material: CFRP, top-deck mounting. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1104",
+      "title": "FCU Enclosure",
+      "subsystem": "Nav/GNC",
+      "material": "aluminium 6061-T6, EMI shielded",
+      "mass_g": 98,
+      "text": "FCU Enclosure. Subsystem: Nav/GNC. Material: aluminium 6061-T6, EMI shielded. Mass: 98g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1105",
+      "title": "FCU Wiring Harness",
+      "subsystem": "Nav/GNC",
+      "material": "JST-GH, 300mm, shielded",
+      "mass_g": 45,
+      "text": "FCU Wiring Harness. Subsystem: Nav/GNC. Material: JST-GH, 300mm, shielded. Mass: 45g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1106",
+      "title": "Servo Controller Board",
+      "subsystem": "Nav/GNC",
+      "material": "PCB, 8-channel PWM, CAN",
+      "mass_g": 38,
+      "text": "Servo Controller Board. Subsystem: Nav/GNC. Material: PCB, 8-channel PWM, CAN. Mass: 38g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1107",
+      "title": "Servo \u2014 Port Aileron",
+      "subsystem": "Nav/GNC",
+      "material": "Hitec HS-5086WP waterproof",
+      "mass_g": 28,
+      "text": "Servo \u2014 Port Aileron. Subsystem: Nav/GNC. Material: Hitec HS-5086WP waterproof. Mass: 28g. Manufactured by HitecAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1108",
+      "title": "Servo \u2014 Starboard Aileron",
+      "subsystem": "Nav/GNC",
+      "material": "Hitec HS-5086WP waterproof",
+      "mass_g": 28,
+      "text": "Servo \u2014 Starboard Aileron. Subsystem: Nav/GNC. Material: Hitec HS-5086WP waterproof. Mass: 28g. Manufactured by HitecAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1109",
+      "title": "Servo \u2014 Elevator",
+      "subsystem": "Nav/GNC",
+      "material": "Hitec HS-5086WP waterproof",
+      "mass_g": 28,
+      "text": "Servo \u2014 Elevator. Subsystem: Nav/GNC. Material: Hitec HS-5086WP waterproof. Mass: 28g. Manufactured by HitecAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1110",
+      "title": "Servo \u2014 Rudder",
+      "subsystem": "Nav/GNC",
+      "material": "Hitec HS-5086WP waterproof",
+      "mass_g": 28,
+      "text": "Servo \u2014 Rudder. Subsystem: Nav/GNC. Material: Hitec HS-5086WP waterproof. Mass: 28g. Manufactured by HitecAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1111",
+      "title": "Servo Cable Harness",
+      "subsystem": "Nav/GNC",
+      "material": "3-wire servo, 500mm extensions",
+      "mass_g": 35,
+      "text": "Servo Cable Harness. Subsystem: Nav/GNC. Material: 3-wire servo, 500mm extensions. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1112",
+      "title": "GPS Cable",
+      "subsystem": "Nav/GNC",
+      "material": "SMA-SMA, LMR100, 400mm",
+      "mass_g": 12,
+      "text": "GPS Cable. Subsystem: Nav/GNC. Material: SMA-SMA, LMR100, 400mm. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1113",
+      "title": "Compass Mount Bracket",
+      "subsystem": "Nav/GNC",
+      "material": "G10 fibreglass, non-magnetic",
+      "mass_g": 14,
+      "text": "Compass Mount Bracket. Subsystem: Nav/GNC. Material: G10 fibreglass, non-magnetic. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1116",
+      "title": "Magnetometer Compensation Board",
+      "subsystem": "Nav/GNC",
+      "material": "PCB, null-coil correction",
+      "mass_g": 18,
+      "text": "Magnetometer Compensation Board. Subsystem: Nav/GNC. Material: PCB, null-coil correction. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1117",
+      "title": "GPS Ground Plane",
+      "subsystem": "Nav/GNC",
+      "material": "aluminium, 100x100mm",
+      "mass_g": 35,
+      "text": "GPS Ground Plane. Subsystem: Nav/GNC. Material: aluminium, 100x100mm. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1118",
+      "title": "IMU Thermal Stabiliser",
+      "subsystem": "Nav/GNC",
+      "material": "PCB, heater + PID controller",
+      "mass_g": 22,
+      "text": "IMU Thermal Stabiliser. Subsystem: Nav/GNC. Material: PCB, heater + PID controller. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1119",
+      "title": "Barometer Cover",
+      "subsystem": "Nav/GNC",
+      "material": "sintered PTFE, dust/splash",
+      "mass_g": 4,
+      "text": "Barometer Cover. Subsystem: Nav/GNC. Material: sintered PTFE, dust/splash. Mass: 4g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1120",
+      "title": "FCU Programming Cable",
+      "subsystem": "Nav/GNC",
+      "material": "USB-C to JST-GH UART",
+      "mass_g": 8,
+      "text": "FCU Programming Cable. Subsystem: Nav/GNC. Material: USB-C to JST-GH UART. Mass: 8g. Manufactured by HolybrozAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1121",
+      "title": "Datalink Controller Board",
+      "subsystem": "Comms/Datalink",
+      "material": "PCB, STM32, SPI/UART bridge",
+      "mass_g": 55,
+      "text": "Datalink Controller Board. Subsystem: Comms/Datalink. Material: PCB, STM32, SPI/UART bridge. Mass: 55g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1122",
+      "title": "Antenna \u2014 Main Port",
+      "subsystem": "Comms/Datalink",
+      "material": "dipole 915MHz, 3dBi",
+      "mass_g": 18,
+      "text": "Antenna \u2014 Main Port. Subsystem: Comms/Datalink. Material: dipole 915MHz, 3dBi. Mass: 18g. Manufactured by LinxTech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1123",
+      "title": "Antenna \u2014 Main Starboard",
+      "subsystem": "Comms/Datalink",
+      "material": "dipole 915MHz, 3dBi",
+      "mass_g": 18,
+      "text": "Antenna \u2014 Main Starboard. Subsystem: Comms/Datalink. Material: dipole 915MHz, 3dBi. Mass: 18g. Manufactured by LinxTech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1124",
+      "title": "Antenna Diversity Switch",
+      "subsystem": "Comms/Datalink",
+      "material": "RF SPDT, 10ns, 1 GHz",
+      "mass_g": 8,
+      "text": "Antenna Diversity Switch. Subsystem: Comms/Datalink. Material: RF SPDT, 10ns, 1 GHz. Mass: 8g. Manufactured by RFMD. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1125",
+      "title": "Radio Transceiver \u2014 Original",
+      "subsystem": "Comms/Datalink",
+      "material": "900MHz FHSS 500kbps 1W",
+      "mass_g": 125,
+      "text": "Radio Transceiver \u2014 Original. Subsystem: Comms/Datalink. Material: 900MHz FHSS 500kbps 1W. Mass: 125g. Manufactured by FreeWave Tech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1126",
+      "title": "Radio Transceiver \u2014 Enhanced",
+      "subsystem": "Comms/Datalink",
+      "material": "900MHz/2.4GHz dual-band FHSS 2Mbps 1W",
+      "mass_g": 138,
+      "text": "Radio Transceiver \u2014 Enhanced. Subsystem: Comms/Datalink. Material: 900MHz/2.4GHz dual-band FHSS 2Mbps 1W. Mass: 138g. Manufactured by FreeWave Tech. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1127",
+      "title": "Encryption Module \u2014 FPGA",
+      "subsystem": "Comms/Datalink",
+      "material": "PCB, Lattice iCE40 FPGA, AES-256-GCM",
+      "mass_g": 42,
+      "text": "Encryption Module \u2014 FPGA. Subsystem: Comms/Datalink. Material: PCB, Lattice iCE40 FPGA, AES-256-GCM. Mass: 42g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1128",
+      "title": "RF Bandpass Filter",
+      "subsystem": "Comms/Datalink",
+      "material": "SAW, 915MHz, \u00b125MHz BW",
+      "mass_g": 14,
+      "text": "RF Bandpass Filter. Subsystem: Comms/Datalink. Material: SAW, 915MHz, \u00b125MHz BW. Mass: 14g. Manufactured by Murata. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1129",
+      "title": "RF Amplifier Module",
+      "subsystem": "Comms/Datalink",
+      "material": "LNA 915MHz, 20dB, NF 1.2dB",
+      "mass_g": 12,
+      "text": "RF Amplifier Module. Subsystem: Comms/Datalink. Material: LNA 915MHz, 20dB, NF 1.2dB. Mass: 12g. Manufactured by Mini-Circuits. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1130",
+      "title": "Antenna Connector SMA (x4)",
+      "subsystem": "Comms/Datalink",
+      "material": "SMA female, gold, IP67",
+      "mass_g": 16,
+      "text": "Antenna Connector SMA (x4). Subsystem: Comms/Datalink. Material: SMA female, gold, IP67. Mass: 16g. Manufactured by Amphenol. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1131",
+      "title": "Antenna Cable \u2014 Port",
+      "subsystem": "Comms/Datalink",
+      "material": "SMA-SMA LMR200, 300mm",
+      "mass_g": 22,
+      "text": "Antenna Cable \u2014 Port. Subsystem: Comms/Datalink. Material: SMA-SMA LMR200, 300mm. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1132",
+      "title": "Antenna Cable \u2014 Starboard",
+      "subsystem": "Comms/Datalink",
+      "material": "SMA-SMA LMR200, 300mm",
+      "mass_g": 22,
+      "text": "Antenna Cable \u2014 Starboard. Subsystem: Comms/Datalink. Material: SMA-SMA LMR200, 300mm. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1133",
+      "title": "Diversity Antenna Mount",
+      "subsystem": "Comms/Datalink",
+      "material": "CFRP bracket, 60mm spacing",
+      "mass_g": 18,
+      "text": "Diversity Antenna Mount. Subsystem: Comms/Datalink. Material: CFRP bracket, 60mm spacing. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1134",
+      "title": "Radio Enclosure",
+      "subsystem": "Comms/Datalink",
+      "material": "aluminium 6061-T6, EMI",
+      "mass_g": 78,
+      "text": "Radio Enclosure. Subsystem: Comms/Datalink. Material: aluminium 6061-T6, EMI. Mass: 78g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1135",
+      "title": "Heatsink \u2014 Radio",
+      "subsystem": "Comms/Datalink",
+      "material": "aluminium, finned",
+      "mass_g": 32,
+      "text": "Heatsink \u2014 Radio. Subsystem: Comms/Datalink. Material: aluminium, finned. Mass: 32g. Manufactured by ThermalTech. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1136",
+      "title": "Radio Power Supply Module",
+      "subsystem": "Comms/Datalink",
+      "material": "PCB, 5V/3.3V, 2A",
+      "mass_g": 22,
+      "text": "Radio Power Supply Module. Subsystem: Comms/Datalink. Material: PCB, 5V/3.3V, 2A. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1137",
+      "title": "Coax Cable Harness",
+      "subsystem": "Comms/Datalink",
+      "material": "LMR200, SMA, 600mm total",
+      "mass_g": 48,
+      "text": "Coax Cable Harness. Subsystem: Comms/Datalink. Material: LMR200, SMA, 600mm total. Mass: 48g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1138",
+      "title": "Status LED \u2014 Radio",
+      "subsystem": "Comms/Datalink",
+      "material": "RGB LED, IP65, panel-mount",
+      "mass_g": 8,
+      "text": "Status LED \u2014 Radio. Subsystem: Comms/Datalink. Material: RGB LED, IP65, panel-mount. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1139",
+      "title": "Radio Wiring Harness",
+      "subsystem": "Comms/Datalink",
+      "material": "JST-GH 6-pin, 250mm",
+      "mass_g": 16,
+      "text": "Radio Wiring Harness. Subsystem: Comms/Datalink. Material: JST-GH 6-pin, 250mm. Mass: 16g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1140",
+      "title": "RF Shield",
+      "subsystem": "Comms/Datalink",
+      "material": "tinplate, 5-sided, press-fit",
+      "mass_g": 14,
+      "text": "RF Shield. Subsystem: Comms/Datalink. Material: tinplate, 5-sided, press-fit. Mass: 14g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1141",
+      "title": "Frequency Hopping Module",
+      "subsystem": "Comms/Datalink",
+      "material": "SiK radio 915MHz hopping",
+      "mass_g": 22,
+      "text": "Frequency Hopping Module. Subsystem: Comms/Datalink. Material: SiK radio 915MHz hopping. Mass: 22g. Manufactured by RFDesign. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1142",
+      "title": "Modem Board",
+      "subsystem": "Comms/Datalink",
+      "material": "PCB, RS-422 to UART bridge",
+      "mass_g": 28,
+      "text": "Modem Board. Subsystem: Comms/Datalink. Material: PCB, RS-422 to UART bridge. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1143",
+      "title": "RS-422 Adapter",
+      "subsystem": "Comms/Datalink",
+      "material": "RS-422 to USB, DB9",
+      "mass_g": 18,
+      "text": "RS-422 Adapter. Subsystem: Comms/Datalink. Material: RS-422 to USB, DB9. Mass: 18g. Manufactured by FTDIchip. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1144",
+      "title": "Datalink Cable \u2014 GCS",
+      "subsystem": "Comms/Datalink",
+      "material": "RS-422, 50m, armoured",
+      "mass_g": 480,
+      "text": "Datalink Cable \u2014 GCS. Subsystem: Comms/Datalink. Material: RS-422, 50m, armoured. Mass: 480g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1145",
+      "title": "Ground Plane Board",
+      "subsystem": "Comms/Datalink",
+      "material": "PCB, copper pour, SMA",
+      "mass_g": 12,
+      "text": "Ground Plane Board. Subsystem: Comms/Datalink. Material: PCB, copper pour, SMA. Mass: 12g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1146",
+      "title": "Payload Wiring Harness",
+      "subsystem": "Payload",
+      "material": "mixed gauge, 500mm bundle",
+      "mass_g": 85,
+      "text": "Payload Wiring Harness. Subsystem: Payload. Material: mixed gauge, 500mm bundle. Mass: 85g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1147",
+      "title": "Sonar Signal Processor",
+      "subsystem": "Payload",
+      "material": "PCB, FPGA + DSP, 50MHz clock",
+      "mass_g": 148,
+      "text": "Sonar Signal Processor. Subsystem: Payload. Material: PCB, FPGA + DSP, 50MHz clock. Mass: 148g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1148",
+      "title": "Sonar Transducer",
+      "subsystem": "Payload",
+      "material": "broadband, 100\u2013400kHz, depth-rated 30m",
+      "mass_g": 245,
+      "text": "Sonar Transducer. Subsystem: Payload. Material: broadband, 100\u2013400kHz, depth-rated 30m. Mass: 245g. Manufactured by AquaSound Corp. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1149",
+      "title": "Sonar Mounting Bracket",
+      "subsystem": "Payload",
+      "material": "aluminium 6061-T6, 7\u00b0 cant, waterproof",
+      "mass_g": 68,
+      "text": "Sonar Mounting Bracket. Subsystem: Payload. Material: aluminium 6061-T6, 7\u00b0 cant, waterproof. Mass: 68g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1150",
+      "title": "Sonar Dome",
+      "subsystem": "Payload",
+      "material": "HDPE acoustically transparent",
+      "mass_g": 42,
+      "text": "Sonar Dome. Subsystem: Payload. Material: HDPE acoustically transparent. Mass: 42g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1151",
+      "title": "Sonar Cable Harness",
+      "subsystem": "Payload",
+      "material": "coax + power, IP68 connector, 600mm",
+      "mass_g": 55,
+      "text": "Sonar Cable Harness. Subsystem: Payload. Material: coax + power, IP68 connector, 600mm. Mass: 55g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1152",
+      "title": "Camera Module",
+      "subsystem": "Payload",
+      "material": "Sony IMX577, 4K30fps, 12MP",
+      "mass_g": 85,
+      "text": "Camera Module. Subsystem: Payload. Material: Sony IMX577, 4K30fps, 12MP. Mass: 85g. Manufactured by SonyAU. Revision A. Part class: COTS.",
+      "children": [
+        {
+          "id": "P-1153",
+          "title": "Camera Lens",
+          "subsystem": "Payload",
+          "material": "f/1.8 5mm EFL, 120\u00b0 HFOV",
+          "mass_g": 22,
+          "text": "Camera Lens. Subsystem: Payload. Material: f/1.8 5mm EFL, 120\u00b0 HFOV. Mass: 22g. Manufactured by Computar. Revision A. Part class: COTS.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "P-1154",
+      "title": "Camera Gimbal Assembly",
+      "subsystem": "Payload",
+      "material": "3-axis brushless, \u00b130\u00b0 all axes, 0.01\u00b0 stability",
+      "mass_g": 215,
+      "text": "Camera Gimbal Assembly. Subsystem: Payload. Material: 3-axis brushless, \u00b130\u00b0 all axes, 0.01\u00b0 stability. Mass: 215g. Manufactured by Meridian Dynamics. Revision C. Part class: custom.",
+      "children": [
+        {
+          "id": "P-1155",
+          "title": "Gimbal Motor \u2014 Pitch",
+          "subsystem": "Payload",
+          "material": "hollow-shaft BLDC, 22mm",
+          "mass_g": 38,
+          "text": "Gimbal Motor \u2014 Pitch. Subsystem: Payload. Material: hollow-shaft BLDC, 22mm. Mass: 38g. Manufactured by GB-Systems. Revision B. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1156",
+          "title": "Gimbal Motor \u2014 Roll",
+          "subsystem": "Payload",
+          "material": "hollow-shaft BLDC, 22mm",
+          "mass_g": 38,
+          "text": "Gimbal Motor \u2014 Roll. Subsystem: Payload. Material: hollow-shaft BLDC, 22mm. Mass: 38g. Manufactured by GB-Systems. Revision B. Part class: COTS.",
+          "children": []
+        },
+        {
+          "id": "P-1157",
+          "title": "Gimbal Motor \u2014 Yaw",
+          "subsystem": "Payload",
+          "material": "hollow-shaft BLDC, 28mm",
+          "mass_g": 45,
+          "text": "Gimbal Motor \u2014 Yaw. Subsystem: Payload. Material: hollow-shaft BLDC, 28mm. Mass: 45g. Manufactured by GB-Systems. Revision B. Part class: COTS.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "P-1158",
+      "title": "Gimbal Controller Board",
+      "subsystem": "Payload",
+      "material": "PCB, SimpleBGC 32-bit extended, IMU",
+      "mass_g": 35,
+      "text": "Gimbal Controller Board. Subsystem: Payload. Material: PCB, SimpleBGC 32-bit extended, IMU. Mass: 35g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1159",
+      "title": "Payload Rail Clamp \u2014 Port",
+      "subsystem": "Payload",
+      "material": "aluminium 6061-T6",
+      "mass_g": 28,
+      "text": "Payload Rail Clamp \u2014 Port. Subsystem: Payload. Material: aluminium 6061-T6. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1160",
+      "title": "Payload Rail Clamp \u2014 Starboard",
+      "subsystem": "Payload",
+      "material": "aluminium 6061-T6",
+      "mass_g": 28,
+      "text": "Payload Rail Clamp \u2014 Starboard. Subsystem: Payload. Material: aluminium 6061-T6. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1161",
+      "title": "Camera Cable Harness",
+      "subsystem": "Payload",
+      "material": "HDMI + USB, 400mm, strain-relieved",
+      "mass_g": 35,
+      "text": "Camera Cable Harness. Subsystem: Payload. Material: HDMI + USB, 400mm, strain-relieved. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1162",
+      "title": "Camera Dome Port",
+      "subsystem": "Payload",
+      "material": "optical glass, AR coated, IP68",
+      "mass_g": 18,
+      "text": "Camera Dome Port. Subsystem: Payload. Material: optical glass, AR coated, IP68. Mass: 18g. Manufactured by OpticsAU. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1163",
+      "title": "GCS Laptop \u2014 Ruggedised",
+      "subsystem": "GCS",
+      "material": "Panasonic Toughbook 55, i7",
+      "mass_g": 2200,
+      "text": "GCS Laptop \u2014 Ruggedised. Subsystem: GCS. Material: Panasonic Toughbook 55, i7. Mass: 2200g. Manufactured by PanasonicAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1164",
+      "title": "GCS Display \u2014 Secondary",
+      "subsystem": "GCS",
+      "material": "10\" sunlight readable, 1500 nit",
+      "mass_g": 580,
+      "text": "GCS Display \u2014 Secondary. Subsystem: GCS. Material: 10\" sunlight readable, 1500 nit. Mass: 580g. Manufactured by BrightTech. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1165",
+      "title": "GCS Antenna Base \u2014 Main",
+      "subsystem": "GCS",
+      "material": "tripod mount, 5/8-11 thread",
+      "mass_g": 320,
+      "text": "GCS Antenna Base \u2014 Main. Subsystem: GCS. Material: tripod mount, 5/8-11 thread. Mass: 320g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1166",
+      "title": "GCS Antenna Base \u2014 Secondary",
+      "subsystem": "GCS",
+      "material": "tripod mount, 5/8-11 thread",
+      "mass_g": 320,
+      "text": "GCS Antenna Base \u2014 Secondary. Subsystem: GCS. Material: tripod mount, 5/8-11 thread. Mass: 320g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1167",
+      "title": "GCS Radio Unit",
+      "subsystem": "GCS",
+      "material": "FreeWave GXM, paired to P-1126",
+      "mass_g": 185,
+      "text": "GCS Radio Unit. Subsystem: GCS. Material: FreeWave GXM, paired to P-1126. Mass: 185g. Manufactured by FreeWave Tech. Revision B. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1168",
+      "title": "GCS Power Supply",
+      "subsystem": "GCS",
+      "material": "ATX 400W, 12V/5V/3.3V",
+      "mass_g": 480,
+      "text": "GCS Power Supply. Subsystem: GCS. Material: ATX 400W, 12V/5V/3.3V. Mass: 480g. Manufactured by MeanWell. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1169",
+      "title": "GCS UPS Battery",
+      "subsystem": "GCS",
+      "material": "12V 18Ah SLA",
+      "mass_g": 2800,
+      "text": "GCS UPS Battery. Subsystem: GCS. Material: 12V 18Ah SLA. Mass: 2800g. Manufactured by Yuasa. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1170",
+      "title": "GCS Wiring Harness",
+      "subsystem": "GCS",
+      "material": "mixed, 3m bundle",
+      "mass_g": 225,
+      "text": "GCS Wiring Harness. Subsystem: GCS. Material: mixed, 3m bundle. Mass: 225g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1171",
+      "title": "GCS Joystick Controller",
+      "subsystem": "GCS",
+      "material": "Logitech Extreme 3D Pro, USB",
+      "mass_g": 460,
+      "text": "GCS Joystick Controller. Subsystem: GCS. Material: Logitech Extreme 3D Pro, USB. Mass: 460g. Manufactured by LogitechAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1172",
+      "title": "GCS Emergency Stop Button",
+      "subsystem": "GCS",
+      "material": "Schneider XB5AS54, 40mm red mushroom",
+      "mass_g": 88,
+      "text": "GCS Emergency Stop Button. Subsystem: GCS. Material: Schneider XB5AS54, 40mm red mushroom. Mass: 88g. Manufactured by Schneider. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1173",
+      "title": "GCS USB Hub",
+      "subsystem": "GCS",
+      "material": "7-port USB 3.0, surge-protected",
+      "mass_g": 68,
+      "text": "GCS USB Hub. Subsystem: GCS. Material: 7-port USB 3.0, surge-protected. Mass: 68g. Manufactured by Belkin. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1174",
+      "title": "GCS Keyboard \u2014 Ruggedised",
+      "subsystem": "GCS",
+      "material": "IP65 backlit, USB",
+      "mass_g": 385,
+      "text": "GCS Keyboard \u2014 Ruggedised. Subsystem: GCS. Material: IP65 backlit, USB. Mass: 385g. Manufactured by iKeyAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1175",
+      "title": "GCS Case",
+      "subsystem": "GCS",
+      "material": "Pelican 1615, foam-cut, with DC distribution",
+      "mass_g": 4200,
+      "text": "GCS Case. Subsystem: GCS. Material: Pelican 1615, foam-cut, with DC distribution. Mass: 4200g. Manufactured by Pelican. Revision B. Part class: custom.",
+      "children": []
+    },
+    {
+      "id": "P-1176",
+      "title": "GCS GPS Dongle",
+      "subsystem": "GCS",
+      "material": "u-blox NEO-M8N USB",
+      "mass_g": 18,
+      "text": "GCS GPS Dongle. Subsystem: GCS. Material: u-blox NEO-M8N USB. Mass: 18g. Manufactured by u-blox. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1177",
+      "title": "GCS Situational Camera",
+      "subsystem": "GCS",
+      "material": "Logitech C920, HD 1080p",
+      "mass_g": 162,
+      "text": "GCS Situational Camera. Subsystem: GCS. Material: Logitech C920, HD 1080p. Mass: 162g. Manufactured by LogitechAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1178",
+      "title": "GCS Speaker",
+      "subsystem": "GCS",
+      "material": "Altec Lansing ALP-VS2621, 5W",
+      "mass_g": 185,
+      "text": "GCS Speaker. Subsystem: GCS. Material: Altec Lansing ALP-VS2621, 5W. Mass: 185g. Manufactured by Altec. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1179",
+      "title": "GCS Fan",
+      "subsystem": "GCS",
+      "material": "80mm 12V DC fan, 35dB",
+      "mass_g": 68,
+      "text": "GCS Fan. Subsystem: GCS. Material: 80mm 12V DC fan, 35dB. Mass: 68g. Manufactured by NidecAU. Revision A. Part class: COTS.",
+      "children": []
+    },
+    {
+      "id": "P-1180",
+      "title": "GCS Indicator Panel",
+      "subsystem": "GCS",
+      "material": "PCB, 8x LED + buzzer, USB",
+      "mass_g": 45,
+      "text": "GCS Indicator Panel. Subsystem: GCS. Material: PCB, 8x LED + buzzer, USB. Mass: 45g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+      "children": []
+    }
+  ]
+}

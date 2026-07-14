@@ -1,0 +1,21 @@
+{
+  "id": "P-1091",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Autopilot FCU",
+  "text": "Autopilot FCU. Subsystem: Nav/GNC. Material: Pixhawk 6X, STM32H7. Mass: 102g. Manufactured by HolybrozAU. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1091",
+    "revision": "B",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "Pixhawk 6X, STM32H7",
+    "mass_g": 102,
+    "manufacturer": "HolybrozAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-506",
+    "DRW-516"
+  ]
+}

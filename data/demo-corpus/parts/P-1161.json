@@ -1,0 +1,20 @@
+{
+  "id": "P-1161",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Camera Cable Harness",
+  "text": "Camera Cable Harness. Subsystem: Payload. Material: HDMI + USB, 400mm, strain-relieved. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1161",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "HDMI + USB, 400mm, strain-relieved",
+    "mass_g": 35,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-537"
+  ]
+}

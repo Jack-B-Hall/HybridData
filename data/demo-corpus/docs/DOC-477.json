@@ -1,0 +1,24 @@
+{
+  "id": "DOC-477",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Risk Register",
+  "text": "# K-200 Airframe Risk Register\n\nDocument number: MD-DOC-477-H. Revision: H. Type: analysis. Author: Nina Schulz. Created: 2023-06-26. Last modified: 2024-05-09. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1127, P-1139.",
+  "structured": {
+    "doc_number": "MD-DOC-477-H",
+    "revision": "H",
+    "doc_type": "analysis",
+    "author": "E12",
+    "created": "2023-06-26",
+    "last_modified": "2024-05-09",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1127",
+    "P-1139",
+    "ECR-203",
+    "ECR-206",
+    "KES-155"
+  ]
+}

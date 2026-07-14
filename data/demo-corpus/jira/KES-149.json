@@ -1,0 +1,29 @@
+{
+  "id": "KES-149",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify software design document",
+  "text": "Story: Qualify software design document. Reporter: Aisha Mbeki. Assignee: Jordan Kim. Status: Done. Priority: High. Created: 2023-12-08.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E08",
+    "created": "2023-12-08",
+    "resolved": "2024-02-03",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "KES-014"
+  ]
+}

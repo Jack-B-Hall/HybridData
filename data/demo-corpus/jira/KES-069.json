@@ -1,0 +1,30 @@
+{
+  "id": "KES-069",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify software design document",
+  "text": "Story: Qualify software design document. Reporter: Tobias Wren. Assignee: Lena Okafor. Status: Open. Priority: High. Created: 2025-09-09.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E03",
+    "created": "2025-09-09",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-445",
+    "KES-014"
+  ]
+}

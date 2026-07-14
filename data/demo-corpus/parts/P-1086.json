@@ -1,0 +1,18 @@
+{
+  "id": "P-1086",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Temperature Runaway Detector",
+  "text": "Temperature Runaway Detector. Subsystem: Battery. Material: PCB, analog comparator. Mass: 16g. Manufactured by Meridian Dynamics. Revision B. Part class: custom.",
+  "structured": {
+    "part_number": "MD-BAT-1086",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "custom",
+    "material": "PCB, analog comparator",
+    "mass_g": 16,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "KES-128",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate interface control document",
+  "text": "Story: Integrate interface control document. Reporter: Dev Patel. Assignee: Sam Dreher. Status: Done. Priority: Medium. Created: 2025-03-25.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E11",
+    "assignee": "E04",
+    "created": "2025-03-25",
+    "resolved": "2025-06-01",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-008",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-008"
+      }
+    ]
+  },
+  "refs": [
+    "KES-008"
+  ]
+}

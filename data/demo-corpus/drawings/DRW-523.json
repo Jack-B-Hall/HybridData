@@ -1,0 +1,24 @@
+{
+  "id": "DRW-523",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-523: Pitot-Static Installation",
+  "text": "Drawing MD-DRW-523 Rev C \u2014 Pitot-Static Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1099, P-1101.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Sam Dreher.",
+  "structured": {
+    "drawing_number": "MD-DRW-523",
+    "revision": "C",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E04",
+    "date": "2024-07-18",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1099",
+      "P-1101"
+    ]
+  },
+  "refs": [
+    "P-1099",
+    "P-1101"
+  ]
+}

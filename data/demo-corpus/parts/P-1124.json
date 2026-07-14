@@ -1,0 +1,18 @@
+{
+  "id": "P-1124",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Antenna Diversity Switch",
+  "text": "Antenna Diversity Switch. Subsystem: Comms/Datalink. Material: RF SPDT, 10ns, 1 GHz. Mass: 8g. Manufactured by RFMD. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1124",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "RF SPDT, 10ns, 1 GHz",
+    "mass_g": 8,
+    "manufacturer": "RFMD",
+    "parent_id": null
+  },
+  "refs": []
+}

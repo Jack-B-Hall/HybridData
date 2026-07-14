@@ -1,0 +1,30 @@
+{
+  "id": "KES-039",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Marcus Thaine. Assignee: Rowan Ellery. Status: In Progress. Priority: Low. Created: 2024-09-24.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E02",
+    "assignee": "E13",
+    "created": "2024-09-24",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-017",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-017"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-018",
+    "KES-017"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P-1134",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Radio Enclosure",
+  "text": "Radio Enclosure. Subsystem: Comms/Datalink. Material: aluminium 6061-T6, EMI. Mass: 78g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1134",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "aluminium 6061-T6, EMI",
+    "mass_g": 78,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-511"
+  ]
+}

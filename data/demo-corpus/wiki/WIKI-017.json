@@ -1,0 +1,24 @@
+{
+  "id": "WIKI-017",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Airframe Materials Review Meeting \u2014 2023-08-22",
+  "text": "# Airframe Materials Review Meeting \u2014 2023-08-22\n\n**Space:** K200  \n**Meeting type:** Technical Design Review  \n**Attendees:** Tobias Wren (Airframe), Dr. Rhea Voss (CSE), Felix Herrera (Integration), Aisha Mbeki (Test), Nina Schulz (Quality)  \n**Chair:** Tobias Wren  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Background\n\nKES-042 (wing skin material trade study) was initiated following KES-045 (wing skin delamination under vibration loading identified during ground vibration test, June 2023). The original wing skin design (P-1008 / P-1009) used straight carbon fibre reinforced polymer (CFRP). The delamination occurred at the wing root bond line after 12 hours of simulated vibration at the motor frequency spectrum.\n\n## Material Options Evaluated\n\nTobias Wren presented three options:\n\n1. **CFRP (original, 0\u00b0/90\u00b0 layup):** Failed \u2014 delamination at wing root under motor vibration after 12h\n2. **CFRP (quasi-isotropic \u00b145\u00b0 dominant layup):** Modelled to increase delamination resistance by 40% but adds ~15g per skin. Estimated to pass the 50h fatigue requirement.\n3. **Hybrid carbon-aramid composite (CFRP weave + Kevlar\u00ae \u00b145\u00b0 interlayer):** Adds ~25g per skin but increases impact resistance dramatically and the aramid interlayer provides crack arrest. Test data from KES-042 material coupon tests shows no delamination at 100h simulated vibration.\n\nDr. Voss noted that the mass penalty of Option 3 (+50g total for both skins) is within the system mass margin (340g margin per REV-631 review of DOC-401).\n\n## Decision\n\n**AGREED:** Change wing skin material from CFRP to hybrid carbon-aramid composite.\n\n- Decision maker: Tobias Wren (Airframe lead), approved by Dr. Rhea Voss (CSE)\n- Rationale: CFRP failed the vibration test (KES-045); aramid interlayer provides crack arrest and delamination resistance; mass penalty acceptable within system margin\n- ECR to be raised: ECR-207 (Tobias Wren, covering P-1008 and P-1009)\n- Structural spec to update: DOC-409 (Structural Specification)\n- Drawing to update: DRW-502 (Wing Skin & Spar Assembly)\n- Loads analysis to re-run: DOC-407 (Airframe Loads Analysis) to verify stiffness change impact\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-207 for P-1008 and P-1009 material change | Tobias Wren | 2023-08-29 |\n| A2 | Update DOC-409 Structural Spec for hybrid composite | Tobias Wren | 2023-09-30 |\n| A3 | Re-run loads analysis for stiffness change, update DOC-407 | Tobias Wren | 2023-09-30 |\n| A4 | Update DRW-502 with revised layup schedule | Tobias Wren | 2023-10-15 |\n| A5 | Fabricate and test 3 wing skin samples to hybrid spec | Aisha Mbeki | 2023-11-01 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E09",
+    "created_date": "2023-08-22",
+    "last_modified": "2023-08-23",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "KES-042",
+    "KES-045",
+    "ECR-207",
+    "DOC-409",
+    "DOC-407",
+    "DRW-502",
+    "P-1008",
+    "P-1009"
+  ]
+}

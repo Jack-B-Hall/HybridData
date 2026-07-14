@@ -1,0 +1,18 @@
+{
+  "id": "P-1137",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Coax Cable Harness",
+  "text": "Coax Cable Harness. Subsystem: Comms/Datalink. Material: LMR200, SMA, 600mm total. Mass: 48g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1137",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "LMR200, SMA, 600mm total",
+    "mass_g": 48,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

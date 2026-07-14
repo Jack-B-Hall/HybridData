@@ -1,0 +1,44 @@
+{
+  "id": "SRC-021",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "payload/gimbal_driver.py \u2014 Payload",
+  "text": "# gimbal_driver.py \u2014 Kestrel K-200 Payload\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gimbal_driver",
+    "language": "Python",
+    "subsystem": "Payload",
+    "file_path": "payload/gimbal_driver.py",
+    "primary_author": "E07",
+    "commit_log": [
+      {
+        "hash": "4becb11",
+        "author": "E03",
+        "date": "2024-08-03",
+        "message": "Initial gimbal_driver [KES-117]",
+        "kes_ref": "KES-117"
+      },
+      {
+        "hash": "1bbf928",
+        "author": "E08",
+        "date": "2024-09-01",
+        "message": "Update gimbal_driver [KES-163]",
+        "kes_ref": "KES-163"
+      },
+      {
+        "hash": "e9a2d2b",
+        "author": "E04",
+        "date": "2024-09-04",
+        "message": "Update gimbal_driver [KES-197]",
+        "kes_ref": "KES-197"
+      }
+    ]
+  },
+  "refs": [
+    "KES-117",
+    "KES-163",
+    "KES-197",
+    "DOC-454",
+    "DOC-440"
+  ]
+}

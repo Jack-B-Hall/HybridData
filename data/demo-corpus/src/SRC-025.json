@@ -1,0 +1,52 @@
+{
+  "id": "SRC-025",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gcs/gcs_map_layer.py \u2014 GCS",
+  "text": "# gcs_map_layer.py \u2014 Kestrel K-200 GCS\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "gcs_map_layer",
+    "language": "Python",
+    "subsystem": "GCS",
+    "file_path": "gcs/gcs_map_layer.py",
+    "primary_author": "E08",
+    "commit_log": [
+      {
+        "hash": "9fd3de7",
+        "author": "E14",
+        "date": "2025-02-22",
+        "message": "Initial gcs_map_layer [KES-102]",
+        "kes_ref": "KES-102"
+      },
+      {
+        "hash": "a7ae85c",
+        "author": "E02",
+        "date": "2025-03-25",
+        "message": "Update gcs_map_layer [KES-205]",
+        "kes_ref": "KES-205"
+      },
+      {
+        "hash": "d4b583a",
+        "author": "E02",
+        "date": "2025-04-21",
+        "message": "Update gcs_map_layer [KES-191]",
+        "kes_ref": "KES-191"
+      },
+      {
+        "hash": "12d5682",
+        "author": "E08",
+        "date": "2025-06-12",
+        "message": "Update gcs_map_layer [KES-204]",
+        "kes_ref": "KES-204"
+      }
+    ]
+  },
+  "refs": [
+    "KES-102",
+    "KES-205",
+    "KES-191",
+    "KES-204",
+    "DOC-478",
+    "DOC-450"
+  ]
+}

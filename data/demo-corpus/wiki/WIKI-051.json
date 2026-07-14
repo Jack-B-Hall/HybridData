@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-051",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "GCS Technical Note: material selection for structural panels",
+  "text": "# GCS Technical Note: material selection for structural panels\n\n**Attendees:** Priya Nair, Tobias Wren, Felix Herrera, Nina Schulz\n\n## Summary\n\nThis page covers the material selection for structural panels for the GCS subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Rowan Ellery on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E14",
+    "created_date": "2025-12-25",
+    "last_modified": "2026-01-14",
+    "last_modified_by": "E13"
+  },
+  "refs": [
+    "ECR-203",
+    "ECR-206",
+    "DOC-433"
+  ]
+}

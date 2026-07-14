@@ -1,0 +1,38 @@
+{
+  "id": "ECR-205",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Battery \u2014 update P-1177 per KES-121",
+  "text": "Engineering Change Request ECR-205. Subsystem: Battery. Affected parts: P-1177, P-1053, P-1106, P-1129. Linked issues: KES-121, KES-218, KES-189. Raised by: Aisha Mbeki on 2024-01-16. Status: Rejected.",
+  "structured": {
+    "raised_by": "E10",
+    "raised_date": "2024-01-16",
+    "status": "Rejected",
+    "affected_parts": [
+      "P-1177",
+      "P-1053",
+      "P-1106",
+      "P-1129"
+    ],
+    "affected_docs": [
+      "DOC-418"
+    ],
+    "jira_issues": [
+      "KES-121",
+      "KES-218",
+      "KES-189"
+    ],
+    "approver": "E11",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1177",
+    "P-1053",
+    "P-1106",
+    "P-1129",
+    "KES-121",
+    "KES-218",
+    "KES-189",
+    "DOC-418"
+  ]
+}

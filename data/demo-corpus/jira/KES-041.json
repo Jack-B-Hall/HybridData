@@ -1,0 +1,29 @@
+{
+  "id": "KES-041",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define flight log schema",
+  "text": "Story: Define flight log schema. Reporter: Tobias Wren. Assignee: Marcus Thaine. Status: In Progress. Priority: Low. Created: 2023-07-28.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E06",
+    "assignee": "E02",
+    "created": "2023-07-28",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "KES-016"
+  ]
+}

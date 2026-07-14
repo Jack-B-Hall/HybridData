@@ -1,0 +1,18 @@
+{
+  "id": "P-1178",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Speaker",
+  "text": "GCS Speaker. Subsystem: GCS. Material: Altec Lansing ALP-VS2621, 5W. Mass: 185g. Manufactured by Altec. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1178",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "Altec Lansing ALP-VS2621, 5W",
+    "mass_g": 185,
+    "manufacturer": "Altec",
+    "parent_id": null
+  },
+  "refs": []
+}

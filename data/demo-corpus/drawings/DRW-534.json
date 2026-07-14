@@ -1,0 +1,28 @@
+{
+  "id": "DRW-534",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-534: GPS v2 Antenna Installation",
+  "text": "Drawing MD-DRW-534 Rev D \u2014 GPS v2 Antenna Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1097, P-1098, P-1102, P-1117.\n4. Drawn by Rowan Ellery, checked by Sam Dreher, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-534",
+    "revision": "D",
+    "drawn_by": "E13",
+    "checked_by": "E04",
+    "approved_by": "E09",
+    "date": "2025-05-06",
+    "subsystem": "Nav/GNC",
+    "referenced_parts": [
+      "P-1097",
+      "P-1098",
+      "P-1102",
+      "P-1117"
+    ]
+  },
+  "refs": [
+    "P-1097",
+    "P-1098",
+    "P-1102",
+    "P-1117"
+  ]
+}

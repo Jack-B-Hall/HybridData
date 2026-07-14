@@ -1,0 +1,29 @@
+{
+  "id": "KES-079",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Nina Schulz. Assignee: Tyler Moss. Status: In Progress. Priority: High. Created: 2024-08-07.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "High",
+    "reporter": "E12",
+    "assignee": "E14",
+    "created": "2024-08-07",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-009",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "KES-009"
+  ]
+}

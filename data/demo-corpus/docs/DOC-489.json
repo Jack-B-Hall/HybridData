@@ -1,0 +1,21 @@
+{
+  "id": "DOC-489",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Interface Control Document",
+  "text": "# K-200 Nav/GNC Interface Control Document\n\nDocument number: MD-DOC-489-A. Revision: A. Type: ICD. Author: Marcus Thaine. Created: 2023-05-15. Last modified: 2023-11-30. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1049, P-1105.",
+  "structured": {
+    "doc_number": "MD-DOC-489-A",
+    "revision": "A",
+    "doc_type": "ICD",
+    "author": "E02",
+    "created": "2023-05-15",
+    "last_modified": "2023-11-30",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1049",
+    "P-1105"
+  ]
+}

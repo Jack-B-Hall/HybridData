@@ -1,0 +1,20 @@
+{
+  "id": "P-1030",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Tie-Down Ring \u2014 Aft",
+  "text": "Tie-Down Ring \u2014 Aft. Subsystem: Airframe. Material: stainless steel 316. Mass: 18g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-AIR-1030",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "COTS",
+    "material": "stainless steel 316",
+    "mass_g": 18,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "KES-064",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Felix Herrera. Assignee: Jordan Kim. Status: Done. Priority: Medium. Created: 2025-08-31.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E09",
+    "assignee": "E08",
+    "created": "2025-08-31",
+    "resolved": "2025-11-02",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-014",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-014"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-450",
+    "DOC-475",
+    "KES-014"
+  ]
+}

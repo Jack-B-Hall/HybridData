@@ -1,0 +1,29 @@
+{
+  "id": "KES-139",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Nina Schulz. Assignee: Rowan Ellery. Status: Done. Priority: Medium. Created: 2024-11-15.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E12",
+    "assignee": "E13",
+    "created": "2024-11-15",
+    "resolved": "2025-01-12",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-009",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-009"
+      }
+    ]
+  },
+  "refs": [
+    "KES-009"
+  ]
+}

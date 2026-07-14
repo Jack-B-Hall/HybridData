@@ -1,0 +1,27 @@
+{
+  "id": "ECN-334",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-234",
+  "text": "Engineering Change Notice ECN-334. Implements ECR-234. Approved by Marcus Thaine on 2025-11-27. Affected parts: P-1086, P-1159. Updated documents: DOC-443, DOC-457.",
+  "structured": {
+    "ecr_id": "ECR-234",
+    "approved_by": "E02",
+    "approved_date": "2025-11-27",
+    "affected_parts": [
+      "P-1086",
+      "P-1159"
+    ],
+    "affected_docs": [
+      "DOC-443",
+      "DOC-457"
+    ]
+  },
+  "refs": [
+    "ECR-234",
+    "P-1086",
+    "P-1159",
+    "DOC-443",
+    "DOC-457"
+  ]
+}

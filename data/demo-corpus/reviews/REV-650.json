@@ -1,0 +1,54 @@
+{
+  "id": "REV-650",
+  "source_system": "PLM",
+  "type": "review",
+  "title": "Review of DOC-421: REV-650",
+  "text": "# Review Record REV-650\n\nDocument: DOC-421. Reviewer: Lena Okafor. Date: 2023-05-23. Overall disposition: Approved with comments.\n\n## Comments\n\n**C01** (Rowan Ellery): Section 7.5: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C02** (Jordan Kim): Section 8.5: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table. \u2014 *Noted*\n\n**C03** (Rowan Ellery): Section 8.3: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table. \u2014 *Action required*\n\n**C04** (Nina Schulz): Section 5.2: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table. \u2014 *Accepted*\n\n**C05** (Tobias Wren): Section 8.3: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table. \u2014 *Accepted*",
+  "structured": {
+    "doc_ref": "DOC-421",
+    "reviewer": "E03",
+    "review_date": "2023-05-23",
+    "status": "Closed",
+    "overall_disposition": "Approved with comments",
+    "comments": [
+      {
+        "comment_id": "C01",
+        "author": "E13",
+        "text": "Section 7.5: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C02",
+        "author": "E08",
+        "text": "Section 8.5: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table.",
+        "disposition": "Noted",
+        "refs": []
+      },
+      {
+        "comment_id": "C03",
+        "author": "E13",
+        "text": "Section 8.3: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table.",
+        "disposition": "Action required",
+        "refs": []
+      },
+      {
+        "comment_id": "C04",
+        "author": "E12",
+        "text": "Section 5.2: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      },
+      {
+        "comment_id": "C05",
+        "author": "E06",
+        "text": "Section 8.3: The specification should clarify the interface requirement for DOC-421. Recommend updating the acceptance criteria table.",
+        "disposition": "Accepted",
+        "refs": []
+      }
+    ]
+  },
+  "refs": [
+    "DOC-421"
+  ]
+}

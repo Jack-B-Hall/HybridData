@@ -1,0 +1,32 @@
+{
+  "id": "DRW-502",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-502: Wing Skin & Spar Assembly",
+  "text": "Drawing MD-DRW-502 Rev B \u2014 Wing Skin & Spar Assembly\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1002, P-1003, P-1008, P-1009, P-1010, P-1011.\n4. Drawn by Tobias Wren, checked by Felix Herrera, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-502",
+    "revision": "B",
+    "drawn_by": "E06",
+    "checked_by": "E09",
+    "approved_by": "E01",
+    "date": "2023-08-30",
+    "subsystem": "Airframe",
+    "referenced_parts": [
+      "P-1002",
+      "P-1003",
+      "P-1008",
+      "P-1009",
+      "P-1010",
+      "P-1011"
+    ]
+  },
+  "refs": [
+    "P-1002",
+    "P-1003",
+    "P-1008",
+    "P-1009",
+    "P-1010",
+    "P-1011"
+  ]
+}

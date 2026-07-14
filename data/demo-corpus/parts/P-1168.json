@@ -1,0 +1,20 @@
+{
+  "id": "P-1168",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GCS Power Supply",
+  "text": "GCS Power Supply. Subsystem: GCS. Material: ATX 400W, 12V/5V/3.3V. Mass: 480g. Manufactured by MeanWell. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-GCS-1168",
+    "revision": "A",
+    "subsystem": "GCS",
+    "part_class": "COTS",
+    "material": "ATX 400W, 12V/5V/3.3V",
+    "mass_g": 480,
+    "manufacturer": "MeanWell",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-528"
+  ]
+}

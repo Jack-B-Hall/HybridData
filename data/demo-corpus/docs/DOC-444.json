@@ -1,0 +1,24 @@
+{
+  "id": "DOC-444",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Acceptance Test Procedure",
+  "text": "# K-200 Nav/GNC Acceptance Test Procedure\n\nDocument number: MD-DOC-444-E. Revision: E. Type: procedure. Author: Marcus Thaine. Created: 2025-04-19. Last modified: 2025-12-08. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1161, P-1129, P-1107.",
+  "structured": {
+    "doc_number": "MD-DOC-444-E",
+    "revision": "E",
+    "doc_type": "procedure",
+    "author": "E02",
+    "created": "2025-04-19",
+    "last_modified": "2025-12-08",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1161",
+    "P-1129",
+    "P-1107",
+    "ECR-206",
+    "ECR-235"
+  ]
+}

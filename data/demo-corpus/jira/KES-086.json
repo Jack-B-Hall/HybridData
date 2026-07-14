@@ -1,0 +1,29 @@
+{
+  "id": "KES-086",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate integration test plan",
+  "text": "Story: Validate integration test plan. Reporter: Tyler Moss. Assignee: Sam Dreher. Status: Done. Priority: Low. Created: 2025-10-21.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E14",
+    "assignee": "E04",
+    "created": "2025-10-21",
+    "resolved": "2025-11-13",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

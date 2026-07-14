@@ -1,0 +1,32 @@
+{
+  "id": "ECR-215",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: GCS \u2014 update P-1023 per KES-048",
+  "text": "Engineering Change Request ECR-215. Subsystem: GCS. Affected parts: P-1023, P-1103, P-1172. Linked issues: KES-048. Raised by: Rowan Ellery on 2025-09-04. Status: Rejected.",
+  "structured": {
+    "raised_by": "E13",
+    "raised_date": "2025-09-04",
+    "status": "Rejected",
+    "affected_parts": [
+      "P-1023",
+      "P-1103",
+      "P-1172"
+    ],
+    "affected_docs": [
+      "DOC-462"
+    ],
+    "jira_issues": [
+      "KES-048"
+    ],
+    "approver": "E08",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1023",
+    "P-1103",
+    "P-1172",
+    "KES-048",
+    "DOC-462"
+  ]
+}

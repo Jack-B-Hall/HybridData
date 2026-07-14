@@ -1,0 +1,31 @@
+{
+  "id": "KES-172",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Nina Schulz. Assignee: Sam Dreher. Status: Done. Priority: Low. Created: 2025-03-01.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E12",
+    "assignee": "E04",
+    "created": "2025-03-01",
+    "resolved": "2025-03-30",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-011",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-011"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-457",
+    "WIKI-047",
+    "KES-011"
+  ]
+}

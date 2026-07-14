@@ -1,0 +1,31 @@
+{
+  "id": "KES-110",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement hardware design review",
+  "text": "Story: Implement hardware design review. Reporter: Felix Herrera. Assignee: Rowan Ellery. Status: Open. Priority: Medium. Created: 2023-12-02.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E09",
+    "assignee": "E13",
+    "created": "2023-12-02",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-444",
+    "DOC-480",
+    "KES-005"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "ECN-331",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-231",
+  "text": "Engineering Change Notice ECN-331. Implements ECR-231. Approved by Aisha Mbeki on 2023-08-28. Affected parts: P-1043. Updated documents: DOC-436, DOC-454.",
+  "structured": {
+    "ecr_id": "ECR-231",
+    "approved_by": "E10",
+    "approved_date": "2023-08-28",
+    "affected_parts": [
+      "P-1043"
+    ],
+    "affected_docs": [
+      "DOC-436",
+      "DOC-454"
+    ]
+  },
+  "refs": [
+    "ECR-231",
+    "P-1043",
+    "DOC-436",
+    "DOC-454"
+  ]
+}

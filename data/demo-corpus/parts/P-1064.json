@@ -1,0 +1,20 @@
+{
+  "id": "P-1064",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Connector \u2014 Main",
+  "text": "Battery Connector \u2014 Main. Subsystem: Battery. Material: AS150 gold 150A. Mass: 18g. Manufactured by AmassConnect. Revision B. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1064",
+    "revision": "B",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "AS150 gold 150A",
+    "mass_g": 18,
+    "manufacturer": "AmassConnect",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-515"
+  ]
+}

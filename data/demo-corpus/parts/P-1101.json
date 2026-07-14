@@ -1,0 +1,20 @@
+{
+  "id": "P-1101",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Air Data Computer",
+  "text": "Air Data Computer. Subsystem: Nav/GNC. Material: PCB, STM32, pitot + baro. Mass: 42g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1101",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "PCB, STM32, pitot + baro",
+    "mass_g": 42,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-523"
+  ]
+}

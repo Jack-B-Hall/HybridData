@@ -1,0 +1,21 @@
+{
+  "id": "P-1069",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Battery Retention Strap (x2)",
+  "text": "Battery Retention Strap (x2). Subsystem: Battery. Material: nylon webbing, QD buckle. Mass: 30g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-BAT-1069",
+    "revision": "A",
+    "subsystem": "Battery",
+    "part_class": "COTS",
+    "material": "nylon webbing, QD buckle",
+    "mass_g": 30,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1067"
+  },
+  "refs": [
+    "P-1067",
+    "DRW-521"
+  ]
+}

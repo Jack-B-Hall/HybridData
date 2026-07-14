@@ -1,0 +1,16 @@
+[
+  {"id": "E01", "name": "Dr. Rhea Voss",  "role": "Chief Systems Engineer",           "status": "departed"},
+  {"id": "E02", "name": "Marcus Thaine",   "role": "Propulsion Lead",                  "status": "active"},
+  {"id": "E03", "name": "Lena Okafor",     "role": "Battery & Power Systems Engineer",  "status": "active"},
+  {"id": "E04", "name": "Sam Dreher",      "role": "Nav/GNC Software Lead",             "status": "active"},
+  {"id": "E05", "name": "Priya Nair",      "role": "Comms/Datalink Engineer",          "status": "active"},
+  {"id": "E06", "name": "Tobias Wren",     "role": "Structural/Airframe Engineer",      "status": "active"},
+  {"id": "E07", "name": "Cass Doyle",      "role": "Payload Systems Engineer",          "status": "departed"},
+  {"id": "E08", "name": "Jordan Kim",      "role": "GCS Software Engineer",             "status": "active"},
+  {"id": "E09", "name": "Felix Herrera",   "role": "Systems Integration Engineer",      "status": "active"},
+  {"id": "E10", "name": "Aisha Mbeki",     "role": "Test & Verification Lead",          "status": "active"},
+  {"id": "E11", "name": "Dev Patel",       "role": "Embedded Software Engineer",        "status": "active"},
+  {"id": "E12", "name": "Nina Schulz",     "role": "Quality & Document Control",        "status": "active"},
+  {"id": "E13", "name": "Rowan Ellery",    "role": "Electrical Systems Engineer",       "status": "active"},
+  {"id": "E14", "name": "Tyler Moss",      "role": "Firmware/Embedded Engineer",        "status": "active"}
+]

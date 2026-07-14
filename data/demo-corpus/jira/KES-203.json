@@ -1,0 +1,31 @@
+{
+  "id": "KES-203",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Servo oscillation in gusty conditions",
+  "text": "Bug: Servo oscillation in gusty conditions. Reporter: Sam Dreher. Assignee: Nina Schulz. Status: Open. Priority: Medium. Created: 2023-07-15.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E04",
+    "assignee": "E12",
+    "created": "2023-07-15",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-462",
+    "DOC-468",
+    "KES-018"
+  ]
+}

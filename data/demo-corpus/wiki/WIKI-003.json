@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-003",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Kestrel K-200 System Architecture Kick-off Meeting \u2014 2023-02-15",
+  "text": "# Kestrel K-200 System Architecture Kick-off Meeting \u2014 2023-02-15\n\n**Space:** K200  \n**Meeting type:** Programme Kick-off / Architecture Baseline  \n**Attendees:** Dr. Rhea Voss (CSE), Marcus Thaine (Propulsion), Lena Okafor (Power), Sam Dreher (GNC), Priya Nair (Comms), Tobias Wren (Airframe), Cass Doyle (Payload), Jordan Kim (GCS SW), Felix Herrera (Integration), Aisha Mbeki (Test), Rowan Ellery (Electrical)  \n**Chair:** Dr. Rhea Voss  \n**Minutes recorded by:** Felix Herrera\n\n---\n\n## Programme Context\n\nThe Kestrel K-200 programme was formally kicked off on 15 February 2023. The top-level programme objective is to develop an autonomous maritime survey drone with a target payload capacity of 1.5kg (combined sonar + camera), maximum takeoff weight of 8kg, and a 60-minute endurance at cruise speed. The customer requirement document is referenced as KES-001 (epic: K-200 System Architecture Definition).\n\n## Key Architecture Decisions Made at Kick-off\n\n### 1. Autonomy Level\nFollowing discussion, the team agreed to target SAE Level 3 conditional autonomy. Dr. Voss cited the customer's RFT-K200-002 addendum explicitly prohibiting fully autonomous (Level 4) navigation in mixed-traffic maritime zones. The implication is that a human supervisory override must always be within the control loop. This drove the GCS architecture to require a continuous datalink.\n\n### 2. Redundancy Philosophy\nAfter weighing the 8kg MTOW constraint, the team agreed on a single-string GNC architecture (no FCU redundancy) with a hardware fail-safe return-to-launch trigger if the datalink is lost for more than 10 seconds. Risk R-GNC-004 was opened.\n\n### 3. Battery Chemistry Baseline\nLiPo was selected for the initial programme baseline as the highest energy density option to meet the 60-minute endurance target. Dr. Voss noted this carried thermal management risk at high ambient temperatures and flagged it as a risk to be revisited.\n\n### 4. Propulsion Configuration\nQuad-pusher configuration agreed: four motors arranged in two tandem pairs fore and aft of the wing. Marcus Thaine presented trade studies showing this gives the best efficiency for the fixed-wing-hybrid envelope.\n\n### 5. Comms Frequency and Range\n900MHz FHSS selected for the 15km range requirement. Priya Nair noted that AES encryption was not in the baseline scope but the architecture should accommodate it. P-1125 (FreeWave radio) designated as baseline hardware.\n\n## Configuration Baseline\n\nThe agreed architecture baseline is documented in DOC-401 (System Architecture Document). ECN-301 will formally capture the configuration baseline once DOC-401 is released.\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Write DOC-401 System Architecture Document | Dr. Rhea Voss | 2023-03-31 |\n| A2 | Open KES-001 epic and sub-stories | Felix Herrera | 2023-02-22 |\n| A3 | Begin subsystem specification series | All leads | 2023-03-15 |\n| A4 | Issue ECN-301 configuration baseline | Nina Schulz | 2023-04-15 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E09",
+    "created_date": "2023-02-15",
+    "last_modified": "2023-02-16",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "KES-001",
+    "DOC-401",
+    "ECN-301",
+    "P-1125",
+    "P-1091"
+  ]
+}

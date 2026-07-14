@@ -1,0 +1,27 @@
+{
+  "id": "ECN-306",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-206",
+  "text": "Engineering Change Notice ECN-306. Implements ECR-206. Approved by Dev Patel on 2024-07-10. Affected parts: P-1016, P-1159. Updated documents: DOC-485, DOC-463.",
+  "structured": {
+    "ecr_id": "ECR-206",
+    "approved_by": "E11",
+    "approved_date": "2024-07-10",
+    "affected_parts": [
+      "P-1016",
+      "P-1159"
+    ],
+    "affected_docs": [
+      "DOC-485",
+      "DOC-463"
+    ]
+  },
+  "refs": [
+    "ECR-206",
+    "P-1016",
+    "P-1159",
+    "DOC-485",
+    "DOC-463"
+  ]
+}

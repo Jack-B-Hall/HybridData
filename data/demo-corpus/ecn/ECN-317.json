@@ -1,0 +1,23 @@
+{
+  "id": "ECN-317",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-217",
+  "text": "Engineering Change Notice ECN-317. Implements ECR-217. Approved by Jordan Kim on 2023-04-17. Affected parts: P-1151. Updated documents: DOC-451.",
+  "structured": {
+    "ecr_id": "ECR-217",
+    "approved_by": "E08",
+    "approved_date": "2023-04-17",
+    "affected_parts": [
+      "P-1151"
+    ],
+    "affected_docs": [
+      "DOC-451"
+    ]
+  },
+  "refs": [
+    "ECR-217",
+    "P-1151",
+    "DOC-451"
+  ]
+}

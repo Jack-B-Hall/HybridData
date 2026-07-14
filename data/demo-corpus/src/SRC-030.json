@@ -1,0 +1,44 @@
+{
+  "id": "SRC-030",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "system/system_init.c \u2014 Systems",
+  "text": "/* system_init.c \u2014 Kestrel K-200 Systems\n   Meridian Dynamics, see DOC refs for interface contract.\n*/\n",
+  "structured": {
+    "module_name": "system_init",
+    "language": "C",
+    "subsystem": "Systems",
+    "file_path": "system/system_init.c",
+    "primary_author": "E09",
+    "commit_log": [
+      {
+        "hash": "2713b6f",
+        "author": "E11",
+        "date": "2024-06-06",
+        "message": "Initial system_init [KES-063]",
+        "kes_ref": "KES-063"
+      },
+      {
+        "hash": "83a1e97",
+        "author": "E08",
+        "date": "2024-07-13",
+        "message": "Update system_init [KES-202]",
+        "kes_ref": "KES-202"
+      },
+      {
+        "hash": "517469a",
+        "author": "E10",
+        "date": "2024-08-20",
+        "message": "Update system_init [KES-153]",
+        "kes_ref": "KES-153"
+      }
+    ]
+  },
+  "refs": [
+    "KES-063",
+    "KES-202",
+    "KES-153",
+    "DOC-477",
+    "DOC-449"
+  ]
+}

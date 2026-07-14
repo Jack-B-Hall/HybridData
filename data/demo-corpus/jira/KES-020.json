@@ -1,0 +1,22 @@
+{
+  "id": "KES-020",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Mission profile validation",
+  "text": "Epic: Mission profile validation. Reporter: Dev Patel. Assignee: Lena Okafor. Status: Done. Priority: High. Created: 2024-09-22.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E11",
+    "assignee": "E03",
+    "created": "2024-09-22",
+    "resolved": "2025-01-17",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

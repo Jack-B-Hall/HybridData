@@ -1,0 +1,18 @@
+{
+  "id": "P-1057",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Protection Diode (x4)",
+  "text": "Motor Protection Diode (x4). Subsystem: Propulsion. Material: Schottky 100V 10A. Mass: 8g. Manufactured by Meridian Dynamics. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1057",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "Schottky 100V 10A",
+    "mass_g": 8,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

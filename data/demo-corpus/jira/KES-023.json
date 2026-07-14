@@ -1,0 +1,31 @@
+{
+  "id": "KES-023",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Sam Dreher. Assignee: Rowan Ellery. Status: Done. Priority: Low. Created: 2025-09-19.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E13",
+    "created": "2025-09-19",
+    "resolved": "2025-12-08",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-005",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-005"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-428",
+    "DOC-470",
+    "KES-005"
+  ]
+}

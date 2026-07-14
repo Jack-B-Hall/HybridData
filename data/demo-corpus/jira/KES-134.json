@@ -1,0 +1,30 @@
+{
+  "id": "KES-134",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test drawing release",
+  "text": "Story: Test drawing release. Reporter: Tobias Wren. Assignee: Sam Dreher. Status: Done. Priority: Low. Created: 2023-10-13.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E06",
+    "assignee": "E04",
+    "created": "2023-10-13",
+    "resolved": "2023-12-31",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-001",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-001"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-415",
+    "KES-001"
+  ]
+}

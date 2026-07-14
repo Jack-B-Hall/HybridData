@@ -1,0 +1,21 @@
+{
+  "id": "P-1097",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "GPS Antenna Module \u2014 Original",
+  "text": "GPS Antenna Module \u2014 Original. Subsystem: Nav/GNC. Material: patch antenna, L1/L2, 35dB LNA. Mass: 28g. Manufactured by TallysmansAU. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1097",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "patch antenna, L1/L2, 35dB LNA",
+    "mass_g": 28,
+    "manufacturer": "TallysmansAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-513",
+    "DRW-534"
+  ]
+}

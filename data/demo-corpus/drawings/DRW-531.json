@@ -1,0 +1,28 @@
+{
+  "id": "DRW-531",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-531: Enhanced Antenna Mount",
+  "text": "Drawing MD-DRW-531 Rev A \u2014 Enhanced Antenna Mount\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1122, P-1123, P-1126, P-1133.\n4. Drawn by Priya Nair, checked by Rowan Ellery, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-531",
+    "revision": "A",
+    "drawn_by": "E05",
+    "checked_by": "E13",
+    "approved_by": "E01",
+    "date": "2025-03-01",
+    "subsystem": "Comms/Datalink",
+    "referenced_parts": [
+      "P-1122",
+      "P-1123",
+      "P-1126",
+      "P-1133"
+    ]
+  },
+  "refs": [
+    "P-1122",
+    "P-1123",
+    "P-1126",
+    "P-1133"
+  ]
+}

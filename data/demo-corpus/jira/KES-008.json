@@ -1,0 +1,22 @@
+{
+  "id": "KES-008",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] System-level EMC testing",
+  "text": "Epic: System-level EMC testing. Reporter: Lena Okafor. Assignee: Felix Herrera. Status: Done. Priority: High. Created: 2024-08-11.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E09",
+    "created": "2024-08-11",
+    "resolved": "2024-10-18",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

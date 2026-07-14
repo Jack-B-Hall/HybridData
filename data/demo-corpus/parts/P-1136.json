@@ -1,0 +1,18 @@
+{
+  "id": "P-1136",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Radio Power Supply Module",
+  "text": "Radio Power Supply Module. Subsystem: Comms/Datalink. Material: PCB, 5V/3.3V, 2A. Mass: 22g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1136",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "PCB, 5V/3.3V, 2A",
+    "mass_g": 22,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

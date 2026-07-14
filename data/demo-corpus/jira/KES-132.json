@@ -1,0 +1,31 @@
+{
+  "id": "KES-132",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify risk mitigation plan",
+  "text": "Story: Verify risk mitigation plan. Reporter: Rowan Ellery. Assignee: Rowan Ellery. Status: Open. Priority: Medium. Created: 2023-03-04.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E13",
+    "assignee": "E13",
+    "created": "2023-03-04",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-007",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-007"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-432",
+    "DOC-417",
+    "KES-007"
+  ]
+}

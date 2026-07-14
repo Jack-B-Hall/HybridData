@@ -1,0 +1,25 @@
+{
+  "id": "DOC-486",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Airframe Maintenance Procedure",
+  "text": "# K-200 Airframe Maintenance Procedure\n\nDocument number: MD-DOC-486-A. Revision: A. Type: manual. Author: Tyler Moss. Created: 2024-04-05. Last modified: 2024-07-29. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Airframe subsystem of the Kestrel K-200. Referenced parts: P-1127, P-1097, P-1090, P-1140.",
+  "structured": {
+    "doc_number": "MD-DOC-486-A",
+    "revision": "A",
+    "doc_type": "manual",
+    "author": "E14",
+    "created": "2024-04-05",
+    "last_modified": "2024-07-29",
+    "status": "Released",
+    "subsystem": "Airframe"
+  },
+  "refs": [
+    "P-1127",
+    "P-1097",
+    "P-1090",
+    "P-1140",
+    "ECR-215",
+    "ECR-211"
+  ]
+}

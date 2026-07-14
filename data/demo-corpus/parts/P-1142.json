@@ -1,0 +1,18 @@
+{
+  "id": "P-1142",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Modem Board",
+  "text": "Modem Board. Subsystem: Comms/Datalink. Material: PCB, RS-422 to UART bridge. Mass: 28g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-COM-1142",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "custom",
+    "material": "PCB, RS-422 to UART bridge",
+    "mass_g": 28,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": []
+}

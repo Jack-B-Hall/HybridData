@@ -1,0 +1,24 @@
+{
+  "id": "KES-002",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Propulsion system integration",
+  "text": "Epic: Propulsion system integration. Reporter: Lena Okafor. Assignee: Nina Schulz. Status: Done. Priority: High. Created: 2025-06-02.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E12",
+    "created": "2025-06-02",
+    "resolved": "2025-06-16",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": [
+    "DOC-430"
+  ]
+}

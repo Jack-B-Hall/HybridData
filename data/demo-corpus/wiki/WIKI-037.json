@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-037",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Propulsion Integration Planning \u2014 2023-08-05",
+  "text": "# Propulsion Integration Planning \u2014 2023-08-05\n\n**Attendees:** Nina Schulz, Lena Okafor, Aisha Mbeki, Tyler Moss\n\n## Summary\n\nThis page covers the supplier evaluation results for the Propulsion subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Tobias Wren on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E03",
+    "created_date": "2023-08-05",
+    "last_modified": "2023-10-23",
+    "last_modified_by": "E06"
+  },
+  "refs": [
+    "ECR-226",
+    "DOC-444",
+    "KES-012",
+    "KES-163"
+  ]
+}

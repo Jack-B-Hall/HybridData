@@ -1,0 +1,31 @@
+{
+  "id": "KES-025",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Review acceptance test procedure",
+  "text": "Story: Review acceptance test procedure. Reporter: Jordan Kim. Assignee: Marcus Thaine. Status: Done. Priority: Medium. Created: 2024-05-05.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Medium",
+    "reporter": "E08",
+    "assignee": "E02",
+    "created": "2024-05-05",
+    "resolved": "2024-07-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-003",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-003"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-481",
+    "WIKI-009",
+    "KES-003"
+  ]
+}

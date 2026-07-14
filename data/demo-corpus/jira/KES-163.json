@@ -1,0 +1,29 @@
+{
+  "id": "KES-163",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update telemetry protocol",
+  "text": "Story: Update telemetry protocol. Reporter: Lena Okafor. Assignee: Rowan Ellery. Status: Done. Priority: High. Created: 2023-07-23.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E03",
+    "assignee": "E13",
+    "created": "2023-07-23",
+    "resolved": "2023-10-19",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

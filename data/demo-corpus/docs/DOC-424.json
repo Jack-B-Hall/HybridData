@@ -1,0 +1,23 @@
+{
+  "id": "DOC-424",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Subsystem Specification",
+  "text": "# K-200 Propulsion Subsystem Specification\n\nDocument number: MD-DOC-424-C. Revision: C. Type: specification. Author: Lena Okafor. Created: 2025-04-05. Last modified: 2025-09-03. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1151, P-1177.",
+  "structured": {
+    "doc_number": "MD-DOC-424-C",
+    "revision": "C",
+    "doc_type": "specification",
+    "author": "E03",
+    "created": "2025-04-05",
+    "last_modified": "2025-09-03",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1151",
+    "P-1177",
+    "ECR-211",
+    "ECR-209"
+  ]
+}

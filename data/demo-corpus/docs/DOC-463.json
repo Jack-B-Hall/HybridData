@@ -1,0 +1,22 @@
+{
+  "id": "DOC-463",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Environmental Test Report",
+  "text": "# K-200 Comms/Datalink Environmental Test Report\n\nDocument number: MD-DOC-463-G. Revision: G. Type: risk-register. Author: Tobias Wren. Created: 2023-09-28. Last modified: 2023-12-05. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1035, P-1150.",
+  "structured": {
+    "doc_number": "MD-DOC-463-G",
+    "revision": "G",
+    "doc_type": "risk-register",
+    "author": "E06",
+    "created": "2023-09-28",
+    "last_modified": "2023-12-05",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1035",
+    "P-1150",
+    "ECR-211"
+  ]
+}

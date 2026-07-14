@@ -1,0 +1,34 @@
+{
+  "id": "DOC-455",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 GNC Interface Control Document v2.0 (Rev B)",
+  "text": "# K-200 GNC Interface Control Document\n\nDocument number: MD-DOC-455-B. Revision: B. Type: ICD. Author: Sam Dreher. Created: 2023-05-01. Last modified: 2025-02-15. Status: Released.\n\n## Change History\n- Rev A: Initial GNC ICD (2023-05-01)\n- Rev B: Updated for sensor suite upgrade ECN-326 \u2014 P-1093 IMU, P-1098 GPS antenna (2025-02-15)\n\n## \u00a72 IMU Interface \u2014 P-1093 (ADIS16505-2)\n\nThe current IMU is the Analog Devices ADIS16505-2 tactical-grade unit (P-1093), replacing the original ICM-42688-P (P-1092, obsolete per ECN-326). Change rationale: MEMS resonant frequency of P-1092 (4.8kHz) coincided with motor harmonics from P-1041, causing attitude errors up to 2.1\u00b0 roll. See ECR-228 and WIKI-067.\n\nInterface: SPI, 3.3V logic, 2000Hz output data rate. Driver: SRC-007 (nav_filter.c).\n\nAttitude accuracy requirement: 0.5\u00b0 roll/pitch (RMS, in-flight). This was not met with P-1092 (error 2.1\u00b0). Confirmed met with P-1093: 0.3\u00b0 roll in bench simulation, 0.28\u00b0 roll in flight test (DOC-467 Rev B).\n\n## \u00a73 GPS Interface \u2014 P-1098 (L1/L2/L5 helical)\n\nThe current GPS antenna is the TallysmansAU helical antenna (P-1098 Rev B), replacing the patch antenna (P-1097, obsolete per ECN-326). Change rationale: P-1097 lost reliable sky view at roll angles >15\u00b0. See ECR-228.\n\nGPS receiver: P-1094 (u-blox F9P RTK). Driver: SRC-009 (gps_driver.c). L5 support enabled in Rev B.\n\n## \u00a74 Navigation Filter\n\nImplemented in SRC-007 (nav_filter.c). EKF fusing IMU (P-1093), GPS (P-1094/P-1098), barometer (P-1095), magnetometer (P-1096), and air data (P-1101).",
+  "structured": {
+    "doc_number": "MD-DOC-455-B",
+    "revision": "B",
+    "doc_type": "ICD",
+    "author": "E04",
+    "created": "2023-05-01",
+    "last_modified": "2025-02-15",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1091",
+    "P-1092",
+    "P-1093",
+    "P-1094",
+    "P-1095",
+    "P-1096",
+    "P-1097",
+    "P-1098",
+    "P-1101",
+    "SRC-007",
+    "SRC-009",
+    "ECR-228",
+    "ECN-326",
+    "DOC-467",
+    "WIKI-067"
+  ]
+}

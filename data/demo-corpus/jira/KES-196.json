@@ -1,0 +1,29 @@
+{
+  "id": "KES-196",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Bug] Sonar depth rating leak at 25m",
+  "text": "Bug: Sonar depth rating leak at 25m. Reporter: Marcus Thaine. Assignee: Nina Schulz. Status: Open. Priority: Medium. Created: 2023-11-30.",
+  "structured": {
+    "issue_type": "Bug",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E02",
+    "assignee": "E12",
+    "created": "2023-11-30",
+    "resolved": null,
+    "labels": [
+      "bug"
+    ],
+    "parent_id": "KES-019",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-019"
+      }
+    ]
+  },
+  "refs": [
+    "KES-019"
+  ]
+}

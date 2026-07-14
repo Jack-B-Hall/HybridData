@@ -1,0 +1,28 @@
+{
+  "id": "DRW-507",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-507: Motor Mount Detail",
+  "text": "Drawing MD-DRW-507 Rev B \u2014 Motor Mount Detail\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1012, P-1013, P-1014, P-1015.\n4. Drawn by Marcus Thaine, checked by Tobias Wren, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-507",
+    "revision": "B",
+    "drawn_by": "E02",
+    "checked_by": "E06",
+    "approved_by": "E09",
+    "date": "2023-07-01",
+    "subsystem": "Propulsion",
+    "referenced_parts": [
+      "P-1012",
+      "P-1013",
+      "P-1014",
+      "P-1015"
+    ]
+  },
+  "refs": [
+    "P-1012",
+    "P-1013",
+    "P-1014",
+    "P-1015"
+  ]
+}

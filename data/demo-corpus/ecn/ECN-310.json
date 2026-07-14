@@ -1,0 +1,25 @@
+{
+  "id": "ECN-310",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-210",
+  "text": "Engineering Change Notice ECN-310. Implements ECR-210. Approved by Dev Patel on 2023-12-15. Affected parts: P-1069, P-1102. Updated documents: DOC-448.",
+  "structured": {
+    "ecr_id": "ECR-210",
+    "approved_by": "E11",
+    "approved_date": "2023-12-15",
+    "affected_parts": [
+      "P-1069",
+      "P-1102"
+    ],
+    "affected_docs": [
+      "DOC-448"
+    ]
+  },
+  "refs": [
+    "ECR-210",
+    "P-1069",
+    "P-1102",
+    "DOC-448"
+  ]
+}

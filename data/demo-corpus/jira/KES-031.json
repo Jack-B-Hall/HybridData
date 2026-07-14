@@ -1,0 +1,30 @@
+{
+  "id": "KES-031",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Define FMEA update",
+  "text": "Story: Define FMEA update. Reporter: Aisha Mbeki. Assignee: Priya Nair. Status: Done. Priority: High. Created: 2025-04-20.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E10",
+    "assignee": "E05",
+    "created": "2025-04-20",
+    "resolved": "2025-05-07",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-450",
+    "KES-016"
+  ]
+}

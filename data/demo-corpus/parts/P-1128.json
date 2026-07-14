@@ -1,0 +1,20 @@
+{
+  "id": "P-1128",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "RF Bandpass Filter",
+  "text": "RF Bandpass Filter. Subsystem: Comms/Datalink. Material: SAW, 915MHz, \u00b125MHz BW. Mass: 14g. Manufactured by Murata. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-COM-1128",
+    "revision": "A",
+    "subsystem": "Comms/Datalink",
+    "part_class": "COTS",
+    "material": "SAW, 915MHz, \u00b125MHz BW",
+    "mass_g": 14,
+    "manufacturer": "Murata",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-535"
+  ]
+}

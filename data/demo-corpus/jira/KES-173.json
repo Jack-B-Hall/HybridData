@@ -1,0 +1,29 @@
+{
+  "id": "KES-173",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Tobias Wren. Assignee: Tyler Moss. Status: Done. Priority: High. Created: 2025-07-27.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E14",
+    "created": "2025-07-27",
+    "resolved": "2025-09-04",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-020",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-020"
+      }
+    ]
+  },
+  "refs": [
+    "KES-020"
+  ]
+}

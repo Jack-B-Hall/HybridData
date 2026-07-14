@@ -1,0 +1,29 @@
+{
+  "id": "KES-130",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Implement hardware design review",
+  "text": "Story: Implement hardware design review. Reporter: Priya Nair. Assignee: Aisha Mbeki. Status: In Progress. Priority: Medium. Created: 2025-07-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Medium",
+    "reporter": "E05",
+    "assignee": "E10",
+    "created": "2025-07-18",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "KES-012"
+  ]
+}

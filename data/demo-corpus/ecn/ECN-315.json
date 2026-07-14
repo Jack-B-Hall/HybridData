@@ -1,0 +1,32 @@
+{
+  "id": "ECN-315",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-218: Sonar transducer vendor change to AquaSound Corp",
+  "text": "Engineering Change Notice ECN-315. Implements ECR-218.\nApproved by: Dr. Rhea Voss, 2024-09-12.\n\nAuthorised changes:\n1. P-1148 (Sonar Transducer): Updated to Rev B, supplier changed from DepthWave Systems to AquaSound Corp. New specification: broadband 100\u2013400kHz, depth-rated 30m, IP68 connector, DNV-GL certified.\n2. P-1149 (Sonar Mounting Bracket): No change required. O-ring flange confirmed compatible with AquaSound interface at WIKI-045.\n3. DOC-462 (Sonar System ICD): Updated for AquaSound Corp electrical and acoustic interface. Cass Doyle, completed 2024-10-15.\n4. SRC-011 (sonar_driver.c): DSP filter anti-alias width narrowed for AquaSound tighter frequency stability. Cass Doyle, committed 2024-10-30.\n5. DOC-468 (Sonar Performance Test Report): Re-issued with AquaSound qualification data. Aisha Mbeki, completed 2024-12-01.\n6. DRW-517 (Sonar Transducer Mounting): Notes updated. Cass Doyle review (REV-641) captured 7\u00b0 cant angle rationale.",
+  "structured": {
+    "ecr_id": "ECR-218",
+    "approved_by": "E01",
+    "approved_date": "2024-09-12",
+    "affected_parts": [
+      "P-1148"
+    ],
+    "affected_docs": [
+      "DOC-462",
+      "DOC-468"
+    ]
+  },
+  "refs": [
+    "ECR-218",
+    "P-1148",
+    "P-1149",
+    "DOC-462",
+    "DOC-468",
+    "SRC-011",
+    "DRW-517",
+    "REV-641",
+    "KES-156",
+    "KES-158",
+    "WIKI-045"
+  ]
+}

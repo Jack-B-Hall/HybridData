@@ -1,0 +1,25 @@
+{
+  "id": "ECN-314",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-214",
+  "text": "Engineering Change Notice ECN-314. Implements ECR-214. Approved by Felix Herrera on 2025-01-20. Affected parts: P-1145, P-1025. Updated documents: DOC-430.",
+  "structured": {
+    "ecr_id": "ECR-214",
+    "approved_by": "E09",
+    "approved_date": "2025-01-20",
+    "affected_parts": [
+      "P-1145",
+      "P-1025"
+    ],
+    "affected_docs": [
+      "DOC-430"
+    ]
+  },
+  "refs": [
+    "ECR-214",
+    "P-1145",
+    "P-1025",
+    "DOC-430"
+  ]
+}

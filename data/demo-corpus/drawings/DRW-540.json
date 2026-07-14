@@ -1,0 +1,32 @@
+{
+  "id": "DRW-540",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-540: System Integration General Arrangement",
+  "text": "Drawing MD-DRW-540 Rev E \u2014 System Integration General Arrangement\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1001, P-1062, P-1091, P-1148, P-1154, P-1125.\n4. Drawn by Felix Herrera, checked by Dr. Rhea Voss, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-540",
+    "revision": "E",
+    "drawn_by": "E09",
+    "checked_by": "E01",
+    "approved_by": "E01",
+    "date": "2026-01-15",
+    "subsystem": "Systems",
+    "referenced_parts": [
+      "P-1001",
+      "P-1062",
+      "P-1091",
+      "P-1148",
+      "P-1154",
+      "P-1125"
+    ]
+  },
+  "refs": [
+    "P-1001",
+    "P-1062",
+    "P-1091",
+    "P-1148",
+    "P-1154",
+    "P-1125"
+  ]
+}

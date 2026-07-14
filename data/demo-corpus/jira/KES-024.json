@@ -1,0 +1,29 @@
+{
+  "id": "KES-024",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Felix Herrera. Assignee: Rowan Ellery. Status: Done. Priority: Low. Created: 2025-02-22.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E09",
+    "assignee": "E13",
+    "created": "2025-02-22",
+    "resolved": "2025-04-29",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

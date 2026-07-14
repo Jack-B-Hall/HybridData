@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-079",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Programme Status Gate 4 \u2014 2023-06-25",
+  "text": "# Programme Status Gate 4 \u2014 2023-06-25\n\n**Attendees:** Tyler Moss, Priya Nair, Jordan Kim, Felix Herrera\n\n## Summary\n\nThis page covers the maintenance schedule for the Systems subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Marcus Thaine on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2023-06-25",
+    "last_modified": "2023-08-26",
+    "last_modified_by": "E02"
+  },
+  "refs": [
+    "ECR-225"
+  ]
+}

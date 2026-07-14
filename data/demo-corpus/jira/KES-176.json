@@ -1,0 +1,29 @@
+{
+  "id": "KES-176",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Validate test coverage matrix",
+  "text": "Story: Validate test coverage matrix. Reporter: Jordan Kim. Assignee: Dev Patel. Status: Done. Priority: Low. Created: 2023-08-18.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E08",
+    "assignee": "E11",
+    "created": "2023-08-18",
+    "resolved": "2023-11-27",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-016",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-016"
+      }
+    ]
+  },
+  "refs": [
+    "KES-016"
+  ]
+}

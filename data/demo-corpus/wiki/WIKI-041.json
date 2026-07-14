@@ -1,0 +1,19 @@
+{
+  "id": "WIKI-041",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Payload Weekly Status \u2014 Week 44, 2025",
+  "text": "# Payload Weekly Status \u2014 Week 44, 2025\n\n**Attendees:** Dev Patel, Aisha Mbeki, Nina Schulz\n\n## Summary\n\nThis page covers the encryption approach for the Payload subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Sam Dreher on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E13",
+    "created_date": "2025-12-10",
+    "last_modified": "2026-03-04",
+    "last_modified_by": "E04"
+  },
+  "refs": [
+    "DOC-489",
+    "DOC-482",
+    "DOC-442"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "WIKI-062",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Action Items: Integration Milestone 4",
+  "text": "# Action Items: Integration Milestone 4\n\n**Attendees:** Aisha Mbeki, Tyler Moss, Marcus Thaine\n\n## Summary\n\nThis page covers the mission planning workflow for the Integration subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Lena Okafor on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E05",
+    "created_date": "2024-01-08",
+    "last_modified": "2024-02-11",
+    "last_modified_by": "E03"
+  },
+  "refs": [
+    "ECR-214"
+  ]
+}

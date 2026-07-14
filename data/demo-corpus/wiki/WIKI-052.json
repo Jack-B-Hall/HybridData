@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-052",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "Battery Chemistry Design Review \u2014 2023-10-05",
+  "text": "# Battery Chemistry Design Review \u2014 2023-10-05\n\n**Space:** K200  \n**Meeting type:** Technical Design Review  \n**Attendees:** Dr. Rhea Voss (CSE), Lena Okafor (Power), Felix Herrera (Integration), Aisha Mbeki (Test), Rowan Ellery (Electrical), Nina Schulz (Quality)  \n**Chair:** Dr. Rhea Voss  \n**Minutes recorded by:** Nina Schulz\n\n---\n\n## Background\n\nThis review was convened following the LiPo thermal runaway event documented in KES-208 (battery cell assembly P-1062, during the 8 September 2023 hot-day endurance test). The purpose is to decide whether to continue with LiPo chemistry or transition to an alternative, and to agree the path forward.\n\n## Presentation Summary\n\nLena Okafor presented a trade study comparing the current LiPo (Nominal: 22.2V 20Ah 6S2P) against LiFePO4 and LTO chemistries on four criteria: energy density, thermal stability, cycle life, and IEC 62133-2 compliance burden.\n\n| Chemistry | Energy density | Thermal stability | Cycle life | IEC 62133-2 risk |\n|---|---|---|---|---|\n| LiPo (current) | High (\u2248200 Wh/kg) | Poor (thermal runaway at ~150\u00b0C) | 300\u2013500 cycles | High |\n| LiFePO4 | Medium (\u2248140 Wh/kg) | Excellent (stable to 270\u00b0C) | 1000\u20132000 cycles | Low |\n| LTO | Low (\u224880 Wh/kg) | Excellent | >5000 cycles | Very low |\n\n## Discussion\n\nDr. Voss noted that the KES-208 event was the second thermal anomaly on P-1062 cells (the first was a minor swelling event in March 2023 captured in the lab log but not escalated to a Jira issue). She stated that the programme cannot continue with LiPo chemistry given the IEC 62133-2 compliance requirements for the customer delivery \u2014 the customer's own safety case explicitly prohibits LiPo cells for BVLOS maritime operations due to salt-water submersion risk.\n\nFelix Herrera confirmed that the ~12% reduction in energy density from switching to LiFePO4 would reduce endurance from a projected 75 minutes to approximately 66 minutes at cruise \u2014 within the 60-minute minimum requirement.\n\nAisha Mbeki asked about the re-qualification test burden. Lena Okafor confirmed ECR-214 will capture the full impact including new qualification testing per DOC-421 Rev C.\n\nLTO was ruled out: the energy density is too low to meet the 60-minute endurance requirement without exceeding the 8kg MTOW.\n\n## Decision\n\n**AGREED:** Transition the K-200 battery cell assembly (P-1062) from LiPo to LiFePO4 chemistry.\n\n- Decision maker: Dr. Rhea Voss (Chief Systems Engineer)\n- Rationale: IEC 62133-2 compliance requirement, two observed thermal events on P-1062 (KES-208 and March 2023 lab anomaly), acceptable energy density penalty\n- ECR to be raised: ECR-214 (Lena Okafor to raise by 2023-10-12)\n- Updated specification: DOC-421 (Battery System Specification) to be updated to Rev C\n- BMS impact: P-1075 charge/discharge profiles must be updated for LiFePO4 voltage curves\n\n## Actions\n\n| # | Action | Owner | Due |\n|---|---|---|---|\n| A1 | Raise ECR-214 for battery chemistry change | Lena Okafor | 2023-10-12 |\n| A2 | Update DOC-421 to Rev C covering LiFePO4 spec | Lena Okafor | 2023-11-15 |\n| A3 | Update P-1075 BMS charge profiles for LiFePO4 | Rowan Ellery | 2023-11-30 |\n| A4 | Plan cell-level qualification test campaign | Aisha Mbeki | 2023-11-01 |",
+  "structured": {
+    "space": "K200",
+    "created_by": "E12",
+    "created_date": "2023-10-05",
+    "last_modified": "2023-10-06",
+    "last_modified_by": "E12"
+  },
+  "refs": [
+    "KES-208",
+    "ECR-214",
+    "DOC-421",
+    "P-1062",
+    "P-1075"
+  ]
+}

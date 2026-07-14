@@ -1,0 +1,28 @@
+{
+  "id": "DRW-532",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-532: BMS to Bus Wiring",
+  "text": "Drawing MD-DRW-532 Rev B \u2014 BMS to Bus Wiring\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1075, P-1076, P-1077, P-1079.\n4. Drawn by Rowan Ellery, checked by Lena Okafor, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-532",
+    "revision": "B",
+    "drawn_by": "E13",
+    "checked_by": "E03",
+    "approved_by": "E09",
+    "date": "2025-03-28",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1075",
+      "P-1076",
+      "P-1077",
+      "P-1079"
+    ]
+  },
+  "refs": [
+    "P-1075",
+    "P-1076",
+    "P-1077",
+    "P-1079"
+  ]
+}

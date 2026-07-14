@@ -1,0 +1,20 @@
+{
+  "id": "P-1028",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Ballast Weight \u2014 Aft",
+  "text": "Ballast Weight \u2014 Aft. Subsystem: Airframe. Material: lead alloy. Mass: 50g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-AIR-1028",
+    "revision": "A",
+    "subsystem": "Airframe",
+    "part_class": "custom",
+    "material": "lead alloy",
+    "mass_g": 50,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": "P-1001"
+  },
+  "refs": [
+    "P-1001"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "SRC-017",
+  "source_system": "SCM",
+  "type": "src",
+  "title": "gcs/mission_planner.py \u2014 GCS",
+  "text": "# mission_planner.py \u2014 Kestrel K-200 GCS\n# Meridian Dynamics, see DOC refs for interface contract.\n\n",
+  "structured": {
+    "module_name": "mission_planner",
+    "language": "Python",
+    "subsystem": "GCS",
+    "file_path": "gcs/mission_planner.py",
+    "primary_author": "E08",
+    "commit_log": [
+      {
+        "hash": "f8b0e47",
+        "author": "E11",
+        "date": "2024-07-21",
+        "message": "Initial mission_planner [KES-051]",
+        "kes_ref": "KES-051"
+      },
+      {
+        "hash": "55a3f8c",
+        "author": "E02",
+        "date": "2024-09-07",
+        "message": "Update mission_planner [KES-041]",
+        "kes_ref": "KES-041"
+      }
+    ]
+  },
+  "refs": [
+    "KES-051",
+    "KES-041",
+    "DOC-481",
+    "DOC-433"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "KES-088",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Integrate interface control document",
+  "text": "Story: Integrate interface control document. Reporter: Sam Dreher. Assignee: Sam Dreher. Status: Done. Priority: Low. Created: 2024-10-03.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E04",
+    "created": "2024-10-03",
+    "resolved": "2024-10-23",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-002",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-002"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-054",
+    "KES-002"
+  ]
+}

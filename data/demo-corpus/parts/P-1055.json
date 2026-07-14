@@ -1,0 +1,18 @@
+{
+  "id": "P-1055",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Motor Programming Card",
+  "text": "Motor Programming Card. Subsystem: Propulsion. Material: USB interface. Mass: 18g. Manufactured by ControlAir Ltd. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-PRO-1055",
+    "revision": "A",
+    "subsystem": "Propulsion",
+    "part_class": "COTS",
+    "material": "USB interface",
+    "mass_g": 18,
+    "manufacturer": "ControlAir Ltd",
+    "parent_id": null
+  },
+  "refs": []
+}

@@ -1,0 +1,18 @@
+{
+  "id": "P-1100",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "AHRS Unit",
+  "text": "AHRS Unit. Subsystem: Nav/GNC. Material: SBG Ellipse-N, 0.05\u00b0 pitch. Mass: 195g. Manufactured by SBG Systems. Revision A. Part class: COTS.",
+  "structured": {
+    "part_number": "MD-NAV-1100",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "COTS",
+    "material": "SBG Ellipse-N, 0.05\u00b0 pitch",
+    "mass_g": 195,
+    "manufacturer": "SBG Systems",
+    "parent_id": null
+  },
+  "refs": []
+}

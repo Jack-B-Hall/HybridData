@@ -1,0 +1,29 @@
+{
+  "id": "KES-193",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Tobias Wren. Assignee: Aisha Mbeki. Status: Done. Priority: High. Created: 2025-06-10.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E06",
+    "assignee": "E10",
+    "created": "2025-06-10",
+    "resolved": "2025-07-11",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-010",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-010"
+      }
+    ]
+  },
+  "refs": [
+    "KES-010"
+  ]
+}

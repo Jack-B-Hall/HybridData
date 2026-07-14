@@ -1,0 +1,36 @@
+{
+  "id": "ECR-227",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Comms/Datalink \u2014 update P-1148 per KES-154",
+  "text": "Engineering Change Request ECR-227. Subsystem: Comms/Datalink. Affected parts: P-1148, P-1082. Linked issues: KES-154, KES-198, KES-173. Raised by: Marcus Thaine on 2023-07-22. Status: In Review.",
+  "structured": {
+    "raised_by": "E02",
+    "raised_date": "2023-07-22",
+    "status": "In Review",
+    "affected_parts": [
+      "P-1148",
+      "P-1082"
+    ],
+    "affected_docs": [
+      "DOC-431",
+      "DOC-439"
+    ],
+    "jira_issues": [
+      "KES-154",
+      "KES-198",
+      "KES-173"
+    ],
+    "approver": "E04",
+    "approved_date": null
+  },
+  "refs": [
+    "P-1148",
+    "P-1082",
+    "KES-154",
+    "KES-198",
+    "KES-173",
+    "DOC-431",
+    "DOC-439"
+  ]
+}

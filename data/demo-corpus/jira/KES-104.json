@@ -1,0 +1,29 @@
+{
+  "id": "KES-104",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Test calibration procedure",
+  "text": "Story: Test calibration procedure. Reporter: Sam Dreher. Assignee: Felix Herrera. Status: Done. Priority: High. Created: 2024-02-14.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E04",
+    "assignee": "E09",
+    "created": "2024-02-14",
+    "resolved": "2024-05-10",
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-018",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-018"
+      }
+    ]
+  },
+  "refs": [
+    "KES-018"
+  ]
+}

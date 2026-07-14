@@ -1,0 +1,25 @@
+{
+  "id": "ECN-329",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-229",
+  "text": "Engineering Change Notice ECN-329. Implements ECR-229. Approved by Tobias Wren on 2024-05-28. Affected parts: P-1022, P-1144. Updated documents: DOC-474.",
+  "structured": {
+    "ecr_id": "ECR-229",
+    "approved_by": "E06",
+    "approved_date": "2024-05-28",
+    "affected_parts": [
+      "P-1022",
+      "P-1144"
+    ],
+    "affected_docs": [
+      "DOC-474"
+    ]
+  },
+  "refs": [
+    "ECR-229",
+    "P-1022",
+    "P-1144",
+    "DOC-474"
+  ]
+}

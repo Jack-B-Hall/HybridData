@@ -1,0 +1,29 @@
+{
+  "id": "ECN-330",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change Notice for ECR-230",
+  "text": "Engineering Change Notice ECN-330. Implements ECR-230. Approved by Dev Patel on 2023-09-21. Affected parts: P-1098, P-1044, P-1036. Updated documents: DOC-439, DOC-435.",
+  "structured": {
+    "ecr_id": "ECR-230",
+    "approved_by": "E11",
+    "approved_date": "2023-09-21",
+    "affected_parts": [
+      "P-1098",
+      "P-1044",
+      "P-1036"
+    ],
+    "affected_docs": [
+      "DOC-439",
+      "DOC-435"
+    ]
+  },
+  "refs": [
+    "ECR-230",
+    "P-1098",
+    "P-1044",
+    "P-1036",
+    "DOC-439",
+    "DOC-435"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "DOC-454",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Comms/Datalink Maintenance Procedure",
+  "text": "# K-200 Comms/Datalink Maintenance Procedure\n\nDocument number: MD-DOC-454-F. Revision: F. Type: manual. Author: Lena Okafor. Created: 2024-09-08. Last modified: 2025-04-16. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Comms/Datalink subsystem of the Kestrel K-200. Referenced parts: P-1129.",
+  "structured": {
+    "doc_number": "MD-DOC-454-F",
+    "revision": "F",
+    "doc_type": "manual",
+    "author": "E03",
+    "created": "2024-09-08",
+    "last_modified": "2025-04-16",
+    "status": "Released",
+    "subsystem": "Comms/Datalink"
+  },
+  "refs": [
+    "P-1129",
+    "KES-058"
+  ]
+}

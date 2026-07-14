@@ -1,0 +1,29 @@
+{
+  "id": "KES-169",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify software design document",
+  "text": "Story: Qualify software design document. Reporter: Sam Dreher. Assignee: Nina Schulz. Status: In Progress. Priority: Low. Created: 2023-07-12.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E04",
+    "assignee": "E12",
+    "created": "2023-07-12",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-013",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-013"
+      }
+    ]
+  },
+  "refs": [
+    "KES-013"
+  ]
+}

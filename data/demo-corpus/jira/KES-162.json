@@ -1,0 +1,29 @@
+{
+  "id": "KES-162",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Verify ICD rev B",
+  "text": "Story: Verify ICD rev B. Reporter: Jordan Kim. Assignee: Dev Patel. Status: In Progress. Priority: Low. Created: 2023-06-20.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E08",
+    "assignee": "E11",
+    "created": "2023-06-20",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-002",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-002"
+      }
+    ]
+  },
+  "refs": [
+    "KES-002"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "DOC-442",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Propulsion Qualification Test Report",
+  "text": "# K-200 Propulsion Qualification Test Report\n\nDocument number: MD-DOC-442-E. Revision: E. Type: test-report. Author: Nina Schulz. Created: 2023-04-14. Last modified: 2024-02-08. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Propulsion subsystem of the Kestrel K-200. Referenced parts: P-1093.",
+  "structured": {
+    "doc_number": "MD-DOC-442-E",
+    "revision": "E",
+    "doc_type": "test-report",
+    "author": "E12",
+    "created": "2023-04-14",
+    "last_modified": "2024-02-08",
+    "status": "Released",
+    "subsystem": "Propulsion"
+  },
+  "refs": [
+    "P-1093",
+    "KES-215"
+  ]
+}

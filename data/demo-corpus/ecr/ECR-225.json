@@ -1,0 +1,37 @@
+{
+  "id": "ECR-225",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "GCS software architecture v2: archive SRC-001 gcs_main.py, introduce SRC-024 backend service",
+  "text": "Engineering Change Request ECR-225.\n\nRaised by: Jordan Kim (GCS Software Engineer), 2024-10-22.\nStatus: Approved. Approved by: Felix Herrera (Systems Integration), 2024-10-30.\n\nSummary: Refactor the GCS software from a monolithic architecture (SRC-001 gcs_main.py) to a split backend/frontend architecture (SRC-024 gcs_ui_backend.py + browser-based frontend).\n\nRationale: Three converging problems identified (KES-173 epic, KES-175 story):\n1. Monolith scale: SRC-001 gcs_main.py grew to 8,400 lines. Telemetry decoding, command encoding, map rendering, and mission planning are in a single synchronous event loop \u2014 unmaintainable.\n2. Encryption integration blocker: Integration of the AES-256 encryption stack (KES-201, P-1127 FPGA module via SRC-018) revealed that synchronous command dispatch in v1 blocks the entire UI thread during encryption operations (800ms\u20132s UI freezes). The encryption latency is unavoidable with hardware AES.\n3. Protocol agility: The v1 architecture couples the MAVLink protocol implementation directly to the UI layer, making protocol updates (required by DOC-471 Comms ICD Rev C) extremely difficult.\n\nThe v2 architecture agreed at WIKI-058 (GCS Architecture Review, 2024-10-15) uses asyncio Python backend (SRC-024) with a WebSocket API to a Vue.js frontend. The backend owns all drone communications via P-1167 (GCS Radio Unit). DOC-479 (GCS Software Architecture Document) to be created.\n\nImpact:\n- SRC-001 (gcs_main.py): Archived (kept for reference)\n- SRC-002 (gcs_telemetry.py): Refactored into SRC-024 backend\n- SRC-024 (gcs_ui_backend.py): New, asyncio backend service\n- SRC-025 (gcs_map_layer.py): Replaced by JavaScript map component\n- DOC-479: New GCS Software Architecture Document\n- SRC-017 (mission_planner.py): Adapted to SRC-024 API",
+  "structured": {
+    "raised_by": "E08",
+    "raised_date": "2024-10-22",
+    "status": "Approved",
+    "affected_parts": [],
+    "affected_docs": [
+      "DOC-479"
+    ],
+    "jira_issues": [
+      "KES-173",
+      "KES-175"
+    ],
+    "approver": "E09",
+    "approved_date": "2024-10-30"
+  },
+  "refs": [
+    "KES-173",
+    "KES-175",
+    "KES-201",
+    "DOC-479",
+    "DOC-471",
+    "SRC-001",
+    "SRC-002",
+    "SRC-024",
+    "SRC-025",
+    "SRC-018",
+    "P-1127",
+    "P-1167",
+    "WIKI-058"
+  ]
+}

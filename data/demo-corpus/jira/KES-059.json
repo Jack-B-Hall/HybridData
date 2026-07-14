@@ -1,0 +1,30 @@
+{
+  "id": "KES-059",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Qualify operations manual section",
+  "text": "Story: Qualify operations manual section. Reporter: Tyler Moss. Assignee: Dev Patel. Status: Open. Priority: Medium. Created: 2025-08-28.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "Open",
+    "priority": "Medium",
+    "reporter": "E14",
+    "assignee": "E11",
+    "created": "2025-08-28",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-006",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-006"
+      }
+    ]
+  },
+  "refs": [
+    "DOC-416",
+    "KES-006"
+  ]
+}

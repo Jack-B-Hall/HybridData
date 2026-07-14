@@ -1,0 +1,20 @@
+{
+  "id": "WIKI-033",
+  "source_system": "Confluence",
+  "type": "wiki",
+  "title": "GCS Weekly Status \u2014 Week 45, 2025",
+  "text": "# GCS Weekly Status \u2014 Week 45, 2025\n\n**Attendees:** Sam Dreher, Dev Patel, Aisha Mbeki, Nina Schulz\n\n## Summary\n\nThis page covers the software architecture selection for the GCS subsystem. Key items discussed and actions agreed are recorded here.\n\n## Actions\n\n- Follow-up with Felix Herrera on outstanding items.\n",
+  "structured": {
+    "space": "K200",
+    "created_by": "E03",
+    "created_date": "2025-09-23",
+    "last_modified": "2025-12-17",
+    "last_modified_by": "E09"
+  },
+  "refs": [
+    "DOC-487",
+    "DOC-483",
+    "DOC-450",
+    "KES-003"
+  ]
+}

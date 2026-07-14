@@ -1,0 +1,22 @@
+{
+  "id": "DOC-435",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Nav/GNC Design Analysis",
+  "text": "# K-200 Nav/GNC Design Analysis\n\nDocument number: MD-DOC-435-D. Revision: D. Type: design-note. Author: Lena Okafor. Created: 2023-06-16. Last modified: 2024-05-14. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Nav/GNC subsystem of the Kestrel K-200. Referenced parts: P-1133, P-1175.",
+  "structured": {
+    "doc_number": "MD-DOC-435-D",
+    "revision": "D",
+    "doc_type": "design-note",
+    "author": "E03",
+    "created": "2023-06-16",
+    "last_modified": "2024-05-14",
+    "status": "Released",
+    "subsystem": "Nav/GNC"
+  },
+  "refs": [
+    "P-1133",
+    "P-1175",
+    "ECR-222"
+  ]
+}

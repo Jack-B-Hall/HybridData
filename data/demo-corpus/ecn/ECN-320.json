@@ -1,0 +1,29 @@
+{
+  "id": "ECN-320",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-225: GCS software architecture v2",
+  "text": "Engineering Change Notice ECN-320. Implements ECR-225.\nApproved by: Felix Herrera, 2024-10-30.\n\nAuthorised changes:\n1. SRC-001 (gcs_main.py): Archived at v1.8.4. No longer maintained.\n2. SRC-002 (gcs_telemetry.py): Refactored into SRC-024 backend service.\n3. SRC-024 (gcs_ui_backend.py): New asyncio Python backend. Owns all drone communications via P-1167 (GCS Radio Unit). Exposes WebSocket API on localhost:8765.\n4. SRC-025 (gcs_map_layer.py): Replaced by JavaScript Leaflet component in frontend.\n5. DOC-479 (GCS Software Architecture Document): Created, Jordan Kim, 2024-11-15.\n6. GCS frontend: Vue.js SPA, served by SRC-024, accessing drone state via WebSocket.\n7. P-1167 (GCS Radio Unit): Interface now managed exclusively by SRC-024. MAVLink dialect unchanged.\n8. Integration with SRC-018 (encryption_handler.c): SRC-024 calls SRC-018 via Python ctypes. Session key management handled in SRC-024.",
+  "structured": {
+    "ecr_id": "ECR-225",
+    "approved_by": "E09",
+    "approved_date": "2024-10-30",
+    "affected_parts": [],
+    "affected_docs": [
+      "DOC-479"
+    ]
+  },
+  "refs": [
+    "ECR-225",
+    "DOC-479",
+    "SRC-001",
+    "SRC-002",
+    "SRC-024",
+    "SRC-025",
+    "SRC-018",
+    "P-1167",
+    "KES-173",
+    "KES-175",
+    "WIKI-058"
+  ]
+}

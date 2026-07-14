@@ -1,0 +1,25 @@
+{
+  "id": "DOC-434",
+  "source_system": "PLM",
+  "type": "doc",
+  "title": "K-200 Battery Qualification Test Report",
+  "text": "# K-200 Battery Qualification Test Report\n\nDocument number: MD-DOC-434-D. Revision: D. Type: test-report. Author: Rowan Ellery. Created: 2023-07-20. Last modified: 2023-09-14. Status: Released.\n\nThis document defines the requirements, interfaces, and verification approach for the Battery subsystem of the Kestrel K-200. Referenced parts: P-1161, P-1079, P-1180, P-1060.",
+  "structured": {
+    "doc_number": "MD-DOC-434-D",
+    "revision": "D",
+    "doc_type": "test-report",
+    "author": "E13",
+    "created": "2023-07-20",
+    "last_modified": "2023-09-14",
+    "status": "Released",
+    "subsystem": "Battery"
+  },
+  "refs": [
+    "P-1161",
+    "P-1079",
+    "P-1180",
+    "P-1060",
+    "ECR-207",
+    "KES-123"
+  ]
+}

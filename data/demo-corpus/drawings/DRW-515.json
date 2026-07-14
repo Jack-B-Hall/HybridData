@@ -1,0 +1,28 @@
+{
+  "id": "DRW-515",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-515: Power Distribution Wiring",
+  "text": "Drawing MD-DRW-515 Rev E \u2014 Power Distribution Wiring\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1064, P-1072, P-1076, P-1079.\n4. Drawn by Rowan Ellery, checked by Lena Okafor, approved by Felix Herrera.",
+  "structured": {
+    "drawing_number": "MD-DRW-515",
+    "revision": "E",
+    "drawn_by": "E13",
+    "checked_by": "E03",
+    "approved_by": "E09",
+    "date": "2024-02-22",
+    "subsystem": "Battery",
+    "referenced_parts": [
+      "P-1064",
+      "P-1072",
+      "P-1076",
+      "P-1079"
+    ]
+  },
+  "refs": [
+    "P-1064",
+    "P-1072",
+    "P-1076",
+    "P-1079"
+  ]
+}

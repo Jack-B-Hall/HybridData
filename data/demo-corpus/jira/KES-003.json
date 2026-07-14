@@ -1,0 +1,22 @@
+{
+  "id": "KES-003",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Epic] Battery management system development",
+  "text": "Epic: Battery management system development. Reporter: Dev Patel. Assignee: Priya Nair. Status: Done. Priority: High. Created: 2025-05-28.",
+  "structured": {
+    "issue_type": "Epic",
+    "status": "Done",
+    "priority": "High",
+    "reporter": "E11",
+    "assignee": "E05",
+    "created": "2025-05-28",
+    "resolved": "2025-07-05",
+    "labels": [
+      "epic"
+    ],
+    "parent_id": null,
+    "linked_issues": []
+  },
+  "refs": []
+}

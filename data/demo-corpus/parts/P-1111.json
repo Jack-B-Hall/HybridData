@@ -1,0 +1,20 @@
+{
+  "id": "P-1111",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Servo Cable Harness",
+  "text": "Servo Cable Harness. Subsystem: Nav/GNC. Material: 3-wire servo, 500mm extensions. Mass: 35g. Manufactured by Meridian Dynamics. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-NAV-1111",
+    "revision": "A",
+    "subsystem": "Nav/GNC",
+    "part_class": "custom",
+    "material": "3-wire servo, 500mm extensions",
+    "mass_g": 35,
+    "manufacturer": "Meridian Dynamics",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-522"
+  ]
+}

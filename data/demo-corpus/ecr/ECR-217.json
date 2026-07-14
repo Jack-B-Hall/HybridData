@@ -1,0 +1,38 @@
+{
+  "id": "ECR-217",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Propulsion \u2014 update P-1079 per KES-181",
+  "text": "Engineering Change Request ECR-217. Subsystem: Propulsion. Affected parts: P-1079, P-1041, P-1104, P-1176. Linked issues: KES-181, KES-198, KES-080. Raised by: Tyler Moss on 2023-10-28. Status: Approved.",
+  "structured": {
+    "raised_by": "E14",
+    "raised_date": "2023-10-28",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1079",
+      "P-1041",
+      "P-1104",
+      "P-1176"
+    ],
+    "affected_docs": [
+      "DOC-482"
+    ],
+    "jira_issues": [
+      "KES-181",
+      "KES-198",
+      "KES-080"
+    ],
+    "approver": "E06",
+    "approved_date": "2023-11-25"
+  },
+  "refs": [
+    "P-1079",
+    "P-1041",
+    "P-1104",
+    "P-1176",
+    "KES-181",
+    "KES-198",
+    "KES-080",
+    "DOC-482"
+  ]
+}

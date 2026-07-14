@@ -1,0 +1,21 @@
+{
+  "id": "P-1162",
+  "source_system": "PLM",
+  "type": "part",
+  "title": "Camera Dome Port",
+  "text": "Camera Dome Port. Subsystem: Payload. Material: optical glass, AR coated, IP68. Mass: 18g. Manufactured by OpticsAU. Revision A. Part class: custom.",
+  "structured": {
+    "part_number": "MD-PAY-1162",
+    "revision": "A",
+    "subsystem": "Payload",
+    "part_class": "custom",
+    "material": "optical glass, AR coated, IP68",
+    "mass_g": 18,
+    "manufacturer": "OpticsAU",
+    "parent_id": null
+  },
+  "refs": [
+    "DRW-514",
+    "DRW-537"
+  ]
+}

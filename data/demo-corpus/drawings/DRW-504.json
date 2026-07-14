@@ -1,0 +1,30 @@
+{
+  "id": "DRW-504",
+  "source_system": "PLM",
+  "type": "drawing",
+  "title": "DRW MD-DRW-504: Propulsion Installation",
+  "text": "Drawing MD-DRW-504 Rev D \u2014 Propulsion Installation\n\n## Notes\n\n1. All dimensions in millimetres unless stated.\n2. Surface finish: Ra 3.2 unless noted.\n3. Parts referenced: P-1031, P-1032, P-1039, P-1040, P-1044.\n4. Drawn by Marcus Thaine, checked by Tobias Wren, approved by Dr. Rhea Voss.",
+  "structured": {
+    "drawing_number": "MD-DRW-504",
+    "revision": "D",
+    "drawn_by": "E02",
+    "checked_by": "E06",
+    "approved_by": "E01",
+    "date": "2023-07-20",
+    "subsystem": "Propulsion",
+    "referenced_parts": [
+      "P-1031",
+      "P-1032",
+      "P-1039",
+      "P-1040",
+      "P-1044"
+    ]
+  },
+  "refs": [
+    "P-1031",
+    "P-1032",
+    "P-1039",
+    "P-1040",
+    "P-1044"
+  ]
+}

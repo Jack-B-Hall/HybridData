@@ -1,0 +1,32 @@
+{
+  "id": "ECR-224",
+  "source_system": "PLM",
+  "type": "ecr",
+  "title": "Change request: Airframe \u2014 update P-1077 per KES-173",
+  "text": "Engineering Change Request ECR-224. Subsystem: Airframe. Affected parts: P-1077. Linked issues: KES-173, KES-185. Raised by: Dev Patel on 2023-07-09. Status: Approved.",
+  "structured": {
+    "raised_by": "E11",
+    "raised_date": "2023-07-09",
+    "status": "Approved",
+    "affected_parts": [
+      "P-1077"
+    ],
+    "affected_docs": [
+      "DOC-469",
+      "DOC-449"
+    ],
+    "jira_issues": [
+      "KES-173",
+      "KES-185"
+    ],
+    "approver": "E05",
+    "approved_date": "2023-07-29"
+  },
+  "refs": [
+    "P-1077",
+    "KES-173",
+    "KES-185",
+    "DOC-469",
+    "DOC-449"
+  ]
+}

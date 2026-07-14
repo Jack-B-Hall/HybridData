@@ -1,0 +1,36 @@
+{
+  "id": "ECN-318",
+  "source_system": "PLM",
+  "type": "ecn",
+  "title": "Approved Change \u2014 ECR-221: Motor and ESC replacement (P-1031/P-1032 \u2192 P-1041/P-1042)",
+  "text": "Engineering Change Notice ECN-318. Implements ECR-221.\nApproved by: Dr. Rhea Voss, 2024-04-22.\n\nThis ECN formally authorises the implementation of ECR-221 (motor and ESC replacement). Effective from approval date.\n\nAuthorised changes:\n1. P-1031 (BLDC Motor v1): Obsoleted. Remove from active BOM. Retain in archive for reference.\n2. P-1032 (ESC 60A Original): Obsoleted. Remove from active BOM.\n3. P-1041 (BLDC Motor v2 Enhanced, TorqueDrive 4014 420KV): Added to BOM. 4 off required per airframe.\n4. P-1042 (ESC 80A Enhanced, ControlAir copper heatsink): Added to BOM. 4 off required per airframe.\n5. P-1051 (ESC Heatsink Enhanced): Added to BOM. 4 off required per airframe.\n6. DOC-445 (Motor Qualification Test Report): Created per this ECN, documents P-1041/P-1042 thermal qualification at 40\u00b0C ambient.\n7. DRW-539 (Motor v2 Installation): Updated for P-1041 and P-1042 dimensions.\n8. SRC-026 (motor_controller.c): KV-rating constants updated for 420KV. Committed 2024-05-10.",
+  "structured": {
+    "ecr_id": "ECR-221",
+    "approved_by": "E01",
+    "approved_date": "2024-04-22",
+    "affected_parts": [
+      "P-1031",
+      "P-1032",
+      "P-1041",
+      "P-1042",
+      "P-1051"
+    ],
+    "affected_docs": [
+      "DOC-445"
+    ]
+  },
+  "refs": [
+    "ECR-221",
+    "P-1031",
+    "P-1032",
+    "P-1041",
+    "P-1042",
+    "P-1051",
+    "DOC-445",
+    "DRW-539",
+    "SRC-026",
+    "KES-187",
+    "KES-188",
+    "WIKI-031"
+  ]
+}

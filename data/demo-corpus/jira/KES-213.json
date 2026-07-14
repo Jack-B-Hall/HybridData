@@ -1,0 +1,30 @@
+{
+  "id": "KES-213",
+  "source_system": "Jira",
+  "type": "jira",
+  "title": "[Story] Update supplier data package",
+  "text": "Story: Update supplier data package. Reporter: Felix Herrera. Assignee: Sam Dreher. Status: In Progress. Priority: Low. Created: 2025-02-16.",
+  "structured": {
+    "issue_type": "Story",
+    "status": "In Progress",
+    "priority": "Low",
+    "reporter": "E09",
+    "assignee": "E04",
+    "created": "2025-02-16",
+    "resolved": null,
+    "labels": [
+      "story"
+    ],
+    "parent_id": "KES-012",
+    "linked_issues": [
+      {
+        "type": "is-child-of",
+        "target": "KES-012"
+      }
+    ]
+  },
+  "refs": [
+    "WIKI-031",
+    "KES-012"
+  ]
+}
