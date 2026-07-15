@@ -6,10 +6,13 @@ import type {
   DocumentDetail,
   DocumentListParams,
   DocumentListResponse,
+  FeedbackRequest,
+  FeedbackResponse,
   GraphNodeResponse,
   GraphOverviewResponse,
   HealthResponse,
   IngestHistoryResponse,
+  TelemetryHealth,
 } from "./types";
 import { consumeSseStream } from "@/lib/sse";
 
@@ -98,6 +101,15 @@ export const liveApi = {
   getCorpusStats: () => request<CorpusStatsResponse>("/api/corpus/stats"),
 
   getIngestHistory: () => request<IngestHistoryResponse>("/api/ingest/history"),
+
+  submitFeedback: (body: FeedbackRequest) =>
+    request<FeedbackResponse>("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+
+  getTelemetryHealth: (recent?: number) =>
+    request<TelemetryHealth>(`/api/telemetry/health${toQuery({ recent })}`),
 };
 
 export type HdeApi = typeof liveApi;

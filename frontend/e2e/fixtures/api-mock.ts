@@ -7,10 +7,12 @@ import type {
   CorpusStatsResponse,
   DocumentDetail,
   DocumentListResponse,
+  FeedbackRating,
   GraphNodeResponse,
   GraphOverviewResponse,
   HealthResponse,
   IngestHistoryResponse,
+  TelemetryHealth,
 } from "../../src/api/types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -42,6 +44,67 @@ function pickAsk(question: string): AskResult {
   if (/lipo|lifepo4|battery chemistry/.test(q)) return fixtures.askSufficient;
   if (/ecr-221|propulsion motor/.test(q)) return fixtures.askImpact;
   return { ...fixtures.askRefusal, question };
+}
+
+// In-memory telemetry so the feedback round-trip and the analytics "System
+// health" view work end-to-end in e2e without a backend. Reset per test.
+interface RecordedAsk {
+  id: number;
+  question: string;
+  verdict: AskResult["verdict"];
+  confidence: AskResult["confidence"];
+  answered: boolean;
+  latency_ms: number;
+  streamed: boolean;
+  feedback: FeedbackRating | null;
+}
+let askSeq = 0;
+let recordedAsks: RecordedAsk[] = [];
+
+function resetTelemetry(): void {
+  askSeq = 0;
+  recordedAsks = [];
+}
+
+function recordAsk(result: AskResult, streamed: boolean): AskResult {
+  const id = ++askSeq;
+  recordedAsks.unshift({
+    id,
+    question: result.question,
+    verdict: result.verdict,
+    confidence: result.confidence,
+    answered: result.answered,
+    latency_ms: result.latency_ms,
+    streamed,
+    feedback: null,
+  });
+  return { ...result, ask_id: id };
+}
+
+function mockHealth(): TelemetryHealth {
+  const answered = recordedAsks.filter((a) => a.answered).length;
+  const refused = recordedAsks.length - answered;
+  const up = recordedAsks.filter((a) => a.feedback === "up").length;
+  const down = recordedAsks.filter((a) => a.feedback === "down").length;
+  return {
+    totals: { asks: recordedAsks.length, answered, refused, errors: 0, abandoned: 0 },
+    answer_rate: recordedAsks.length ? answered / recordedAsks.length : 0,
+    latency: { p50_ms: 1200, p95_ms: 1800 },
+    feedback: { up, down, ratio: up + down ? up / (up + down) : 0 },
+    per_day: [{ day: new Date().toISOString().slice(0, 10), count: recordedAsks.length }],
+    recent: recordedAsks.slice(0, 25).map((a) => ({
+      id: a.id,
+      ts: new Date().toISOString(),
+      question: a.question,
+      verdict: a.verdict,
+      confidence: a.confidence,
+      answered: a.answered,
+      latency_ms: a.latency_ms,
+      status: "ok" as const,
+      streamed: a.streamed,
+      feedback: a.feedback,
+    })),
+  };
 }
 
 /** Build a Server-Sent Events body replaying a fixture as the live stream would. */
@@ -77,6 +140,7 @@ function askStreamBody(result: AskResult): string {
  * committed fixtures — no live backend is ever contacted during e2e runs.
  */
 export async function mockApiRoutes(page: Page): Promise<void> {
+  resetTelemetry();
   // A glob like "**/api/**" would also match Vite's dev-server module URL
   // for our own src/api/*.ts modules — match on the request pathname
   // starting with the real backend prefix instead.
@@ -94,7 +158,7 @@ export async function mockApiRoutes(page: Page): Promise<void> {
 
     if (pathname === "/api/ask" && request.method() === "POST") {
       const body = request.postDataJSON() as { question: string };
-      await route.fulfill({ json: pickAsk(body.question) });
+      await route.fulfill({ json: recordAsk(pickAsk(body.question), false) });
       return;
     }
 
@@ -103,8 +167,25 @@ export async function mockApiRoutes(page: Page): Promise<void> {
       await route.fulfill({
         status: 200,
         headers: { "content-type": "text/event-stream" },
-        body: askStreamBody(pickAsk(body.question)),
+        body: askStreamBody(recordAsk(pickAsk(body.question), true)),
       });
+      return;
+    }
+
+    if (pathname === "/api/feedback" && request.method() === "POST") {
+      const body = request.postDataJSON() as { ask_id: number; rating: FeedbackRating };
+      const ask = recordedAsks.find((a) => a.id === body.ask_id);
+      if (!ask) {
+        await route.fulfill({ status: 404, json: { detail: `no ask ${body.ask_id}` } });
+        return;
+      }
+      ask.feedback = body.rating;
+      await route.fulfill({ json: { ok: true, feedback_id: body.ask_id } });
+      return;
+    }
+
+    if (pathname === "/api/telemetry/health") {
+      await route.fulfill({ json: mockHealth() });
       return;
     }
 

@@ -109,6 +109,44 @@ describe("liveApi", () => {
     await expect(liveApi.getDocument("NOPE")).rejects.toMatchObject({ status: 404 });
   });
 
+  it("submitFeedback POSTs the ask id, rating and comment", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ ok: true, feedback_id: 7 }));
+
+    const res = await liveApi.submitFeedback({ ask_id: 42, rating: "down", comment: "off" });
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "/api/feedback",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ ask_id: 42, rating: "down", comment: "off" }),
+      }),
+    );
+    expect(res.feedback_id).toBe(7);
+  });
+
+  it("getTelemetryHealth requests the health endpoint with the recent limit", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(
+      jsonResponse({
+        totals: { asks: 3, answered: 2, refused: 1, errors: 0, abandoned: 0 },
+        answer_rate: 0.66,
+        latency: { p50_ms: 1200, p95_ms: 1800 },
+        feedback: { up: 1, down: 1, ratio: 0.5 },
+        per_day: [],
+        recent: [],
+      }),
+    );
+
+    const health = await liveApi.getTelemetryHealth(10);
+
+    const calledUrl = mockFetch.mock.calls[0]?.[0] as string;
+    const url = new URL(calledUrl, "http://localhost");
+    expect(url.pathname).toBe("/api/telemetry/health");
+    expect(url.searchParams.get("recent")).toBe("10");
+    expect(health.totals.asks).toBe(3);
+  });
+
   it("getGraphNode passes hops through as a query param", async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValueOnce(jsonResponse({ center: "P-1062", nodes: [], edges: [] }));

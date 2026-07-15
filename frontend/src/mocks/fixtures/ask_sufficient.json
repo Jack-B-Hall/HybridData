@@ -1,4 +1,5 @@
 {
+  "ask_id": 0,
   "question": "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
   "answered": true,
   "verdict": "sufficient",

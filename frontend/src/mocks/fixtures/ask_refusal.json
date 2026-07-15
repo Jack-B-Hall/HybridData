@@ -1,4 +1,5 @@
 {
+  "ask_id": 0,
     "question": "What is the capital of France?",
     "answered": false,
     "verdict": "insufficient",

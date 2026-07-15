@@ -1,10 +1,14 @@
 import { ApiError } from "./types";
 import type {
+  AskResult,
   AskStreamHandlers,
   DocumentDetail,
   DocumentListParams,
   DocumentListResponse,
   DocumentSummary,
+  FeedbackRating,
+  FeedbackRequest,
+  TelemetryHealth,
 } from "./types";
 import type { HdeApi } from "./client";
 import {
@@ -70,6 +74,40 @@ function buildDocumentDetail(id: string): DocumentDetail {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// A tiny in-memory telemetry store so offline mode logs asks/feedback and the
+// analytics "System health" view is populated without a backend.
+interface MockAsk {
+  id: number;
+  ts: string;
+  question: string;
+  verdict: AskResult["verdict"];
+  confidence: AskResult["confidence"];
+  answered: boolean;
+  latency_ms: number;
+  status: "ok";
+  streamed: boolean;
+  feedback: FeedbackRating | null;
+}
+const mockAsks: MockAsk[] = [];
+let mockAskSeq = 0;
+
+function logMockAsk(result: AskResult, streamed: boolean): number {
+  const id = ++mockAskSeq;
+  mockAsks.unshift({
+    id,
+    ts: new Date().toISOString(),
+    question: result.question,
+    verdict: result.verdict,
+    confidence: result.confidence,
+    answered: result.answered,
+    latency_ms: result.latency_ms,
+    status: "ok",
+    streamed,
+    feedback: null,
+  });
+  return id;
+}
+
 export const mockApi: HdeApi = {
   getHealth: async () => {
     await delay(60);
@@ -78,14 +116,16 @@ export const mockApi: HdeApi = {
 
   ask: async (question: string) => {
     await delay(220);
-    return pickAskFixture(question);
+    const result = pickAskFixture(question);
+    return { ...result, ask_id: logMockAsk(result, false) };
   },
 
   askStream: async (question: string, handlers: AskStreamHandlers, signal?: AbortSignal) => {
     // Replays the committed fixture as the same event sequence a live backend
     // emits, so staged loading + streaming render identically offline.
     const aborted = () => signal?.aborted ?? false;
-    const result = pickAskFixture(question);
+    const base = pickAskFixture(question);
+    const result: AskResult = { ...base, ask_id: logMockAsk(base, true) };
 
     await delay(260);
     if (aborted()) return;
@@ -155,5 +195,50 @@ export const mockApi: HdeApi = {
   getIngestHistory: async () => {
     await delay(60);
     return ingestHistory;
+  },
+
+  submitFeedback: async (body: FeedbackRequest) => {
+    await delay(80);
+    const ask = mockAsks.find((a) => a.id === body.ask_id);
+    if (!ask) throw new ApiError(`no ask ${body.ask_id}`, 404);
+    ask.feedback = body.rating;
+    return { ok: true, feedback_id: body.ask_id };
+  },
+
+  getTelemetryHealth: async () => {
+    await delay(90);
+    const ok = mockAsks.filter((a) => a.status === "ok");
+    const answered = ok.filter((a) => a.answered).length;
+    const refused = ok.filter((a) => !a.answered).length;
+    const latencies = ok.map((a) => a.latency_ms).sort((x, y) => x - y);
+    const pct = (p: number) =>
+      latencies.length ? latencies[Math.min(latencies.length - 1, Math.floor((latencies.length - 1) * p))]! : 0;
+    const up = mockAsks.filter((a) => a.feedback === "up").length;
+    const down = mockAsks.filter((a) => a.feedback === "down").length;
+    const perDayMap = new Map<string, number>();
+    for (const a of mockAsks) {
+      const day = a.ts.slice(0, 10);
+      perDayMap.set(day, (perDayMap.get(day) ?? 0) + 1);
+    }
+    const health: TelemetryHealth = {
+      totals: { asks: mockAsks.length, answered, refused, errors: 0, abandoned: 0 },
+      answer_rate: answered + refused ? answered / (answered + refused) : 0,
+      latency: { p50_ms: pct(0.5), p95_ms: pct(0.95) },
+      feedback: { up, down, ratio: up + down ? up / (up + down) : 0 },
+      per_day: [...perDayMap.entries()].map(([day, count]) => ({ day, count })),
+      recent: mockAsks.slice(0, 25).map((a) => ({
+        id: a.id,
+        ts: a.ts,
+        question: a.question,
+        verdict: a.verdict,
+        confidence: a.confidence,
+        answered: a.answered,
+        latency_ms: a.latency_ms,
+        status: a.status,
+        streamed: a.streamed,
+        feedback: a.feedback,
+      })),
+    };
+    return health;
   },
 };

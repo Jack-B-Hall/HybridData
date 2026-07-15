@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/api";
 import type { CorpusStatsResponse, IngestRun } from "@/api/types";
 import { BarList } from "@/components/BarList";
+import { SystemHealth } from "@/components/SystemHealth";
 import { formatDate, formatInt } from "@/lib/format";
 
 export function ExplorerAnalyticsTab() {
@@ -18,19 +19,24 @@ export function ExplorerAnalyticsTab() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading || !stats) {
-    return (
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-24 animate-pulse rounded-card border border-border bg-canvas-sunken" />
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-6" data-testid="analytics-view">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+    <div className="space-y-8" data-testid="analytics-view">
+      <section className="space-y-4">
+        <h2 className="text-sm font-semibold text-ink">System health</h2>
+        <SystemHealth />
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-sm font-semibold text-ink">Corpus</h2>
+        {loading || !stats ? (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-24 animate-pulse rounded-card border border-border bg-canvas-sunken" />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard label="Artifacts" value={stats.totals.artifacts} />
         <StatCard label="Chunks" value={stats.totals.chunks} />
         <StatCard label="References" value={stats.totals.refs} />
@@ -95,6 +101,9 @@ export function ExplorerAnalyticsTab() {
           Snapshot taken {formatDate(stats.snapshot_at)} · embedder: {stats.embedder}
         </p>
       </Panel>
+          </div>
+        )}
+      </section>
     </div>
   );
 }

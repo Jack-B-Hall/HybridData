@@ -87,6 +87,8 @@ export interface AskResult {
   latency_ms: number;
   backend: string;
   retrieval: RetrievalStats;
+  /** Telemetry row id for this ask; feedback (thumbs) attaches to it. 0 = not logged. */
+  ask_id: number;
 }
 
 export interface AskRequest {
@@ -256,6 +258,49 @@ export interface IngestRun {
 
 export interface IngestHistoryResponse {
   runs: IngestRun[];
+}
+
+// ── Feedback + system-health telemetry ──────────────────────────────────────
+
+export type FeedbackRating = "up" | "down";
+
+export interface FeedbackRequest {
+  ask_id: number;
+  rating: FeedbackRating;
+  comment?: string;
+}
+
+export interface FeedbackResponse {
+  ok: boolean;
+  feedback_id: number;
+}
+
+export interface TelemetryRecentAsk {
+  id: number;
+  ts: string;
+  question: string;
+  verdict: Verdict | null;
+  confidence: Confidence | null;
+  answered: boolean;
+  latency_ms: number | null;
+  status: "ok" | "error" | "abandoned";
+  streamed: boolean;
+  feedback: FeedbackRating | null;
+}
+
+export interface TelemetryHealth {
+  totals: {
+    asks: number;
+    answered: number;
+    refused: number;
+    errors: number;
+    abandoned: number;
+  };
+  answer_rate: number;
+  latency: { p50_ms: number; p95_ms: number };
+  feedback: { up: number; down: number; ratio: number };
+  per_day: { day: string; count: number }[];
+  recent: TelemetryRecentAsk[];
 }
 
 export class ApiError extends Error {

@@ -4,6 +4,7 @@ import { ConfidenceIndicator } from "@/components/ConfidenceIndicator";
 import { SourcesPanel } from "@/components/SourcesPanel";
 import { RefusalPanel } from "@/components/RefusalPanel";
 import { GraphPathsList } from "@/components/GraphPathsList";
+import { FeedbackControl } from "@/components/FeedbackControl";
 import { formatLatency, modelLabel } from "@/lib/format";
 import { useChat, type Turn } from "@/store/chat";
 
@@ -232,6 +233,7 @@ function TurnBlock({ turn, onRemove }: { turn: Turn; onRemove: () => void }) {
                   <span className="font-mono text-[11px] text-ink-faint">
                     {formatLatency(result.latency_ms)} · {result.backend}
                   </span>
+                  <FeedbackControl turn={turn} className="ml-auto" />
                 </div>
                 <AnswerRenderer answer={result.answer} citations={result.citations} />
                 <GraphPathsList paths={result.graph_paths} />

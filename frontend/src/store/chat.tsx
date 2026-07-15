@@ -1,8 +1,15 @@
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
 import { api } from "@/api";
-import type { AskResult, RetrievalEvent } from "@/api/types";
+import type { AskResult, FeedbackRating, RetrievalEvent } from "@/api/types";
 
 export type TurnPhase = "searching" | "generating" | "streaming" | "done" | "error";
+
+export interface TurnFeedback {
+  rating: FeedbackRating;
+  comment?: string;
+  /** True once the POST /api/feedback round-trip has succeeded. */
+  saved: boolean;
+}
 
 export interface Turn {
   id: number;
@@ -14,6 +21,8 @@ export interface Turn {
   streamedText: string;
   result?: AskResult;
   error?: string;
+  /** Thumbs feedback the user gave on this answer; persists across tab nav. */
+  feedback?: TurnFeedback;
 }
 
 interface ChatContextValue {
@@ -23,6 +32,7 @@ interface ChatContextValue {
   submit: (question: string) => void;
   removeTurn: (id: number) => void;
   clearAll: () => void;
+  submitFeedback: (turnId: number, rating: FeedbackRating, comment?: string) => void;
   /** Persisted scroll offset so the list restores position across tab changes. */
   scrollTopRef: React.MutableRefObject<number>;
 }
@@ -35,6 +45,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [draft, setDraft] = useState("");
   const scrollTopRef = useRef(0);
+  // Mirror of `turns` for reads inside async callbacks without stale closures.
+  const turnsRef = useRef<Turn[]>(turns);
+  turnsRef.current = turns;
   // One AbortController per in-flight turn, so removing/clearing cancels its stream.
   const controllers = useRef(new Map<number, AbortController>());
 
@@ -98,9 +111,26 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     setTurns([]);
   }, []);
 
+  const submitFeedback = useCallback(
+    (turnId: number, rating: FeedbackRating, comment?: string) => {
+      const trimmed = comment?.trim() || undefined;
+      // Optimistic: show the rating immediately, mark saved once it round-trips.
+      patchTurn(turnId, (t) => ({ ...t, feedback: { rating, comment: trimmed, saved: false } }));
+      const askId = turnsRef.current.find((t) => t.id === turnId)?.result?.ask_id;
+      if (!askId) return;
+      api
+        .submitFeedback({ ask_id: askId, rating, comment: trimmed })
+        .then(() => patchTurn(turnId, (t) => ({ ...t, feedback: { rating, comment: trimmed, saved: true } })))
+        .catch(() => {
+          /* keep the optimistic rating; saved stays false */
+        });
+    },
+    [patchTurn],
+  );
+
   const value = useMemo(
-    () => ({ turns, draft, setDraft, submit, removeTurn, clearAll, scrollTopRef }),
-    [turns, draft, submit, removeTurn, clearAll],
+    () => ({ turns, draft, setDraft, submit, removeTurn, clearAll, submitFeedback, scrollTopRef }),
+    [turns, draft, submit, removeTurn, clearAll, submitFeedback],
   );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
