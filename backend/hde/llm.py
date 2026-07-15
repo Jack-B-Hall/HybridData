@@ -23,7 +23,7 @@ from __future__ import annotations
 import json
 import urllib.request
 from dataclasses import dataclass, field
-from typing import Protocol
+from typing import Iterator, Protocol
 
 from .config import Settings
 
@@ -46,6 +46,15 @@ class LLMClient(Protocol):
 
     def synthesize(self, request: SynthesisRequest) -> str:
         """Return raw answer text ending in the JSON claims block."""
+        ...
+
+    def synthesize_stream(self, request: SynthesisRequest) -> Iterator[str]:
+        """Yield raw answer text incrementally (same format as ``synthesize``).
+
+        The concatenation of all yielded chunks equals what ``synthesize`` would
+        return. Backends that cannot stream may yield a single chunk. The blocking
+        ``synthesize`` remains the canonical path used by the CLI and tests.
+        """
         ...
 
 
@@ -97,6 +106,19 @@ class MockLLM:
         return answer + "\n\n" + _render_json_block(
             claims, citations, request.graph_paths[:12]
         )
+
+    def synthesize_stream(self, request: SynthesisRequest) -> Iterator[str]:
+        """Emit the deterministic answer as a few word-group chunks so the demo
+        and offline tests exercise the same streaming path as a live model."""
+        full = self.synthesize(request)
+        # Chunk on whitespace boundaries into small groups; the JSON metadata
+        # block rides along as later chunks (the engine strips it from the
+        # displayed prose exactly as it does for a live model's trailing block).
+        words = full.split(" ")
+        group = 4
+        for i in range(0, len(words), group):
+            piece = " ".join(words[i : i + group])
+            yield piece if i == 0 else " " + piece
 
 
 def _first_sentence(body: str, title: str) -> str:
@@ -155,6 +177,43 @@ class OllamaLLM:
             data = json.loads(resp.read())
         return data["message"]["content"]
 
+    def synthesize_stream(self, request: SynthesisRequest) -> Iterator[str]:
+        """Stream answer deltas from Ollama's line-delimited ``/api/chat`` feed.
+
+        With ``stream: true`` Ollama returns one JSON object per line, each
+        carrying a ``message.content`` delta, terminated by a line with
+        ``done: true``. We forward the content deltas as they arrive; the
+        ``thinking`` field (present only when ``think`` is enabled) is not part
+        of the answer and is deliberately skipped.
+        """
+        body = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": request.system_prompt},
+                {"role": "user", "content": request.user_prompt},
+            ],
+            "stream": True,
+            "options": {"temperature": 0.1, "num_predict": self.num_predict, "num_ctx": self.num_ctx},
+            "think": self.think,
+        }
+        payload = json.dumps(body).encode()
+        req = urllib.request.Request(
+            f"{self.host}/api/chat",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=self.timeout_s) as resp:
+            for line in resp:
+                line = line.strip()
+                if not line:
+                    continue
+                obj = json.loads(line)
+                piece = obj.get("message", {}).get("content", "")
+                if piece:
+                    yield piece
+                if obj.get("done"):
+                    break
+
 
 class AnthropicLLM:
     """The Claude API via the official ``anthropic`` SDK (lazy-imported)."""
@@ -174,6 +233,18 @@ class AnthropicLLM:
             messages=[{"role": "user", "content": request.user_prompt}],
         )
         return "".join(block.text for block in msg.content if block.type == "text")
+
+    def synthesize_stream(self, request: SynthesisRequest) -> Iterator[str]:
+        """Stream text deltas from the Claude API via the SDK's streaming helper."""
+        with self._client.messages.stream(
+            model=self.model,
+            max_tokens=2000,
+            system=request.system_prompt,
+            messages=[{"role": "user", "content": request.user_prompt}],
+        ) as stream:
+            for text in stream.text_stream:
+                if text:
+                    yield text
 
 
 def build_llm(settings: Settings) -> LLMClient:

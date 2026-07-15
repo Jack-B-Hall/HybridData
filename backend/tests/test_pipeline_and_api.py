@@ -1,6 +1,8 @@
 """End-to-end tests for the ask pipeline and the HTTP API."""
 from __future__ import annotations
 
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -56,6 +58,48 @@ def test_api_ask(client):
     body = client.post("/api/ask", json={"question": "Why was the battery chemistry changed?"}).json()
     assert body["verdict"] in ("sufficient", "borderline")
     assert body["sources"]
+
+
+def _collect_sse(client, question):
+    events = []
+    with client.stream("POST", "/api/ask/stream", json={"question": question}) as r:
+        assert r.status_code == 200
+        assert r.headers["content-type"].startswith("text/event-stream")
+        for line in r.iter_lines():
+            if line.startswith("data: "):
+                events.append(json.loads(line[6:]))
+    return events
+
+
+def test_api_ask_stream_answerable(client):
+    events = _collect_sse(client, "Why was the battery chemistry changed?")
+    types = [e["type"] for e in events]
+    # First a retrieval event, at least one token, and a terminal done event.
+    assert types[0] == "retrieval"
+    assert types[-1] == "done"
+    assert "token" in types
+
+    retrieval = events[0]
+    assert retrieval["answered"] is True
+    assert retrieval["sources"]  # sources available before generation completes
+
+    done = events[-1]["result"]
+    # The streamed prose reassembles to the final answer, with citations resolved.
+    streamed = "".join(e["text"] for e in events if e["type"] == "token")
+    assert streamed.strip()
+    assert done["answered"] is True
+    assert done["citations"]
+    assert done["backend"] == retrieval["backend"]
+
+
+def test_api_ask_stream_refusal_has_no_tokens(client):
+    events = _collect_sse(client, "What is the population of Japan?")
+    types = [e["type"] for e in events]
+    assert types[0] == "retrieval"
+    assert types[-1] == "done"
+    assert "token" not in types  # a declined question streams no answer prose
+    assert events[0]["answered"] is False
+    assert events[-1]["result"]["answered"] is False
 
 
 def test_api_documents_and_detail(client):

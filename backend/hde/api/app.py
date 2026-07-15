@@ -16,11 +16,13 @@ serving workload is read-only and guarded by a lock in the engine.
 """
 from __future__ import annotations
 
+import json
 from contextlib import asynccontextmanager
+from typing import Iterator
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -76,6 +78,36 @@ def health() -> dict:
 @app.post("/api/ask")
 def ask(req: AskRequest) -> dict:
     return _engine().ask(req.question).as_dict()
+
+
+def _sse(event: dict) -> str:
+    """Serialise one event as a Server-Sent Events frame."""
+    return f"data: {json.dumps(event)}\n\n"
+
+
+@app.post("/api/ask/stream")
+def ask_stream(req: AskRequest) -> StreamingResponse:
+    """Stream the ask pipeline as Server-Sent Events.
+
+    Emits ``retrieval`` (sources + graph paths + gate verdict, as soon as they
+    are computed), then ``token`` frames (answer prose as the model generates
+    it), then a final ``done`` frame with resolved citations and timing. The
+    blocking :func:`ask` endpoint above is unchanged for compatibility.
+    """
+    eng = _engine()
+
+    def frames() -> Iterator[str]:
+        try:
+            for event in eng.ask_stream(req.question):
+                yield _sse(event)
+        except Exception as exc:  # surface as a stream event, not a broken socket
+            yield _sse({"type": "error", "message": str(exc)})
+
+    return StreamingResponse(
+        frames(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 @app.get("/api/documents")

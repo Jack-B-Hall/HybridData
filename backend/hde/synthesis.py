@@ -213,6 +213,36 @@ def _parse_meta(tail: str) -> dict:
     return meta
 
 
+def build_request(
+    question: str,
+    chunks: list[RetrievedChunk],
+    graph_paths: list[str],
+    closures: list[dict],
+    *,
+    borderline: bool = False,
+) -> SynthesisRequest:
+    """Assemble the grounded prompt a backend needs to answer one question."""
+    context = build_context(chunks, graph_paths, closures)
+    user_prompt = f"Question: {question}\n\nContext:\n{context}"
+    if borderline:
+        user_prompt += BORDERLINE_NOTE
+    return SynthesisRequest(
+        question=question,
+        system_prompt=SYSTEM_PROMPT,
+        user_prompt=user_prompt,
+        chunks=[c.as_dict() for c in chunks],
+        graph_paths=graph_paths,
+        borderline=borderline,
+    )
+
+
+def displayed_prose_so_far(raw_accumulated: str) -> str:
+    """The prose portion of a partial stream, with the trailing metadata block
+    (once it begins) excluded. Used to drive incremental rendering: as raw text
+    arrives, this returns what should be shown, never leaking the JSON block."""
+    return _split_meta(_strip_reasoning(raw_accumulated))[0]
+
+
 def synthesize(
     llm: LLMClient,
     question: str,
@@ -222,22 +252,46 @@ def synthesize(
     *,
     borderline: bool = False,
 ) -> Answer:
-    context = build_context(chunks, graph_paths, closures)
-    user_prompt = f"Question: {question}\n\nContext:\n{context}"
-    if borderline:
-        user_prompt += BORDERLINE_NOTE
+    raw = llm.synthesize(build_request(question, chunks, graph_paths, closures, borderline=borderline))
+    return parse_synthesis(raw, chunks, graph_paths)
 
-    raw = llm.synthesize(
-        SynthesisRequest(
-            question=question,
-            system_prompt=SYSTEM_PROMPT,
-            user_prompt=user_prompt,
-            chunks=[c.as_dict() for c in chunks],
-            graph_paths=graph_paths,
-            borderline=borderline,
-        )
-    )
 
+def stream_synthesis(
+    llm: LLMClient,
+    question: str,
+    chunks: list[RetrievedChunk],
+    graph_paths: list[str],
+    closures: list[dict],
+    *,
+    borderline: bool = False,
+):
+    """Generator that yields each newly-displayable slice of answer prose as the
+    model streams, and *returns* the fully-parsed :class:`Answer` (accessible via
+    ``StopIteration.value`` or ``yield from``).
+
+    The same parser as :func:`synthesize` runs over the accumulated raw text, so
+    the returned Answer's citations, claims, and cleaned prose are identical to
+    the blocking path — streaming only changes *when* the prose becomes visible.
+    """
+    request = build_request(question, chunks, graph_paths, closures, borderline=borderline)
+    raw_parts: list[str] = []
+    emitted = 0
+    for piece in llm.synthesize_stream(request):
+        raw_parts.append(piece)
+        prose_now = displayed_prose_so_far("".join(raw_parts))
+        if len(prose_now) > emitted:
+            yield prose_now[emitted:]
+            emitted = len(prose_now)
+    return parse_synthesis("".join(raw_parts), chunks, graph_paths)
+
+
+def parse_synthesis(
+    raw: str, chunks: list[RetrievedChunk], graph_paths: list[str]
+) -> Answer:
+    """Turn a backend's raw output into a grounded :class:`Answer`.
+
+    Shared by the blocking and streaming synthesis paths so both resolve
+    citations against the retrieved chunks identically."""
     raw = _strip_reasoning(raw)
     prose, tail = _split_meta(raw)
     prose = _clean_markup(prose)

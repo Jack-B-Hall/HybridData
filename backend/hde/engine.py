@@ -26,7 +26,7 @@ from .embeddings import Embedder, build_embedder
 from .graph import KnowledgeGraph
 from .llm import LLMClient, build_llm
 from .retrieval import retrieve
-from .synthesis import synthesize
+from .synthesis import stream_synthesis, synthesize
 
 CONFIDENCE = {"sufficient": "high", "borderline": "medium", "insufficient": "low"}
 
@@ -118,6 +118,88 @@ class Engine:
             latency_ms=int((time.time() - t0) * 1000),
             backend=self.llm.name, retrieval=debug,
         )
+
+    # ── ask (streaming) ──────────────────────────────────────────────────────
+    def ask_stream(self, question: str):
+        """Yield the ask pipeline as a sequence of events for incremental UI.
+
+        Event shapes (each a plain dict with a ``type`` key):
+
+        * ``retrieval`` — emitted as soon as retrieval + the gate have run:
+          sources, pre-synthesis graph paths, gate verdict/signals, backend, and
+          whether the question will be answered. The UI populates the sources
+          panel and the staged status from this.
+        * ``token`` — a newly-displayable slice of answer prose (answerable case
+          only), streamed from the model.
+        * ``done`` — the final, fully-parsed result (identical shape to
+          :meth:`ask`'s ``as_dict``), with citations resolved and timing.
+
+        The blocking :meth:`ask` is unchanged; this is a parallel path so the
+        CLI, tests, and the ``/api/ask`` contract keep their exact behaviour.
+        """
+        with self._lock:
+            yield from self._ask_stream(question)
+
+    def _ask_stream(self, question: str):
+        t0 = time.time()
+        chunks, debug = retrieve(self.conn, self.kg, self.embedder, question, self.settings)
+        verdict_result = gate_mod.evaluate(self.conn, question, chunks)
+        verdict = verdict_result.verdict
+        sources = [c.as_dict() for c in chunks]
+        answerable = verdict != "insufficient"
+
+        entry_ids = [c.artifact_id for c in chunks]
+        pre_paths = self.kg.expand_paths(entry_ids) if answerable else []
+
+        yield {
+            "type": "retrieval",
+            "answered": answerable,
+            "verdict": verdict,
+            "confidence": CONFIDENCE[verdict],
+            "signals": verdict_result.signals,
+            "backend": self.llm.name,
+            "sources": sources,
+            "graph_paths": pre_paths,
+            "retrieval": debug,
+        }
+
+        if not answerable:
+            result = AskResult(
+                question=question, answered=False, verdict=verdict,
+                confidence=CONFIDENCE[verdict], answer=REFUSAL_TEXT,
+                signals=verdict_result.signals, sources=sources,
+                latency_ms=int((time.time() - t0) * 1000),
+                backend=self.llm.name, retrieval=debug,
+            )
+            yield {"type": "done", "result": result.as_dict()}
+            return
+
+        closures = self.kg.closures(entry_ids[:4])
+        stream = stream_synthesis(
+            self.llm, question, chunks, pre_paths, closures,
+            borderline=(verdict == "borderline"),
+        )
+        # Drive the synthesis generator manually so we can forward each prose
+        # delta as a token event and capture the parsed Answer it returns.
+        while True:
+            try:
+                piece = next(stream)
+            except StopIteration as stop:
+                answer = stop.value
+                break
+            yield {"type": "token", "text": piece}
+
+        result = AskResult(
+            question=question, answered=True, verdict=verdict,
+            confidence=CONFIDENCE[verdict], answer=answer.text,
+            signals=verdict_result.signals,
+            claims=[c.as_dict() for c in answer.claims],
+            citations=[c.as_dict() for c in answer.citations],
+            graph_paths=answer.graph_paths, sources=sources,
+            latency_ms=int((time.time() - t0) * 1000),
+            backend=self.llm.name, retrieval=debug,
+        )
+        yield {"type": "done", "result": result.as_dict()}
 
     # ── documents ────────────────────────────────────────────────────────────
     def list_documents(
