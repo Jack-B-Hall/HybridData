@@ -58,6 +58,11 @@ class Settings:
     # ── Misc ───────────────────────────────────────────────────────────────
     cors_origins: tuple[str, ...] = field(default_factory=lambda: ("*",))
 
+    # Built frontend to serve alongside the API. When this directory exists the
+    # API also serves the single-page app (see hde.api.app); absent, the API is
+    # headless. Defaults to the repo's frontend/dist so `npm run build` is enough.
+    frontend_dist: Path = REPO_ROOT / "frontend" / "dist"
+
     @classmethod
     def from_env(cls) -> "Settings":
         return cls(
@@ -80,6 +85,7 @@ class Settings:
             cors_origins=tuple(
                 o.strip() for o in _env("HDE_CORS_ORIGINS", "*").split(",") if o.strip()
             ),
+            frontend_dist=Path(_env("HDE_FRONTEND_DIST", str(cls.frontend_dist))),
         )
 
 

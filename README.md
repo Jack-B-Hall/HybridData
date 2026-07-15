@@ -57,6 +57,15 @@ make ingest
 Requirements: Python 3.10+, Node 18+ (for the frontend). No GPU, no database, no
 API key for the demo.
 
+Prefer a container? One image serves the API and frontend from a single port, with
+the demo store baked in:
+
+```bash
+docker compose up -d --build      # then open http://localhost:8470
+```
+
+See [docs/deployment.md](docs/deployment.md#container-docker) for details.
+
 ## What you get
 
 **Backend** (`backend/`) — a typed Python package (`hde`) and a FastAPI service.

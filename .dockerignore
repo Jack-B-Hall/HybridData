@@ -1,0 +1,22 @@
+# Keep the build context small and reproducible: everything the image needs is
+# rebuilt inside it (frontend dist, editable install, demo SQLite store).
+.git
+.venv
+**/__pycache__
+**/*.py[cod]
+**/*.egg-info
+backend/.pytest_cache
+frontend/node_modules
+frontend/dist
+frontend/.vite
+frontend/test-results
+frontend/playwright-report
+
+# Prebuilt / local runtime stores — the image runs `hde ingest --demo` itself.
+data/hde.db
+data/hde.db-wal
+data/hde.db-shm
+data/hde-live.db
+data/hde-live.db-wal
+data/hde-live.db-shm
+.env.live

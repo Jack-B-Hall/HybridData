@@ -87,9 +87,36 @@ npm install
 npm run build            # emits static assets in frontend/dist/
 ```
 
-Serve `frontend/dist/` from any static host and point it at the API (the frontend
-calls `/api`; configure your proxy so `/api` reaches the backend, or set the API
-base at build time).
+The frontend calls `/api` with relative paths and uses client-side routing, so it
+serves from the same origin as the backend with no build-time API base. Two options:
+
+- **Served by the API (simplest).** If `frontend/dist/` exists (or `HDE_FRONTEND_DIST`
+  points at a build), `hde serve` mounts the hashed assets and falls back to
+  `index.html` for client routes — one process, one port, no proxy. This is what the
+  container below does.
+- **Served by a static host.** Serve `frontend/dist/` from any static host and
+  configure your proxy so `/api` reaches the backend.
+
+## Container (Docker)
+
+A root `Dockerfile` builds one self-contained image: stage 1 (`node:20`) builds the
+frontend, stage 2 (`python:3.12-slim`) installs the backend, copies the built SPA in,
+and bakes the demo SQLite store at image-build time (`hde ingest --demo`). The API
+then serves both the JSON API and the SPA from a single port. It runs fully offline
+(hash embedder + mock answer model) — no GPU, no network at run time.
+
+```bash
+docker compose up -d --build      # build + start, serves on http://<host>:8470/
+```
+
+`docker-compose.yml` maps host port **8470** to the container's 8000 and sets
+`restart: unless-stopped`. Open `http://<host>:8470/` for the UI; the API is under
+`http://<host>:8470/api`. Because the demo store is baked into the image, the
+container starts instantly with no ingest step.
+
+To point the container at real backends instead of the offline stand-ins, pass the
+`HDE_EMBEDDER` / `HDE_LLM_*` environment variables (see above) via compose
+`environment:` and rebuild — the same knobs apply inside the container.
 
 ## Re-ingesting / updating
 

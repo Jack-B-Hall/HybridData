@@ -1,0 +1,10 @@
+# One container serving the API + built frontend on http://<host>:8470/.
+# Fully offline (hash embedder + mock answer model); the demo store is baked in.
+services:
+  hybrid-data-example:
+    build: .
+    image: hybrid-data-example:latest
+    container_name: hybrid-data-example
+    ports:
+      - "8470:8000"
+    restart: unless-stopped

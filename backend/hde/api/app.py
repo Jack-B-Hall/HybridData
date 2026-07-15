@@ -20,6 +20,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from ..config import get_settings
@@ -119,3 +121,29 @@ def corpus_stats() -> dict:
 @app.get("/api/ingest/history")
 def ingest_history() -> dict:
     return {"runs": _engine().ingest_history()}
+
+
+# ── Static frontend ────────────────────────────────────────────────────────
+# When a built single-page app is present (frontend/dist by default), serve it
+# from the same origin as the API. The app uses relative /api paths and
+# client-side routing, so hashed assets are mounted directly and every other
+# path falls back to index.html. Registered last so the /api routes above win.
+_dist = settings.frontend_dist
+if _dist.is_dir() and (_dist / "index.html").is_file():
+    _assets = _dist / "assets"
+    if _assets.is_dir():
+        app.mount("/assets", StaticFiles(directory=_assets), name="assets")
+
+    @app.get("/", include_in_schema=False)
+    def _spa_root() -> FileResponse:
+        return FileResponse(_dist / "index.html")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    def _spa_fallback(full_path: str) -> FileResponse:
+        # Unknown API paths should still 404 as JSON, not silently serve the app.
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail=f"no route /{full_path}")
+        candidate = (_dist / full_path).resolve()
+        if candidate.is_file() and _dist.resolve() in candidate.parents:
+            return FileResponse(candidate)
+        return FileResponse(_dist / "index.html")
