@@ -26,6 +26,10 @@ class Settings:
 
     # ── Storage ────────────────────────────────────────────────────────────
     db_path: Path = REPO_ROOT / "data" / "hde.db"
+    # Telemetry lives in a SEPARATE, writable database so the corpus store stays
+    # read-only and the protected core is never written to at serve time. In the
+    # container this is mounted on a named volume so it survives image rebuilds.
+    telemetry_db: Path = REPO_ROOT / "data" / "telemetry.db"
 
     # ── Embeddings ─────────────────────────────────────────────────────────
     # "hash"   deterministic, dependency-free (default; great for tests/CI)
@@ -67,6 +71,7 @@ class Settings:
     def from_env(cls) -> "Settings":
         return cls(
             db_path=Path(_env("HDE_DB_PATH", str(cls.db_path))),
+            telemetry_db=Path(_env("HDE_TELEMETRY_DB", str(cls.telemetry_db))),
             embedder=_env("HDE_EMBEDDER", cls.embedder),
             embed_dim=int(_env("HDE_EMBED_DIM", str(cls.embed_dim))),
             embed_model=_env("HDE_EMBED_MODEL", cls.embed_model),

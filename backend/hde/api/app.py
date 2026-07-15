@@ -34,6 +34,12 @@ class AskRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=1000)
 
 
+class FeedbackRequest(BaseModel):
+    ask_id: int = Field(..., ge=1)
+    rating: str = Field(..., pattern="^(up|down)$")
+    comment: str | None = Field(default=None, max_length=2000)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
@@ -108,6 +114,22 @@ def ask_stream(req: AskRequest) -> StreamingResponse:
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@app.post("/api/feedback")
+def feedback(req: FeedbackRequest) -> dict:
+    """Attach thumbs feedback (+ optional comment) to a previously-logged ask."""
+    comment = (req.comment or "").strip() or None
+    feedback_id = _engine().submit_feedback(req.ask_id, req.rating, comment)
+    if feedback_id is None:
+        raise HTTPException(status_code=404, detail=f"no ask {req.ask_id}")
+    return {"ok": True, "feedback_id": feedback_id}
+
+
+@app.get("/api/telemetry/health")
+def telemetry_health(recent: int = Query(25, ge=1, le=200)) -> dict:
+    """System-health metrics: ask volume, answer/refusal rate, latency, feedback."""
+    return _engine().telemetry_health(recent_limit=recent)
 
 
 @app.get("/api/documents")

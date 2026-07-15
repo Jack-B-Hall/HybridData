@@ -27,6 +27,7 @@ from .graph import KnowledgeGraph
 from .llm import LLMClient, build_llm
 from .retrieval import retrieve
 from .synthesis import stream_synthesis, synthesize
+from .telemetry import Telemetry
 
 CONFIDENCE = {"sufficient": "high", "borderline": "medium", "insufficient": "low"}
 
@@ -52,9 +53,24 @@ class AskResult:
     latency_ms: int = 0
     backend: str = ""
     retrieval: dict = field(default_factory=dict)
+    # Telemetry row id for this ask, so the UI can attach thumbs feedback to it.
+    ask_id: int = 0
 
     def as_dict(self) -> dict:
         return self.__dict__.copy()
+
+
+@dataclass
+class _Prepared:
+    """The materialised result of the locked retrieval/gate/graph phase."""
+
+    chunks: list
+    debug: dict
+    verdict: str
+    answerable: bool
+    signals: dict
+    graph_paths: list[str]
+    closures: list[dict]
 
 
 class Engine:
@@ -76,48 +92,89 @@ class Engine:
         self.embedder = embedder or build_embedder(self.settings)
         self.llm = llm or build_llm(self.settings)
         self._lock = threading.Lock()
+        # Telemetry has its own connection + lock (separate writable DB), so it is
+        # never contended with the corpus lock and best-effort by construction.
+        self.telemetry = Telemetry(self.settings.telemetry_db)
 
     def close(self) -> None:
         self.conn.close()
+        self.telemetry.close()
 
     # ── ask ────────────────────────────────────────────────────────────────
     def ask(self, question: str) -> AskResult:
-        with self._lock:
-            return self._ask(question)
+        return self._ask(question)
 
     def _ask(self, question: str) -> AskResult:
         t0 = time.time()
-        chunks, debug = retrieve(self.conn, self.kg, self.embedder, question, self.settings)
-        verdict_result = gate_mod.evaluate(self.conn, question, chunks)
-        verdict = verdict_result.verdict
-        sources = [c.as_dict() for c in chunks]
+        # Lock only the SQLite-touching phase (retrieve + gate + graph expansion);
+        # the answer model touches no shared DB state, so it must not hold the lock.
+        prep = self._prepare(question)
+        retrieval_ms = int((time.time() - t0) * 1000)
+        sources = [c.as_dict() for c in prep.chunks]
 
-        if verdict == "insufficient":
-            return AskResult(
-                question=question, answered=False, verdict=verdict,
-                confidence=CONFIDENCE[verdict], answer=REFUSAL_TEXT,
-                signals=verdict_result.signals, sources=sources,
+        if not prep.answerable:
+            result = AskResult(
+                question=question, answered=False, verdict=prep.verdict,
+                confidence=CONFIDENCE[prep.verdict], answer=REFUSAL_TEXT,
+                signals=prep.signals, sources=sources,
                 latency_ms=int((time.time() - t0) * 1000),
-                backend=self.llm.name, retrieval=debug,
+                backend=self.llm.name, retrieval=prep.debug,
             )
+            self._log(result, retrieval_ms=retrieval_ms, llm_ms=0, streamed=False)
+            return result
 
-        entry_ids = [c.artifact_id for c in chunks]
-        graph_paths = self.kg.expand_paths(entry_ids)
-        closures = self.kg.closures(entry_ids[:4])
+        llm_t0 = time.time()
         answer = synthesize(
-            self.llm, question, chunks, graph_paths, closures,
-            borderline=(verdict == "borderline"),
+            self.llm, question, prep.chunks, prep.graph_paths, prep.closures,
+            borderline=(prep.verdict == "borderline"),
         )
-        return AskResult(
-            question=question, answered=True, verdict=verdict,
-            confidence=CONFIDENCE[verdict], answer=answer.text,
-            signals=verdict_result.signals,
+        llm_ms = int((time.time() - llm_t0) * 1000)
+        result = AskResult(
+            question=question, answered=True, verdict=prep.verdict,
+            confidence=CONFIDENCE[prep.verdict], answer=answer.text,
+            signals=prep.signals,
             claims=[c.as_dict() for c in answer.claims],
             citations=[c.as_dict() for c in answer.citations],
             graph_paths=answer.graph_paths, sources=sources,
             latency_ms=int((time.time() - t0) * 1000),
-            backend=self.llm.name, retrieval=debug,
+            backend=self.llm.name, retrieval=prep.debug,
         )
+        self._log(result, retrieval_ms=retrieval_ms, llm_ms=llm_ms, streamed=False)
+        return result
+
+    # ── retrieval + gate (the locked, DB-touching phase) ─────────────────────
+    def _prepare(self, question: str) -> "_Prepared":
+        """Run retrieval, the gate, and (if answerable) graph expansion under the
+        connection lock, and return everything the lock-free answer phase needs.
+
+        Everything returned is fully materialised (chunks, closures, path strings,
+        signal dicts), so the caller can generate the answer without the lock —
+        which is what keeps a slow or abandoned stream from wedging the engine.
+        """
+        with self._lock:
+            chunks, debug = retrieve(self.conn, self.kg, self.embedder, question, self.settings)
+            verdict_result = gate_mod.evaluate(self.conn, question, chunks)
+            verdict = verdict_result.verdict
+            answerable = verdict != "insufficient"
+            entry_ids = [c.artifact_id for c in chunks]
+            graph_paths = self.kg.expand_paths(entry_ids) if answerable else []
+            closures = self.kg.closures(entry_ids[:4]) if answerable else []
+        return _Prepared(
+            chunks=chunks, debug=debug, verdict=verdict, answerable=answerable,
+            signals=verdict_result.signals, graph_paths=graph_paths, closures=closures,
+        )
+
+    def _log(self, result: AskResult, *, retrieval_ms: int, llm_ms: int,
+             streamed: bool, status: str = "ok", error: str | None = None) -> None:
+        ask_id = self.telemetry.log_ask(
+            question=result.question, verdict=result.verdict, confidence=result.confidence,
+            answered=result.answered, backend=result.backend, latency_ms=result.latency_ms,
+            retrieval_ms=retrieval_ms, llm_ms=llm_ms, n_sources=len(result.sources),
+            n_graph_paths=len(result.graph_paths), answer_chars=len(result.answer),
+            streamed=streamed, status=status, error=error,
+        )
+        if ask_id:
+            result.ask_id = ask_id
 
     # ── ask (streaming) ──────────────────────────────────────────────────────
     def ask_stream(self, question: str):
@@ -136,70 +193,106 @@ class Engine:
 
         The blocking :meth:`ask` is unchanged; this is a parallel path so the
         CLI, tests, and the ``/api/ask`` contract keep their exact behaviour.
+
+        The engine lock is held ONLY across the DB phase (see :meth:`_prepare`)
+        and released before the model streams, so a client that abandons the
+        stream mid-generation cannot wedge the engine for every later request.
         """
-        with self._lock:
-            yield from self._ask_stream(question)
+        return self._ask_stream(question)
 
     def _ask_stream(self, question: str):
         t0 = time.time()
-        chunks, debug = retrieve(self.conn, self.kg, self.embedder, question, self.settings)
-        verdict_result = gate_mod.evaluate(self.conn, question, chunks)
-        verdict = verdict_result.verdict
-        sources = [c.as_dict() for c in chunks]
-        answerable = verdict != "insufficient"
-
-        entry_ids = [c.artifact_id for c in chunks]
-        pre_paths = self.kg.expand_paths(entry_ids) if answerable else []
+        prep = self._prepare(question)  # locked; released before the LLM streams
+        retrieval_ms = int((time.time() - t0) * 1000)
+        sources = [c.as_dict() for c in prep.chunks]
 
         yield {
             "type": "retrieval",
-            "answered": answerable,
-            "verdict": verdict,
-            "confidence": CONFIDENCE[verdict],
-            "signals": verdict_result.signals,
+            "answered": prep.answerable,
+            "verdict": prep.verdict,
+            "confidence": CONFIDENCE[prep.verdict],
+            "signals": prep.signals,
             "backend": self.llm.name,
             "sources": sources,
-            "graph_paths": pre_paths,
-            "retrieval": debug,
+            "graph_paths": prep.graph_paths,
+            "retrieval": prep.debug,
         }
 
-        if not answerable:
+        if not prep.answerable:
             result = AskResult(
-                question=question, answered=False, verdict=verdict,
-                confidence=CONFIDENCE[verdict], answer=REFUSAL_TEXT,
-                signals=verdict_result.signals, sources=sources,
+                question=question, answered=False, verdict=prep.verdict,
+                confidence=CONFIDENCE[prep.verdict], answer=REFUSAL_TEXT,
+                signals=prep.signals, sources=sources,
                 latency_ms=int((time.time() - t0) * 1000),
-                backend=self.llm.name, retrieval=debug,
+                backend=self.llm.name, retrieval=prep.debug,
             )
+            self._log(result, retrieval_ms=retrieval_ms, llm_ms=0, streamed=True)
             yield {"type": "done", "result": result.as_dict()}
             return
 
-        closures = self.kg.closures(entry_ids[:4])
-        stream = stream_synthesis(
-            self.llm, question, chunks, pre_paths, closures,
-            borderline=(verdict == "borderline"),
-        )
-        # Drive the synthesis generator manually so we can forward each prose
-        # delta as a token event and capture the parsed Answer it returns.
-        while True:
-            try:
-                piece = next(stream)
-            except StopIteration as stop:
-                answer = stop.value
-                break
-            yield {"type": "token", "text": piece}
+        llm_t0 = time.time()
+        terminal_logged = False
+        try:
+            stream = stream_synthesis(
+                self.llm, question, prep.chunks, prep.graph_paths, prep.closures,
+                borderline=(prep.verdict == "borderline"),
+            )
+            # Drive the synthesis generator manually so we can forward each prose
+            # delta as a token event and capture the parsed Answer it returns.
+            while True:
+                try:
+                    piece = next(stream)
+                except StopIteration as stop:
+                    answer = stop.value
+                    break
+                yield {"type": "token", "text": piece}
 
-        result = AskResult(
-            question=question, answered=True, verdict=verdict,
-            confidence=CONFIDENCE[verdict], answer=answer.text,
-            signals=verdict_result.signals,
-            claims=[c.as_dict() for c in answer.claims],
-            citations=[c.as_dict() for c in answer.citations],
-            graph_paths=answer.graph_paths, sources=sources,
-            latency_ms=int((time.time() - t0) * 1000),
-            backend=self.llm.name, retrieval=debug,
+            llm_ms = int((time.time() - llm_t0) * 1000)
+            result = AskResult(
+                question=question, answered=True, verdict=prep.verdict,
+                confidence=CONFIDENCE[prep.verdict], answer=answer.text,
+                signals=prep.signals,
+                claims=[c.as_dict() for c in answer.claims],
+                citations=[c.as_dict() for c in answer.citations],
+                graph_paths=answer.graph_paths, sources=sources,
+                latency_ms=int((time.time() - t0) * 1000),
+                backend=self.llm.name, retrieval=prep.debug,
+            )
+            self._log(result, retrieval_ms=retrieval_ms, llm_ms=llm_ms, streamed=True)
+            terminal_logged = True
+            yield {"type": "done", "result": result.as_dict()}
+        except GeneratorExit:
+            # Client disconnected mid-generation (tab nav, reload). Record it as
+            # an abandoned ask so it is visible in system health, then let the
+            # close propagate. No yield here — the generator is being torn down.
+            if not terminal_logged:
+                self._log_incomplete(question, prep, retrieval_ms,
+                                     int((time.time() - llm_t0) * 1000), status="abandoned")
+            raise
+        except Exception as exc:
+            if not terminal_logged:
+                self._log_incomplete(question, prep, retrieval_ms,
+                                     int((time.time() - llm_t0) * 1000),
+                                     status="error", error=str(exc))
+            raise
+
+    def _log_incomplete(self, question: str, prep: "_Prepared", retrieval_ms: int,
+                        llm_ms: int, *, status: str, error: str | None = None) -> None:
+        """Log a stream that ended before ``done`` (abandoned or errored)."""
+        self.telemetry.log_ask(
+            question=question, verdict=prep.verdict, confidence=CONFIDENCE[prep.verdict],
+            answered=prep.answerable, backend=self.llm.name,
+            latency_ms=retrieval_ms + llm_ms, retrieval_ms=retrieval_ms, llm_ms=llm_ms,
+            n_sources=len(prep.chunks), n_graph_paths=len(prep.graph_paths),
+            answer_chars=0, streamed=True, status=status, error=error,
         )
-        yield {"type": "done", "result": result.as_dict()}
+
+    # ── feedback + system health ─────────────────────────────────────────────
+    def submit_feedback(self, ask_id: int, rating: str, comment: str | None = None) -> int | None:
+        return self.telemetry.add_feedback(ask_id, rating, comment)
+
+    def telemetry_health(self, recent_limit: int = 25) -> dict:
+        return self.telemetry.health(recent_limit=recent_limit)
 
     # ── documents ────────────────────────────────────────────────────────────
     def list_documents(

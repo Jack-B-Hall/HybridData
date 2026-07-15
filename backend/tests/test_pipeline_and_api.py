@@ -123,6 +123,36 @@ def test_api_graph_overview_and_node(client):
     assert nb["center"] == node
 
 
+def test_api_feedback_round_trip_and_health(client):
+    ask = client.post("/api/ask", json={"question": "Why was the battery chemistry changed?"}).json()
+    ask_id = ask["ask_id"]
+    assert ask_id > 0
+
+    ok = client.post("/api/feedback", json={"ask_id": ask_id, "rating": "down", "comment": "wanted more"})
+    assert ok.status_code == 200 and ok.json()["ok"] is True
+
+    # Unknown ask -> 404; invalid rating -> 422 (validated by the request model).
+    assert client.post("/api/feedback", json={"ask_id": 10_000_000, "rating": "up"}).status_code == 404
+    assert client.post("/api/feedback", json={"ask_id": ask_id, "rating": "meh"}).status_code == 422
+
+    health = client.get("/api/telemetry/health").json()
+    assert health["totals"]["asks"] >= 1
+    assert "p50_ms" in health["latency"] and "p95_ms" in health["latency"]
+    assert health["feedback"]["down"] >= 1
+    assert isinstance(health["recent"], list) and health["recent"]
+
+
+def test_api_stream_logs_ask_id(client):
+    events = []
+    with client.stream("POST", "/api/ask/stream", json={"question": "Why was the battery chemistry changed?"}) as r:
+        for line in r.iter_lines():
+            if line.startswith("data: "):
+                events.append(json.loads(line[6:]))
+    done = events[-1]
+    assert done["type"] == "done"
+    assert done["result"]["ask_id"] > 0
+
+
 def test_api_corpus_stats(client):
     stats = client.get("/api/corpus/stats").json()
     assert stats["totals"]["artifacts"] > 0

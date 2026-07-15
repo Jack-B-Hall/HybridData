@@ -45,7 +45,11 @@ class _TinyAdapter(SourceAdapter):
 
 
 def _build(tmp_path: Path) -> Engine:
-    settings = Settings(db_path=tmp_path / "tiny.db", embedder="hash", llm_backend="mock")
+    settings = Settings(
+        db_path=tmp_path / "tiny.db",
+        telemetry_db=tmp_path / "telemetry.db",
+        embedder="hash", llm_backend="mock",
+    )
     ingest(_TinyAdapter(), settings, reset=True)
     return Engine(settings)
 
@@ -58,11 +62,15 @@ def tiny_engine(tmp_path) -> Engine:
 
 
 @pytest.fixture
-def demo_engine():
+def demo_engine(tmp_path):
     db = REPO_ROOT / "data" / "hde.db"
     if not db.exists():
         pytest.skip("demo corpus not ingested (run `make demo`)")
-    settings = Settings(db_path=db, embedder="hash", llm_backend="mock")
+    # Telemetry goes to a temp DB so the API tests never write into the repo.
+    settings = Settings(
+        db_path=db, telemetry_db=tmp_path / "telemetry.db",
+        embedder="hash", llm_backend="mock",
+    )
     eng = Engine(settings)
     yield eng
     eng.close()
