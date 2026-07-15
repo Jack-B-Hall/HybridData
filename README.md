@@ -97,10 +97,10 @@ three areas:
   document table with provenance tiers, a part-tree browser, corpus analytics, and
   a **System health** view (request volume, answer-vs-refusal rate, p50/p95 latency,
   thumbs ratio, and a recent-questions log) fed by request telemetry. Following a
-  graph-path link (or clicking a node) **centres and glow-highlights** it, populates
-  the neighborhood inspector, and lets you **walk the graph hop-by-hop** — each
-  relationship recentres on the next node, with a back trail. Deep-linkable via
-  `?node=<id>`.
+  graph-path link (or clicking a node) **centres and glow-highlights** it, labels
+  the relationship type along its edges, populates the neighborhood inspector, and
+  lets you **walk the graph hop-by-hop** — each relationship recentres on the next
+  node, with a back trail. Deep-linkable via `?node=<id>`.
 
 The staged-streaming answer and the source slide-over, both against a live model:
 
