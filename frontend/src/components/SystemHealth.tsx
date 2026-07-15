@@ -41,7 +41,7 @@ export function SystemHealth() {
         data-testid="system-health-empty"
       >
         <p className="text-sm text-ink-muted">
-          No questions logged yet. Ask something in Chat and its telemetry will appear here.
+          No questions logged yet. Ask something in the Interface and its telemetry will appear here.
         </p>
       </div>
     );

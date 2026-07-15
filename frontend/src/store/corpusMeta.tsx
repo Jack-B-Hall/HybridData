@@ -8,6 +8,8 @@ const FALLBACK: CorpusMeta = {
   title: null,
   placeholder: "Ask about the corpus — records, changes, decisions, relationships…",
   starter_questions: [],
+  app_name: "Hybrid-Data-Example",
+  app_icon: null,
   id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
   tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
 };

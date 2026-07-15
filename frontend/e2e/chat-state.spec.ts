@@ -33,7 +33,7 @@ test("chat history survives navigating to Documents and back", async ({ page }) 
   await expect(page.getByTestId("document-title")).toBeVisible();
 
   // Back to Chat — the full two-question history is still there, no reload.
-  await page.getByRole("link", { name: "Chat" }).click();
+  await page.getByRole("link", { name: "Interface" }).click();
   await expect(page).toHaveURL(/\/$|\/$/);
   await expect(page.getByTestId("chat-turn")).toHaveCount(2);
   await expect(page.getByTestId("answer-body").first()).toBeVisible();

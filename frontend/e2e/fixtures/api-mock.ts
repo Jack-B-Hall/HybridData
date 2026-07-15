@@ -276,6 +276,8 @@ export async function mockApiRoutes(page: Page): Promise<void> {
             },
             { text: "What is the capital of France?", hint: "Off-corpus — demonstrates refusal" },
           ],
+          app_name: "Hybrid-Data-Example",
+          app_icon: null,
           id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
           tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
         },

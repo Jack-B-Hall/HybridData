@@ -23,6 +23,8 @@ export interface Turn {
   error?: string;
   /** Thumbs feedback the user gave on this answer; persists across tab nav. */
   feedback?: TurnFeedback;
+  /** Collapsed to a compact row; persists across tab nav. */
+  collapsed?: boolean;
 }
 
 interface ChatContextValue {
@@ -33,6 +35,7 @@ interface ChatContextValue {
   removeTurn: (id: number) => void;
   clearAll: () => void;
   submitFeedback: (turnId: number, rating: FeedbackRating, comment?: string) => void;
+  toggleCollapse: (id: number) => void;
   /** Persisted scroll offset so the list restores position across tab changes. */
   scrollTopRef: React.MutableRefObject<number>;
 }
@@ -111,6 +114,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     setTurns([]);
   }, []);
 
+  const toggleCollapse = useCallback((id: number) => {
+    setTurns((prev) => prev.map((t) => (t.id === id ? { ...t, collapsed: !t.collapsed } : t)));
+  }, []);
+
   const submitFeedback = useCallback(
     (turnId: number, rating: FeedbackRating, comment?: string) => {
       const trimmed = comment?.trim() || undefined;
@@ -129,8 +136,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo(
-    () => ({ turns, draft, setDraft, submit, removeTurn, clearAll, submitFeedback, scrollTopRef }),
-    [turns, draft, submit, removeTurn, clearAll, submitFeedback],
+    () => ({
+      turns, draft, setDraft, submit, removeTurn, clearAll, submitFeedback, toggleCollapse, scrollTopRef,
+    }),
+    [turns, draft, submit, removeTurn, clearAll, submitFeedback, toggleCollapse],
   );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

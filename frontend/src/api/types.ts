@@ -236,6 +236,10 @@ export interface CorpusMeta {
   title: string | null;
   placeholder: string;
   starter_questions: CorpusStarterQuestion[];
+  /** Header title + browser tab. */
+  app_name: string;
+  /** Header glyph + favicon: an emoji, an image path/URL, or null (built-in mark). */
+  app_icon: string | null;
   id_pattern: string;
   tier_labels: Record<string, string>;
 }

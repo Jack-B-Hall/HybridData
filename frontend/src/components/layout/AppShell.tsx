@@ -1,24 +1,31 @@
+import { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { useMocks } from "@/api";
+import { useCorpusMeta } from "@/store/corpusMeta";
 
 const NAV_ITEMS = [
-  { to: "/", label: "Chat", end: true },
+  { to: "/", label: "Interface", end: true },
   { to: "/documents", label: "Documents", end: false },
   { to: "/explorer", label: "Data Explorer", end: false },
 ];
 
 export function AppShell() {
   const { theme, toggle } = useTheme();
+  const { app_name, app_icon } = useCorpusMeta();
+  useBranding(app_name, app_icon);
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 border-b border-border bg-canvas/85 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-6 px-5">
           <div className="flex items-center gap-2.5">
-            <Mark />
-            <span className="font-display text-[17px] font-medium tracking-tight text-ink">
-              Hybrid-Data-Example
+            <AppIcon icon={app_icon} />
+            <span
+              className="font-display text-[17px] font-medium tracking-tight text-ink"
+              data-testid="app-name"
+            >
+              {app_name}
             </span>
             {useMocks && (
               <span className="rounded-full border border-tier-unverified/30 bg-tier-unverified-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-tier-unverified">
@@ -65,6 +72,51 @@ export function AppShell() {
       </main>
     </div>
   );
+}
+
+/** True when app_icon is an image reference rather than an emoji/short glyph. */
+function isImageIcon(icon: string): boolean {
+  return /^https?:\/\//.test(icon) || icon.startsWith("/") || /\.(png|jpe?g|svg|gif|webp|ico)$/i.test(icon);
+}
+
+/** The header glyph: built-in mark (null), an image, or an emoji. */
+function AppIcon({ icon }: { icon: string | null }) {
+  if (!icon) return <Mark />;
+  if (isImageIcon(icon)) {
+    return <img src={icon} alt="" width={22} height={22} className="rounded" data-testid="app-icon-image" />;
+  }
+  return (
+    <span aria-hidden className="text-[20px] leading-none" data-testid="app-icon-emoji">
+      {icon}
+    </span>
+  );
+}
+
+/** Data URI favicon for an emoji; image icons use their own href; null keeps the built-in. */
+function faviconHref(icon: string | null): string | null {
+  if (!icon) return null;
+  if (isImageIcon(icon)) return icon;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><text y=".9em" font-size="52">${icon}</text></svg>`;
+  return "data:image/svg+xml," + encodeURIComponent(svg);
+}
+
+/** Reflect the configured app name/icon into the browser tab title + favicon. */
+function useBranding(appName: string, appIcon: string | null): void {
+  useEffect(() => {
+    if (appName) document.title = appName;
+  }, [appName]);
+
+  useEffect(() => {
+    const href = faviconHref(appIcon);
+    if (!href) return;
+    let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.setAttribute("href", href);
+  }, [appIcon]);
 }
 
 function Mark() {

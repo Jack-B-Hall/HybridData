@@ -45,7 +45,7 @@ test("thumbs-up feedback persists across a tab switch", async ({ page }) => {
   // Navigate away and back — the chosen rating survives (chat state is lifted).
   await page.getByRole("link", { name: "Documents" }).click();
   await expect(page).toHaveURL(/\/documents/);
-  await page.getByRole("link", { name: "Chat" }).click();
+  await page.getByRole("link", { name: "Interface" }).click();
 
   await expect(page.getByTestId("chat-turn").first().getByTestId("feedback-up")).toHaveAttribute(
     "aria-pressed",

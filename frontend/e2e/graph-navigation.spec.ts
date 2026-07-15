@@ -38,7 +38,7 @@ test("a graph-path node link focuses the explorer, hops to a neighbor, and retur
   await expect(page).toHaveURL(/node=P-1062/);
 
   // Return to Chat — the full answer history survived the round trip (no reload).
-  await page.getByRole("link", { name: "Chat" }).click();
+  await page.getByRole("link", { name: "Interface" }).click();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByTestId("chat-turn")).toHaveCount(1);
   await expect(page.getByTestId("answer-body").first()).toBeVisible();

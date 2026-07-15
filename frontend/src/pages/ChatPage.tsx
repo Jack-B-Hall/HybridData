@@ -11,7 +11,7 @@ import { useCorpusMeta } from "@/store/corpusMeta";
 import type { CorpusStarterQuestion } from "@/api/types";
 
 export function ChatPage() {
-  const { turns, draft, setDraft, submit, removeTurn, clearAll, scrollTopRef } = useChat();
+  const { turns, draft, setDraft, submit, removeTurn, clearAll, toggleCollapse, scrollTopRef } = useChat();
   const corpus = useCorpusMeta();
   const listRef = useRef<HTMLDivElement>(null);
   const prevCount = useRef(turns.length);
@@ -22,12 +22,14 @@ export function ChatPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // On a new question, scroll to the bottom to reveal it.
+  // Focus follows the ask: on a NEW question (not on every streamed token), bring
+  // the new answer block into view once. Never yanks the user back mid-stream.
   useEffect(() => {
-    if (turns.length > prevCount.current && listRef.current) {
-      requestAnimationFrame(() =>
-        listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }),
-      );
+    if (turns.length > prevCount.current) {
+      requestAnimationFrame(() => {
+        const blocks = listRef.current?.querySelectorAll('[data-testid="chat-turn"]');
+        blocks?.[blocks.length - 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     }
     prevCount.current = turns.length;
   }, [turns.length]);
@@ -51,7 +53,14 @@ export function ChatPage() {
         {turns.length === 0 ? (
           <EmptyState onPick={submit} starters={corpus.starter_questions} />
         ) : (
-          turns.map((turn) => <TurnBlock key={turn.id} turn={turn} onRemove={() => removeTurn(turn.id)} />)
+          turns.map((turn) => (
+            <TurnBlock
+              key={turn.id}
+              turn={turn}
+              onRemove={() => removeTurn(turn.id)}
+              onToggleCollapse={() => toggleCollapse(turn.id)}
+            />
+          ))
         )}
       </div>
 
@@ -176,7 +185,15 @@ function EmptyState({
   );
 }
 
-function TurnBlock({ turn, onRemove }: { turn: Turn; onRemove: () => void }) {
+function TurnBlock({
+  turn,
+  onRemove,
+  onToggleCollapse,
+}: {
+  turn: Turn;
+  onRemove: () => void;
+  onToggleCollapse: () => void;
+}) {
   const { phase, result, retrieval } = turn;
   const isDone = phase === "done";
   const answered = isDone ? result?.answered ?? false : retrieval?.answered ?? true;
@@ -184,24 +201,48 @@ function TurnBlock({ turn, onRemove }: { turn: Turn; onRemove: () => void }) {
   // While finishing an off-corpus question, don't flash the answer layout.
   const knownRefusing = !isDone && retrieval !== undefined && !retrieval.answered;
   const sources = result?.sources ?? retrieval?.sources ?? [];
+  const collapsed = turn.collapsed ?? false;
 
   return (
     <div
-      className="group/turn relative animate-fade-in border-t border-border pt-6 first:border-t-0 first:pt-0"
+      className="group/turn relative animate-fade-in scroll-mt-20 border-t border-border pt-6 first:border-t-0 first:pt-0"
       data-testid="chat-turn"
     >
       <div className="flex items-start justify-between gap-3">
-        <h2 className="font-display text-[17px] font-medium leading-snug text-ink">{turn.question}</h2>
-        <button
-          type="button"
-          onClick={onRemove}
-          aria-label="Remove this question"
-          data-testid="remove-turn"
-          className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-transparent text-ink-faint opacity-0 transition-all hover:border-border hover:text-confidence-low focus-visible:opacity-100 group-hover/turn:opacity-100"
-        >
-          <RemoveIcon />
-        </button>
+        <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1.5">
+          <h2 className="font-display text-[17px] font-medium leading-snug text-ink">{turn.question}</h2>
+          {collapsed && isDone && result?.answered && <ConfidenceIndicator result={result} />}
+          {collapsed && showRefusal && (
+            <span className="rounded-full border border-border bg-canvas-sunken px-2 py-0.5 text-[11px] font-medium text-ink-muted">
+              Not in the corpus
+            </span>
+          )}
+        </div>
+        <div className="mt-0.5 flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            onClick={onToggleCollapse}
+            aria-label={collapsed ? "Expand this answer" : "Collapse this answer"}
+            aria-expanded={!collapsed}
+            data-testid="collapse-turn"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-transparent text-ink-faint transition-colors hover:border-border hover:text-ink"
+          >
+            <ChevronIcon collapsed={collapsed} />
+          </button>
+          <button
+            type="button"
+            onClick={onRemove}
+            aria-label="Remove this question"
+            data-testid="remove-turn"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-transparent text-ink-faint opacity-0 transition-all hover:border-border hover:text-confidence-low focus-visible:opacity-100 group-hover/turn:opacity-100"
+          >
+            <RemoveIcon />
+          </button>
+        </div>
       </div>
+
+      {collapsed ? null : (
+      <>
 
       {phase === "error" && (
         <div className="mt-3 rounded-card border border-confidence-low/30 bg-canvas-raised p-4 text-sm text-confidence-low">
@@ -252,6 +293,9 @@ function TurnBlock({ turn, onRemove }: { turn: Turn; onRemove: () => void }) {
           </aside>
         </div>
       ))}
+
+      </>
+      )}
     </div>
   );
 }
@@ -369,6 +413,23 @@ function RemoveIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** Chevron: points up (collapse) when expanded, down (expand) when collapsed. */
+function ChevronIcon({ collapsed }: { collapsed: boolean }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden
+      className="transition-transform"
+      style={{ transform: collapsed ? "rotate(0deg)" : "rotate(180deg)" }}
+    >
+      <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
