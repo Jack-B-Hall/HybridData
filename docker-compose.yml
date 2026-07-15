@@ -15,3 +15,12 @@ services:
       HDE_LLM_MODEL: "gemma4:26b-a4b-it-qat"
       HDE_OLLAMA_LLM_HOST: "http://192.168.1.24:11434"
       HDE_LLM_NUM_PREDICT: "4000"
+      # Telemetry (request log + feedback) lives on a named volume, NOT under
+      # /app/data — that path holds the baked-in corpus store, and mounting over
+      # it would hide the corpus. Kept here so it survives image rebuilds.
+      HDE_TELEMETRY_DB: "/app/telemetry/telemetry.db"
+    volumes:
+      - hde-telemetry:/app/telemetry
+
+volumes:
+  hde-telemetry:

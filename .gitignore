@@ -10,6 +10,7 @@ dist/
 data/hde.db
 data/hde.db-wal
 data/hde.db-shm
+data/telemetry.db
 *.db-wal
 *.db-shm
 

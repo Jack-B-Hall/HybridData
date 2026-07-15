@@ -109,3 +109,20 @@ Everything lives in one SQLite file: the lexical index (FTS5), the vector index
 closures, and the ingestion history. There is no external database, search
 service, or message broker to operate — `pip install` and run. Ingestion is
 snapshot-only: re-ingesting a record id replaces any superseded version.
+
+The corpus store is read-only at serve time. **Telemetry** (the request log and
+thumbs feedback) is a *separate*, writable SQLite database (`HDE_TELEMETRY_DB`,
+`hde/telemetry.py`) so the corpus store and the protected retrieval/gate/synthesis
+core are never written to while serving. It is best-effort: a telemetry write can
+never fail an answer, and in the container it lives on a named volume so it
+survives image rebuilds.
+
+## Serving concurrency
+
+The engine shares one SQLite connection across the request threadpool, guarded by
+a lock, because the SQLite handles aren't safe for concurrent use. That lock is
+held **only** around the DB-touching phase — retrieval, the gate, and graph
+expansion — and released before the answer model runs. This matters most for
+streaming: the model call can take tens of seconds, and a client that abandons a
+stream mid-generation (tab nav, reload) must not leave the lock held. Concurrent
+generations simply queue at the model host (e.g. Ollama), not at our mutex.

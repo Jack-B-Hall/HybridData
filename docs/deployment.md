@@ -62,6 +62,15 @@ HDE_EMBEDDER=ollama HDE_LLM_BACKEND=ollama HDE_LLM_MODEL=gemma3:12b \
   hde serve --host 0.0.0.0 --port 8000
 ```
 
+### Telemetry (`HDE_TELEMETRY_DB`)
+
+Request telemetry (the ask log + thumbs feedback behind the Data Explorer's
+System-health view) is written to a **separate** SQLite file, default
+`data/telemetry.db`. Keep it off the read-only corpus path; in the container it is
+`/app/telemetry/telemetry.db` on a named volume (see `docker-compose.yml`) so it
+survives image rebuilds. It is best-effort — a telemetry failure never breaks an
+answer — so it is safe to point at ephemeral storage if you don't need history.
+
 For a ready-made "live" config (nomic-embed-text embeddings + a gemma-class answer
 model), copy `.env.live.example` to `.env.live`, edit the host/model, and use the
 convenience targets:

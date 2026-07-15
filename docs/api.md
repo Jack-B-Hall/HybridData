@@ -68,6 +68,38 @@ citation-resolved answer is always the `done` event's `result`. A declined
 (`answered: false`) question emits no `token` events. The blocking `/api/ask`
 endpoint is unchanged and remains the simplest way to get a single JSON result.
 
+Every ask (blocking or streamed) is logged to a separate, writable telemetry
+database (`HDE_TELEMETRY_DB`, never the read-only corpus store). The response
+carries an `ask_id`; feedback attaches to it. Streams are logged on `done`, and
+also on error or client disconnect (`status` = `error` / `abandoned`), so
+abandoned streams are visible in system health.
+
+### `POST /api/feedback`
+Attach thumbs feedback to a logged ask. Body:
+
+| field | type | notes |
+|---|---|---|
+| `ask_id` | number | the `ask_id` from an `AskResult` (≥ 1) |
+| `rating` | `"up" \| "down"` | validated; other values → 422 |
+| `comment` | string? | optional, ≤ 2000 chars (typically sent with a down) |
+
+Returns `{ "ok": true, "feedback_id": number }`, or 404 if `ask_id` is unknown.
+
+### `GET /api/telemetry/health`
+System-health metrics for the Data Explorer. Query param `recent` (1–200,
+default 25) caps the recent-questions slice. Returns:
+
+```
+{ "totals":   { "asks", "answered", "refused", "errors", "abandoned" },
+  "answer_rate": number,                       // answered / (answered+refused)
+  "latency":   { "p50_ms", "p95_ms" },         // over status='ok' asks
+  "feedback":  { "up", "down", "ratio" },      // ratio = up / (up+down)
+  "per_day":   [ { "day": "YYYY-MM-DD", "count": number }, ... ],
+  "recent":    [ { "id", "ts", "question", "verdict", "confidence",
+                   "answered", "latency_ms", "status", "streamed",
+                   "feedback": "up"|"down"|null }, ... ] }
+```
+
 ### `GET /api/documents`
 Query params (all optional): `kind` (`entity|document|person`), `source`,
 `subsystem`, `query` (substring over id/title), `limit` (1..1000, default 200).

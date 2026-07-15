@@ -88,11 +88,14 @@ three areas:
   jump to the full document. A confidence indicator is backed by the real gate
   signals, and a distinct "not in the corpus" refusal state declines rather than
   invents. Chat history persists across tabs, and each question can be removed
-  individually or cleared in bulk.
+  individually or cleared in bulk. Each answer takes **thumbs up/down feedback**
+  (a thumbs-down opens an optional comment box).
 - **Document viewer** — full documents with section navigation, highlighted cited
   passages, and cross-reference links into the graph and related records.
 - **Data Explorer** — an interactive knowledge-graph visualisation, a filterable
-  document table with provenance tiers, a part-tree browser, and corpus analytics.
+  document table with provenance tiers, a part-tree browser, corpus analytics, and
+  a **System health** view (request volume, answer-vs-refusal rate, p50/p95 latency,
+  thumbs ratio, and a recent-questions log) fed by request telemetry.
 
 The staged-streaming answer and the source slide-over, both against a live model:
 
