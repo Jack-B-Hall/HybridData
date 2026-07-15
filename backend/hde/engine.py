@@ -434,6 +434,9 @@ class Engine:
             or self.settings.corpus_placeholder
             or "Ask about the corpus — records, changes, decisions, relationships…",
             "starter_questions": declared.get("starter_questions") or cfg_starters or [],
+            # App branding: adapter/DB meta wins, then config file, then built-in.
+            "app_name": declared.get("app_name") or self.settings.corpus_app_name or "Hybrid-Data-Example",
+            "app_icon": declared.get("app_icon") or self.settings.corpus_app_icon,
             "id_pattern": id_pattern,
             "tier_labels": {str(t): provenance.label_for(t) for t in (1, 2, 3)},
         }

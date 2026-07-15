@@ -103,6 +103,7 @@ def test_corpus_meta_falls_back_to_config_branding_when_db_absent(tmp_path):
         embedder="hash", llm_backend="mock",
         corpus_title="ConfigCorp", corpus_placeholder="Ask ConfigCorp",
         corpus_starter_questions=(("Config Q", "ch"),),
+        corpus_app_name="Acme Knowledge", corpus_app_icon="🛰️",
     )
     ingest(_BareAdapter(), settings, reset=True)
     eng = Engine(settings)
@@ -111,5 +112,33 @@ def test_corpus_meta_falls_back_to_config_branding_when_db_absent(tmp_path):
         assert meta["title"] == "ConfigCorp"
         assert meta["placeholder"] == "Ask ConfigCorp"
         assert meta["starter_questions"] == [{"text": "Config Q", "hint": "ch"}]
+        assert meta["app_name"] == "Acme Knowledge"
+        assert meta["app_icon"] == "🛰️"
     finally:
         eng.close()
+
+
+def test_app_name_defaults_to_builtin_when_unset(tmp_path):
+    settings = Settings(
+        db_path=tmp_path / "d.db", telemetry_db=tmp_path / "t.db",
+        embedder="hash", llm_backend="mock",
+    )
+    ingest(_BareAdapter(), settings, reset=True)
+    eng = Engine(settings)
+    try:
+        meta = eng.corpus_meta()
+        assert meta["app_name"] == "Hybrid-Data-Example"
+        assert meta["app_icon"] is None
+    finally:
+        eng.close()
+
+
+def test_config_file_app_branding_parsed(tmp_path, monkeypatch):
+    cfg = tmp_path / "hde.toml"
+    cfg.write_text('[corpus]\napp_name = "Acme"\napp_icon = "🚀"\n')
+    monkeypatch.setenv("HDE_CONFIG", str(cfg))
+    for var in ("HDE_CORPUS_APP_NAME", "HDE_CORPUS_APP_ICON"):
+        monkeypatch.delenv(var, raising=False)
+    s = Settings.load()
+    assert s.corpus_app_name == "Acme"
+    assert s.corpus_app_icon == "🚀"

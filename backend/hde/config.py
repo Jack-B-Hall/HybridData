@@ -105,6 +105,11 @@ class Settings:
     corpus_title: str | None = None
     corpus_placeholder: str | None = None
     corpus_starter_questions: tuple[tuple[str, str], ...] = field(default_factory=tuple)
+    # App branding: the header title/browser tab and the header glyph + favicon.
+    # app_icon is an emoji (rendered + used as an SVG-text favicon) or a path/URL to
+    # an image. None -> the built-in name + mark. Adapter/DB corpus_meta still wins.
+    corpus_app_name: str | None = None
+    corpus_app_icon: str | None = None
 
     @classmethod
     def load(cls) -> "Settings":
@@ -150,6 +155,8 @@ class Settings:
             corpus_title=_pick_optional("HDE_CORPUS_TITLE", fv("corpus", "title"), None),
             corpus_placeholder=_pick_optional("HDE_CORPUS_PLACEHOLDER", fv("corpus", "placeholder"), None),
             corpus_starter_questions=starters,
+            corpus_app_name=_pick_optional("HDE_CORPUS_APP_NAME", fv("corpus", "app_name"), None),
+            corpus_app_icon=_pick_optional("HDE_CORPUS_APP_ICON", fv("corpus", "app_icon"), None),
         )
 
     # Backwards-compatible alias (env + file layering happens either way).

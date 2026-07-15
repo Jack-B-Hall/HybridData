@@ -158,6 +158,9 @@ def test_api_corpus_meta_shape(client):
     assert "placeholder" in meta and isinstance(meta["starter_questions"], list)
     assert "id_pattern" in meta and meta["id_pattern"]
     assert meta["tier_labels"]["1"] == "formal"
+    # App branding is always present (falls back to the built-in name).
+    assert meta["app_name"]
+    assert "app_icon" in meta
 
 
 def test_api_corpus_stats(client):

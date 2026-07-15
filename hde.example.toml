@@ -73,6 +73,11 @@
 #   { text = "What changed in revision 12?", hint = "change history" },
 #   { text = "What depends on part 000123?", hint = "impact analysis" },
 # ]
+# App branding: the header title + browser tab, and the header glyph + favicon.
+# app_icon accepts an emoji (rendered in the header and as the favicon) OR a
+# path/URL to an image (e.g. one you mount next to this config and serve).
+# app_name = "Acme Knowledge"
+# app_icon = "🛰️"                             # or "/logo.svg" / "https://…/logo.png"
 
 [server]
 # port = 8000                                 # the API/UI port inside the process
