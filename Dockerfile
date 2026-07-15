@@ -25,6 +25,10 @@ RUN pip install --no-cache-dir -e ./backend
 COPY data/demo-corpus/ ./data/demo-corpus/
 COPY --from=frontend /app/frontend/dist/ ./frontend/dist/
 
+# The bundled golden question set — seeds the Testing page's golden store on first
+# run (see hde.testing.load_seed_questions). Absent file just means an empty set.
+COPY eval/gold-qa.json ./eval/gold-qa.json
+
 # Offline defaults: hash embedder + mock answer model (no GPU, no network).
 ENV HDE_EMBEDDER=hash \
     HDE_LLM_BACKEND=mock \

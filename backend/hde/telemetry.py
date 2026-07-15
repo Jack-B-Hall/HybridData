@@ -14,6 +14,7 @@ Two tables:
 """
 from __future__ import annotations
 
+import json
 import sqlite3
 import threading
 from datetime import datetime, timezone
@@ -58,8 +59,50 @@ CREATE TABLE IF NOT EXISTS ingest_jobs (
   duration_ms INTEGER,
   error       TEXT
 );
+CREATE TABLE IF NOT EXISTS golden_questions (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  text       TEXT    NOT NULL,
+  category   TEXT    NOT NULL DEFAULT 'general',
+  behaviour  TEXT    NOT NULL DEFAULT 'answer',      -- 'answer' | 'refuse'
+  citations  TEXT,                                   -- JSON list of expected artifact ids
+  keywords   TEXT,                                   -- JSON list of expected keywords/phrases
+  enabled    INTEGER NOT NULL DEFAULT 1,
+  notes      TEXT,
+  created_at TEXT    NOT NULL,
+  updated_at TEXT    NOT NULL
+);
+CREATE TABLE IF NOT EXISTS test_runs (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  started_at      TEXT    NOT NULL,
+  finished_at     TEXT,
+  status          TEXT    NOT NULL,                  -- 'ok' | 'error'
+  backend         TEXT,
+  scope           TEXT,                              -- which questions ran, e.g. 'all enabled'
+  total           INTEGER, passed INTEGER, failed INTEGER,
+  answer_rate     REAL,                              -- correct-answer rate on ANSWER questions
+  refusal_rate    REAL,                              -- correct-refusal rate on REFUSE questions
+  mean_latency_ms INTEGER,
+  duration_ms     INTEGER,
+  error           TEXT
+);
+CREATE TABLE IF NOT EXISTS test_results (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id        INTEGER NOT NULL,
+  question_id   INTEGER,
+  question      TEXT,
+  category      TEXT,
+  behaviour     TEXT,
+  answered      INTEGER,
+  verdict       TEXT,
+  passed        INTEGER,
+  failed_checks TEXT,                                -- JSON list of failure reasons
+  latency_ms    INTEGER,
+  error         TEXT,
+  FOREIGN KEY (run_id) REFERENCES test_runs(id)
+);
 CREATE INDEX IF NOT EXISTS idx_asks_ts ON asks(ts);
 CREATE INDEX IF NOT EXISTS idx_feedback_ask ON feedback(ask_id);
+CREATE INDEX IF NOT EXISTS idx_test_results_run ON test_results(run_id);
 """
 
 
@@ -167,6 +210,184 @@ class Telemetry:
                 (limit,),
             ).fetchall()
         return [dict(zip(cols, r)) for r in rows]
+
+    # ── golden-set questions (writable, survives corpus clears) ───────────────
+    _GOLDEN_COLS = (
+        "id", "text", "category", "behaviour", "citations", "keywords",
+        "enabled", "notes", "created_at", "updated_at",
+    )
+
+    @staticmethod
+    def _golden_row(r) -> dict:
+        d = dict(zip(Telemetry._GOLDEN_COLS, r))
+        d["citations"] = json.loads(d["citations"]) if d["citations"] else []
+        d["keywords"] = json.loads(d["keywords"]) if d["keywords"] else []
+        d["enabled"] = bool(d["enabled"])
+        return d
+
+    def golden_count(self) -> int:
+        with self._lock:
+            return self.conn.execute("SELECT COUNT(*) FROM golden_questions").fetchone()[0]
+
+    def seed_golden(self, questions: list[dict]) -> int:
+        """Insert seed questions only when the table is empty. Returns rows added."""
+        with self._lock:
+            if self.conn.execute("SELECT COUNT(*) FROM golden_questions").fetchone()[0]:
+                return 0
+            now = _now()
+            n = 0
+            for q in questions:
+                self.conn.execute(
+                    "INSERT INTO golden_questions (text, category, behaviour, citations, "
+                    "keywords, enabled, notes, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                    (q["text"], q.get("category", "general"), q.get("behaviour", "answer"),
+                     json.dumps(q.get("citations", [])), json.dumps(q.get("keywords", [])),
+                     int(q.get("enabled", True)), q.get("notes"), now, now),
+                )
+                n += 1
+            self.conn.commit()
+            return n
+
+    def list_golden(self, *, category: str | None = None, behaviour: str | None = None,
+                    enabled: bool | None = None) -> list[dict]:
+        clauses, params = [], []
+        if category:
+            clauses.append("category = ?"); params.append(category)
+        if behaviour:
+            clauses.append("behaviour = ?"); params.append(behaviour)
+        if enabled is not None:
+            clauses.append("enabled = ?"); params.append(int(enabled))
+        where = (" WHERE " + " AND ".join(clauses)) if clauses else ""
+        with self._lock:
+            rows = self.conn.execute(
+                f"SELECT {', '.join(self._GOLDEN_COLS)} FROM golden_questions{where} "
+                "ORDER BY category, id", params,
+            ).fetchall()
+        return [self._golden_row(r) for r in rows]
+
+    def get_golden(self, qid: int) -> dict | None:
+        with self._lock:
+            r = self.conn.execute(
+                f"SELECT {', '.join(self._GOLDEN_COLS)} FROM golden_questions WHERE id = ?",
+                (qid,),
+            ).fetchone()
+        return self._golden_row(r) if r else None
+
+    def add_golden(self, q: dict) -> int:
+        now = _now()
+        with self._lock:
+            cur = self.conn.execute(
+                "INSERT INTO golden_questions (text, category, behaviour, citations, "
+                "keywords, enabled, notes, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                (q["text"], q.get("category", "general"), q.get("behaviour", "answer"),
+                 json.dumps(q.get("citations", [])), json.dumps(q.get("keywords", [])),
+                 int(q.get("enabled", True)), q.get("notes"), now, now),
+            )
+            self.conn.commit()
+            return int(cur.lastrowid)
+
+    def update_golden(self, qid: int, fields: dict) -> bool:
+        allowed = {"text", "category", "behaviour", "citations", "keywords", "enabled", "notes"}
+        sets, params = [], []
+        for k, v in fields.items():
+            if k not in allowed:
+                continue
+            if k in ("citations", "keywords"):
+                v = json.dumps(v or [])
+            elif k == "enabled":
+                v = int(bool(v))
+            sets.append(f"{k} = ?"); params.append(v)
+        if not sets:
+            return self.get_golden(qid) is not None
+        sets.append("updated_at = ?"); params.append(_now())
+        params.append(qid)
+        with self._lock:
+            cur = self.conn.execute(
+                f"UPDATE golden_questions SET {', '.join(sets)} WHERE id = ?", params)
+            self.conn.commit()
+            return cur.rowcount > 0
+
+    def delete_golden(self, qid: int) -> bool:
+        with self._lock:
+            cur = self.conn.execute("DELETE FROM golden_questions WHERE id = ?", (qid,))
+            self.conn.commit()
+            return cur.rowcount > 0
+
+    # ── test runs (writable, survives corpus clears) ──────────────────────────
+    def log_test_run(self, run: dict, results: list[dict]) -> int | None:
+        run_cols = (
+            "started_at", "finished_at", "status", "backend", "scope", "total",
+            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
+            "duration_ms", "error",
+        )
+        res_cols = (
+            "question_id", "question", "category", "behaviour", "answered", "verdict",
+            "passed", "failed_checks", "latency_ms", "error",
+        )
+        try:
+            with self._lock:
+                cur = self.conn.execute(
+                    f"INSERT INTO test_runs ({', '.join(run_cols)}) "
+                    f"VALUES ({', '.join('?' * len(run_cols))})",
+                    tuple(run.get(c) for c in run_cols),
+                )
+                run_id = int(cur.lastrowid)
+                for res in results:
+                    row = dict(res)
+                    row["failed_checks"] = json.dumps(res.get("failed_checks") or [])
+                    self.conn.execute(
+                        f"INSERT INTO test_results (run_id, {', '.join(res_cols)}) "
+                        f"VALUES (?, {', '.join('?' * len(res_cols))})",
+                        (run_id, *(row.get(c) for c in res_cols)),
+                    )
+                self.conn.commit()
+                return run_id
+        except sqlite3.Error:
+            return None
+
+    def test_runs(self, limit: int = 25) -> list[dict]:
+        cols = (
+            "id", "started_at", "finished_at", "status", "backend", "scope", "total",
+            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
+            "duration_ms", "error",
+        )
+        with self._lock:
+            rows = self.conn.execute(
+                f"SELECT {', '.join(cols)} FROM test_runs ORDER BY id DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [dict(zip(cols, r)) for r in rows]
+
+    def test_run(self, run_id: int) -> dict | None:
+        run_cols = (
+            "id", "started_at", "finished_at", "status", "backend", "scope", "total",
+            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
+            "duration_ms", "error",
+        )
+        res_cols = (
+            "id", "question_id", "question", "category", "behaviour", "answered",
+            "verdict", "passed", "failed_checks", "latency_ms", "error",
+        )
+        with self._lock:
+            r = self.conn.execute(
+                f"SELECT {', '.join(run_cols)} FROM test_runs WHERE id = ?", (run_id,),
+            ).fetchone()
+            if not r:
+                return None
+            run = dict(zip(run_cols, r))
+            rows = self.conn.execute(
+                f"SELECT {', '.join(res_cols)} FROM test_results WHERE run_id = ? ORDER BY id",
+                (run_id,),
+            ).fetchall()
+        results = []
+        for rr in rows:
+            d = dict(zip(res_cols, rr))
+            d["answered"] = bool(d["answered"]) if d["answered"] is not None else None
+            d["passed"] = bool(d["passed"]) if d["passed"] is not None else None
+            d["failed_checks"] = json.loads(d["failed_checks"]) if d["failed_checks"] else []
+            results.append(d)
+        run["results"] = results
+        return run
 
     # ── reads ────────────────────────────────────────────────────────────────
     def health(self, recent_limit: int = 25) -> dict:

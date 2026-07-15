@@ -29,6 +29,7 @@ from pydantic import BaseModel, Field
 from ..config import get_settings
 from ..engine import Engine
 from ..ingestion import IngestBadRequest, IngestBusy, IngestManager
+from ..testing import TestBusy, TestManager
 
 
 class AskRequest(BaseModel):
@@ -46,11 +47,37 @@ class IngestStartRequest(BaseModel):
     confirm: str | None = Field(default=None, max_length=64)
 
 
+class GoldenQuestionIn(BaseModel):
+    text: str = Field(..., min_length=1, max_length=1000)
+    category: str = Field(default="general", max_length=64)
+    behaviour: str = Field(default="answer", pattern="^(answer|refuse)$")
+    citations: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    enabled: bool = True
+    notes: str | None = Field(default=None, max_length=2000)
+
+
+class GoldenQuestionPatch(BaseModel):
+    text: str | None = Field(default=None, min_length=1, max_length=1000)
+    category: str | None = Field(default=None, max_length=64)
+    behaviour: str | None = Field(default=None, pattern="^(answer|refuse)$")
+    citations: list[str] | None = None
+    keywords: list[str] | None = None
+    enabled: bool | None = None
+    notes: str | None = Field(default=None, max_length=2000)
+
+
+class TestRunRequest(BaseModel):
+    categories: list[str] | None = None
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
     app.state.engine = Engine(settings, shared=True)
     app.state.ingest = IngestManager(app.state.engine)
+    app.state.testing = TestManager(app.state.engine)
+    app.state.testing.seed_if_empty()
     try:
         yield
     finally:
@@ -217,6 +244,76 @@ def ingest_jobs(limit: int = Query(25, ge=1, le=200)) -> dict:
 @app.get("/api/ingest/history")
 def ingest_history() -> dict:
     return {"runs": _engine().ingest_history()}
+
+
+# ── Testing (golden set + health test runs) ─────────────────────────────────
+def _testing() -> TestManager:
+    return app.state.testing
+
+
+@app.get("/api/testing/questions")
+def testing_questions(
+    category: str | None = None,
+    behaviour: str | None = None,
+    enabled: bool | None = None,
+) -> dict:
+    """The golden set, optionally filtered by category / behaviour / enabled."""
+    qs = _engine().telemetry.list_golden(
+        category=category, behaviour=behaviour, enabled=enabled
+    )
+    return {"count": len(qs), "questions": qs}
+
+
+@app.post("/api/testing/questions", status_code=201)
+def testing_add_question(req: GoldenQuestionIn) -> dict:
+    qid = _engine().telemetry.add_golden(req.model_dump())
+    return _engine().telemetry.get_golden(qid)
+
+
+@app.patch("/api/testing/questions/{qid}")
+def testing_update_question(qid: int, req: GoldenQuestionPatch) -> dict:
+    fields = req.model_dump(exclude_unset=True)
+    if not _engine().telemetry.update_golden(qid, fields):
+        raise HTTPException(status_code=404, detail=f"no golden question {qid}")
+    return _engine().telemetry.get_golden(qid)
+
+
+@app.delete("/api/testing/questions/{qid}")
+def testing_delete_question(qid: int) -> dict:
+    if not _engine().telemetry.delete_golden(qid):
+        raise HTTPException(status_code=404, detail=f"no golden question {qid}")
+    return {"ok": True, "deleted": qid}
+
+
+@app.post("/api/testing/run")
+def testing_run(req: TestRunRequest) -> dict:
+    """Kick a background test run over the enabled golden set (optionally a subset
+    of categories). One at a time (409 if a run is in progress); fire-and-forget."""
+    try:
+        return _testing().start(req.categories)
+    except TestBusy as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
+
+
+@app.get("/api/testing/run/status")
+def testing_run_status() -> dict:
+    """Current (or last) run: running flag, stage, and live pass/fail tallies."""
+    return _testing().status()
+
+
+@app.get("/api/testing/runs")
+def testing_runs(limit: int = Query(25, ge=1, le=200)) -> dict:
+    """Persistent test-run history (survives corpus rebuilds/clears)."""
+    return {"runs": _testing().history(limit)}
+
+
+@app.get("/api/testing/runs/{run_id}")
+def testing_run_detail(run_id: int) -> dict:
+    """One run's summary plus its per-question results and failure reasons."""
+    detail = _testing().run_detail(run_id)
+    if detail is None:
+        raise HTTPException(status_code=404, detail=f"no test run {run_id}")
+    return detail
 
 
 # ── Static frontend ────────────────────────────────────────────────────────

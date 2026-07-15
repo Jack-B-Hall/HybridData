@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import time
 
 import pytest
 from fastapi.testclient import TestClient
@@ -179,6 +180,47 @@ def test_api_ingest_clear_requires_confirm(client):
 
 def test_api_ingest_bad_action_rejected(client):
     assert client.post("/api/ingest/start", json={"action": "destroy"}).status_code == 422
+
+
+def test_api_testing_questions_seeded_and_crud(client):
+    body = client.get("/api/testing/questions").json()
+    assert body["count"] > 0  # golden set seeded from the bundled gold file at startup
+
+    created = client.post("/api/testing/questions", json={
+        "text": "Custom health check?", "category": "custom", "behaviour": "answer",
+        "citations": ["ECR-214"], "keywords": ["battery"]})
+    assert created.status_code == 201
+    qid = created.json()["id"]
+    assert created.json()["citations"] == ["ECR-214"]
+
+    only = client.get("/api/testing/questions", params={"category": "custom"}).json()
+    assert only["count"] == 1 and only["questions"][0]["id"] == qid
+
+    patched = client.patch(f"/api/testing/questions/{qid}", json={"enabled": False}).json()
+    assert patched["enabled"] is False
+
+    assert client.delete(f"/api/testing/questions/{qid}").json()["ok"] is True
+    assert client.get("/api/testing/questions", params={"category": "custom"}).json()["count"] == 0
+
+    assert client.patch("/api/testing/questions/999999", json={"enabled": True}).status_code == 404
+    assert client.delete("/api/testing/questions/999999").status_code == 404
+
+
+def test_api_testing_run_and_history(client):
+    r = client.post("/api/testing/run", json={"categories": ["negative"]})
+    assert r.status_code == 200
+    for _ in range(400):
+        st = client.get("/api/testing/run/status").json()
+        if not st["running"]:
+            break
+        time.sleep(0.05)
+    assert st["running"] is False and st["status"] == "ok"
+
+    runs = client.get("/api/testing/runs").json()["runs"]
+    assert runs and runs[0]["total"] >= 1
+    detail = client.get(f"/api/testing/runs/{runs[0]['id']}").json()
+    assert "results" in detail and len(detail["results"]) == runs[0]["total"]
+    assert client.get("/api/testing/runs/999999").status_code == 404
 
 
 def test_api_corpus_stats(client):
