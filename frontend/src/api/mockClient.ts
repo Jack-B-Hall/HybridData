@@ -8,6 +8,8 @@ import type {
   DocumentSummary,
   FeedbackRating,
   FeedbackRequest,
+  GraphNode,
+  GraphNodeResponse,
   TelemetryHealth,
 } from "./types";
 import type { HdeApi } from "./client";
@@ -73,6 +75,33 @@ function buildDocumentDetail(id: string): DocumentDetail {
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Build a node's neighbourhood from the union of the (capped) overview and the
+ * richer graph_node fixture, so following relationships hop-by-hop resolves
+ * offline even for ids the overview omits. Returns null for a truly unknown id.
+ */
+function buildMockNeighborhood(id: string): GraphNodeResponse | null {
+  const allEdges = [...graphNode.edges, ...graphOverview.edges];
+  const index = new Map<string, GraphNode>();
+  for (const n of [...graphNode.nodes, ...graphOverview.nodes]) {
+    if (!index.has(n.id)) index.set(n.id, n);
+  }
+  const edges = allEdges.filter((e) => e.src === id || e.dst === id);
+  if (edges.length === 0) {
+    const self = index.get(id);
+    return self ? { center: id, nodes: [self], edges: [] } : null;
+  }
+  const ids = new Set<string>([id]);
+  edges.forEach((e) => {
+    ids.add(e.src);
+    ids.add(e.dst);
+  });
+  const nodes = [...ids].map(
+    (nid) => index.get(nid) ?? { id: nid, kind: "document" as const, label: nid, subsystem: null, source: "", prov_tier: 1 },
+  );
+  return { center: id, nodes, edges };
+}
 
 // A tiny in-memory telemetry store so offline mode logs asks/feedback and the
 // analytics "System health" view is populated without a backend.
@@ -176,15 +205,13 @@ export const mockApi: HdeApi = {
 
   getGraphNode: async (id: string) => {
     await delay(90);
+    // The overview fixture is capped, so build a neighbourhood from the union of
+    // the overview and the richer graph_node fixture. This lets hop-by-hop graph
+    // walking (following relationships) resolve offline, not just overview nodes.
     if (id === graphNode.center) return graphNode;
-    // Fall back to a single-node neighbourhood built from the overview so
-    // any node in the graph tab remains clickable in mock mode.
-    const node = graphOverview.nodes.find((n) => n.id === id);
-    if (!node) throw new ApiError(`Unknown node '${id}'`, 404);
-    const edges = graphOverview.edges.filter((e) => e.src === id || e.dst === id);
-    const neighborIds = new Set(edges.flatMap((e) => [e.src, e.dst]));
-    const nodes = graphOverview.nodes.filter((n) => neighborIds.has(n.id));
-    return { center: id, nodes, edges };
+    const built = buildMockNeighborhood(id);
+    if (!built) throw new ApiError(`Unknown node '${id}'`, 404);
+    return built;
   },
 
   getCorpusStats: async () => {

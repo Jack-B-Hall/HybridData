@@ -19,3 +19,11 @@ export function documentHighlightPath(id: string, highlight?: HighlightTarget): 
 export function graphNodePath(id: string): string {
   return `/explorer/graph?node=${encodeURIComponent(id)}`;
 }
+
+/**
+ * Deep-link to a relationship: focus the `from` node and highlight the edge to
+ * `to` (both endpoints emphasised, the typed relationship shown in the inspector).
+ */
+export function graphEdgePath(from: string, to: string): string {
+  return `/explorer/graph?node=${encodeURIComponent(from)}&edge=${encodeURIComponent(to)}`;
+}

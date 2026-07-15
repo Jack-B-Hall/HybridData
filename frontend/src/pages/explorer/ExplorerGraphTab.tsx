@@ -1,61 +1,98 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D, { type ForceGraphMethods } from "react-force-graph-2d";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { api } from "@/api";
 import type { ArtifactKind, GraphEdge, GraphNode, GraphOverviewResponse, GraphNodeResponse } from "@/api/types";
 import { NODE_KIND_COLOR, NODE_KIND_LABEL, tierFromProvTier } from "@/lib/graphColors";
 import { TierBadge } from "@/components/TierBadge";
-import { Link } from "react-router-dom";
 import { formatInt } from "@/lib/format";
 
-type FGLink = { source: string; target: string; rel: string };
+type FGLink = { source: string | GraphNode; target: string | GraphNode; rel: string };
+
+// react-force-graph augments node objects with layout coordinates at runtime.
+type PositionedNode = GraphNode & { x?: number; y?: number };
+
+const linkEndId = (end: string | GraphNode): string => (typeof end === "object" ? end.id : end);
 
 export function ExplorerGraphTab() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const nodeParam = searchParams.get("node");
+  const edgeParam = searchParams.get("edge"); // relationship focus: highlight nodeParam↔edgeParam
+
   const [overview, setOverview] = useState<GraphOverviewResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [kindFilter, setKindFilter] = useState<ArtifactKind | "">("");
   const [subsystemFilter, setSubsystemFilter] = useState("");
   const [selected, setSelected] = useState<GraphNodeResponse | null>(null);
   const [selectedLoading, setSelectedLoading] = useState(false);
+  const [trail, setTrail] = useState<string[]>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const fgRef = useRef<ForceGraphMethods<GraphNode, FGLink> | undefined>(undefined);
   const [size, setSize] = useState({ width: 800, height: 560 });
 
+  // Refs the (per-frame) canvas callbacks read, so highlight tracks the URL.
+  const focusIdRef = useRef<string | null>(nodeParam);
+  const pulseStartRef = useRef(0);
+  focusIdRef.current = nodeParam;
+
+  // Canvas can't resolve CSS variables, so read the theme accent once per render
+  // (renders are infrequent) and hand the concrete colour to the ring drawer.
+  const accentRef = useRef("#0891a8");
+  if (typeof window !== "undefined") {
+    const v = getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim();
+    if (v) accentRef.current = v;
+  }
+
   useEffect(() => {
-    api
-      .getGraphOverview()
-      .then(setOverview)
-      .finally(() => setLoading(false));
+    // Fetch the whole graph (well under the API cap) so any node linked from an
+    // answer or reached by a hop is present in the canvas and can be focused +
+    // highlighted — a 400-node slice would leave many path targets unrendered.
+    api.getGraphOverview(2000).then(setOverview).finally(() => setLoading(false));
   }, []);
 
-  // This dataset is a dense core (~400 nodes, ~1,100 edges) with a handful
-  // of loosely-connected outliers that drift far out under charge
-  // repulsion. zoomToFit's bounding box includes those outliers, which
-  // zooms the *whole* view out so far that the legible core shrinks to an
-  // illegible speck. Center on the core and hold a fixed, comfortable zoom
-  // instead of chasing the outliers. Guard against running twice (React
-  // StrictMode double-invokes effects in dev).
+  const graphData = useMemo(() => {
+    if (!overview) return { nodes: [] as GraphNode[], links: [] as FGLink[] };
+    let nodes = overview.nodes as GraphNode[];
+    if (kindFilter) nodes = nodes.filter((n) => n.kind === kindFilter);
+    if (subsystemFilter) nodes = nodes.filter((n) => n.subsystem === subsystemFilter);
+    const ids = new Set(nodes.map((n) => n.id));
+    const links = overview.edges
+      .filter((e) => ids.has(e.src) && ids.has(e.dst))
+      .map((e) => ({ source: e.src, target: e.dst, rel: e.rel }) as FGLink);
+    return { nodes, links };
+  }, [overview, kindFilter, subsystemFilter]);
+
+  // Centre + zoom the camera on a node (if it is laid out) and start a pulse.
+  const focusNodeById = useCallback((id: string): boolean => {
+    const node = graphData.nodes.find((n) => n.id === id) as PositionedNode | undefined;
+    if (!node || node.x == null || node.y == null || !fgRef.current) return false;
+    fgRef.current.centerAt(node.x, node.y, 700);
+    fgRef.current.zoom(3.2, 700);
+    pulseStartRef.current = Date.now();
+    return true;
+  }, [graphData]);
+
+  // Default framing: this dataset has outliers that wreck zoomToFit, so centre
+  // on the core at a fixed zoom. Skip it when we're focusing a specific node.
   const fittedRef = useRef(false);
   useEffect(() => {
     fittedRef.current = false;
   }, [overview]);
 
-  const fitOnce = useCallback(() => {
+  const settle = useCallback(() => {
+    if (focusIdRef.current && focusNodeById(focusIdRef.current)) return;
     if (fittedRef.current) return;
     fittedRef.current = true;
     fgRef.current?.centerAt(0, 0, 0);
     fgRef.current?.zoom(2.4, 0);
-  }, []);
+  }, [focusNodeById]);
 
-  // Fallback in case onEngineStop doesn't fire (e.g. cooldownTicks=0
-  // resolving the cooldown loop before a listener can attach).
   useEffect(() => {
     if (!overview) return;
-    const timer = setTimeout(fitOnce, 300);
+    const timer = setTimeout(settle, 350);
     return () => clearTimeout(timer);
-  }, [overview, fitOnce]);
+  }, [overview, settle]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -70,26 +107,65 @@ export function ExplorerGraphTab() {
     return () => observer.disconnect();
   }, []);
 
-  const selectNode = useCallback((id: string) => {
+  // Navigation is URL-driven: selecting a node just updates the query string.
+  const selectNode = useCallback(
+    (id: string) => {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.set("node", id);
+          next.delete("edge");
+          return next;
+        },
+        { replace: false },
+      );
+    },
+    [setSearchParams],
+  );
+
+  // Fetch the selected node's neighborhood whenever the URL node/edge changes,
+  // maintain the back-trail, and re-centre the camera on it.
+  useEffect(() => {
+    if (!nodeParam) {
+      setSelected(null);
+      return;
+    }
+    // Maintain the back-trail: a hop forward appends; navigating back to the
+    // previous node pops. (No navigation happens here — this only tracks it.)
+    setTrail((prev) => {
+      if (prev[prev.length - 1] === nodeParam) return prev;
+      if (prev.length >= 2 && prev[prev.length - 2] === nodeParam) return prev.slice(0, -1);
+      return [...prev, nodeParam];
+    });
+    let cancelled = false;
     setSelectedLoading(true);
     api
-      .getGraphNode(id, 1)
-      .then((res) => setSelected(res))
-      .catch(() => setSelected(null))
-      .finally(() => setSelectedLoading(false));
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      next.set("node", id);
-      return next;
-    });
-  }, [setSearchParams]);
-
-  useEffect(() => {
-    const nodeParam = searchParams.get("node");
-    if (nodeParam) selectNode(nodeParam);
-    // Only run once on mount for deep-link support.
+      .getGraphNode(nodeParam, 1)
+      .then((res) => {
+        if (cancelled) return;
+        setSelected(res);
+        // Already laid out (a hop within a settled graph) → focus immediately.
+        focusNodeById(nodeParam);
+      })
+      .catch(() => !cancelled && setSelected(null))
+      .finally(() => !cancelled && setSelectedLoading(false));
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [nodeParam, edgeParam]);
+
+  const goBack = useCallback(() => {
+    const target = trail[trail.length - 2];
+    if (!target) return;
+    // Navigate only; the selection effect trims the trail when it sees the pop.
+    setSearchParams((sp) => {
+      const n = new URLSearchParams(sp);
+      n.set("node", target);
+      n.delete("edge");
+      return n;
+    });
+  }, [trail, setSearchParams]);
 
   const subsystems = useMemo(() => {
     if (!overview) return [];
@@ -98,17 +174,23 @@ export function ExplorerGraphTab() {
     return [...set].sort();
   }, [overview]);
 
-  const graphData = useMemo(() => {
-    if (!overview) return { nodes: [] as GraphNode[], links: [] as FGLink[] };
-    let nodes = overview.nodes as GraphNode[];
-    if (kindFilter) nodes = nodes.filter((n) => n.kind === kindFilter);
-    if (subsystemFilter) nodes = nodes.filter((n) => n.subsystem === subsystemFilter);
-    const ids = new Set(nodes.map((n) => n.id));
-    const links = overview.edges
-      .filter((e) => ids.has(e.src) && ids.has(e.dst))
-      .map((e) => ({ source: e.src, target: e.dst, rel: e.rel }) as FGLink);
-    return { nodes, links };
-  }, [overview, kindFilter, subsystemFilter]);
+  // Which nodes/edge to highlight on the canvas.
+  const highlightIds = useMemo(() => {
+    const s = new Set<string>();
+    if (nodeParam) s.add(nodeParam);
+    if (edgeParam) s.add(edgeParam);
+    return s;
+  }, [nodeParam, edgeParam]);
+
+  const isFocusedEdge = useCallback(
+    (link: FGLink) => {
+      if (!nodeParam || !edgeParam) return false;
+      const a = linkEndId(link.source);
+      const b = linkEndId(link.target);
+      return (a === nodeParam && b === edgeParam) || (a === edgeParam && b === nodeParam);
+    },
+    [nodeParam, edgeParam],
+  );
 
   return (
     <div className="grid h-full min-h-[560px] grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr),320px]">
@@ -159,18 +241,22 @@ export function ExplorerGraphTab() {
               nodeRelSize={4}
               nodeLabel={(n) => `${n.label}\n${n.id} · ${n.kind}`}
               nodeColor={(n) => NODE_KIND_COLOR[n.kind]}
-              linkColor={() => "var(--color-border-strong)"}
-              linkWidth={0.6}
-              linkDirectionalArrowLength={3}
+              linkColor={(l) => (isFocusedEdge(l) ? "var(--color-accent)" : "var(--color-border-strong)")}
+              linkWidth={(l) => (isFocusedEdge(l) ? 2.5 : 0.6)}
+              linkDirectionalArrowLength={(l) => (isFocusedEdge(l) ? 5 : 3)}
               linkDirectionalArrowRelPos={1}
               backgroundColor="rgba(0,0,0,0)"
               warmupTicks={150}
               cooldownTicks={100}
               d3VelocityDecay={0.3}
-              onEngineStop={fitOnce}
+              onEngineStop={settle}
               onNodeClick={(n) => selectNode(n.id)}
-              nodeCanvasObjectMode={() => "after"}
+              nodeCanvasObjectMode={(n) => (highlightIds.has(n.id) ? "before" : "after")}
               nodeCanvasObject={(n, ctx, scale) => {
+                if (highlightIds.has(n.id)) {
+                  drawHighlightRing(n, ctx, n.id === focusIdRef.current, pulseStartRef.current, accentRef.current);
+                  return;
+                }
                 if (scale < 2.4) return;
                 const label = n.label.length > 24 ? `${n.label.slice(0, 23)}…` : n.label;
                 ctx.font = "3px Manrope, sans-serif";
@@ -183,9 +269,47 @@ export function ExplorerGraphTab() {
         </div>
       </div>
 
-      <NodePanel selected={selected} loading={selectedLoading} onSelect={selectNode} />
+      <NodePanel
+        selected={selected}
+        loading={selectedLoading}
+        onSelect={selectNode}
+        edgeTarget={edgeParam}
+        canGoBack={trail.length > 1}
+        onBack={goBack}
+      />
     </div>
   );
+}
+
+/** A glowing accent ring around a highlighted node; pulses briefly after focus. */
+function drawHighlightRing(
+  n: PositionedNode,
+  ctx: CanvasRenderingContext2D,
+  isCenter: boolean,
+  pulseStart: number,
+  accent: string,
+) {
+  const x = n.x ?? 0;
+  const y = n.y ?? 0;
+  const base = 7;
+  const elapsed = Date.now() - pulseStart;
+  const pulse = isCenter && elapsed < 1200 ? Math.abs(Math.sin(elapsed / 190)) * 3 : 0;
+  const r = base + pulse;
+  ctx.save();
+  // Soft outer glow.
+  ctx.globalAlpha = 0.16;
+  ctx.beginPath();
+  ctx.arc(x, y, r + 3, 0, 2 * Math.PI);
+  ctx.fillStyle = accent;
+  ctx.fill();
+  // Ring.
+  ctx.globalAlpha = 1;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = isCenter ? 1.6 : 1.1;
+  ctx.stroke();
+  ctx.restore();
 }
 
 function Legend() {
@@ -193,11 +317,7 @@ function Legend() {
     <div className="flex items-center gap-3 text-[11px] text-ink-muted" data-testid="graph-legend">
       {(Object.keys(NODE_KIND_COLOR) as ArtifactKind[]).map((kind) => (
         <span key={kind} className="flex items-center gap-1.5">
-          <span
-            aria-hidden
-            className="h-2.5 w-2.5 rounded-full"
-            style={{ backgroundColor: NODE_KIND_COLOR[kind] }}
-          />
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: NODE_KIND_COLOR[kind] }} />
           {NODE_KIND_LABEL[kind]}
         </span>
       ))}
@@ -209,12 +329,18 @@ function NodePanel({
   selected,
   loading,
   onSelect,
+  edgeTarget,
+  canGoBack,
+  onBack,
 }: {
   selected: GraphNodeResponse | null;
   loading: boolean;
   onSelect: (id: string) => void;
+  edgeTarget: string | null;
+  canGoBack: boolean;
+  onBack: () => void;
 }) {
-  if (loading) {
+  if (loading && !selected) {
     return (
       <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
         <div className="h-5 w-32 animate-pulse rounded bg-canvas-sunken" />
@@ -229,7 +355,9 @@ function NodePanel({
         className="flex h-full min-h-[200px] flex-col items-center justify-center rounded-card border border-dashed border-border-strong bg-canvas-sunken/60 p-6 text-center"
         data-testid="graph-node-panel-empty"
       >
-        <p className="text-sm text-ink-muted">Click a node to inspect its neighborhood and typed relationships.</p>
+        <p className="text-sm text-ink-muted">
+          Click a node — or a graph path in an answer — to focus it here and inspect its typed relationships.
+        </p>
       </div>
     );
   }
@@ -237,12 +365,27 @@ function NodePanel({
   const center = selected.nodes.find((n) => n.id === selected.center);
   const documentNeighbors = selected.nodes.filter((n) => n.id !== selected.center && n.kind === "document");
   const nodeById = new Map(selected.nodes.map((n) => [n.id, n]));
+  const edgeToTarget = edgeTarget
+    ? selected.edges.find((e) => e.src === edgeTarget || e.dst === edgeTarget)
+    : undefined;
 
   return (
     <div className="space-y-4 rounded-card border border-border bg-canvas-raised p-4 shadow-panel" data-testid="graph-node-panel">
       <div>
+        {canGoBack && (
+          <button
+            type="button"
+            onClick={onBack}
+            data-testid="graph-back"
+            className="mb-2 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium text-ink-faint transition-colors hover:bg-canvas-sunken hover:text-ink"
+          >
+            <span aria-hidden>←</span> Back
+          </button>
+        )}
         <div className="font-mono text-[11px] text-ink-faint">{selected.center}</div>
-        <h3 className="mt-0.5 font-display text-lg font-medium text-ink">{center?.label ?? selected.center}</h3>
+        <h3 className="mt-0.5 font-display text-lg font-medium text-ink" data-testid="graph-node-title">
+          {center?.label ?? selected.center}
+        </h3>
         <div className="mt-1.5 flex flex-wrap gap-1.5">
           {center && <TierBadge tier={tierFromProvTier(center.prov_tier)} />}
           {center?.subsystem && (
@@ -252,6 +395,20 @@ function NodePanel({
           )}
         </div>
       </div>
+
+      {edgeToTarget && (
+        <div
+          className="rounded-md border border-accent/30 bg-accent-soft/50 px-3 py-2 text-[12px]"
+          data-testid="graph-focused-relationship"
+        >
+          <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-ink">
+            Relationship
+          </div>
+          <div className="font-mono text-ink">
+            {edgeToTarget.src} <span className="text-accent">{edgeToTarget.rel}</span> {edgeToTarget.dst}
+          </div>
+        </div>
+      )}
 
       {documentNeighbors.length > 0 && (
         <div>
@@ -280,7 +437,14 @@ function NodePanel({
         </h4>
         <ul className="max-h-72 space-y-1 overflow-y-auto font-mono text-[11px] leading-relaxed">
           {selected.edges.map((edge, i) => (
-            <RelationshipRow key={i} edge={edge} onSelect={onSelect} nodeById={nodeById} center={selected.center} />
+            <RelationshipRow
+              key={i}
+              edge={edge}
+              onSelect={onSelect}
+              nodeById={nodeById}
+              center={selected.center}
+              edgeTarget={edgeTarget}
+            />
           ))}
         </ul>
       </div>
@@ -293,20 +457,26 @@ function RelationshipRow({
   onSelect,
   nodeById,
   center,
+  edgeTarget,
 }: {
   edge: GraphEdge;
   onSelect: (id: string) => void;
   nodeById: Map<string, GraphNode>;
   center: string;
+  edgeTarget: string | null;
 }) {
   const other = edge.src === center ? edge.dst : edge.src;
   const otherLabel = nodeById.get(other)?.label ?? other;
+  const emphasised = edgeTarget != null && other === edgeTarget;
   return (
     <li>
       <button
         type="button"
         onClick={() => onSelect(other)}
-        className="flex w-full items-center gap-1 truncate rounded px-1 py-0.5 text-left text-ink-muted hover:bg-canvas-sunken hover:text-accent-ink"
+        data-testid="graph-relationship-row"
+        className={`flex w-full items-center gap-1 truncate rounded px-1 py-0.5 text-left transition-colors hover:bg-canvas-sunken hover:text-accent-ink ${
+          emphasised ? "bg-accent-soft/60 text-accent-ink ring-1 ring-inset ring-accent/30" : "text-ink-muted"
+        }`}
         title={otherLabel}
       >
         <span className="text-accent">{edge.rel}</span>

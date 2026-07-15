@@ -239,14 +239,25 @@ export async function mockApiRoutes(page: Page): Promise<void> {
         await route.fulfill({ json: fixtures.graphNode });
         return;
       }
-      const node = fixtures.graphOverview.nodes.find((n) => n.id === id);
-      if (!node) {
+      // Union of overview + the richer graph_node fixture, so hop-by-hop graph
+      // walking resolves offline even for ids the capped overview omits.
+      const allEdges = [...fixtures.graphNode.edges, ...fixtures.graphOverview.edges];
+      const index = new Map(
+        [...fixtures.graphNode.nodes, ...fixtures.graphOverview.nodes].map((n) => [n.id, n]),
+      );
+      const edges = allEdges.filter((e) => e.src === id || e.dst === id);
+      if (edges.length === 0 && !index.has(id)) {
         await route.fulfill({ status: 404, json: { detail: `Unknown node '${id}'` } });
         return;
       }
-      const edges = fixtures.graphOverview.edges.filter((e) => e.src === id || e.dst === id);
-      const neighborIds = new Set(edges.flatMap((e) => [e.src, e.dst]));
-      const nodes = fixtures.graphOverview.nodes.filter((n) => neighborIds.has(n.id));
+      const ids = new Set<string>([id]);
+      edges.forEach((e) => {
+        ids.add(e.src);
+        ids.add(e.dst);
+      });
+      const nodes = [...ids].map(
+        (nid) => index.get(nid) ?? { id: nid, kind: "document", label: nid, subsystem: null, source: "", prov_tier: 1 },
+      );
       const response: GraphNodeResponse = { center: id, nodes, edges };
       await route.fulfill({ json: response });
       return;
