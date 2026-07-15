@@ -34,14 +34,22 @@ export function ExplorerGraphTab() {
   // Refs the (per-frame) canvas callbacks read, so highlight tracks the URL.
   const focusIdRef = useRef<string | null>(nodeParam);
   const pulseStartRef = useRef(0);
+  const hoverIdRef = useRef<string | null>(null);
   focusIdRef.current = nodeParam;
 
-  // Canvas can't resolve CSS variables, so read the theme accent once per render
-  // (renders are infrequent) and hand the concrete colour to the ring drawer.
+  // Canvas can't resolve CSS variables, so read the theme colours once per render
+  // (renders are infrequent) and hand the concrete values to the canvas drawers.
   const accentRef = useRef("#0891a8");
+  const mutedRef = useRef("#6b6a62");
+  const plateRef = useRef("#ffffff");
   if (typeof window !== "undefined") {
-    const v = getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim();
-    if (v) accentRef.current = v;
+    const cs = getComputedStyle(document.documentElement);
+    const accent = cs.getPropertyValue("--color-accent").trim();
+    const muted = cs.getPropertyValue("--color-ink-muted").trim();
+    const plate = cs.getPropertyValue("--color-canvas-raised").trim();
+    if (accent) accentRef.current = accent;
+    if (muted) mutedRef.current = muted;
+    if (plate) plateRef.current = plate;
   }
 
   useEffect(() => {
@@ -192,6 +200,19 @@ export function ExplorerGraphTab() {
     [nodeParam, edgeParam],
   );
 
+  // Label a relationship line only when it's in the focused/hovered neighborhood
+  // — always-on labels for ~3k edges would be unreadable. Reads refs so the
+  // per-frame callback stays cheap and current.
+  const shouldLabelLink = useCallback((link: FGLink): boolean => {
+    const a = linkEndId(link.source);
+    const b = linkEndId(link.target);
+    const focus = focusIdRef.current;
+    const hover = hoverIdRef.current;
+    if (focus && (a === focus || b === focus)) return true;
+    if (hover && (a === hover || b === hover)) return true;
+    return false;
+  }, []);
+
   return (
     <div className="grid h-full min-h-[560px] grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr),320px]">
       <div className="flex min-h-0 flex-col rounded-card border border-border bg-canvas-raised shadow-panel">
@@ -251,6 +272,9 @@ export function ExplorerGraphTab() {
               d3VelocityDecay={0.3}
               onEngineStop={settle}
               onNodeClick={(n) => selectNode(n.id)}
+              onNodeHover={(n) => {
+                hoverIdRef.current = n?.id ?? null;
+              }}
               nodeCanvasObjectMode={(n) => (highlightIds.has(n.id) ? "before" : "after")}
               nodeCanvasObject={(n, ctx, scale) => {
                 if (highlightIds.has(n.id)) {
@@ -260,9 +284,15 @@ export function ExplorerGraphTab() {
                 if (scale < 2.4) return;
                 const label = n.label.length > 24 ? `${n.label.slice(0, 23)}…` : n.label;
                 ctx.font = "3px Manrope, sans-serif";
-                ctx.fillStyle = "var(--color-ink-muted)";
+                ctx.fillStyle = mutedRef.current;
                 ctx.textAlign = "center";
                 ctx.fillText(label, n.x ?? 0, (n.y ?? 0) + 6);
+              }}
+              linkCanvasObjectMode={() => "after"}
+              linkCanvasObject={(l, ctx) => {
+                if (shouldLabelLink(l)) {
+                  drawLinkLabel(l, ctx, mutedRef.current, plateRef.current);
+                }
               }}
             />
           )}
@@ -309,6 +339,42 @@ function drawHighlightRing(
   ctx.strokeStyle = accent;
   ctx.lineWidth = isCenter ? 1.6 : 1.1;
   ctx.stroke();
+  ctx.restore();
+}
+
+/** Draw a relationship's type as muted text on a small plate at the link midpoint. */
+function drawLinkLabel(l: FGLink, ctx: CanvasRenderingContext2D, color: string, plate: string) {
+  const s = l.source;
+  const t = l.target;
+  if (typeof s !== "object" || typeof t !== "object") return;
+  const sx = (s as PositionedNode).x;
+  const sy = (s as PositionedNode).y;
+  const tx = (t as PositionedNode).x;
+  const ty = (t as PositionedNode).y;
+  if (sx == null || sy == null || tx == null || ty == null) return;
+
+  const x = (sx + tx) / 2;
+  const y = (sy + ty) / 2;
+  // Keep text roughly upright regardless of edge direction.
+  let angle = Math.atan2(ty - sy, tx - sx);
+  if (angle > Math.PI / 2) angle -= Math.PI;
+  if (angle < -Math.PI / 2) angle += Math.PI;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.font = "2.5px Manrope, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const text = l.rel;
+  const w = ctx.measureText(text).width;
+  // Legibility plate over the crossing lines.
+  ctx.globalAlpha = 0.85;
+  ctx.fillStyle = plate;
+  ctx.fillRect(-w / 2 - 0.6, -1.7, w + 1.2, 3.4);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = color;
+  ctx.fillText(text, 0, 0);
   ctx.restore();
 }
 
