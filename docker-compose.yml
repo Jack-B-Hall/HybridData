@@ -1,5 +1,7 @@
 # One container serving the API + built frontend on http://<host>:8470/.
-# Fully offline (hash embedder + mock answer model); the demo store is baked in.
+# The demo store (hash embeddings) is baked in, so retrieval is fully offline.
+# Answers use a live Ollama model when HDE_LLM_BACKEND=ollama; drop those env
+# lines (or set HDE_LLM_BACKEND=mock) for a fully offline template-answer demo.
 services:
   hybrid-data-example:
     build: .
@@ -8,3 +10,8 @@ services:
     ports:
       - "8470:8000"
     restart: unless-stopped
+    environment:
+      HDE_LLM_BACKEND: "ollama"
+      HDE_LLM_MODEL: "gemma4:26b-a4b-it-qat"
+      HDE_OLLAMA_LLM_HOST: "http://192.168.1.24:11434"
+      HDE_LLM_NUM_PREDICT: "4000"
