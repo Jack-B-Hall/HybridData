@@ -87,7 +87,10 @@ def cmd_stats(args: argparse.Namespace) -> int:
 def cmd_serve(args: argparse.Namespace) -> int:
     import uvicorn
 
-    uvicorn.run("hde.api.app:app", host=args.host, port=args.port, reload=args.reload)
+    # --port wins; otherwise fall back to the configured server port (config file
+    # or HDE_SERVER_PORT), then the built-in default.
+    port = args.port if args.port is not None else get_settings().server_port
+    uvicorn.run("hde.api.app:app", host=args.host, port=port, reload=args.reload)
     return 0
 
 
@@ -113,7 +116,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     srv = sub.add_parser("serve", help="run the HTTP API")
     srv.add_argument("--host", default="127.0.0.1")
-    srv.add_argument("--port", type=int, default=8000)
+    srv.add_argument("--port", type=int, default=None, help="override the configured server port")
     srv.add_argument("--reload", action="store_true")
     srv.set_defaults(func=cmd_serve)
 

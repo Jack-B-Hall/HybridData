@@ -25,9 +25,14 @@ services:
       # it. Uncomment these two lines + the volume below:
       #   HDE_ID_PATTERN: "\\b\\d{4,8}\\b"          # if your ids aren't PREFIX-digits
       #   HDE_DB_PATH: "/app/data-live/hde.db"
+      # ── One-file config (alternative to this env block) ───────────────────
+      # Instead of env vars, mount an hde.toml (see hde.example.toml) and point
+      # HDE_CONFIG at it — env vars here still override individual file values:
+      #   HDE_CONFIG: "/app/hde.toml"
     volumes:
       - hde-telemetry:/app/telemetry
       # - ./data-live:/app/data-live:ro            # externally-built store (read-only)
+      # - ./hde.toml:/app/hde.toml:ro              # one-file config (with HDE_CONFIG above)
 
 volumes:
   hde-telemetry:

@@ -151,12 +151,16 @@ how to run the semantic judge: [`docs/evaluation.md`](docs/evaluation.md).
 
 ## Configuration
 
-Everything is environment-driven with offline defaults. The two pluggable seams:
+Everything resolves from **defaults < a config file (`hde.toml`) < environment
+variables**, all with offline defaults. Copy [`hde.example.toml`](hde.example.toml)
+to `hde.toml` and edit one file to transplant the whole deployment (Ollama host,
+model names, store path, gate tuning, corpus branding, port); any single value is
+still overridable by an `HDE_*` env var. The two pluggable seams:
 
 | variable | default | options |
 |---|---|---|
-| `HDE_EMBEDDER` | `hash` | `hash`, `ollama` (nomic-embed-text), `sbert` |
-| `HDE_LLM_BACKEND` | `mock` | `mock`, `ollama`, `anthropic` |
+| `HDE_EMBEDDER` (`[embedder] backend`) | `hash` | `hash`, `ollama` (nomic-embed-text), `sbert` |
+| `HDE_LLM_BACKEND` (`[llm] backend`) | `mock` | `mock`, `ollama`, `anthropic` |
 
 For production, point both at real backends (a single 16-32 GB GPU running a
 gemma-class model is the target). The reference stack is western-origin (Google

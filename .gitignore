@@ -11,6 +11,7 @@ data/hde.db
 data/hde.db-wal
 data/hde.db-shm
 data/telemetry.db
+hde.toml
 *.db-wal
 *.db-shm
 

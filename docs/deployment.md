@@ -4,6 +4,31 @@ The system is deliberately small to operate: one SQLite file, one Python API
 process, and one static frontend bundle. There is no external database, vector
 service, or message broker.
 
+## Configuration (one file)
+
+Everything deployment-specific — LLM host/model, embedder, store paths, gate
+tuning, corpus branding, server port/CORS — resolves from three layers, lowest to
+highest:
+
+1. **built-in defaults** (safe, offline)
+2. **a config file** — `hde.toml`, found via `HDE_CONFIG` or `./hde.toml`
+3. **environment variables** — the `HDE_*` names documented below
+
+So `hde.toml` is the single place to edit when transplanting to a work environment,
+and any one value can still be overridden by an env var. With no config file
+present, behaviour is exactly the env-only behaviour. Copy the fully-commented
+[`hde.example.toml`](../hde.example.toml) to `hde.toml` and edit it:
+
+```bash
+cp hde.example.toml hde.toml      # then set your Ollama host, model, db path, …
+hde serve                         # picks up ./hde.toml automatically
+# or point anywhere:
+HDE_CONFIG=/etc/hde/prod.toml hde serve
+```
+
+The individual `HDE_*` variables below are the highest-precedence layer — use them
+for one-off overrides or in environments where a file is inconvenient.
+
 ## Backends
 
 Two things are pluggable; both default to offline stand-ins so nothing is required

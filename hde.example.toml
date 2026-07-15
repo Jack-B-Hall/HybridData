@@ -1,0 +1,80 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# hde.toml — one file to configure a deployment.
+#
+# Copy this to `hde.toml` (next to where you run `hde`, or point HDE_CONFIG at it)
+# and edit. Every value here is OPTIONAL: anything you omit keeps its built-in
+# default. Precedence, lowest to highest, is:
+#
+#     built-in defaults  <  this file  <  environment variables (HDE_*)
+#
+# So this is the obvious place to change things when bringing the system across to
+# a work environment — point it at your Ollama host, swap model names, mount your
+# own store — and any single value can still be overridden by an env var at run
+# time. With no config file present, behaviour is exactly the env-only behaviour.
+#
+# The values shown below are the built-in defaults unless a comment says otherwise;
+# uncomment and edit the ones you need. A "work transplant" example is inlined in
+# comments against each section.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[llm]
+# Answer model. "mock" is deterministic/offline (default). Use "ollama" for a
+# local model or "anthropic" for the Claude API.
+# backend = "ollama"                          # work: point at your model server
+# host = "http://ollama.internal:11434"       # work: your Ollama host/URL
+# model = "gemma4:26b-a4b-it-qat"             # work: your model tag
+# timeout_s = 300
+# num_ctx = 16384
+# num_predict = 1500
+# think = false                               # reasoning-model chain-of-thought (slow)
+
+[embedder]
+# "hash" is deterministic/offline (default). "ollama" runs a real embed model;
+# "sbert" uses local sentence-transformers.
+# backend = "ollama"
+# model = "nomic-embed-text"                  # US-origin embedder
+# host = "http://ollama.internal:11434"
+# dim = 1024                                  # hash embedder only
+# sbert_model = "sentence-transformers/all-MiniLM-L6-v2"
+
+[storage]
+# The corpus store is read-only at serve time. Point at a store you built from
+# your own data (see docs/adding-a-data-source.md and the BYO-store recipe in
+# docs/deployment.md). Telemetry is a SEPARATE, writable database.
+# db_path = "data/hde.db"                     # work: "/app/data-live/hde.db"
+# telemetry_db = "data/telemetry.db"
+
+[retrieval]
+# top_chunks = 8
+# rrf_k = 60
+# graph_hops = 2
+
+[gate]
+# Answer/decline thresholds — recalibrate for real data (eval/calibrate_gate.py).
+# cov_hi = 0.34
+# cov_mid = 0.20
+# cov_void = 0.20
+# strong_frac = 0.5
+# Domain-flavoured stopwords added to the generic English stoplist. Clear or
+# replace these for a non-engineering corpus (e.g. where "system"/"change" are
+# content words). Defaults reproduce the demo's stoplist exactly.
+# domain_stopwords = ["change", "affects", "requires", "system", "new"]
+
+[corpus]
+# Record-id shape used for exact-id retrieval, the gate anchor and citations.
+# Default = PREFIX-digits. A store built with a given pattern persists it and that
+# wins at query time; set it here to match your ids when building the store.
+# id_pattern = "\\b\\d{4,8}\\b"               # work: e.g. numeric Teamcenter ids
+# Branding for the chat UI. If your store was ingested with adapter-declared
+# corpus_meta, that wins; otherwise these are used (else a generic fallback).
+# title = "My Programme"
+# placeholder = "Ask about the programme — records, changes, decisions…"
+# starter_questions = [
+#   { text = "What changed in revision 12?", hint = "change history" },
+#   { text = "What depends on part 000123?", hint = "impact analysis" },
+# ]
+
+[server]
+# port = 8000                                 # the API/UI port inside the process
+# cors_origins = ["*"]                        # restrict in production
+# frontend_dist = "frontend/dist"             # built SPA served alongside the API

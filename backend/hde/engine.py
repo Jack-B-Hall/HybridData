@@ -425,11 +425,15 @@ class Engine:
                 declared = json.loads(raw)
             except (json.JSONDecodeError, ValueError):
                 declared = {}
+        # Precedence: adapter/DB corpus_meta (from ingest) wins, then config-file
+        # branding (Settings), then a generic fallback.
+        cfg_starters = [{"text": t, "hint": h} for (t, h) in self.settings.corpus_starter_questions]
         return {
-            "title": declared.get("title"),
+            "title": declared.get("title") or self.settings.corpus_title,
             "placeholder": declared.get("placeholder")
+            or self.settings.corpus_placeholder
             or "Ask about the corpus — records, changes, decisions, relationships…",
-            "starter_questions": declared.get("starter_questions") or [],
+            "starter_questions": declared.get("starter_questions") or cfg_starters or [],
             "id_pattern": id_pattern,
             "tier_labels": {str(t): provenance.label_for(t) for t in (1, 2, 3)},
         }
