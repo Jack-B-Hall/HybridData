@@ -227,6 +227,19 @@ export interface GraphNodeResponse {
   edges: GraphEdge[];
 }
 
+export interface CorpusStarterQuestion {
+  text: string;
+  hint: string;
+}
+
+export interface CorpusMeta {
+  title: string | null;
+  placeholder: string;
+  starter_questions: CorpusStarterQuestion[];
+  id_pattern: string;
+  tier_labels: Record<string, string>;
+}
+
 export interface CorpusStatsResponse {
   totals: {
     artifacts: number;

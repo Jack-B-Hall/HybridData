@@ -2,6 +2,7 @@ import { ApiError } from "./types";
 import type {
   AskResult,
   AskStreamHandlers,
+  CorpusMeta,
   CorpusStatsResponse,
   DocumentDetail,
   DocumentListParams,
@@ -97,6 +98,8 @@ export const liveApi = {
 
   getGraphNode: (id: string, hops?: number) =>
     request<GraphNodeResponse>(`/api/graph/node/${encodeURIComponent(id)}${toQuery({ hops })}`),
+
+  getCorpusMeta: () => request<CorpusMeta>("/api/corpus/meta"),
 
   getCorpusStats: () => request<CorpusStatsResponse>("/api/corpus/stats"),
 

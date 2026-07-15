@@ -263,6 +263,26 @@ export async function mockApiRoutes(page: Page): Promise<void> {
       return;
     }
 
+    if (pathname === "/api/corpus/meta") {
+      await route.fulfill({
+        json: {
+          title: "K-200 programme",
+          placeholder: "Ask about the K-200 programme — parts, changes, decisions, incidents…",
+          starter_questions: [
+            { text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?", hint: "Change history" },
+            {
+              text: "If ECR-221 changes the propulsion motors, what parts and documents are affected?",
+              hint: "Impact analysis",
+            },
+            { text: "What is the capital of France?", hint: "Off-corpus — demonstrates refusal" },
+          ],
+          id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
+          tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
+        },
+      });
+      return;
+    }
+
     if (pathname === "/api/corpus/stats") {
       await route.fulfill({ json: fixtures.corpusStats });
       return;

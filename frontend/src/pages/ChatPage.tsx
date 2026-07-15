@@ -7,24 +7,12 @@ import { GraphPathsList } from "@/components/GraphPathsList";
 import { FeedbackControl } from "@/components/FeedbackControl";
 import { formatLatency, modelLabel } from "@/lib/format";
 import { useChat, type Turn } from "@/store/chat";
-
-const STARTER_QUESTIONS = [
-  {
-    text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
-    hint: "Change history",
-  },
-  {
-    text: "If ECR-221 changes the propulsion motors, what parts and documents are affected?",
-    hint: "Impact analysis",
-  },
-  {
-    text: "What is the capital of France?",
-    hint: "Off-corpus — demonstrates refusal",
-  },
-];
+import { useCorpusMeta } from "@/store/corpusMeta";
+import type { CorpusStarterQuestion } from "@/api/types";
 
 export function ChatPage() {
   const { turns, draft, setDraft, submit, removeTurn, clearAll, scrollTopRef } = useChat();
+  const corpus = useCorpusMeta();
   const listRef = useRef<HTMLDivElement>(null);
   const prevCount = useRef(turns.length);
 
@@ -61,7 +49,7 @@ export function ChatPage() {
         className="flex-1 space-y-8 overflow-y-auto pb-28"
       >
         {turns.length === 0 ? (
-          <EmptyState onPick={submit} />
+          <EmptyState onPick={submit} starters={corpus.starter_questions} />
         ) : (
           turns.map((turn) => <TurnBlock key={turn.id} turn={turn} onRemove={() => removeTurn(turn.id)} />)
         )}
@@ -90,7 +78,7 @@ export function ChatPage() {
               }
             }}
             rows={1}
-            placeholder="Ask about the K-200 programme — parts, changes, decisions, incidents…"
+            placeholder={corpus.placeholder}
             data-testid="ask-input"
             className="max-h-40 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none"
           />
@@ -152,7 +140,13 @@ function ClearAllButton({ onConfirm }: { onConfirm: () => void }) {
   );
 }
 
-function EmptyState({ onPick }: { onPick: (q: string) => void }) {
+function EmptyState({
+  onPick,
+  starters,
+}: {
+  onPick: (q: string) => void;
+  starters: CorpusStarterQuestion[];
+}) {
   return (
     <div className="flex h-full min-h-[420px] flex-col items-center justify-center text-center">
       <h1 className="font-display text-[28px] font-medium tracking-tight text-ink">Ask the corpus.</h1>
@@ -160,22 +154,24 @@ function EmptyState({ onPick }: { onPick: (q: string) => void }) {
         Answers are grounded in retrieved passages with inline citations — the system declines to
         answer rather than invent when the evidence isn&apos;t there.
       </p>
-      <div className="mt-8 grid w-full max-w-xl gap-2.5">
-        {STARTER_QUESTIONS.map((q) => (
-          <button
-            key={q.text}
-            type="button"
-            onClick={() => onPick(q.text)}
-            data-testid="starter-question"
-            className="group flex items-center justify-between gap-3 rounded-card border border-border bg-canvas-raised px-4 py-3 text-left shadow-panel transition-colors hover:border-accent/40 hover:bg-accent-soft/40"
-          >
-            <span className="text-sm text-ink">{q.text}</span>
-            <span className="shrink-0 rounded-full bg-canvas-sunken px-2 py-0.5 text-[11px] font-medium text-ink-faint group-hover:text-accent-ink">
-              {q.hint}
-            </span>
-          </button>
-        ))}
-      </div>
+      {starters.length > 0 && (
+        <div className="mt-8 grid w-full max-w-xl gap-2.5">
+          {starters.map((q) => (
+            <button
+              key={q.text}
+              type="button"
+              onClick={() => onPick(q.text)}
+              data-testid="starter-question"
+              className="group flex items-center justify-between gap-3 rounded-card border border-border bg-canvas-raised px-4 py-3 text-left shadow-panel transition-colors hover:border-accent/40 hover:bg-accent-soft/40"
+            >
+              <span className="text-sm text-ink">{q.text}</span>
+              <span className="shrink-0 rounded-full bg-canvas-sunken px-2 py-0.5 text-[11px] font-medium text-ink-faint group-hover:text-accent-ink">
+                {q.hint}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

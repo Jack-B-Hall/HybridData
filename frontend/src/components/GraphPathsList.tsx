@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { extractNodeId } from "@/lib/ids";
 import { graphEdgePath, graphNodePath } from "@/lib/paths";
+import { useCorpusMeta } from "@/store/corpusMeta";
 
 export interface GraphPathsListProps {
   paths: string[];
@@ -15,6 +16,7 @@ const PATH_RE = /^(.*?)\s(-[A-Z_]+->)\s(.*)$/;
  * fact straight into the knowledge graph.
  */
 export function GraphPathsList({ paths }: GraphPathsListProps) {
+  const { id_pattern } = useCorpusMeta();
   if (paths.length === 0) return null;
   return (
     <div data-testid="graph-paths">
@@ -32,8 +34,8 @@ export function GraphPathsList({ paths }: GraphPathsListProps) {
             );
           }
           const [, from, rel, to] = match;
-          const fromId = extractNodeId(from!);
-          const toId = extractNodeId(to!);
+          const fromId = extractNodeId(from!, id_pattern);
+          const toId = extractNodeId(to!, id_pattern);
           const relType = rel!.replace(/^-|->$/g, "");
           return (
             <li key={i} className="text-ink-muted" data-testid="graph-path">

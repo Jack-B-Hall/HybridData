@@ -8,14 +8,16 @@ import { ExplorerTableTab } from "@/pages/explorer/ExplorerTableTab";
 import { ExplorerAnalyticsTab } from "@/pages/explorer/ExplorerAnalyticsTab";
 import { ChatProvider } from "@/store/chat";
 import { DrawerProvider } from "@/store/drawer";
+import { CorpusMetaProvider } from "@/store/corpusMeta";
 import { SourceDrawer } from "@/components/SourceDrawer";
 
 export function App() {
   // Providers live above the router so chat history and the source drawer
   // survive navigation between tabs (Chat ↔ Documents ↔ Data Explorer).
   return (
-    <ChatProvider>
-      <DrawerProvider>
+    <CorpusMetaProvider>
+      <ChatProvider>
+        <DrawerProvider>
         <Routes>
           <Route element={<AppShell />}>
             <Route path="/" element={<ChatPage />} />
@@ -31,7 +33,8 @@ export function App() {
           </Route>
         </Routes>
         <SourceDrawer />
-      </DrawerProvider>
-    </ChatProvider>
+        </DrawerProvider>
+      </ChatProvider>
+    </CorpusMetaProvider>
   );
 }
