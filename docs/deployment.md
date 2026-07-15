@@ -127,6 +127,39 @@ To point the container at real backends instead of the offline stand-ins, pass t
 `HDE_EMBEDDER` / `HDE_LLM_*` environment variables (see above) via compose
 `environment:` and rebuild — the same knobs apply inside the container.
 
+### Bring your own data (mount a real store)
+
+The image bakes the *demo* store at `/app/data/hde.db`. To serve real data without
+rebuilding the image, build a store **outside** the container and mount it at a path
+that does not shadow `/app/data`, then override `HDE_DB_PATH`:
+
+```bash
+# 1. Build a store from your data (any adapter; see adding-a-data-source.md).
+#    Set HDE_ID_PATTERN if your record ids aren't the default PREFIX-digits shape —
+#    it is persisted into the store and used at query time.
+HDE_DB_PATH="$PWD/data-live/hde.db" HDE_ID_PATTERN='\b\d{4,8}\b' \
+  hde ingest --json-tree your-export.json
+
+# 2. Mount it read-only and point the API at it (uncomment the lines already in
+#    docker-compose.yml), then:
+docker compose up -d
+```
+
+In compose that is a bind mount plus two env vars:
+
+```yaml
+    environment:
+      HDE_DB_PATH: "/app/data-live/hde.db"
+      HDE_ID_PATTERN: "\\b\\d{4,8}\\b"   # only if your ids differ from the default
+    volumes:
+      - ./data-live:/app/data-live:ro
+```
+
+The corpus store is read-only at serve time, so `:ro` is correct; telemetry stays on
+its own writable volume. Corpus branding (title, chat placeholder, starter questions)
+comes from the adapter's `corpus_meta()` and rides along in the store, so the mounted
+data set carries its own UI copy — nothing K-200-specific is compiled into the app.
+
 ## Re-ingesting / updating
 
 Ingestion is snapshot-only. Re-run `hde ingest` to rebuild from scratch

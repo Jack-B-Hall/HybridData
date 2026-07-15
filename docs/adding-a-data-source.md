@@ -41,6 +41,7 @@ class TicketsAdapter(SourceAdapter):
 | `title` | short label |
 | `text` | full searchable prose (may be empty for pure entities) |
 | `source` | provenance label; maps to a tier. Defaults to the adapter's `source` |
+| `prov_tier` | optional explicit tier (`1` formal, `2` unverified, `3` informal) — wins over the `source`→tier map |
 | `parent_id` | for entities, the parent in the hierarchy — this builds the `PART_OF` backbone |
 | `refs` | ids this record references; drives impact/dependency closures and untyped edges |
 | `relations` | optional typed graph edges (`Relation(rel, target_id)`) |
@@ -53,8 +54,9 @@ Rules of thumb:
   records and give them a `parent_id`. That is the graph's backbone.
 - Make **content** things (a spec, ticket, note, drawing, commit) `document`
   records and connect them to the entities they describe via `refs` / `relations`.
-- Set `source` so the record lands in the right provenance tier. Add new source
-  labels to `SOURCE_TIER` in `hde/provenance.py`.
+- Set `source` so the record lands in the right provenance tier. For a source the
+  built-in `SOURCE_TIER` map doesn't know, either declare the tier per-record with
+  `prov_tier=` (no core edit needed) or extend `SOURCE_TIER` in `hde/provenance.py`.
 - Use `refs` when you only need a reference edge (closures, generic links); add a
   `Relation` when the edge *type* should show in the graph view.
 
