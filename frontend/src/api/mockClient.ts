@@ -10,6 +10,9 @@ import type {
   FeedbackRequest,
   GraphNode,
   GraphNodeResponse,
+  IngestJob,
+  IngestStartRequest,
+  IngestStatus,
   TelemetryHealth,
 } from "./types";
 import type { HdeApi } from "./client";
@@ -75,6 +78,57 @@ function buildDocumentDetail(id: string): DocumentDetail {
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// In-memory ingest job state so the Ingestion page works offline / in e2e.
+const mockIngest: { status: IngestStatus; jobs: IngestJob[]; seq: number } = {
+  status: {
+    running: false,
+    action: null,
+    stage: "idle",
+    started_at: null,
+    finished_at: null,
+    status: null,
+    error: null,
+    counts: {},
+  },
+  jobs: [],
+  seq: 0,
+};
+
+function finishMockIngest(action: IngestStartRequest["action"]): void {
+  const counts =
+    action === "clear"
+      ? { records: 0, chunks: 0, nodes: 0, edges: 0, added: 0, updated: 0, removed: 0 }
+      : { records: 774, chunks: 795, nodes: 774, edges: 3143, added: 0, updated: 0, removed: 0 };
+  const now = new Date().toISOString();
+  mockIngest.status = {
+    running: false,
+    action,
+    stage: "done",
+    started_at: mockIngest.status.started_at,
+    finished_at: now,
+    status: "ok",
+    error: null,
+    counts,
+  };
+  mockIngest.jobs.unshift({
+    id: ++mockIngest.seq,
+    started_at: mockIngest.status.started_at ?? now,
+    finished_at: now,
+    action,
+    source: "demo",
+    status: "ok",
+    n_records: counts.records,
+    n_chunks: counts.chunks,
+    n_nodes: counts.nodes,
+    n_edges: counts.edges,
+    n_added: counts.added,
+    n_updated: counts.updated,
+    n_removed: counts.removed,
+    duration_ms: 900,
+    error: null,
+  });
+}
 
 /**
  * Build a node's neighbourhood from the union of the (capped) overview and the
@@ -242,6 +296,37 @@ export const mockApi: HdeApi = {
   getIngestHistory: async () => {
     await delay(60);
     return ingestHistory;
+  },
+
+  startIngest: async (body: IngestStartRequest) => {
+    await delay(120);
+    if (body.action === "clear" && body.confirm !== "CLEAR") {
+      throw new ApiError("clear requires the confirm token", 422);
+    }
+    if (mockIngest.status.running) throw new ApiError("an ingest job is already running", 409);
+    mockIngest.status = {
+      running: true,
+      action: body.action,
+      stage: "ingesting",
+      started_at: new Date().toISOString(),
+      finished_at: null,
+      status: null,
+      error: null,
+      counts: {},
+    };
+    // Simulate a short job that then lands in history.
+    window.setTimeout(() => finishMockIngest(body.action), 900);
+    return mockIngest.status;
+  },
+
+  getIngestStatus: async () => {
+    await delay(40);
+    return mockIngest.status;
+  },
+
+  getIngestJobs: async () => {
+    await delay(50);
+    return { jobs: mockIngest.jobs.slice(0, 25) };
   },
 
   submitFeedback: async (body: FeedbackRequest) => {

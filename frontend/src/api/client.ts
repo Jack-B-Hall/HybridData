@@ -4,6 +4,9 @@ import type {
   AskStreamHandlers,
   CorpusMeta,
   CorpusStatsResponse,
+  IngestJobsResponse,
+  IngestStartRequest,
+  IngestStatus,
   DocumentDetail,
   DocumentListParams,
   DocumentListResponse,
@@ -100,6 +103,14 @@ export const liveApi = {
     request<GraphNodeResponse>(`/api/graph/node/${encodeURIComponent(id)}${toQuery({ hops })}`),
 
   getCorpusMeta: () => request<CorpusMeta>("/api/corpus/meta"),
+
+  startIngest: (body: IngestStartRequest) =>
+    request<IngestStatus>("/api/ingest/start", { method: "POST", body: JSON.stringify(body) }),
+
+  getIngestStatus: () => request<IngestStatus>("/api/ingest/status"),
+
+  getIngestJobs: (limit?: number) =>
+    request<IngestJobsResponse>(`/api/ingest/jobs${toQuery({ limit })}`),
 
   getCorpusStats: () => request<CorpusStatsResponse>("/api/corpus/stats"),
 

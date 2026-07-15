@@ -61,9 +61,55 @@ interface RecordedAsk {
 let askSeq = 0;
 let recordedAsks: RecordedAsk[] = [];
 
+interface IngestState {
+  running: boolean;
+  action: string | null;
+  startedAt: number;
+  startedIso: string | null;
+  jobs: Record<string, unknown>[];
+  seq: number;
+}
+let ingest: IngestState = { running: false, action: null, startedAt: 0, startedIso: null, jobs: [], seq: 0 };
+
 function resetTelemetry(): void {
   askSeq = 0;
   recordedAsks = [];
+  ingest = { running: false, action: null, startedAt: 0, startedIso: null, jobs: [], seq: 0 };
+}
+
+// A running job finishes ~400ms after start, so a poller observes running then done.
+function ingestStatus(): Record<string, unknown> {
+  if (ingest.running && Date.now() - ingest.startedAt > 400) {
+    const now = new Date().toISOString();
+    ingest.jobs.unshift({
+      id: ++ingest.seq,
+      started_at: ingest.startedIso,
+      finished_at: now,
+      action: ingest.action,
+      source: "demo",
+      status: "ok",
+      n_records: 774,
+      n_chunks: 795,
+      n_nodes: 774,
+      n_edges: 3143,
+      n_added: 0,
+      n_updated: 0,
+      n_removed: 0,
+      duration_ms: 420,
+      error: null,
+    });
+    ingest.running = false;
+  }
+  return {
+    running: ingest.running,
+    action: ingest.action,
+    stage: ingest.running ? "ingesting" : "done",
+    started_at: ingest.startedIso,
+    finished_at: ingest.running ? null : new Date().toISOString(),
+    status: ingest.running ? null : "ok",
+    error: null,
+    counts: ingest.running ? {} : { records: 774, chunks: 795, added: 0, updated: 0, removed: 0 },
+  };
 }
 
 function recordAsk(result: AskResult, streamed: boolean): AskResult {
@@ -287,6 +333,35 @@ export async function mockApiRoutes(page: Page): Promise<void> {
 
     if (pathname === "/api/corpus/stats") {
       await route.fulfill({ json: fixtures.corpusStats });
+      return;
+    }
+
+    if (pathname === "/api/ingest/start" && request.method() === "POST") {
+      const body = request.postDataJSON() as { action: string; confirm?: string };
+      if (body.action === "clear" && body.confirm !== "CLEAR") {
+        await route.fulfill({ status: 422, json: { detail: "clear requires the confirm token" } });
+        return;
+      }
+      if (ingest.running) {
+        await route.fulfill({ status: 409, json: { detail: "an ingest job is already running" } });
+        return;
+      }
+      ingest.running = true;
+      ingest.action = body.action;
+      ingest.startedAt = Date.now();
+      ingest.startedIso = new Date().toISOString();
+      await route.fulfill({ json: ingestStatus() });
+      return;
+    }
+
+    if (pathname === "/api/ingest/status") {
+      await route.fulfill({ json: ingestStatus() });
+      return;
+    }
+
+    if (pathname === "/api/ingest/jobs") {
+      ingestStatus(); // advance a finished job into history if due
+      await route.fulfill({ json: { jobs: ingest.jobs.slice(0, 25) } });
       return;
     }
 

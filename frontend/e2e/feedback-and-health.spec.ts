@@ -24,7 +24,7 @@ test("thumbs-down with a comment records feedback and surfaces in system health"
   await expect(turn.getByTestId("feedback-thanks")).toBeVisible();
 
   // The System health view reflects the ask and the thumbs-down.
-  await page.getByRole("link", { name: "Data Explorer" }).click();
+  await page.getByRole("link", { name: "Data Explorer", exact: true }).click();
   await page.getByRole("link", { name: "Analytics" }).click();
 
   const health = page.getByTestId("system-health");
@@ -43,9 +43,9 @@ test("thumbs-up feedback persists across a tab switch", async ({ page }) => {
   await expect(turn.getByTestId("feedback-up")).toHaveAttribute("aria-pressed", "true");
 
   // Navigate away and back — the chosen rating survives (chat state is lifted).
-  await page.getByRole("link", { name: "Documents" }).click();
+  await page.getByRole("link", { name: "Documents", exact: true }).click();
   await expect(page).toHaveURL(/\/documents/);
-  await page.getByRole("link", { name: "Interface" }).click();
+  await page.getByRole("link", { name: "Interface", exact: true }).click();
 
   await expect(page.getByTestId("chat-turn").first().getByTestId("feedback-up")).toHaveAttribute(
     "aria-pressed",

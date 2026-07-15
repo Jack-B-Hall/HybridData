@@ -6,6 +6,7 @@ import { ExplorerLayout } from "@/pages/explorer/ExplorerLayout";
 import { ExplorerGraphTab } from "@/pages/explorer/ExplorerGraphTab";
 import { ExplorerTableTab } from "@/pages/explorer/ExplorerTableTab";
 import { ExplorerAnalyticsTab } from "@/pages/explorer/ExplorerAnalyticsTab";
+import { IngestionPage } from "@/pages/IngestionPage";
 import { ChatProvider } from "@/store/chat";
 import { DrawerProvider } from "@/store/drawer";
 import { CorpusMetaProvider } from "@/store/corpusMeta";
@@ -29,6 +30,7 @@ export function App() {
               <Route path="table" element={<ExplorerTableTab />} />
               <Route path="analytics" element={<ExplorerAnalyticsTab />} />
             </Route>
+            <Route path="/ingestion" element={<IngestionPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

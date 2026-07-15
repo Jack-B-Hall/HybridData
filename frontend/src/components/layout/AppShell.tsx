@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: "/", label: "Interface", end: true },
   { to: "/documents", label: "Documents", end: false },
   { to: "/explorer", label: "Data Explorer", end: false },
+  { to: "/ingestion", label: "Ingestion", end: false },
 ];
 
 export function AppShell() {

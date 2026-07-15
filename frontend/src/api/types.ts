@@ -256,6 +256,7 @@ export interface CorpusStatsResponse {
   by_subsystem: Record<string, number>;
   graph: GraphOverviewStats;
   embedder: string;
+  embed_dim?: string | null;
   snapshot_at: string;
 }
 
@@ -318,6 +319,48 @@ export interface TelemetryHealth {
   feedback: { up: number; down: number; ratio: number };
   per_day: { day: string; count: number }[];
   recent: TelemetryRecentAsk[];
+}
+
+// ── Ingestion management ────────────────────────────────────────────────────
+
+export type IngestAction = "reingest" | "scan" | "clear";
+
+export interface IngestStatus {
+  running: boolean;
+  action: IngestAction | null;
+  stage: string;
+  started_at: string | null;
+  finished_at: string | null;
+  status: "ok" | "error" | null;
+  error: string | null;
+  counts: Record<string, number | null>;
+}
+
+export interface IngestJob {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  action: string;
+  source: string | null;
+  status: string;
+  n_records: number | null;
+  n_chunks: number | null;
+  n_nodes: number | null;
+  n_edges: number | null;
+  n_added: number | null;
+  n_updated: number | null;
+  n_removed: number | null;
+  duration_ms: number | null;
+  error: string | null;
+}
+
+export interface IngestJobsResponse {
+  jobs: IngestJob[];
+}
+
+export interface IngestStartRequest {
+  action: IngestAction;
+  confirm?: string;
 }
 
 export class ApiError extends Error {
