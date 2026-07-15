@@ -363,6 +363,101 @@ export interface IngestStartRequest {
   confirm?: string;
 }
 
+// ── Testing (golden set + health test runs) ─────────────────────────────────
+
+export type GoldenBehaviour = "answer" | "refuse";
+
+export interface GoldenQuestion {
+  id: number;
+  text: string;
+  category: string;
+  behaviour: GoldenBehaviour;
+  citations: string[];
+  keywords: string[];
+  enabled: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GoldenQuestionsResponse {
+  count: number;
+  questions: GoldenQuestion[];
+}
+
+export interface GoldenQuestionInput {
+  text: string;
+  category?: string;
+  behaviour?: GoldenBehaviour;
+  citations?: string[];
+  keywords?: string[];
+  enabled?: boolean;
+  notes?: string | null;
+}
+
+export interface GoldenQuestionFilters {
+  category?: string;
+  behaviour?: GoldenBehaviour;
+  enabled?: boolean;
+}
+
+export interface TestRunStatus {
+  running: boolean;
+  stage: string;
+  started_at: string | null;
+  finished_at: string | null;
+  status: "ok" | "error" | null;
+  error: string | null;
+  total: number;
+  done: number;
+  passed: number;
+  failed: number;
+  run_id: number | null;
+}
+
+export interface TestRunSummary {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  status: "ok" | "error";
+  backend: string | null;
+  scope: string | null;
+  total: number | null;
+  passed: number | null;
+  failed: number | null;
+  answer_rate: number | null;
+  refusal_rate: number | null;
+  mean_latency_ms: number | null;
+  duration_ms: number | null;
+  error: string | null;
+}
+
+export interface TestResult {
+  id: number;
+  question_id: number | null;
+  question: string;
+  category: string;
+  behaviour: GoldenBehaviour;
+  answered: boolean | null;
+  verdict: string | null;
+  passed: boolean | null;
+  failed_checks: string[];
+  latency_ms: number | null;
+  error: string | null;
+}
+
+export interface TestRunDetail extends TestRunSummary {
+  results: TestResult[];
+}
+
+export interface TestRunsResponse {
+  runs: TestRunSummary[];
+}
+
+export interface TestRunRequest {
+  categories?: string[];
+}
+
 export class ApiError extends Error {
   status: number;
   constructor(message: string, status: number) {

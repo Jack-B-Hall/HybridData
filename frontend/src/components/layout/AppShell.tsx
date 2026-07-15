@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { to: "/documents", label: "Documents", end: false },
   { to: "/explorer", label: "Data Explorer", end: false },
   { to: "/ingestion", label: "Ingestion", end: false },
+  { to: "/testing", label: "Testing", end: false },
 ];
 
 export function AppShell() {

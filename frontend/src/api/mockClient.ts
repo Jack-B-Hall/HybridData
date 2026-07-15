@@ -14,6 +14,14 @@ import type {
   IngestStartRequest,
   IngestStatus,
   TelemetryHealth,
+  GoldenQuestion,
+  GoldenQuestionFilters,
+  GoldenQuestionInput,
+  TestRunDetail,
+  TestRunRequest,
+  TestRunStatus,
+  TestRunSummary,
+  TestResult,
 } from "./types";
 import type { HdeApi } from "./client";
 import {
@@ -191,6 +199,80 @@ function logMockAsk(result: AskResult, streamed: boolean): number {
   return id;
 }
 
+// In-memory golden set + test-run state so the Testing page works offline / e2e.
+function nowIso(): string {
+  return new Date().toISOString();
+}
+
+const mockGolden: { questions: GoldenQuestion[]; seq: number } = {
+  questions: [
+    {
+      id: 1, text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
+      category: "provenance", behaviour: "answer", citations: ["KES-208", "WIKI-052", "ECR-214"],
+      keywords: ["LiFePO4"], enabled: true, notes: "Seeded from the bundled demo gold set.",
+      created_at: nowIso(), updated_at: nowIso(),
+    },
+    {
+      id: 2, text: "If ECR-221 changes the propulsion motors, what parts and documents are affected?",
+      category: "impact", behaviour: "answer", citations: ["ECR-221"], keywords: [],
+      enabled: true, notes: "Seeded from the bundled demo gold set.",
+      created_at: nowIso(), updated_at: nowIso(),
+    },
+    {
+      id: 3, text: "What firmware version is currently installed on the encryption FPGA module?",
+      category: "negative", behaviour: "refuse", citations: [], keywords: [],
+      enabled: true, notes: "Out of scope — expect a refusal.",
+      created_at: nowIso(), updated_at: nowIso(),
+    },
+  ],
+  seq: 3,
+};
+
+const mockTestRun: {
+  status: TestRunStatus;
+  runs: TestRunSummary[];
+  details: Map<number, TestRunDetail>;
+  seq: number;
+} = {
+  status: {
+    running: false, stage: "idle", started_at: null, finished_at: null,
+    status: null, error: null, total: 0, done: 0, passed: 0, failed: 0, run_id: null,
+  },
+  runs: [],
+  details: new Map(),
+  seq: 0,
+};
+
+function finishMockTestRun(questions: GoldenQuestion[]): void {
+  const now = nowIso();
+  const results: TestResult[] = questions.map((q, i) => ({
+    id: i + 1, question_id: q.id, question: q.text, category: q.category,
+    behaviour: q.behaviour, answered: q.behaviour === "answer", verdict:
+      q.behaviour === "answer" ? "sufficient" : "insufficient",
+    passed: true, failed_checks: [], latency_ms: 40 + i * 7, error: null,
+  }));
+  const passed = results.filter((r) => r.passed).length;
+  const answerRes = results.filter((r) => r.behaviour === "answer");
+  const refuseRes = results.filter((r) => r.behaviour === "refuse");
+  const runId = ++mockTestRun.seq;
+  const summary: TestRunSummary = {
+    id: runId, started_at: mockTestRun.status.started_at ?? now, finished_at: now,
+    status: "ok", backend: "mock/mock", scope: "all enabled", total: results.length,
+    passed, failed: results.length - passed,
+    answer_rate: answerRes.length ? answerRes.filter((r) => r.answered).length / answerRes.length : null,
+    refusal_rate: refuseRes.length ? refuseRes.filter((r) => r.answered === false).length / refuseRes.length : null,
+    mean_latency_ms: results.length ? Math.round(results.reduce((s, r) => s + (r.latency_ms ?? 0), 0) / results.length) : null,
+    duration_ms: 900, error: null,
+  };
+  mockTestRun.runs.unshift(summary);
+  mockTestRun.details.set(runId, { ...summary, results });
+  mockTestRun.status = {
+    running: false, stage: "done", started_at: summary.started_at, finished_at: now,
+    status: "ok", error: null, total: results.length, done: results.length,
+    passed, failed: results.length - passed, run_id: runId,
+  };
+}
+
 export const mockApi: HdeApi = {
   getHealth: async () => {
     await delay(60);
@@ -335,6 +417,78 @@ export const mockApi: HdeApi = {
     if (!ask) throw new ApiError(`no ask ${body.ask_id}`, 404);
     ask.feedback = body.rating;
     return { ok: true, feedback_id: body.ask_id };
+  },
+
+  getGoldenQuestions: async (filters: GoldenQuestionFilters = {}) => {
+    await delay(60);
+    let list = mockGolden.questions;
+    if (filters.category) list = list.filter((q) => q.category === filters.category);
+    if (filters.behaviour) list = list.filter((q) => q.behaviour === filters.behaviour);
+    if (filters.enabled !== undefined) list = list.filter((q) => q.enabled === filters.enabled);
+    return { count: list.length, questions: list };
+  },
+
+  addGoldenQuestion: async (body: GoldenQuestionInput) => {
+    await delay(80);
+    const now = nowIso();
+    const q: GoldenQuestion = {
+      id: ++mockGolden.seq, text: body.text, category: body.category ?? "general",
+      behaviour: body.behaviour ?? "answer", citations: body.citations ?? [],
+      keywords: body.keywords ?? [], enabled: body.enabled ?? true,
+      notes: body.notes ?? null, created_at: now, updated_at: now,
+    };
+    mockGolden.questions.push(q);
+    return q;
+  },
+
+  updateGoldenQuestion: async (id: number, body: Partial<GoldenQuestionInput>) => {
+    await delay(80);
+    const q = mockGolden.questions.find((x) => x.id === id);
+    if (!q) throw new ApiError(`no golden question ${id}`, 404);
+    Object.assign(q, body, { updated_at: nowIso() });
+    return q;
+  },
+
+  deleteGoldenQuestion: async (id: number) => {
+    await delay(80);
+    const idx = mockGolden.questions.findIndex((x) => x.id === id);
+    if (idx === -1) throw new ApiError(`no golden question ${id}`, 404);
+    mockGolden.questions.splice(idx, 1);
+    return { ok: true, deleted: id };
+  },
+
+  startTestRun: async (body: TestRunRequest = {}) => {
+    await delay(120);
+    if (mockTestRun.status.running) throw new ApiError("a test run is already in progress", 409);
+    let questions = mockGolden.questions.filter((q) => q.enabled);
+    if (body.categories?.length) {
+      const wanted = new Set(body.categories);
+      questions = questions.filter((q) => wanted.has(q.category));
+    }
+    mockTestRun.status = {
+      running: true, stage: "asking 1/" + questions.length, started_at: nowIso(),
+      finished_at: null, status: null, error: null, total: questions.length,
+      done: 0, passed: 0, failed: 0, run_id: null,
+    };
+    window.setTimeout(() => finishMockTestRun(questions), 900);
+    return mockTestRun.status;
+  },
+
+  getTestRunStatus: async () => {
+    await delay(40);
+    return mockTestRun.status;
+  },
+
+  getTestRuns: async () => {
+    await delay(50);
+    return { runs: mockTestRun.runs.slice(0, 25) };
+  },
+
+  getTestRun: async (id: number) => {
+    await delay(50);
+    const detail = mockTestRun.details.get(id);
+    if (!detail) throw new ApiError(`no test run ${id}`, 404);
+    return detail;
   },
 
   getTelemetryHealth: async () => {

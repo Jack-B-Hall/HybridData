@@ -71,10 +71,88 @@ interface IngestState {
 }
 let ingest: IngestState = { running: false, action: null, startedAt: 0, startedIso: null, jobs: [], seq: 0 };
 
+interface GoldenQ {
+  id: number;
+  text: string;
+  category: string;
+  behaviour: "answer" | "refuse";
+  citations: string[];
+  keywords: string[];
+  enabled: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+interface TestingState {
+  questions: GoldenQ[];
+  qSeq: number;
+  running: boolean;
+  startedAt: number;
+  startedIso: string | null;
+  ranQuestions: number;
+  runs: Record<string, unknown>[];
+  details: Record<number, Record<string, unknown>>;
+  runSeq: number;
+}
+function seedGolden(): GoldenQ[] {
+  const now = new Date().toISOString();
+  return [
+    { id: 1, text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?", category: "provenance", behaviour: "answer", citations: ["ECR-214"], keywords: [], enabled: true, notes: null, created_at: now, updated_at: now },
+    { id: 2, text: "What firmware version is on the encryption FPGA module?", category: "negative", behaviour: "refuse", citations: [], keywords: [], enabled: true, notes: null, created_at: now, updated_at: now },
+  ];
+}
+let testing: TestingState = {
+  questions: seedGolden(), qSeq: 2, running: false, startedAt: 0, startedIso: null,
+  ranQuestions: 0, runs: [], details: {}, runSeq: 0,
+};
+
 function resetTelemetry(): void {
   askSeq = 0;
   recordedAsks = [];
   ingest = { running: false, action: null, startedAt: 0, startedIso: null, jobs: [], seq: 0 };
+  testing = {
+    questions: seedGolden(), qSeq: 2, running: false, startedAt: 0, startedIso: null,
+    ranQuestions: 0, runs: [], details: {}, runSeq: 0,
+  };
+}
+
+// A running test run finishes ~400ms after start, so a poller sees running then done.
+function testRunStatus(): Record<string, unknown> {
+  if (testing.running && Date.now() - testing.startedAt > 400) {
+    const now = new Date().toISOString();
+    const runId = ++testing.runSeq;
+    const enabled = testing.questions.filter((q) => q.enabled);
+    const results = enabled.slice(0, testing.ranQuestions || enabled.length).map((q, i) => ({
+      id: i + 1, question_id: q.id, question: q.text, category: q.category,
+      behaviour: q.behaviour, answered: q.behaviour === "answer",
+      verdict: q.behaviour === "answer" ? "sufficient" : "insufficient",
+      passed: true, failed_checks: [], latency_ms: 40 + i * 5, error: null,
+    }));
+    const total = results.length;
+    const summary = {
+      id: runId, started_at: testing.startedIso, finished_at: now, status: "ok",
+      backend: "mock/mock", scope: "all enabled", total, passed: total, failed: 0,
+      answer_rate: 1, refusal_rate: results.some((r) => r.behaviour === "refuse") ? 1 : null,
+      mean_latency_ms: 50, duration_ms: 420, error: null,
+    };
+    testing.runs.unshift(summary);
+    testing.details[runId] = { ...summary, results };
+    testing.running = false;
+  }
+  const total = testing.questions.filter((q) => q.enabled).length;
+  return {
+    running: testing.running,
+    stage: testing.running ? `asking 1/${total}` : "done",
+    started_at: testing.startedIso,
+    finished_at: testing.running ? null : new Date().toISOString(),
+    status: testing.running ? null : "ok",
+    error: null,
+    total,
+    done: testing.running ? 0 : total,
+    passed: testing.running ? 0 : total,
+    failed: 0,
+    run_id: testing.running ? null : testing.runSeq,
+  };
 }
 
 // A running job finishes ~400ms after start, so a poller observes running then done.
@@ -367,6 +445,100 @@ export async function mockApiRoutes(page: Page): Promise<void> {
 
     if (pathname === "/api/ingest/history") {
       await route.fulfill({ json: fixtures.ingestHistory });
+      return;
+    }
+
+    // ── Testing (golden set + runs) ──────────────────────────────────────────
+    if (pathname === "/api/testing/questions" && request.method() === "GET") {
+      const category = url.searchParams.get("category");
+      const behaviour = url.searchParams.get("behaviour");
+      const enabled = url.searchParams.get("enabled");
+      let list = testing.questions;
+      if (category) list = list.filter((q) => q.category === category);
+      if (behaviour) list = list.filter((q) => q.behaviour === behaviour);
+      if (enabled != null) list = list.filter((q) => String(q.enabled) === enabled);
+      await route.fulfill({ json: { count: list.length, questions: list } });
+      return;
+    }
+
+    if (pathname === "/api/testing/questions" && request.method() === "POST") {
+      const body = request.postDataJSON() as Partial<GoldenQ>;
+      const now = new Date().toISOString();
+      const q: GoldenQ = {
+        id: ++testing.qSeq, text: body.text ?? "", category: body.category ?? "general",
+        behaviour: (body.behaviour as GoldenQ["behaviour"]) ?? "answer",
+        citations: body.citations ?? [], keywords: body.keywords ?? [],
+        enabled: body.enabled ?? true, notes: body.notes ?? null,
+        created_at: now, updated_at: now,
+      };
+      testing.questions.push(q);
+      await route.fulfill({ status: 201, json: q });
+      return;
+    }
+
+    const qIdMatch = /^\/api\/testing\/questions\/(\d+)$/.exec(pathname);
+    if (qIdMatch) {
+      const id = Number(qIdMatch[1]);
+      const q = testing.questions.find((x) => x.id === id);
+      if (request.method() === "PATCH") {
+        if (!q) {
+          await route.fulfill({ status: 404, json: { detail: `no golden question ${id}` } });
+          return;
+        }
+        Object.assign(q, request.postDataJSON(), { updated_at: new Date().toISOString() });
+        await route.fulfill({ json: q });
+        return;
+      }
+      if (request.method() === "DELETE") {
+        const idx = testing.questions.findIndex((x) => x.id === id);
+        if (idx === -1) {
+          await route.fulfill({ status: 404, json: { detail: `no golden question ${id}` } });
+          return;
+        }
+        testing.questions.splice(idx, 1);
+        await route.fulfill({ json: { ok: true, deleted: id } });
+        return;
+      }
+    }
+
+    if (pathname === "/api/testing/run" && request.method() === "POST") {
+      if (testing.running) {
+        await route.fulfill({ status: 409, json: { detail: "a test run is already in progress" } });
+        return;
+      }
+      const body = request.postDataJSON() as { categories?: string[] };
+      let enabled = testing.questions.filter((q) => q.enabled);
+      if (body.categories?.length) {
+        const wanted = new Set(body.categories);
+        enabled = enabled.filter((q) => wanted.has(q.category));
+      }
+      testing.running = true;
+      testing.startedAt = Date.now();
+      testing.startedIso = new Date().toISOString();
+      testing.ranQuestions = enabled.length;
+      await route.fulfill({ json: testRunStatus() });
+      return;
+    }
+
+    if (pathname === "/api/testing/run/status") {
+      await route.fulfill({ json: testRunStatus() });
+      return;
+    }
+
+    if (pathname === "/api/testing/runs" && request.method() === "GET") {
+      testRunStatus(); // advance a finished run into history if due
+      await route.fulfill({ json: { runs: testing.runs.slice(0, 25) } });
+      return;
+    }
+
+    const runIdMatch = /^\/api\/testing\/runs\/(\d+)$/.exec(pathname);
+    if (runIdMatch) {
+      const detail = testing.details[Number(runIdMatch[1])];
+      if (!detail) {
+        await route.fulfill({ status: 404, json: { detail: `no test run ${runIdMatch[1]}` } });
+        return;
+      }
+      await route.fulfill({ json: detail });
       return;
     }
 

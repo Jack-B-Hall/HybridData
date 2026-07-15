@@ -158,4 +158,68 @@ describe("liveApi", () => {
     expect(url.pathname).toBe("/api/graph/node/P-1062");
     expect(url.searchParams.get("hops")).toBe("2");
   });
+
+  it("getGoldenQuestions serializes filters, stringifying the enabled boolean", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ count: 0, questions: [] }));
+
+    await liveApi.getGoldenQuestions({ category: "lookup", behaviour: "refuse", enabled: false });
+
+    const calledUrl = mockFetch.mock.calls[0]?.[0] as string;
+    const url = new URL(calledUrl, "http://localhost");
+    expect(url.pathname).toBe("/api/testing/questions");
+    expect(url.searchParams.get("category")).toBe("lookup");
+    expect(url.searchParams.get("behaviour")).toBe("refuse");
+    expect(url.searchParams.get("enabled")).toBe("false");
+  });
+
+  it("addGoldenQuestion POSTs the question body", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ id: 5 }));
+
+    await liveApi.addGoldenQuestion({ text: "Q?", category: "custom", citations: ["ECR-1"] });
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "/api/testing/questions",
+      expect.objectContaining({ method: "POST" }),
+    );
+  });
+
+  it("updateGoldenQuestion PATCHes the id path", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ id: 5, enabled: false }));
+
+    await liveApi.updateGoldenQuestion(5, { enabled: false });
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "/api/testing/questions/5",
+      expect.objectContaining({ method: "PATCH", body: JSON.stringify({ enabled: false }) }),
+    );
+  });
+
+  it("deleteGoldenQuestion DELETEs the id path", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ ok: true, deleted: 5 }));
+
+    await liveApi.deleteGoldenQuestion(5);
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "/api/testing/questions/5",
+      expect.objectContaining({ method: "DELETE" }),
+    );
+  });
+
+  it("startTestRun POSTs categories and getTestRun encodes the run id", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ running: true }));
+    await liveApi.startTestRun({ categories: ["impact"] });
+    expect(mockFetch).toHaveBeenCalledWith(
+      "/api/testing/run",
+      expect.objectContaining({ method: "POST", body: JSON.stringify({ categories: ["impact"] }) }),
+    );
+
+    mockFetch.mockResolvedValueOnce(jsonResponse({ id: 9, results: [] }));
+    await liveApi.getTestRun(9);
+    expect(mockFetch).toHaveBeenLastCalledWith("/api/testing/runs/9", expect.any(Object));
+  });
 });

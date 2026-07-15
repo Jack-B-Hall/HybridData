@@ -17,6 +17,14 @@ import type {
   HealthResponse,
   IngestHistoryResponse,
   TelemetryHealth,
+  GoldenQuestion,
+  GoldenQuestionFilters,
+  GoldenQuestionInput,
+  GoldenQuestionsResponse,
+  TestRunDetail,
+  TestRunRequest,
+  TestRunStatus,
+  TestRunsResponse,
 } from "./types";
 import { consumeSseStream } from "@/lib/sse";
 
@@ -124,6 +132,45 @@ export const liveApi = {
 
   getTelemetryHealth: (recent?: number) =>
     request<TelemetryHealth>(`/api/telemetry/health${toQuery({ recent })}`),
+
+  getGoldenQuestions: (filters: GoldenQuestionFilters = {}) =>
+    request<GoldenQuestionsResponse>(
+      `/api/testing/questions${toQuery({
+        category: filters.category,
+        behaviour: filters.behaviour,
+        enabled: filters.enabled === undefined ? undefined : String(filters.enabled),
+      })}`,
+    ),
+
+  addGoldenQuestion: (body: GoldenQuestionInput) =>
+    request<GoldenQuestion>("/api/testing/questions", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+
+  updateGoldenQuestion: (id: number, body: Partial<GoldenQuestionInput>) =>
+    request<GoldenQuestion>(`/api/testing/questions/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+
+  deleteGoldenQuestion: (id: number) =>
+    request<{ ok: boolean; deleted: number }>(`/api/testing/questions/${id}`, {
+      method: "DELETE",
+    }),
+
+  startTestRun: (body: TestRunRequest = {}) =>
+    request<TestRunStatus>("/api/testing/run", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+
+  getTestRunStatus: () => request<TestRunStatus>("/api/testing/run/status"),
+
+  getTestRuns: (limit?: number) =>
+    request<TestRunsResponse>(`/api/testing/runs${toQuery({ limit })}`),
+
+  getTestRun: (id: number) => request<TestRunDetail>(`/api/testing/runs/${id}`),
 };
 
 export type HdeApi = typeof liveApi;
