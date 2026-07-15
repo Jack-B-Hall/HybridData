@@ -187,10 +187,66 @@ data set carries its own UI copy — nothing K-200-specific is compiled into the
 
 ## Re-ingesting / updating
 
-Ingestion is snapshot-only. Re-run `hde ingest` to rebuild from scratch
-(`reset=True`), or ingest with `--append` to replace individual records by id
-without a full rebuild. The `ingest_runs` table records the history, surfaced in
-the Data Explorer's analytics view.
+### From the Ingestion page (or the API)
+
+The **Ingestion** page in the UI (and the `/api/ingest/*` endpoints, see
+[api.md](api.md)) manage the store at runtime without a redeploy:
+
+- **Scan & update** — re-read the configured sources and apply only what changed
+  (added / updated / removed by content hash).
+- **Re-ingest** — rebuild the whole store from scratch.
+- **Clear** — wipe the corpus (telemetry/history are kept); guarded by a typed
+  confirmation.
+
+Jobs run one at a time. The rebuild happens in a temporary store and only the
+final atomic file-swap holds the engine lock, so the app keeps answering from the
+current store while a job runs. Every run is recorded (ISO-8601 UTC timestamps,
+action, source, counts, duration, outcome) and shown in the page's history table
+in the viewer's local time.
+
+### Which sources those actions read (`[ingest]`)
+
+Scan / Re-ingest — and `hde ingest` run with no source flags — rebuild from the
+`[ingest]` section of your config (see `hde.example.toml`). Omit the section to
+keep the bundled demo corpus. Each key is a source adapter; values are a path or
+a list of paths, resolved relative to where `hde` runs:
+
+```toml
+[ingest]
+# demo = true                         # include the bundled demo corpus
+markdown  = "source-data/wiki"        # a directory tree of .md files
+json_tree = ["source-data/parts.json"]
+csv       = "source-data/records.csv"
+```
+
+**Mounting your source data into the container.** Paths resolve relative to
+`/app` inside the image, so bind-mount your data under `/app` (read-only is fine)
+and point `[ingest]` at it. With a mounted `hde.toml` (see the BYO-store section
+above for the `HDE_CONFIG` wiring):
+
+```yaml
+    environment:
+      HDE_CONFIG: "/app/hde.toml"
+    volumes:
+      - ./hde.toml:/app/hde.toml:ro
+      - ./source-data:/app/source-data:ro     # your markdown/json/csv sources
+      # writable corpus store so hot-swap can replace it (NOT under /app/data,
+      # which holds the baked demo corpus):
+      - ./data-live:/app/data-live
+```
+
+with `db_path = "/app/data-live/hde.db"` in `[storage]`. Then trigger **Scan &
+update** or **Re-ingest** from the Ingestion page; the new store is swapped in
+live. (Building a store ahead of time and mounting it read-only, as in the BYO
+section above, is still fine when you don't want in-container rebuilds — but a
+read-only store can't be hot-swapped by the Ingestion page.)
+
+### From the CLI
+
+Re-run `hde ingest` to rebuild from scratch (`reset=True`), or ingest with
+`--append` to replace individual records by id without a full rebuild. The
+`ingest_runs` table records the history, surfaced in the Data Explorer's
+analytics view.
 
 ## Operational notes
 

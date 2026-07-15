@@ -145,6 +145,46 @@ Full record. `404` if unknown.
   "embedder": "hash", "snapshot_at": "2026-..." }
 ```
 
+### `POST /api/ingest/start`
+Start a corpus job. One runs at a time; the slow rebuild happens in a temp store
+and only the final file-swap holds the engine lock, so the app keeps answering
+from the current store while a job runs.
+```json
+// request
+{ "action": "reingest" | "scan" | "clear",
+  "confirm": "CLEAR" }   // required only for action "clear"
+```
+- `reingest` — rebuild the whole store from the configured `[ingest]` sources.
+- `scan` — re-read the sources and report added / updated / removed records
+  (content-hash diff), then swap in the refreshed store.
+- `clear` — wipe the corpus store (telemetry/history are kept). Needs
+  `confirm: "CLEAR"` so it can't fire by accident.
+
+Returns the job status (same shape as `GET /api/ingest/status`). Responds
+`409` if a job is already running, `422` for an unknown action or a `clear`
+without the confirm token.
+
+### `GET /api/ingest/status`
+Current or most-recent job. `counts` is populated once a job finishes.
+```json
+{ "running": true, "action": "scan", "stage": "embedding chunks…",
+  "started_at": "2026-07-15T12:40:03+00:00", "finished_at": null,
+  "status": null, "error": null,
+  "counts": { "records", "chunks", "nodes", "edges", "added", "updated", "removed" } }
+```
+`stage` is a human-readable progress string; `status` becomes `"ok"` or
+`"error"` (with `error` set) when `running` returns to `false`.
+
+### `GET /api/ingest/jobs?limit=25`
+Persistent run history, newest first. Lives in the telemetry DB, so it survives
+corpus rebuilds and clears. Datetimes are ISO-8601 UTC; the UI renders them in
+local time.
+```json
+{ "jobs": [ { "id", "started_at", "finished_at", "action", "source", "status",
+  "n_records", "n_chunks", "n_nodes", "n_edges",
+  "n_added", "n_updated", "n_removed", "duration_ms", "error" } ] }
+```
+
 ### `GET /api/ingest/history`
 ```json
 { "runs": [ { "id", "started_at", "finished_at", "adapter", "source_path",

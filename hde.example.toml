@@ -44,6 +44,18 @@
 # db_path = "data/hde.db"                     # work: "/app/data-live/hde.db"
 # telemetry_db = "data/telemetry.db"
 
+[ingest]
+# The sources the Ingestion page (and `hde ingest` with no flags) rebuilds from.
+# Used by Scan & update, Re-ingest, and the CLI. Omit this whole section to keep
+# the bundled demo corpus. Each key maps to a source adapter; a path can be a
+# single string or a list of strings. Paths are resolved relative to where `hde`
+# runs (inside the container, relative to /app — mount your data there, see
+# docs/deployment.md). Sources are ingested in the order below.
+# demo = true                                 # include the bundled demo corpus
+# markdown = "source-data/wiki"               # a directory tree of .md files
+# json_tree = ["source-data/parts.json"]      # hierarchical parent_id JSON
+# csv = "source-data/records.csv"             # flat CSV, one record per row
+
 [retrieval]
 # top_chunks = 8
 # rrf_k = 60
