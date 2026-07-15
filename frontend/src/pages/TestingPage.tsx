@@ -4,6 +4,7 @@ import type {
   GoldenBehaviour,
   GoldenQuestion,
   GoldenQuestionInput,
+  TestResult,
   TestRunDetail,
   TestRunStatus,
   TestRunSummary,
@@ -665,6 +666,7 @@ function RunRow({ run }: { run: TestRunSummary }) {
             <span>Backend: {run.backend ?? "—"}</span>
             {run.duration_ms != null && <span>Duration: {formatLatency(run.duration_ms)}</span>}
           </div>
+          {detail && <CategoryBreakdown results={detail.results} />}
           {!detail ? (
             <p className="text-sm text-ink-faint">Loading results…</p>
           ) : (
@@ -709,6 +711,36 @@ function RunRow({ run }: { run: TestRunSummary }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function CategoryBreakdown({ results }: { results: TestResult[] }) {
+  const byCat = new Map<string, { passed: number; total: number }>();
+  for (const r of results) {
+    const c = byCat.get(r.category) ?? { passed: 0, total: 0 };
+    c.total += 1;
+    if (r.passed) c.passed += 1;
+    byCat.set(r.category, c);
+  }
+  if (byCat.size <= 1) return null;
+  return (
+    <div className="mb-2 flex flex-wrap gap-1.5" data-testid="category-breakdown">
+      {[...byCat.entries()].sort().map(([cat, { passed, total }]) => {
+        const all = passed === total;
+        return (
+          <span
+            key={cat}
+            className={`rounded-full border px-2 py-0.5 text-[11px] font-medium capitalize ${
+              all
+                ? "border-tier-formal/30 bg-tier-formal-soft text-tier-formal"
+                : "border-confidence-low/30 bg-confidence-low/10 text-confidence-low"
+            }`}
+          >
+            {cat} {passed}/{total}
+          </span>
+        );
+      })}
     </div>
   );
 }
