@@ -248,6 +248,23 @@ Re-run `hde ingest` to rebuild from scratch (`reset=True`), or ingest with
 `ingest_runs` table records the history, surfaced in the Data Explorer's
 analytics view.
 
+## Testing the deployment
+
+The **Testing** page (and the `/api/testing/*` endpoints, see [api.md](api.md))
+runs a curated golden set of questions through the live app and grades them
+deterministically — answered vs refused, expected citations present, expected
+keywords present. Use it to confirm a deployment is healthy after pointing it at
+new data, changing the answer model, or recalibrating the gate.
+
+- The golden set and run history live in the **telemetry** DB, so they survive
+  corpus clears/rebuilds. On first start the golden set is seeded from the bundled
+  `eval/gold-qa.json` (copied into the image); edit it freely from the page after.
+- Runs happen in the background (one at a time) — kick one off and leave; results
+  land in the run history with per-question pass/fail and failure reasons.
+- If the answer model is offline, a run ends cleanly marked `error` rather than
+  hanging, so it's safe to trigger from health checks. For a fully offline smoke
+  test, run against `HDE_LLM_BACKEND=mock`.
+
 ## Operational notes
 
 - The store is a single file: back it up by copying it (use SQLite's backup API or

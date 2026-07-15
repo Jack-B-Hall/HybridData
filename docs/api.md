@@ -191,5 +191,71 @@ local time.
   "n_records", "n_chunks", "n_nodes", "n_edges", "status", "note" } ] }
 ```
 
+### Testing (golden set + health test runs)
+
+A curated golden set of questions, asked through the live engine and graded
+deterministically (no LLM judge), run as a background job. The golden set and run
+history live in the telemetry DB, so they survive corpus clears/rebuilds. On first
+run the golden set is seeded from the bundled demo gold file; negative (out-of-scope)
+questions are seeded as `behaviour: "refuse"`.
+
+Grading, per question:
+- **behaviour** — `answer` questions must be answered, `refuse` questions must be
+  refused (from the gate verdict).
+- **citations** — every expected artifact-id must appear in the returned citations.
+- **keywords** — every expected keyword must appear (case-insensitive) in the answer.
+
+A question passes only if all applicable checks pass.
+
+#### `GET /api/testing/questions?category=&behaviour=&enabled=`
+```json
+{ "count": 40, "questions": [ { "id", "text", "category", "behaviour",
+  "citations": [], "keywords": [], "enabled": true, "notes",
+  "created_at", "updated_at" } ] }
+```
+
+#### `POST /api/testing/questions` → `201`
+```json
+// request (only `text` is required)
+{ "text", "category": "general", "behaviour": "answer",
+  "citations": [], "keywords": [], "enabled": true, "notes": null }
+```
+Returns the created question. `PATCH /api/testing/questions/{id}` updates any subset
+of those fields (404 if unknown); `DELETE /api/testing/questions/{id}` removes it
+(404 if unknown).
+
+#### `POST /api/testing/run`
+Kick a background run over the enabled golden set (optionally a category subset).
+One at a time (`409` if a run is in progress); fire-and-forget. Returns the run
+status (same shape as `GET /api/testing/run/status`).
+```json
+{ "categories": ["impact", "lookup"] }   // omit or empty = all enabled
+```
+If the answer backend is unreachable, the run ends cleanly with `status: "error"`
+and a message — it never hangs.
+
+#### `GET /api/testing/run/status`
+```json
+{ "running": true, "stage": "asking 12/40", "started_at", "finished_at": null,
+  "status": null, "error": null, "total": 40, "done": 11, "passed": 9,
+  "failed": 2, "run_id": null }
+```
+
+#### `GET /api/testing/runs?limit=25`
+Persistent run history, newest first.
+```json
+{ "runs": [ { "id", "started_at", "finished_at", "status", "backend", "scope",
+  "total", "passed", "failed", "answer_rate", "refusal_rate",
+  "mean_latency_ms", "duration_ms", "error" } ] }
+```
+
+#### `GET /api/testing/runs/{id}`
+One run's summary plus its per-question results (404 if unknown).
+```json
+{ "id", ..., "results": [ { "id", "question_id", "question", "category",
+  "behaviour", "answered", "verdict", "passed", "failed_checks": [],
+  "latency_ms", "error" } ] }
+```
+
 Representative real responses for every endpoint are committed under
 `frontend/src/mocks/fixtures/` and are used by the frontend's mocks and e2e tests.
