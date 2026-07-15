@@ -61,6 +61,10 @@ class Record:
         text:      Full searchable text/prose. May be empty for pure entities.
         source:    Provenance label; maps to a tier in :mod:`hde.provenance`
                    (e.g. "PLM", "Confluence", "Jira"). Defaults per-adapter.
+        prov_tier: Optional explicit provenance tier (1=formal, 2=unverified,
+                   3=informal). When set, it wins over the ``source``->tier map,
+                   so an adapter can declare provenance for a novel source label
+                   without editing the core map. ``None`` = derive from ``source``.
         parent_id: For entities, the id of the parent in the hierarchy (builds
                    the assembly/PART_OF backbone). ``None`` for roots/documents.
         refs:      Ids of other records this one references. Drives the impact and
@@ -75,6 +79,7 @@ class Record:
     title: str
     text: str = ""
     source: str = ""
+    prov_tier: int | None = None
     parent_id: str | None = None
     refs: list[str] = field(default_factory=list)
     relations: list[Relation] = field(default_factory=list)
@@ -101,6 +106,19 @@ class SourceAdapter(ABC):
     def records(self) -> Iterator[Record]:
         """Yield normalised :class:`Record` objects from the source."""
         raise NotImplementedError
+
+    def corpus_meta(self) -> dict | None:
+        """Optional corpus-level branding for the UI, persisted at ingest and
+        served from ``/api/corpus/meta``. Recognised keys (all optional):
+
+            title              short corpus name (e.g. "K-200 programme")
+            placeholder        chat input placeholder text
+            starter_questions  list of ``{"text": ..., "hint": ...}`` suggestions
+
+        Return ``None`` (the default) to let the API fall back to generic copy —
+        so a bare adapter still gets a sensible, un-branded first-run experience.
+        """
+        return None
 
     def __iter__(self) -> Iterator[Record]:
         for rec in self.records():

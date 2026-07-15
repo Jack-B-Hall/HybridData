@@ -51,6 +51,12 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def _tier(rec: Record) -> int:
+    """Provenance tier for a record: adapter-declared value wins, else derived
+    from the ``source`` label via :data:`hde.provenance.SOURCE_TIER`."""
+    return rec.prov_tier if rec.prov_tier is not None else provenance.tier_for(rec.source)
+
+
 def _collect(adapters: Iterable[SourceAdapter]) -> list[Record]:
     """Materialise records, applying snapshot replacement (last id wins)."""
     by_id: dict[str, Record] = {}
@@ -102,6 +108,16 @@ def ingest(
     store.initialise(conn, embedder.dim)
     store.set_meta(conn, "embedder", settings.embedder)
     store.set_meta(conn, "snapshot_at", _now())
+    # Persist the record-id shape used at ingest so query-time id matching
+    # (exact-id leg, gate anchor, citation grounding) always agrees with it.
+    store.set_meta(conn, "id_pattern", settings.id_pattern)
+    # Persist any adapter-declared corpus branding (title, placeholder, starter
+    # questions) for /api/corpus/meta. First adapter that declares it wins.
+    for adapter in adapters:
+        cm = adapter.corpus_meta()
+        if cm:
+            store.set_meta(conn, "corpus_meta", json.dumps(cm))
+            break
 
     log("parsing records from adapters")
     records = _collect(adapters)
@@ -117,7 +133,7 @@ def ingest(
     for rec in records:
         if not reset:
             store.delete_artifact(conn, rec.id)
-        tier = provenance.tier_for(rec.source)
+        tier = _tier(rec)
         conn.execute(
             "INSERT OR REPLACE INTO artifacts"
             "(id, kind, title, text, source, prov_tier, subsystem, parent_id, metadata) "
@@ -183,7 +199,7 @@ def _embed_and_store(conn, pending, embedder, log) -> int:
                 "(artifact_id, source, art_kind, title, prov_tier, chunk_idx, "
                 " char_start, char_end, body) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 (rec.id, rec.source, rec.kind, rec.title,
-                 provenance.tier_for(rec.source), ch.chunk_idx,
+                 _tier(rec), ch.chunk_idx,
                  ch.char_start, ch.char_end, ch.body),
             )
             conn.execute(
@@ -204,7 +220,7 @@ def _build_graph(conn, records: list[Record], known_ids: set[str]) -> tuple[int,
             "INSERT OR REPLACE INTO graph_nodes(id, kind, label, subsystem, source, prov_tier) "
             "VALUES (?, ?, ?, ?, ?, ?)",
             (rec.id, rec.kind, rec.title, rec.subsystem, rec.source,
-             provenance.tier_for(rec.source)),
+             _tier(rec)),
         )
 
     edges: set[tuple[str, str, str]] = set()
@@ -233,7 +249,7 @@ def _build_graph(conn, records: list[Record], known_ids: set[str]) -> tuple[int,
 
 def _build_closures(conn, records: list[Record], known_ids: set[str]) -> int:
     title_of = {r.id: r.title for r in records}
-    tier_of = {r.id: provenance.tier_for(r.source) for r in records}
+    tier_of = {r.id: _tier(r) for r in records}
 
     forward: dict[str, list[str]] = {}   # id -> ids it references / is part of
     reverse: dict[str, list[str]] = {}   # id -> ids that reference / contain it

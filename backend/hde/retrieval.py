@@ -24,7 +24,7 @@ from . import provenance
 from .config import Settings
 from .embeddings import Embedder
 from .graph import KnowledgeGraph
-from .ids import explicit_ids
+from .ids import ID_RE, build_id_re, explicit_ids
 
 RRF_K = 60
 CANDIDATES = 20        # per-leg candidate depth
@@ -127,14 +127,14 @@ def _rows_for(conn: sqlite3.Connection, rowids: list[int]) -> dict[int, sqlite3.
     return {r[0]: r for r in rows}
 
 
-def _exact_id_hits(conn: sqlite3.Connection, query: str) -> list[int]:
+def _exact_id_hits(conn: sqlite3.Connection, query: str, id_re: "re.Pattern[str]" = ID_RE) -> list[int]:
     """Representative chunk rowids for record ids named verbatim in the query.
 
     An exact-match leg so a lookup like "what does ECR-214 say" always retrieves
     the named record, which dense and lexical search can otherwise rank below
     documents that merely mention it.
     """
-    ids = explicit_ids(query)
+    ids = explicit_ids(query, id_re)
     if not ids:
         return []
     ph = ",".join("?" * len(ids))
@@ -176,9 +176,11 @@ def retrieve(
     embedder: Embedder,
     query: str,
     settings: Settings,
+    id_re: "re.Pattern[str] | None" = None,
 ) -> tuple[list[RetrievedChunk], dict]:
     """Return the top fused chunks (one per artifact) and a debug breakdown."""
-    exact_ids = _exact_id_hits(conn, query)
+    id_re = id_re or build_id_re(settings.id_pattern)
+    exact_ids = _exact_id_hits(conn, query, id_re)
     fts_ids = _fts(conn, query, CANDIDATES)
     vec_ids = _vector(conn, embedder, query, CANDIDATES)
 

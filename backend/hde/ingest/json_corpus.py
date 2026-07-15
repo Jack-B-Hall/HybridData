@@ -82,6 +82,27 @@ class JsonCorpusAdapter(SourceAdapter):
     def __init__(self, root: str | Path) -> None:
         self.root = Path(root)
 
+    def corpus_meta(self) -> dict:
+        """Branding + suggested questions for the bundled K-200 demo corpus."""
+        return {
+            "title": "K-200 programme",
+            "placeholder": "Ask about the K-200 programme — parts, changes, decisions, incidents…",
+            "starter_questions": [
+                {
+                    "text": "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
+                    "hint": "Change history",
+                },
+                {
+                    "text": "If ECR-221 changes the propulsion motors, what parts and documents are affected?",
+                    "hint": "Impact analysis",
+                },
+                {
+                    "text": "What is the capital of France?",
+                    "hint": "Off-corpus — demonstrates refusal",
+                },
+            ],
+        }
+
     def records(self) -> Iterator[Record]:
         yield from self._people()
         for subdir in _TYPE_DIRS:

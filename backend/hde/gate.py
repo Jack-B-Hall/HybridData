@@ -36,18 +36,31 @@ import re
 import sqlite3
 from dataclasses import dataclass, field
 
+from .config import DEFAULT_DOMAIN_STOPWORDS
 from .ids import ID_RE, explicit_ids
 from .retrieval import RetrievedChunk
 
-_STOP = {
+# Generic English stopwords, kept separate from the domain-flavoured list so the
+# latter can be overridden for a non-engineering corpus (where e.g. "system" or
+# "change" is a content word). The union below reproduces the original combined
+# stoplist exactly, so default gate behaviour is unchanged.
+_GENERIC_STOP = {
     "the", "and", "for", "with", "of", "in", "to", "a", "an", "is", "are", "was",
     "were", "it", "its", "be", "at", "by", "as", "or", "that", "what", "which",
     "who", "does", "do", "did", "if", "on", "how", "many", "much", "when", "why",
-    "would", "will", "changing", "change", "changed", "changes", "new", "other",
-    "else", "need", "needs", "needed", "affect", "affects", "affected", "any",
-    "from", "this", "these", "those", "into", "get", "have", "has", "had",
-    "there", "their", "them", "requires", "require", "required", "full", "system",
+    "would", "will", "other", "else", "need", "needs", "needed", "any", "from",
+    "this", "these", "those", "into", "get", "have", "has", "had", "there",
+    "their", "them", "full",
 }
+
+#: Default combined stoplist (generic + the default domain words).
+_STOP = _GENERIC_STOP | set(DEFAULT_DOMAIN_STOPWORDS)
+
+
+def build_stopwords(domain_stopwords: "tuple[str, ...] | list[str]") -> set[str]:
+    """Combine the generic English stoplist with a domain-specific list. Passing
+    the default domain list reproduces :data:`_STOP` exactly."""
+    return _GENERIC_STOP | {w.lower() for w in domain_stopwords}
 
 
 @dataclass
@@ -74,12 +87,14 @@ class GateResult:
     signals: dict = field(default_factory=dict)
 
 
-def _content_terms(question: str) -> list[str]:
-    q = ID_RE.sub(" ", question)  # ids scored separately, via the anchor
+def _content_terms(
+    question: str, id_re: "re.Pattern[str]" = ID_RE, stopwords: set[str] = _STOP,
+) -> list[str]:
+    q = id_re.sub(" ", question)  # ids scored separately, via the anchor
     toks = re.findall(r"[a-zA-Z][a-zA-Z0-9\-]*", q.lower())
     out, seen = [], set()
     for t in toks:
-        if len(t) < 3 or t in _STOP or t in seen:
+        if len(t) < 3 or t in stopwords or t in seen:
             continue
         seen.add(t)
         out.append(t)
@@ -97,14 +112,15 @@ def _known_ids(conn: sqlite3.Connection, ids: list[str]) -> set[str]:
 def compute_signals(
     conn: sqlite3.Connection, question: str, chunks: list[RetrievedChunk],
     thresholds: GateThresholds = DEFAULT_THRESHOLDS,
+    id_re: "re.Pattern[str]" = ID_RE, stopwords: set[str] = _STOP,
 ) -> dict:
     retrieved_ids = {c.artifact_id for c in chunks}
-    q_ids = explicit_ids(question)
+    q_ids = explicit_ids(question, id_re)
     known = _known_ids(conn, q_ids)
     named_known = [i for i in q_ids if i in known]
     named_retrieved = [i for i in named_known if i in retrieved_ids]
 
-    terms = _content_terms(question)
+    terms = _content_terms(question, id_re, stopwords)
     haystack = " ".join(f"{c.title} {c.body}" for c in chunks).lower()
     hits = [t for t in terms if t in haystack]
     coverage = (len(hits) / len(terms)) if terms else 0.0
@@ -146,6 +162,7 @@ def decide(signals: dict, thresholds: GateThresholds = DEFAULT_THRESHOLDS) -> st
 def evaluate(
     conn: sqlite3.Connection, question: str, chunks: list[RetrievedChunk],
     thresholds: GateThresholds = DEFAULT_THRESHOLDS,
+    id_re: "re.Pattern[str]" = ID_RE, stopwords: set[str] = _STOP,
 ) -> GateResult:
-    signals = compute_signals(conn, question, chunks, thresholds)
+    signals = compute_signals(conn, question, chunks, thresholds, id_re, stopwords)
     return GateResult(verdict=decide(signals, thresholds), signals=signals)

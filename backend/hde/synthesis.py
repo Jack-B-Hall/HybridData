@@ -17,16 +17,19 @@ from .ids import ID_RE
 from .llm import LLMClient, SynthesisRequest
 from .retrieval import RetrievedChunk
 
-SYSTEM_PROMPT = """\
-You are a precise engineering-knowledge assistant. You answer strictly from the
+# Domain-neutral system prompt. The citation example ids are filled in from the
+# actually-retrieved records (see :func:`_system_prompt`), so the instruction is
+# concrete without referencing records that may not exist in a given corpus.
+SYSTEM_PROMPT_TEMPLATE = """\
+You are a precise document-intelligence assistant. You answer strictly from the
 provided context: retrieved document chunks (each tagged with a provenance tier),
 knowledge-graph relationships, and precomputed impact/dependency closures.
 
 Rules:
 1. Use ONLY the provided context. Never invent ids, dates, names, or facts.
-2. Cite inline using the bracketed record id, e.g. [ECR-214] or [ECN-312]. Put
+2. Cite inline using the bracketed record id, e.g. {example}. Put
    each id in its own brackets. In the JSON block use BARE ids only (e.g.
-   "ECR-214"), never the bracketed header form.
+   "{example_bare}"), never the bracketed header form.
 3. For provenance or decision questions, lay out the chain of events step by step.
 4. For impact or dependency questions, prefer the closures and graph relationships.
 5. Prefer formal-tier sources; if a claim rests on an unverified source, say so.
@@ -34,10 +37,23 @@ Rules:
    do NOT use markdown headings, bold, bullet lists, tables, or LaTeX.
 
 End your response with a JSON block, on its own lines, fenced as ```json:
-{"claims": [{"text": "<one claim>", "citations": ["ID", ...]}, ...],
+{{"claims": [{{"text": "<one claim>", "citations": ["ID", ...]}}, ...],
  "citations": ["ID1", "ID2", ...],
- "graph_paths": ["A -REL-> B", ...]}
+ "graph_paths": ["A -REL-> B", ...]}}
 Include only ids and paths you actually used, in first-use order."""
+
+
+def _system_prompt(chunks: list[RetrievedChunk]) -> str:
+    """Fill the prompt's citation example with real retrieved ids, so the guidance
+    matches the corpus in hand rather than the demo's records."""
+    ids = [c.artifact_id for c in chunks[:2]]
+    if len(ids) >= 2:
+        example, bare = f"[{ids[0]}] or [{ids[1]}]", ids[0]
+    elif ids:
+        example, bare = f"[{ids[0]}]", ids[0]
+    else:
+        example, bare = "[RECORD-1]", "RECORD-1"
+    return SYSTEM_PROMPT_TEMPLATE.format(example=example, example_bare=bare)
 
 BORDERLINE_NOTE = (
     "\n\nIMPORTANT: the retrieved context may not fully cover this question. If a "
@@ -155,12 +171,12 @@ def _clean_markup(text: str) -> str:
     return text.strip()
 
 
-def _normalize_id(token: str) -> str:
+def _normalize_id(token: str, id_re: "re.Pattern[str]" = ID_RE) -> str:
     """Extract a bare record id from whatever a model emitted for a citation.
 
     Models often echo the context header form ``[ECN-312] Approved Change ...``
     or ``ECN-312 — Approved Change``; we want just ``ECN-312``."""
-    m = ID_RE.search(token)
+    m = id_re.search(token)
     return m.group(0) if m else token.strip().strip("[]").strip()
 
 
@@ -178,16 +194,16 @@ def _split_meta(raw: str) -> tuple[str, str]:
     return raw[:cut].rstrip().rstrip("`").rstrip(), raw[cut:]
 
 
-def _ids_from_array(body: str) -> list[str]:
+def _ids_from_array(body: str, id_re: "re.Pattern[str]" = ID_RE) -> list[str]:
     ids: list[str] = []
     for token in re.findall(r'"([^"]+)"', body):
-        norm = _normalize_id(token)
+        norm = _normalize_id(token, id_re)
         if norm and norm not in ids:
             ids.append(norm)
     return ids
 
 
-def _parse_meta(tail: str) -> dict:
+def _parse_meta(tail: str, id_re: "re.Pattern[str]" = ID_RE) -> dict:
     """Best-effort structured metadata from the (possibly malformed) tail.
 
     Tries strict JSON first; falls back to regex extraction of the citations and
@@ -206,7 +222,7 @@ def _parse_meta(tail: str) -> dict:
     meta: dict = {}
     cm = _CITATIONS_ARR.search(text)
     if cm:
-        meta["citations"] = _ids_from_array(cm.group(1))
+        meta["citations"] = _ids_from_array(cm.group(1), id_re)
     pm = _PATHS_ARR.search(text)
     if pm:
         meta["graph_paths"] = [p.strip() for p in re.findall(r'"([^"]+)"', pm.group(1))]
@@ -228,7 +244,7 @@ def build_request(
         user_prompt += BORDERLINE_NOTE
     return SynthesisRequest(
         question=question,
-        system_prompt=SYSTEM_PROMPT,
+        system_prompt=_system_prompt(chunks),
         user_prompt=user_prompt,
         chunks=[c.as_dict() for c in chunks],
         graph_paths=graph_paths,
@@ -251,9 +267,10 @@ def synthesize(
     closures: list[dict],
     *,
     borderline: bool = False,
+    id_re: "re.Pattern[str]" = ID_RE,
 ) -> Answer:
     raw = llm.synthesize(build_request(question, chunks, graph_paths, closures, borderline=borderline))
-    return parse_synthesis(raw, chunks, graph_paths)
+    return parse_synthesis(raw, chunks, graph_paths, id_re)
 
 
 def stream_synthesis(
@@ -264,6 +281,7 @@ def stream_synthesis(
     closures: list[dict],
     *,
     borderline: bool = False,
+    id_re: "re.Pattern[str]" = ID_RE,
 ):
     """Generator that yields each newly-displayable slice of answer prose as the
     model streams, and *returns* the fully-parsed :class:`Answer` (accessible via
@@ -282,11 +300,12 @@ def stream_synthesis(
         if len(prose_now) > emitted:
             yield prose_now[emitted:]
             emitted = len(prose_now)
-    return parse_synthesis("".join(raw_parts), chunks, graph_paths)
+    return parse_synthesis("".join(raw_parts), chunks, graph_paths, id_re)
 
 
 def parse_synthesis(
-    raw: str, chunks: list[RetrievedChunk], graph_paths: list[str]
+    raw: str, chunks: list[RetrievedChunk], graph_paths: list[str],
+    id_re: "re.Pattern[str]" = ID_RE,
 ) -> Answer:
     """Turn a backend's raw output into a grounded :class:`Answer`.
 
@@ -295,13 +314,13 @@ def parse_synthesis(
     raw = _strip_reasoning(raw)
     prose, tail = _split_meta(raw)
     prose = _clean_markup(prose)
-    meta = _parse_meta(tail)
+    meta = _parse_meta(tail, id_re)
 
-    cited_ids: list[str] = [_normalize_id(str(c)) for c in meta.get("citations", []) if c]
+    cited_ids: list[str] = [_normalize_id(str(c), id_re) for c in meta.get("citations", []) if c]
     claims = [
         Claim(
             text=str(c.get("text", "")),
-            citations=[_normalize_id(str(x)) for x in c.get("citations", [])],
+            citations=[_normalize_id(str(x), id_re) for x in c.get("citations", [])],
         )
         for c in meta.get("claims", [])
         if isinstance(c, dict)
@@ -317,8 +336,8 @@ def parse_synthesis(
     # Promote any ids referenced inline in the prose (models often write
     # "[ECR-214]" instead of a numeric marker) into the ordered citation list.
     ordered_ids = _dedupe(cited_ids)
-    for group in _INLINE_REF.findall(prose):
-        for norm in ID_RE.findall(group):
+    for group in _BRACKET_GROUP.findall(prose):
+        for norm in id_re.findall(group):
             if norm in by_artifact and norm not in ordered_ids:
                 ordered_ids.append(norm)
 
@@ -341,18 +360,22 @@ def parse_synthesis(
 
     # Rewrite inline bracketed id references (e.g. "[ECN-312, ECR-214]") into the
     # numeric markers the UI renders as citation chips ("[1][2]").
-    prose = _rewrite_inline_citations(prose, marker_of, n_citations=len(citations))
+    prose = _rewrite_inline_citations(prose, marker_of, n_citations=len(citations), id_re=id_re)
 
     return Answer(text=prose, claims=claims, citations=citations, graph_paths=paths)
 
 
-# A bracketed group that contains at least one record id (not a pure-numeric [1]).
-_INLINE_REF = re.compile(r"\[([^\[\]]*?[A-Z]{1,6}-\d+[^\[\]]*?)\]")
+# Any bracketed group; record ids are matched inside it with the (configurable)
+# id pattern, so this stays agnostic to the id shape.
+_BRACKET_GROUP = re.compile(r"\[([^\[\]]+)\]")
 # A bracketed group of one or more comma/space-separated numbers, e.g. [1, 4].
 _NUMERIC_GROUP = re.compile(r"\[(\d+(?:\s*[,;]\s*\d+)*)\]")
 
 
-def _rewrite_inline_citations(prose: str, marker_of: dict[str, int], n_citations: int = 0) -> str:
+def _rewrite_inline_citations(
+    prose: str, marker_of: dict[str, int], n_citations: int = 0,
+    id_re: "re.Pattern[str]" = ID_RE,
+) -> str:
     """Normalise whatever inline citation form a model produced into single
     ``[n]`` markers the UI renders as chips.
 
@@ -360,11 +383,11 @@ def _rewrite_inline_citations(prose: str, marker_of: dict[str, int], n_citations
     numeric groups like ``[1, 4]`` (split into ``[1][4]``, dropping any number
     outside the citation range)."""
     def repl_ids(match: re.Match) -> str:
-        ids = ID_RE.findall(match.group(1))
+        ids = id_re.findall(match.group(1))
         markers = [f"[{marker_of[i]}]" for i in ids if i in marker_of]
         return "".join(markers) if markers else match.group(0)
 
-    prose = _INLINE_REF.sub(repl_ids, prose)
+    prose = _BRACKET_GROUP.sub(repl_ids, prose)
 
     limit = n_citations or (max(marker_of.values()) if marker_of else 0)
 

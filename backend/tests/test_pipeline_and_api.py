@@ -153,6 +153,13 @@ def test_api_stream_logs_ask_id(client):
     assert done["result"]["ask_id"] > 0
 
 
+def test_api_corpus_meta_shape(client):
+    meta = client.get("/api/corpus/meta").json()
+    assert "placeholder" in meta and isinstance(meta["starter_questions"], list)
+    assert "id_pattern" in meta and meta["id_pattern"]
+    assert meta["tier_labels"]["1"] == "formal"
+
+
 def test_api_corpus_stats(client):
     stats = client.get("/api/corpus/stats").json()
     assert stats["totals"]["artifacts"] > 0

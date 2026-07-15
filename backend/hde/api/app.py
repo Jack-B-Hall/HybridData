@@ -167,6 +167,13 @@ def graph_node(node_id: str, hops: int = Query(1, ge=1, le=3)) -> dict:
     return eng.graph_neighborhood(node_id, hops=hops)
 
 
+@app.get("/api/corpus/meta")
+def corpus_meta() -> dict:
+    """Corpus branding (title, chat placeholder, starter questions), the record-id
+    pattern, and tier labels — so the UI carries no compiled-in demo copy."""
+    return _engine().corpus_meta()
+
+
 @app.get("/api/corpus/stats")
 def corpus_stats() -> dict:
     return _engine().corpus_stats()

@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import gate as gate_mod
+from . import ids as ids_mod
 from . import store
 from .config import Settings, get_settings
 from .embeddings import Embedder, build_embedder
@@ -92,6 +93,19 @@ class Engine:
         self.embedder = embedder or build_embedder(self.settings)
         self.llm = llm or build_llm(self.settings)
         self._lock = threading.Lock()
+        # Resolve the record-id pattern from the store's meta (what the corpus was
+        # ingested with) so query-time matching equals ingest-time; fall back to
+        # the configured default. Gate thresholds/stopwords come from settings.
+        self.id_re = ids_mod.build_id_re(
+            store.get_meta(self.conn, "id_pattern") or self.settings.id_pattern
+        )
+        self.gate_thresholds = gate_mod.GateThresholds(
+            cov_hi=self.settings.gate_cov_hi,
+            cov_mid=self.settings.gate_cov_mid,
+            cov_void=self.settings.gate_cov_void,
+            strong_frac=self.settings.gate_strong_frac,
+        )
+        self.gate_stopwords = gate_mod.build_stopwords(self.settings.gate_domain_stopwords)
         # Telemetry has its own connection + lock (separate writable DB), so it is
         # never contended with the corpus lock and best-effort by construction.
         self.telemetry = Telemetry(self.settings.telemetry_db)
@@ -126,7 +140,7 @@ class Engine:
         llm_t0 = time.time()
         answer = synthesize(
             self.llm, question, prep.chunks, prep.graph_paths, prep.closures,
-            borderline=(prep.verdict == "borderline"),
+            borderline=(prep.verdict == "borderline"), id_re=self.id_re,
         )
         llm_ms = int((time.time() - llm_t0) * 1000)
         result = AskResult(
@@ -152,8 +166,12 @@ class Engine:
         which is what keeps a slow or abandoned stream from wedging the engine.
         """
         with self._lock:
-            chunks, debug = retrieve(self.conn, self.kg, self.embedder, question, self.settings)
-            verdict_result = gate_mod.evaluate(self.conn, question, chunks)
+            chunks, debug = retrieve(
+                self.conn, self.kg, self.embedder, question, self.settings, self.id_re
+            )
+            verdict_result = gate_mod.evaluate(
+                self.conn, question, chunks, self.gate_thresholds, self.id_re, self.gate_stopwords
+            )
             verdict = verdict_result.verdict
             answerable = verdict != "insufficient"
             entry_ids = [c.artifact_id for c in chunks]
@@ -235,7 +253,7 @@ class Engine:
         try:
             stream = stream_synthesis(
                 self.llm, question, prep.chunks, prep.graph_paths, prep.closures,
-                borderline=(prep.verdict == "borderline"),
+                borderline=(prep.verdict == "borderline"), id_re=self.id_re,
             )
             # Drive the synthesis generator manually so we can forward each prose
             # delta as a token event and capture the parsed Answer it returns.
@@ -392,6 +410,30 @@ class Engine:
         return {"nodes": nodes, "edges": edges, "stats": self.kg.stats()}
 
     # ── corpus stats ─────────────────────────────────────────────────────────
+    def corpus_meta(self) -> dict:
+        """Corpus branding for the UI (title, chat placeholder, starter questions),
+        the record-id pattern, and tier labels — from adapter/ingest metadata in
+        the DB, with generic fallbacks so an un-branded corpus still reads sensibly."""
+        from . import provenance
+
+        with self._lock:
+            raw = store.get_meta(self.conn, "corpus_meta")
+            id_pattern = store.get_meta(self.conn, "id_pattern") or self.settings.id_pattern
+        declared: dict = {}
+        if raw:
+            try:
+                declared = json.loads(raw)
+            except (json.JSONDecodeError, ValueError):
+                declared = {}
+        return {
+            "title": declared.get("title"),
+            "placeholder": declared.get("placeholder")
+            or "Ask about the corpus — records, changes, decisions, relationships…",
+            "starter_questions": declared.get("starter_questions") or [],
+            "id_pattern": id_pattern,
+            "tier_labels": {str(t): provenance.label_for(t) for t in (1, 2, 3)},
+        }
+
     def corpus_stats(self) -> dict:
         with self._lock:
             return self._corpus_stats()
