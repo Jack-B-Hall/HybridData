@@ -80,9 +80,10 @@ citations resolving to the exact passages and the gate declining the off-corpus
 probe. Real models emit markdown, LaTeX, and inconsistent citation formats; the
 synthesis layer normalises all of these (see `hde/synthesis.py`) so the answer
 renders as clean prose with numeric citation chips regardless of model. Latency
-was ~8-14 s per answer on a single 16 GB GPU. See the live screenshots in
-`docs/screenshots/chat-live.png`, `citation-popover-live.png`, and
-`chat-live-impact.png`.
+was ~8-14 s per answer on a single 16 GB GPU — streamed token-by-token so the
+answer appears as it is generated rather than after a wall of latency. See the
+live screenshots in `docs/screenshots/03-answer-done-light.png`,
+`02-staged-streaming-light.png`, and `04-source-drawer-light.png`.
 
 On a 10-question live slice (`python eval/run_eval.py --limit 10`) with this
 stack, **citation recall rose to 0.67** — up from the deterministic mock's 0.35 on

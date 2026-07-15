@@ -80,19 +80,28 @@ three areas:
 |---|---|---|
 | ![chat](docs/screenshots/chat.png) | ![viewer](docs/screenshots/document-viewer.png) | ![explorer](docs/screenshots/data-explorer-graph.png) |
 
-- **Chat** — answers with inline citation chips, a confidence indicator backed by
-  the real gate signals, a sources panel, click-to-open citation popovers showing
-  the exact grounding passage, and a distinct "not in the corpus" refusal state.
+- **Chat** — answers **stream token-by-token** behind a staged status that names
+  what the system is genuinely doing (searching the corpus → *N* passages + graph
+  paths retrieved, with the sources panel populated → asking the answer model →
+  answer streaming in). Inline citation chips and source cards open a right-hand
+  **slide-over** that shows the cited passage highlighted in a reading view, with a
+  jump to the full document. A confidence indicator is backed by the real gate
+  signals, and a distinct "not in the corpus" refusal state declines rather than
+  invents. Chat history persists across tabs, and each question can be removed
+  individually or cleared in bulk.
 - **Document viewer** — full documents with section navigation, highlighted cited
   passages, and cross-reference links into the graph and related records.
 - **Data Explorer** — an interactive knowledge-graph visualisation, a filterable
   document table with provenance tiers, a part-tree browser, and corpus analytics.
 
-The screenshots above use the offline deterministic stack. The system has also
-been validated live against a real western-origin model stack (Google gemma4:26b
-answers + Nomic AI nomic-embed-text embeddings) — see
-[`docs/screenshots/chat-live.png`](docs/screenshots/chat-live.png) and
-[`citation-popover-live.png`](docs/screenshots/citation-popover-live.png).
+The staged-streaming answer and the source slide-over, both against a live model:
+
+| Staged streaming | Source slide-over |
+|---|---|
+| ![streaming](docs/screenshots/02-staged-streaming-light.png) | ![slide-over](docs/screenshots/04-source-drawer-light.png) |
+
+These use a real western-origin model stack (Google gemma4:26b answers + Nomic AI
+nomic-embed-text embeddings); the offline deterministic stack streams the same way.
 
 ## Bring your own data
 

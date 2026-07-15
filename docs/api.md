@@ -50,6 +50,24 @@ which retrievers found the chunk (`fts`, `vector`, `graph`).
 When `answered` is `false`, `answer` is a refusal message and `sources` still
 lists what *was* found — render this as a distinct "not in the corpus" state.
 
+### `POST /api/ask/stream`
+Same body as `/api/ask`, but streams the pipeline as **Server-Sent Events**
+(`Content-Type: text/event-stream`) so the UI can show staged progress and the
+answer as it is generated. Each event is one `data:` frame carrying a JSON object
+with a `type`:
+
+| `type` | payload | emitted |
+|---|---|---|
+| `retrieval` | `{ answered, verdict, confidence, signals, backend, sources, graph_paths, retrieval }` | once, as soon as retrieval + the gate have run (before generation) |
+| `token` | `{ text }` | zero or more; a newly-displayable slice of answer prose (answerable case only) |
+| `done` | `{ result }` | once; `result` is the full `AskResult` above, with citations resolved and timing |
+| `error` | `{ message }` | on failure, in place of `done` |
+
+The concatenated `token` texts reassemble the streamed prose; the authoritative,
+citation-resolved answer is always the `done` event's `result`. A declined
+(`answered: false`) question emits no `token` events. The blocking `/api/ask`
+endpoint is unchanged and remains the simplest way to get a single JSON result.
+
 ### `GET /api/documents`
 Query params (all optional): `kind` (`entity|document|person`), `source`,
 `subsystem`, `query` (substring over id/title), `limit` (1..1000, default 200).
