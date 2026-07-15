@@ -44,6 +44,34 @@ function pickAsk(question: string): AskResult {
   return { ...fixtures.askRefusal, question };
 }
 
+/** Build a Server-Sent Events body replaying a fixture as the live stream would. */
+function askStreamBody(result: AskResult): string {
+  const frame = (obj: unknown) => `data: ${JSON.stringify(obj)}\n\n`;
+  const parts: string[] = [];
+  parts.push(
+    frame({
+      type: "retrieval",
+      answered: result.answered,
+      verdict: result.verdict,
+      confidence: result.confidence,
+      signals: result.signals,
+      backend: result.backend,
+      sources: result.sources,
+      graph_paths: result.graph_paths,
+      retrieval: result.retrieval,
+    }),
+  );
+  if (result.answered) {
+    const words = result.answer.split(" ");
+    for (let i = 0; i < words.length; i += 3) {
+      const piece = words.slice(i, i + 3).join(" ");
+      parts.push(frame({ type: "token", text: i === 0 ? piece : " " + piece }));
+    }
+  }
+  parts.push(frame({ type: "done", result }));
+  return parts.join("");
+}
+
 /**
  * Intercepts every `/api/**` request the app makes and answers from the
  * committed fixtures — no live backend is ever contacted during e2e runs.
@@ -67,6 +95,16 @@ export async function mockApiRoutes(page: Page): Promise<void> {
     if (pathname === "/api/ask" && request.method() === "POST") {
       const body = request.postDataJSON() as { question: string };
       await route.fulfill({ json: pickAsk(body.question) });
+      return;
+    }
+
+    if (pathname === "/api/ask/stream" && request.method() === "POST") {
+      const body = request.postDataJSON() as { question: string };
+      await route.fulfill({
+        status: 200,
+        headers: { "content-type": "text/event-stream" },
+        body: askStreamBody(pickAsk(body.question)),
+      });
       return;
     }
 

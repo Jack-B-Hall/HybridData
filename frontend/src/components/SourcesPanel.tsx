@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import type { Source } from "@/api/types";
 import { TierBadge } from "./TierBadge";
 import { formatScore } from "@/lib/format";
-import { documentHighlightPath } from "@/lib/paths";
+import { useDrawer, targetFromSource } from "@/store/drawer";
 
 const LEG_LABEL: Record<string, string> = {
   fts: "Full-text",
@@ -18,6 +17,7 @@ export interface SourcesPanelProps {
 }
 
 export function SourcesPanel({ sources, title, emptyLabel = "No sources retrieved." }: SourcesPanelProps) {
+  const { open } = useDrawer();
   return (
     <div data-testid="sources-panel">
       <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-faint">
@@ -30,13 +30,11 @@ export function SourcesPanel({ sources, title, emptyLabel = "No sources retrieve
         <ol className="space-y-2">
           {sources.map((source) => (
             <li key={`${source.artifact_id}-${source.chunk_idx}`}>
-              <Link
-                to={documentHighlightPath(source.artifact_id, {
-                  chunk_idx: source.chunk_idx,
-                  char_start: source.char_start,
-                  char_end: source.char_end,
-                })}
-                className="group block rounded-card border border-border bg-canvas-raised p-3 shadow-panel transition-colors hover:border-accent/40 hover:bg-accent-soft/40"
+              <button
+                type="button"
+                onClick={() => open(targetFromSource(source))}
+                data-testid="source-card"
+                className="group block w-full rounded-card border border-border bg-canvas-raised p-3 text-left shadow-panel transition-colors hover:border-accent/40 hover:bg-accent-soft/40"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
@@ -64,7 +62,7 @@ export function SourcesPanel({ sources, title, emptyLabel = "No sources retrieve
                   </div>
                   <span className="font-mono text-[11px] text-ink-faint">{formatScore(source.score)}</span>
                 </div>
-              </Link>
+              </button>
             </li>
           ))}
         </ol>

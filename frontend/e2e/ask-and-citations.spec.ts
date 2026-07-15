@@ -22,7 +22,7 @@ test("asking a question renders the answer with interactive citation chips", asy
   await expect(turn.getByTestId("sources-panel")).toContainText(fixtures.askSufficient.sources[0]!.artifact_id);
 });
 
-test("clicking a citation chip opens a popover with the grounding passage", async ({ page }) => {
+test("clicking a citation chip opens the source slide-over with the grounding passage", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("starter-question").filter({ hasText: "LiPo to LiFePO4" }).click();
 
@@ -30,16 +30,20 @@ test("clicking a citation chip opens a popover with the grounding passage", asyn
   await firstChip.waitFor({ state: "visible" });
   await firstChip.click();
 
-  const popover = page.getByTestId("citation-popover");
-  await expect(popover).toBeVisible();
+  const drawer = page.getByTestId("source-drawer");
+  await expect(drawer).toBeVisible();
 
   const firstCitation = fixtures.askSufficient.citations[0]!;
-  await expect(popover).toContainText(firstCitation.artifact_id);
-  // The passage is the exact grounding text — assert a distinctive slice of it appears.
-  await expect(popover).toContainText(firstCitation.passage.slice(0, 40));
+  await expect(drawer).toContainText(firstCitation.artifact_id);
+  // The passage is the exact grounding text — assert a distinctive slice appears.
+  await expect(page.getByTestId("drawer-passage")).toContainText(firstCitation.passage.slice(0, 40));
+
+  // Escape closes the drawer.
+  await page.keyboard.press("Escape");
+  await expect(drawer).toBeHidden();
 });
 
-test("opening the full document from a citation popover navigates to the highlighted viewer", async ({ page }) => {
+test("opening the full document from the slide-over navigates to the highlighted viewer", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("starter-question").filter({ hasText: "LiPo to LiFePO4" }).click();
 
@@ -47,7 +51,7 @@ test("opening the full document from a citation popover navigates to the highlig
   await firstChip.waitFor({ state: "visible" });
   await firstChip.click();
 
-  await page.getByTestId("citation-open-document").click();
+  await page.getByTestId("drawer-open-document").click();
 
   const firstCitation = fixtures.askSufficient.citations[0]!;
   await expect(page).toHaveURL(new RegExp(`/documents/${firstCitation.artifact_id}\\?`));

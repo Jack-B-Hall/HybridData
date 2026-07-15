@@ -93,6 +93,48 @@ export interface AskRequest {
   question: string;
 }
 
+// ── Streaming (POST /api/ask/stream, Server-Sent Events) ────────────────────
+// The stream emits a single `retrieval` event (sources + graph paths + gate
+// verdict, as soon as they are computed), then zero or more `token` events
+// (answer prose deltas as the model generates), then a final `done` event whose
+// `result` matches the blocking /api/ask response exactly.
+
+export interface RetrievalEvent {
+  type: "retrieval";
+  answered: boolean;
+  verdict: Verdict;
+  confidence: Confidence;
+  signals: GateSignals;
+  backend: string;
+  sources: Source[];
+  graph_paths: string[];
+  retrieval: RetrievalStats;
+}
+
+export interface TokenEvent {
+  type: "token";
+  text: string;
+}
+
+export interface DoneEvent {
+  type: "done";
+  result: AskResult;
+}
+
+export interface ErrorEvent {
+  type: "error";
+  message: string;
+}
+
+export type StreamEvent = RetrievalEvent | TokenEvent | DoneEvent | ErrorEvent;
+
+export interface AskStreamHandlers {
+  onRetrieval?: (event: RetrievalEvent) => void;
+  onToken?: (delta: string) => void;
+  onDone?: (result: AskResult) => void;
+  onError?: (message: string) => void;
+}
+
 export interface DocumentSummary {
   id: string;
   kind: ArtifactKind;

@@ -1,6 +1,7 @@
 import { ApiError } from "./types";
 import type {
   AskResult,
+  AskStreamHandlers,
   CorpusStatsResponse,
   DocumentDetail,
   DocumentListParams,
@@ -10,6 +11,7 @@ import type {
   HealthResponse,
   IngestHistoryResponse,
 } from "./types";
+import { consumeSseStream } from "@/lib/sse";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -46,6 +48,32 @@ export const liveApi = {
       method: "POST",
       body: JSON.stringify({ question }),
     }),
+
+  askStream: async (question: string, handlers: AskStreamHandlers, signal?: AbortSignal) => {
+    let res: Response;
+    try {
+      res = await fetch("/api/ask/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
+        body: JSON.stringify({ question }),
+        signal,
+      });
+    } catch (err) {
+      if ((err as Error)?.name === "AbortError") return;
+      handlers.onError?.(err instanceof Error ? err.message : "Network error");
+      return;
+    }
+    if (!res.ok || !res.body) {
+      handlers.onError?.(`Stream failed (${res.status})`);
+      return;
+    }
+    try {
+      await consumeSseStream(res.body, handlers);
+    } catch (err) {
+      if ((err as Error)?.name === "AbortError") return;
+      handlers.onError?.(err instanceof Error ? err.message : "Stream interrupted");
+    }
+  },
 
   getDocuments: (params: DocumentListParams = {}) =>
     request<DocumentListResponse>(

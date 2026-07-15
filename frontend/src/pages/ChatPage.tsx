@@ -1,12 +1,11 @@
-import { useRef, useState } from "react";
-import { api } from "@/api";
-import type { AskResult } from "@/api/types";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnswerRenderer } from "@/components/AnswerRenderer";
 import { ConfidenceIndicator } from "@/components/ConfidenceIndicator";
 import { SourcesPanel } from "@/components/SourcesPanel";
 import { RefusalPanel } from "@/components/RefusalPanel";
 import { GraphPathsList } from "@/components/GraphPathsList";
-import { formatLatency } from "@/lib/format";
+import { formatLatency, modelLabel } from "@/lib/format";
+import { useChat, type Turn } from "@/store/chat";
 
 const STARTER_QUESTIONS = [
   {
@@ -23,48 +22,47 @@ const STARTER_QUESTIONS = [
   },
 ];
 
-interface Turn {
-  id: number;
-  question: string;
-  status: "loading" | "done" | "error";
-  result?: AskResult;
-  error?: string;
-}
-
-let turnId = 0;
-
 export function ChatPage() {
-  const [turns, setTurns] = useState<Turn[]>([]);
-  const [draft, setDraft] = useState("");
+  const { turns, draft, setDraft, submit, removeTurn, clearAll, scrollTopRef } = useChat();
   const listRef = useRef<HTMLDivElement>(null);
+  const prevCount = useRef(turns.length);
 
-  async function submit(question: string) {
-    const trimmed = question.trim();
-    if (!trimmed) return;
-    const id = ++turnId;
-    setTurns((prev) => [...prev, { id, question: trimmed, status: "loading" }]);
-    setDraft("");
-    requestAnimationFrame(() => listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }));
+  // Restore the scroll offset saved when we last left this tab.
+  useLayoutEffect(() => {
+    if (listRef.current) listRef.current.scrollTop = scrollTopRef.current;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    try {
-      const result = await api.ask(trimmed);
-      setTurns((prev) => prev.map((t) => (t.id === id ? { ...t, status: "done", result } : t)));
-    } catch (err) {
-      setTurns((prev) =>
-        prev.map((t) =>
-          t.id === id ? { ...t, status: "error", error: err instanceof Error ? err.message : "Request failed" } : t,
-        ),
+  // On a new question, scroll to the bottom to reveal it.
+  useEffect(() => {
+    if (turns.length > prevCount.current && listRef.current) {
+      requestAnimationFrame(() =>
+        listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }),
       );
     }
-  }
+    prevCount.current = turns.length;
+  }, [turns.length]);
 
   return (
     <div className="relative flex min-h-[calc(100vh-8.5rem)] flex-col">
-      <div ref={listRef} className="flex-1 space-y-8 overflow-y-auto pb-28">
+      {turns.length > 0 && (
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-xs font-medium text-ink-faint">
+            {turns.length} {turns.length === 1 ? "question" : "questions"}
+          </span>
+          <ClearAllButton onConfirm={clearAll} />
+        </div>
+      )}
+
+      <div
+        ref={listRef}
+        onScroll={(e) => (scrollTopRef.current = e.currentTarget.scrollTop)}
+        className="flex-1 space-y-8 overflow-y-auto pb-28"
+      >
         {turns.length === 0 ? (
           <EmptyState onPick={submit} />
         ) : (
-          turns.map((turn) => <TurnBlock key={turn.id} turn={turn} />)
+          turns.map((turn) => <TurnBlock key={turn.id} turn={turn} onRemove={() => removeTurn(turn.id)} />)
         )}
       </div>
 
@@ -76,7 +74,7 @@ export function ChatPage() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void submit(draft);
+          submit(draft);
         }}
         className="sticky bottom-4 mt-4"
       >
@@ -87,7 +85,7 @@ export function ChatPage() {
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                void submit(draft);
+                submit(draft);
               }
             }}
             rows={1}
@@ -110,12 +108,53 @@ export function ChatPage() {
   );
 }
 
+function ClearAllButton({ onConfirm }: { onConfirm: () => void }) {
+  const [confirming, setConfirming] = useState(false);
+
+  useEffect(() => {
+    if (!confirming) return;
+    const t = setTimeout(() => setConfirming(false), 4000);
+    return () => clearTimeout(t);
+  }, [confirming]);
+
+  if (!confirming) {
+    return (
+      <button
+        type="button"
+        onClick={() => setConfirming(true)}
+        data-testid="clear-all"
+        className="rounded-md px-2 py-1 text-xs font-medium text-ink-faint transition-colors hover:bg-canvas-raised hover:text-ink"
+      >
+        Clear all
+      </button>
+    );
+  }
+  return (
+    <div className="flex items-center gap-1.5 text-xs" data-testid="clear-all-confirm">
+      <span className="text-ink-muted">Clear all questions?</span>
+      <button
+        type="button"
+        onClick={onConfirm}
+        data-testid="clear-all-confirm-yes"
+        className="rounded-md bg-confidence-low/15 px-2 py-1 font-semibold text-confidence-low transition-colors hover:bg-confidence-low/25"
+      >
+        Clear
+      </button>
+      <button
+        type="button"
+        onClick={() => setConfirming(false)}
+        className="rounded-md px-2 py-1 font-medium text-ink-faint transition-colors hover:text-ink"
+      >
+        Cancel
+      </button>
+    </div>
+  );
+}
+
 function EmptyState({ onPick }: { onPick: (q: string) => void }) {
   return (
     <div className="flex h-full min-h-[420px] flex-col items-center justify-center text-center">
-      <h1 className="font-display text-[28px] font-medium tracking-tight text-ink">
-        Ask the corpus.
-      </h1>
+      <h1 className="font-display text-[28px] font-medium tracking-tight text-ink">Ask the corpus.</h1>
       <p className="mt-2 max-w-md text-[15px] leading-relaxed text-ink-muted">
         Answers are grounded in retrieved passages with inline citations — the system declines to
         answer rather than invent when the evidence isn&apos;t there.
@@ -140,53 +179,198 @@ function EmptyState({ onPick }: { onPick: (q: string) => void }) {
   );
 }
 
-function TurnBlock({ turn }: { turn: Turn }) {
+function TurnBlock({ turn, onRemove }: { turn: Turn; onRemove: () => void }) {
+  const { phase, result, retrieval } = turn;
+  const isDone = phase === "done";
+  const answered = isDone ? result?.answered ?? false : retrieval?.answered ?? true;
+  const showRefusal = isDone && result && !result.answered;
+  // While finishing an off-corpus question, don't flash the answer layout.
+  const knownRefusing = !isDone && retrieval !== undefined && !retrieval.answered;
+  const sources = result?.sources ?? retrieval?.sources ?? [];
+
   return (
-    <div className="animate-fade-in border-t border-border pt-6 first:border-t-0 first:pt-0" data-testid="chat-turn">
-      <h2 className="font-display text-[17px] font-medium leading-snug text-ink">{turn.question}</h2>
+    <div
+      className="group/turn relative animate-fade-in border-t border-border pt-6 first:border-t-0 first:pt-0"
+      data-testid="chat-turn"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <h2 className="font-display text-[17px] font-medium leading-snug text-ink">{turn.question}</h2>
+        <button
+          type="button"
+          onClick={onRemove}
+          aria-label="Remove this question"
+          data-testid="remove-turn"
+          className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-transparent text-ink-faint opacity-0 transition-all hover:border-border hover:text-confidence-low focus-visible:opacity-100 group-hover/turn:opacity-100"
+        >
+          <RemoveIcon />
+        </button>
+      </div>
 
-      {turn.status === "loading" && <LoadingBlock />}
-
-      {turn.status === "error" && (
+      {phase === "error" && (
         <div className="mt-3 rounded-card border border-confidence-low/30 bg-canvas-raised p-4 text-sm text-confidence-low">
           {turn.error ?? "Something went wrong."}
         </div>
       )}
 
-      {turn.status === "done" && turn.result && (
+      {phase !== "error" && showRefusal && (
         <div className="mt-4">
-          {!turn.result.answered ? (
-            <RefusalPanel result={turn.result} />
-          ) : (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr,320px]">
-              <div className="min-w-0 space-y-5">
-                <div className="flex flex-wrap items-center gap-3">
-                  <ConfidenceIndicator result={turn.result} />
-                  <span className="font-mono text-[11px] text-ink-faint">
-                    {formatLatency(turn.result.latency_ms)} · {turn.result.backend}
-                  </span>
-                </div>
-                <AnswerRenderer answer={turn.result.answer} citations={turn.result.citations} />
-                <GraphPathsList paths={turn.result.graph_paths} />
-              </div>
-              <aside className="min-w-0">
-                <SourcesPanel sources={turn.result.sources} title="Sources" />
-              </aside>
-            </div>
-          )}
+          <RefusalPanel result={result} />
         </div>
       )}
+
+      {phase !== "error" && !showRefusal && (knownRefusing ? (
+        <div className="mt-4">
+          <StageStrip turn={turn} refusing />
+        </div>
+      ) : (
+        <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[1fr,320px]">
+          <div className="min-w-0 space-y-5">
+            {isDone && result ? (
+              <>
+                <div className="flex flex-wrap items-center gap-3">
+                  <ConfidenceIndicator result={result} />
+                  <span className="font-mono text-[11px] text-ink-faint">
+                    {formatLatency(result.latency_ms)} · {result.backend}
+                  </span>
+                </div>
+                <AnswerRenderer answer={result.answer} citations={result.citations} />
+                <GraphPathsList paths={result.graph_paths} />
+              </>
+            ) : phase === "streaming" ? (
+              <>
+                <StageStrip turn={turn} />
+                <StreamingAnswer text={turn.streamedText} />
+              </>
+            ) : (
+              <StageStrip turn={turn} />
+            )}
+          </div>
+          <aside className="min-w-0">
+            {answered && sources.length > 0 ? (
+              <SourcesPanel sources={sources} title="Sources" />
+            ) : (
+              <SourcesSkeleton />
+            )}
+          </aside>
+        </div>
+      ))}
     </div>
   );
 }
 
-function LoadingBlock() {
+/**
+ * The staged status shown while a question is in flight. The labels reflect what
+ * the system is genuinely doing: searching the corpus, then retrieval landing
+ * with real counts, then handing the grounded context to the answer model.
+ */
+function StageStrip({ turn, refusing = false }: { turn: Turn; refusing?: boolean }) {
+  const { phase, retrieval } = turn;
+  const searching = phase === "searching";
+  const hasRetrieval = retrieval !== undefined;
+  const nPassages = retrieval?.sources.length ?? 0;
+  const nPaths = retrieval?.graph_paths.length ?? 0;
+  const asking = phase === "generating" || phase === "streaming";
+
   return (
-    <div className="mt-4 animate-fade-in space-y-3" data-testid="chat-loading" aria-busy="true">
-      <div className="h-6 w-40 animate-pulse rounded-full bg-canvas-sunken" />
-      <div className="h-4 w-full animate-pulse rounded bg-canvas-sunken" />
-      <div className="h-4 w-5/6 animate-pulse rounded bg-canvas-sunken" />
-      <div className="h-4 w-2/3 animate-pulse rounded bg-canvas-sunken" />
+    <ol className="space-y-2.5" data-testid="stage-strip" aria-live="polite">
+      <Stage state={searching ? "active" : "done"} label="Searching the corpus" />
+      <Stage
+        state={hasRetrieval ? "done" : "pending"}
+        label={
+          hasRetrieval
+            ? `${nPassages} ${nPassages === 1 ? "passage" : "passages"} · ${nPaths} graph ${
+                nPaths === 1 ? "path" : "paths"
+              } retrieved`
+            : "Retrieving passages + graph paths"
+        }
+      />
+      {refusing ? (
+        <Stage state="active" label="Off-corpus — preparing decline" />
+      ) : (
+        <Stage
+          state={phase === "streaming" ? "done" : asking ? "active" : "pending"}
+          label={`Asking ${modelLabel(retrieval?.backend ?? "")}`}
+        />
+      )}
+    </ol>
+  );
+}
+
+function Stage({ state, label }: { state: "pending" | "active" | "done"; label: string }) {
+  return (
+    <li className="flex items-center gap-2.5 text-sm">
+      <span className="flex h-4 w-4 shrink-0 items-center justify-center" aria-hidden>
+        {state === "active" && <Spinner />}
+        {state === "done" && <CheckIcon />}
+        {state === "pending" && <span className="h-1.5 w-1.5 rounded-full bg-border-strong" />}
+      </span>
+      <span className={state === "pending" ? "text-ink-faint" : state === "active" ? "text-ink" : "text-ink-muted"}>
+        {label}
+      </span>
+    </li>
+  );
+}
+
+function StreamingAnswer({ text }: { text: string }) {
+  return (
+    <div className="space-y-3" data-testid="streaming-answer">
+      <p className="whitespace-pre-wrap text-[15px] leading-relaxed text-ink">
+        {cleanStreaming(text)}
+        <span
+          aria-hidden
+          className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] animate-pulse bg-accent align-baseline"
+        />
+      </p>
     </div>
+  );
+}
+
+/** Light, display-only tidy of in-flight prose (the final answer is cleaned server-side). */
+function cleanStreaming(text: string): string {
+  return text
+    .replace(/(^|\n)\s{0,3}#{1,6}\s+/g, "$1") // headings
+    .replace(/\*\*([^*]+)\*\*/g, "$1") // **bold**
+    .replace(/`([^`]+)`/g, "$1") // `code`
+    .replace(/(^|\n)(\s*)[*-]\s+/g, "$1$2• "); // bullets → •, matching the final answer
+}
+
+function SourcesSkeleton() {
+  return (
+    <div data-testid="sources-skeleton">
+      <div className="mb-3 h-3 w-16 animate-pulse rounded bg-canvas-sunken" />
+      <div className="space-y-2">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="rounded-card border border-border bg-canvas-raised p-3 shadow-panel">
+            <div className="h-3 w-2/3 animate-pulse rounded bg-canvas-sunken" />
+            <div className="mt-2 h-3 w-1/3 animate-pulse rounded bg-canvas-sunken" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg className="h-3.5 w-3.5 animate-spin text-accent" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <circle cx="8" cy="8" r="6" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
+      <path d="M14 8a6 6 0 0 0-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg className="h-3.5 w-3.5 text-tier-formal" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function RemoveIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
   );
 }

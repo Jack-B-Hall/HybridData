@@ -1,5 +1,11 @@
 import { ApiError } from "./types";
-import type { DocumentDetail, DocumentListParams, DocumentListResponse, DocumentSummary } from "./types";
+import type {
+  AskStreamHandlers,
+  DocumentDetail,
+  DocumentListParams,
+  DocumentListResponse,
+  DocumentSummary,
+} from "./types";
 import type { HdeApi } from "./client";
 import {
   corpusStats,
@@ -73,6 +79,42 @@ export const mockApi: HdeApi = {
   ask: async (question: string) => {
     await delay(220);
     return pickAskFixture(question);
+  },
+
+  askStream: async (question: string, handlers: AskStreamHandlers, signal?: AbortSignal) => {
+    // Replays the committed fixture as the same event sequence a live backend
+    // emits, so staged loading + streaming render identically offline.
+    const aborted = () => signal?.aborted ?? false;
+    const result = pickAskFixture(question);
+
+    await delay(260);
+    if (aborted()) return;
+    handlers.onRetrieval?.({
+      type: "retrieval",
+      answered: result.answered,
+      verdict: result.verdict,
+      confidence: result.confidence,
+      signals: result.signals,
+      backend: result.backend,
+      sources: result.sources,
+      graph_paths: result.graph_paths,
+      retrieval: result.retrieval,
+    });
+
+    if (result.answered) {
+      await delay(220);
+      const words = result.answer.split(" ");
+      for (let i = 0; i < words.length; i += 3) {
+        if (aborted()) return;
+        const piece = words.slice(i, i + 3).join(" ");
+        handlers.onToken?.(i === 0 ? piece : " " + piece);
+        await delay(45);
+      }
+    }
+
+    if (aborted()) return;
+    await delay(80);
+    handlers.onDone?.(result);
   },
 
   getDocuments: async (params: DocumentListParams = {}) => {
