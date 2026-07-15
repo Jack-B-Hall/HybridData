@@ -13,6 +13,7 @@ the graph, and report corpus statistics.
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import threading
 import time
@@ -84,6 +85,7 @@ class Engine:
         shared: bool = False,
     ) -> None:
         self.settings = settings or get_settings()
+        self._shared = shared
         # ``shared=True`` is the serving path: one connection across the request
         # threadpool, guarded by ``self._lock`` (the workload is read-only).
         self.conn: sqlite3.Connection = store.connect(
@@ -113,6 +115,24 @@ class Engine:
     def close(self) -> None:
         self.conn.close()
         self.telemetry.close()
+
+    def swap_store(self, new_db_path: Path | str) -> None:
+        """Atomically replace the corpus store with a freshly-built one at
+        ``new_db_path`` and reload the connection. Held under the engine lock so
+        no query is in its DB phase; in-flight streams use already-materialised
+        data (no corpus-connection access after retrieval) and are unaffected.
+
+        Only the fast file swap + reopen runs under the lock — the slow ingest
+        happened into a temp DB beforehand — so this never wedges the engine.
+        """
+        with self._lock:
+            self.conn.close()
+            os.replace(os.fspath(new_db_path), os.fspath(self.settings.db_path))
+            self.conn = store.connect(self.settings.db_path, check_same_thread=not self._shared)
+            self.kg = KnowledgeGraph(self.conn)
+            self.id_re = ids_mod.build_id_re(
+                store.get_meta(self.conn, "id_pattern") or self.settings.id_pattern
+            )
 
     # ── ask ────────────────────────────────────────────────────────────────
     def ask(self, question: str) -> AskResult:
@@ -465,6 +485,7 @@ class Engine:
             "by_tier": by_tier, "by_subsystem": by_subsystem,
             "graph": self.kg.stats(),
             "embedder": store.get_meta(self.conn, "embedder"),
+            "embed_dim": store.get_meta(self.conn, "embed_dim"),
             "snapshot_at": store.get_meta(self.conn, "snapshot_at"),
         }
 

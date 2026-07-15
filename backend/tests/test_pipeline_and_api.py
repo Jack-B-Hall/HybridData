@@ -163,6 +163,24 @@ def test_api_corpus_meta_shape(client):
     assert "app_icon" in meta
 
 
+def test_api_ingest_status_and_jobs(client):
+    st = client.get("/api/ingest/status").json()
+    assert st["running"] is False
+    jobs = client.get("/api/ingest/jobs").json()
+    assert isinstance(jobs["jobs"], list)
+
+
+def test_api_ingest_clear_requires_confirm(client):
+    # A clear without the confirm token is rejected and starts no job.
+    assert client.post("/api/ingest/start", json={"action": "clear"}).status_code == 422
+    assert client.post("/api/ingest/start", json={"action": "clear", "confirm": "nope"}).status_code == 422
+    assert client.get("/api/ingest/status").json()["running"] is False
+
+
+def test_api_ingest_bad_action_rejected(client):
+    assert client.post("/api/ingest/start", json={"action": "destroy"}).status_code == 422
+
+
 def test_api_corpus_stats(client):
     stats = client.get("/api/corpus/stats").json()
     assert stats["totals"]["artifacts"] > 0

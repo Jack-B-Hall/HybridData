@@ -52,6 +52,10 @@ class Settings:
     # corpus with different ids. Persisted in DB meta at ingest (query-time == ingest-time).
     id_pattern: str = ID_PATTERN_DEFAULT
 
+    # Sources the CLI and the Ingestion page rebuild from, as (kind, path) pairs
+    # where kind is demo | markdown | json_tree | csv. Default = the bundled demo.
+    ingest_sources: tuple[tuple[str, str], ...] = field(default_factory=lambda: (("demo", ""),))
+
     # ── Embeddings ─────────────────────────────────────────────────────────
     # "hash"   deterministic, dependency-free (default; great for tests/CI)
     # "ollama" nomic-embed-text (or any embed model) over the Ollama HTTP API;
@@ -157,6 +161,7 @@ class Settings:
             corpus_starter_questions=starters,
             corpus_app_name=_pick_optional("HDE_CORPUS_APP_NAME", fv("corpus", "app_name"), None),
             corpus_app_icon=_pick_optional("HDE_CORPUS_APP_ICON", fv("corpus", "app_icon"), None),
+            ingest_sources=_read_ingest_sources(f.get("ingest", {})),
         )
 
     # Backwards-compatible alias (env + file layering happens either way).
@@ -234,6 +239,23 @@ def _pick_words(env: str, fileval, default: tuple[str, ...], *, lower: bool = Tr
     else:
         return default
     return tuple(w.lower() for w in items) if lower else tuple(items)
+
+
+def _read_ingest_sources(section: dict) -> tuple[tuple[str, str], ...]:
+    """Parse the [ingest] section into (kind, path) source pairs. Empty/omitted
+    section -> the bundled demo corpus, so the demo config needs no [ingest]."""
+    if not section:
+        return (("demo", ""),)
+    out: list[tuple[str, str]] = []
+    if section.get("demo"):
+        out.append(("demo", ""))
+    for kind in ("markdown", "json_tree", "csv"):
+        val = section.get(kind)
+        if isinstance(val, str) and val:
+            out.append((kind, val))
+        elif isinstance(val, list):
+            out.extend((kind, str(v)) for v in val if str(v))
+    return tuple(out) if out else (("demo", ""),)
 
 
 def _read_starters(fileval) -> tuple[tuple[str, str], ...]:

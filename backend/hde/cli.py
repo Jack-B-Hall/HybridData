@@ -42,6 +42,11 @@ def cmd_ingest(args: argparse.Namespace) -> int:
     if args.csv:
         adapters.append(CsvAdapter(args.csv))
     if not adapters:
+        # No source flags -> use the configured [ingest] sources (default: demo).
+        from .ingest import build_adapters
+
+        adapters = build_adapters(settings)
+    if not adapters:
         print("nothing to ingest: pass --demo / --markdown / --json-tree / --csv", file=sys.stderr)
         return 2
 

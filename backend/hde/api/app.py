@@ -28,6 +28,7 @@ from pydantic import BaseModel, Field
 
 from ..config import get_settings
 from ..engine import Engine
+from ..ingestion import IngestBadRequest, IngestBusy, IngestManager
 
 
 class AskRequest(BaseModel):
@@ -40,10 +41,16 @@ class FeedbackRequest(BaseModel):
     comment: str | None = Field(default=None, max_length=2000)
 
 
+class IngestStartRequest(BaseModel):
+    action: str = Field(..., pattern="^(reingest|scan|clear)$")
+    confirm: str | None = Field(default=None, max_length=64)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
     app.state.engine = Engine(settings, shared=True)
+    app.state.ingest = IngestManager(app.state.engine)
     try:
         yield
     finally:
@@ -177,6 +184,34 @@ def corpus_meta() -> dict:
 @app.get("/api/corpus/stats")
 def corpus_stats() -> dict:
     return _engine().corpus_stats()
+
+
+def _ingest() -> IngestManager:
+    return app.state.ingest
+
+
+@app.post("/api/ingest/start")
+def ingest_start(req: IngestStartRequest) -> dict:
+    """Start a corpus job (reingest | scan | clear). One at a time (409 if busy);
+    clear needs the confirm token so it can't fire accidentally."""
+    try:
+        return _ingest().start(req.action, req.confirm)
+    except IngestBusy as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
+    except IngestBadRequest as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+
+
+@app.get("/api/ingest/status")
+def ingest_status() -> dict:
+    """Current (or last) job status: running flag, stage, and counts."""
+    return _ingest().status()
+
+
+@app.get("/api/ingest/jobs")
+def ingest_jobs(limit: int = Query(25, ge=1, le=200)) -> dict:
+    """Persistent ingest-run history (survives corpus rebuilds/clears)."""
+    return {"jobs": _ingest().history(limit)}
 
 
 @app.get("/api/ingest/history")

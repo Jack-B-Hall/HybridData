@@ -4,6 +4,6 @@ To add your own data source, subclass :class:`~hde.ingest.base.SourceAdapter` an
 yield :class:`~hde.ingest.base.Record` objects. See ``docs/adding-a-data-source.md``.
 """
 from .base import Record, Relation, SourceAdapter
-from .runner import IngestResult, ingest
+from .runner import IngestResult, build_adapters, ingest
 
-__all__ = ["Record", "Relation", "SourceAdapter", "ingest", "IngestResult"]
+__all__ = ["Record", "Relation", "SourceAdapter", "ingest", "IngestResult", "build_adapters"]

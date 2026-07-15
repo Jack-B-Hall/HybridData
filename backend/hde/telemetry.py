@@ -46,6 +46,18 @@ CREATE TABLE IF NOT EXISTS feedback (
   comment TEXT,
   FOREIGN KEY (ask_id) REFERENCES asks(id)
 );
+CREATE TABLE IF NOT EXISTS ingest_jobs (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  started_at  TEXT    NOT NULL,
+  finished_at TEXT,
+  action      TEXT    NOT NULL,                     -- 'reingest' | 'scan' | 'clear'
+  source      TEXT,
+  status      TEXT    NOT NULL,                     -- 'ok' | 'error'
+  n_records   INTEGER, n_chunks INTEGER, n_nodes INTEGER, n_edges INTEGER,
+  n_added     INTEGER, n_updated INTEGER, n_removed INTEGER,
+  duration_ms INTEGER,
+  error       TEXT
+);
 CREATE INDEX IF NOT EXISTS idx_asks_ts ON asks(ts);
 CREATE INDEX IF NOT EXISTS idx_feedback_ask ON feedback(ask_id);
 """
@@ -122,6 +134,39 @@ class Telemetry:
             )
             self.conn.commit()
             return int(cur.lastrowid)
+
+    def log_ingest_job(self, job: dict) -> int | None:
+        """Persist one ingest-management run. Lives in telemetry (not the corpus
+        store), so the history survives corpus rebuilds/clears."""
+        cols = (
+            "started_at", "finished_at", "action", "source", "status", "n_records",
+            "n_chunks", "n_nodes", "n_edges", "n_added", "n_updated", "n_removed",
+            "duration_ms", "error",
+        )
+        try:
+            with self._lock:
+                cur = self.conn.execute(
+                    f"INSERT INTO ingest_jobs ({', '.join(cols)}) "
+                    f"VALUES ({', '.join('?' * len(cols))})",
+                    tuple(job.get(c) for c in cols),
+                )
+                self.conn.commit()
+                return int(cur.lastrowid)
+        except sqlite3.Error:
+            return None
+
+    def ingest_jobs(self, limit: int = 25) -> list[dict]:
+        cols = (
+            "id", "started_at", "finished_at", "action", "source", "status",
+            "n_records", "n_chunks", "n_nodes", "n_edges", "n_added", "n_updated",
+            "n_removed", "duration_ms", "error",
+        )
+        with self._lock:
+            rows = self.conn.execute(
+                f"SELECT {', '.join(cols)} FROM ingest_jobs ORDER BY id DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [dict(zip(cols, r)) for r in rows]
 
     # ── reads ────────────────────────────────────────────────────────────────
     def health(self, recent_limit: int = 25) -> dict:

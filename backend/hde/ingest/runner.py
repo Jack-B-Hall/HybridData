@@ -47,6 +47,28 @@ class IngestResult:
     adapters: list[str]
 
 
+def build_adapters(settings: Settings) -> list[SourceAdapter]:
+    """Construct the adapters named by ``settings.ingest_sources``. Shared by the
+    CLI and the Ingestion-page endpoints so both rebuild from the same sources."""
+    from ..config import REPO_ROOT
+    from .csv_adapter import CsvAdapter
+    from .json_corpus import JsonCorpusAdapter
+    from .json_tree_adapter import JsonTreeAdapter
+    from .markdown_adapter import MarkdownDirectoryAdapter
+
+    adapters: list[SourceAdapter] = []
+    for kind, path in settings.ingest_sources:
+        if kind == "demo":
+            adapters.append(JsonCorpusAdapter(REPO_ROOT / "data" / "demo-corpus"))
+        elif kind == "markdown":
+            adapters.append(MarkdownDirectoryAdapter(path))
+        elif kind == "json_tree":
+            adapters.append(JsonTreeAdapter(path))
+        elif kind == "csv":
+            adapters.append(CsvAdapter(path))
+    return adapters
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
