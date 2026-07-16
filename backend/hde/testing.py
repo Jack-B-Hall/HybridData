@@ -1,5 +1,6 @@
 """Health testing: a curated golden-set of questions, asked through the real
-engine, graded deterministically (no LLM judge), as a background job.
+engine, then scored on TWO axes and combined into one composite score, as a
+background job.
 
 Design mirrors :mod:`hde.ingestion`:
 
@@ -7,11 +8,21 @@ Design mirrors :mod:`hde.ingestion`:
 * The run happens on a daemon thread; the page polls :meth:`status` and can be
   left (fire-and-forget). Results land in the telemetry DB, which survives corpus
   clears/rebuilds — the same store the golden questions live in.
-* Grading is deterministic: expected behaviour (answered vs refused, from the
-  gate verdict), expected citation artifact-ids present, and expected keywords
-  present (case-insensitive) in the answer. No model judges the output.
-* If the answer model is unreachable (e.g. the Ollama host is off), the run ends
+* If the answer model (or a separate judge model) is unreachable, the run ends
   cleanly marked ``error`` with a clear message — it never hangs.
+
+Scoring (see :func:`retrieval_score`, :func:`composite_score`):
+
+* **Retrieval sub-score** (deterministic, 0-1) — did it get the behaviour right
+  (answered vs refused) and surface the expected citations/keywords? This is the
+  "found and cited the right documents" axis.
+* **Answer quality** — when a golden answer is present and a judge is available,
+  an LLM-as-judge (:mod:`hde.judge`) scores the produced answer against the golden
+  answer + retrieved evidence on a rubric (correctness / groundedness /
+  completeness / citation quality).
+* **Composite (0-100)** — a configurable weighted blend of the retrieval sub-score
+  and the judge's correctness / groundedness / completeness. With no golden answer
+  or no judge, it degrades gracefully to the deterministic retrieval sub-score.
 """
 from __future__ import annotations
 
@@ -23,6 +34,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .config import REPO_ROOT
+from .judge import RUBRIC_DIMS, JudgeUnavailable, build_judge
 
 BEHAVIOURS = ("answer", "refuse")
 
@@ -62,12 +74,16 @@ def load_seed_questions() -> list[dict]:
     out: list[dict] = []
     for q in raw:
         category = q.get("category", "general")
+        refuse = category == "negative"
         out.append({
             "text": q["question"],
             "category": category,
-            "behaviour": "refuse" if category == "negative" else "answer",
+            "behaviour": "refuse" if refuse else "answer",
             "citations": q.get("required_citation_ids", []),
             "keywords": [],
+            # The gold file ships a reference answer per question; refuse cases
+            # have nothing to match against, so they carry none.
+            "golden_answer": None if refuse else q.get("gold_answer"),
             "enabled": True,
             "notes": "Seeded from the bundled demo gold set.",
         })
@@ -92,33 +108,85 @@ class RunStatus:
         return asdict(self)
 
 
-def grade(question: dict, result) -> tuple[bool, list[str]]:
-    """Deterministic pass/fail + the list of failed-check reasons for one question."""
-    failed: list[str] = []
+@dataclass(frozen=True)
+class Weights:
+    """Composite-score weights. Retrieval is the deterministic axis; the other three
+    are judge rubric dimensions. Normalised on use so the composite stays 0-100."""
 
-    if question["behaviour"] == "refuse":
+    retrieval: float = 0.30
+    correctness: float = 0.40
+    groundedness: float = 0.20
+    completeness: float = 0.10
+
+    @classmethod
+    def from_settings(cls, s) -> "Weights":
+        return cls(s.eval_w_retrieval, s.eval_w_correctness,
+                   s.eval_w_groundedness, s.eval_w_completeness)
+
+    def as_dict(self) -> dict:
+        return asdict(self)
+
+
+def retrieval_score(question: dict, result) -> tuple[float, list[str]]:
+    """Deterministic sub-score (0-1) + the failed-check reasons for one question.
+
+    Behaviour is a gate: a wrong behaviour (answered when it should refuse, or vice
+    versa) scores 0. Given the right behaviour, an ANSWER question is scored on the
+    fraction of expected citations and keywords it surfaced (each neutral at 1.0
+    when none are specified); a correct REFUSE scores 1.0."""
+    failed: list[str] = []
+    behaviour = question["behaviour"]
+
+    if behaviour == "refuse":
         if result.answered:
             failed.append("expected a refusal (out of scope) but the app answered")
-    else:
-        if not result.answered:
-            failed.append("expected an answer but the app refused")
+            return 0.0, failed
+        return 1.0, failed
 
-    # Content checks only make sense when we wanted (and got) an answer.
-    if question["behaviour"] == "answer" and result.answered:
-        want_ids = question.get("citations") or []
-        if want_ids:
-            got = {c.get("artifact_id") for c in result.citations}
-            missing = [cid for cid in want_ids if cid not in got]
-            if missing:
-                failed.append("missing expected citations: " + ", ".join(missing))
-        want_kw = question.get("keywords") or []
-        if want_kw:
-            text = (result.answer or "").lower()
-            missing_kw = [k for k in want_kw if k.lower() not in text]
-            if missing_kw:
-                failed.append("missing expected keywords: " + ", ".join(missing_kw))
+    # answer
+    if not result.answered:
+        failed.append("expected an answer but the app refused")
+        return 0.0, failed
 
-    return (not failed), failed
+    parts: list[float] = []
+    want_ids = question.get("citations") or []
+    if want_ids:
+        got = {c.get("artifact_id") for c in result.citations}
+        missing = [cid for cid in want_ids if cid not in got]
+        parts.append((len(want_ids) - len(missing)) / len(want_ids))
+        if missing:
+            failed.append("missing expected citations: " + ", ".join(missing))
+    want_kw = question.get("keywords") or []
+    if want_kw:
+        text = (result.answer or "").lower()
+        missing_kw = [k for k in want_kw if k.lower() not in text]
+        parts.append((len(want_kw) - len(missing_kw)) / len(want_kw))
+        if missing_kw:
+            failed.append("missing expected keywords: " + ", ".join(missing_kw))
+
+    return (sum(parts) / len(parts) if parts else 1.0), failed
+
+
+def composite_score(retrieval: float, judge_dims: dict | None, weights: Weights) -> float:
+    """Blend the retrieval sub-score with the judge rubric into a 0-100 score.
+
+    Weights are normalised so the result is always 0-100. With no judge (refuse
+    questions, no golden answer, or judge unavailable) this is just the retrieval
+    sub-score scaled to 100 — the graceful, deterministic-only path. The judge's
+    ``citation_quality`` is reported for transparency but not weighted here, since
+    citations are already scored deterministically in the retrieval sub-score."""
+    if judge_dims is None:
+        return round(100.0 * retrieval, 1)
+    total = weights.retrieval + weights.correctness + weights.groundedness + weights.completeness
+    if total <= 0:
+        return round(100.0 * retrieval, 1)
+    blended = (
+        weights.retrieval * retrieval
+        + weights.correctness * judge_dims["correctness"]
+        + weights.groundedness * judge_dims["groundedness"]
+        + weights.completeness * judge_dims["completeness"]
+    ) / total
+    return round(100.0 * blended, 1)
 
 
 class TestManager:
@@ -149,6 +217,23 @@ class TestManager:
     def run_detail(self, run_id: int) -> dict | None:
         return self.engine.telemetry.test_run(run_id)
 
+    def scoring_config(self) -> dict:
+        """The scoring methodology, surfaced so the UI can render it transparently:
+        the rubric, the composite weights, the pass threshold, and which model
+        judges (with a same-model-bias flag when the judge == the answer model)."""
+        s = self.engine.settings
+        same_model = s.eval_judge_backend is None and s.eval_judge_model is None
+        return {
+            "pass_threshold": s.eval_pass_threshold,
+            "weights": Weights.from_settings(s).as_dict(),
+            "rubric_dims": list(RUBRIC_DIMS),
+            "judge": {
+                "backend": (s.eval_judge_backend or s.llm_backend),
+                "model": (s.eval_judge_model or s.llm_model),
+                "same_as_answer_model": same_model,
+            },
+        }
+
     # ── control ──────────────────────────────────────────────────────────────
     def start(self, categories: list[str] | None = None) -> dict:
         with self._lock:
@@ -173,9 +258,14 @@ class TestManager:
 
     def _run(self, questions: list[dict], scope: str) -> None:
         t0 = time.time()
+        settings = self.engine.settings
         backend = self.engine.llm.name
+        weights = Weights.from_settings(settings)
+        threshold = settings.eval_pass_threshold
+        judge = build_judge(settings)
         results: list[dict] = []
         latencies: list[int] = []
+        composites: list[float] = []
         passed = failed = 0
         run_error: str | None = None
 
@@ -187,28 +277,49 @@ class TestManager:
                 if _looks_like_backend_down(exc):
                     run_error = f"answer backend unreachable ({backend}): {exc}"
                     break
-                results.append({
-                    "question_id": q["id"], "question": q["text"], "category": q["category"],
-                    "behaviour": q["behaviour"], "answered": None, "verdict": None,
-                    "passed": 0, "failed_checks": [f"engine error: {exc}"],
-                    "latency_ms": None, "error": str(exc),
-                })
+                results.append(_error_result(q, f"engine error: {exc}", str(exc)))
                 failed += 1
+                self._set(failed=failed)
                 continue
 
-            ok, reasons = grade(q, res)
+            ret, reasons = retrieval_score(q, res)
+
+            # Judge answer quality when there's a golden answer to match against and
+            # the app actually produced an answer to grade.
+            judge_dims: dict | None = None
+            golden = q.get("golden_answer")
+            if q["behaviour"] == "answer" and res.answered and golden:
+                self._set(stage=f"judging {i}/{len(questions)}")
+                try:
+                    evidence = [s.get("body", "") for s in res.sources[:6]]
+                    judge_dims = judge.judge(
+                        question=q["text"], golden=golden, answer=res.answer, evidence=evidence)
+                except JudgeUnavailable as exc:
+                    run_error = f"judge backend unreachable ({judge.name}): {exc}"
+                    break
+                except Exception as exc:  # noqa: BLE001 — bad judge output: degrade this one
+                    reasons = [*reasons, f"judge output unusable: {exc}"]
+
+            comp = composite_score(ret, judge_dims, weights)
+            ok = comp >= threshold
             passed += int(ok)
             failed += int(not ok)
             latencies.append(res.latency_ms)
+            composites.append(comp)
             results.append({
                 "question_id": q["id"], "question": q["text"], "category": q["category"],
                 "behaviour": q["behaviour"], "answered": int(res.answered), "verdict": res.verdict,
-                "passed": int(ok), "failed_checks": reasons, "latency_ms": res.latency_ms,
-                "error": None,
+                "passed": int(ok), "failed_checks": reasons, "retrieval_score": round(ret, 3),
+                "judged": int(judge_dims is not None),
+                "judge_correctness": judge_dims["correctness"] if judge_dims else None,
+                "judge_groundedness": judge_dims["groundedness"] if judge_dims else None,
+                "judge_completeness": judge_dims["completeness"] if judge_dims else None,
+                "judge_citation": judge_dims["citation_quality"] if judge_dims else None,
+                "judge_justification": judge_dims["justification"] if judge_dims else None,
+                "composite": comp, "latency_ms": res.latency_ms, "error": None,
             })
             self._set(passed=passed, failed=failed)
 
-        answered_q = [q for q, r in zip(questions, results) if q["behaviour"] == "answer"]
         refuse_results = [r for r in results if r["behaviour"] == "refuse"]
         answer_results = [r for r in results if r["behaviour"] == "answer"]
         answer_rate = (
@@ -220,13 +331,16 @@ class TestManager:
             if refuse_results else None
         )
         mean_latency = int(sum(latencies) / len(latencies)) if latencies else None
+        mean_composite = round(sum(composites) / len(composites), 1) if composites else None
+        any_judged = any(r["judged"] for r in results)
 
         run = {
             "started_at": self._status.started_at, "finished_at": _now(),
-            "status": "error" if run_error else "ok", "backend": backend, "scope": scope,
+            "status": "error" if run_error else "ok", "backend": backend,
+            "judge_backend": judge.name if any_judged else None, "scope": scope,
             "total": len(questions), "passed": passed, "failed": failed,
             "answer_rate": answer_rate, "refusal_rate": refusal_rate,
-            "mean_latency_ms": mean_latency,
+            "mean_composite": mean_composite, "mean_latency_ms": mean_latency,
             "duration_ms": int((time.time() - t0) * 1000), "error": run_error,
         }
         run_id = self.engine.telemetry.log_test_run(run, results)
@@ -235,3 +349,14 @@ class TestManager:
             status="error" if run_error else "ok", error=run_error,
             finished_at=run["finished_at"], done=len(results), run_id=run_id,
         )
+
+
+def _error_result(q: dict, reason: str, error: str) -> dict:
+    return {
+        "question_id": q["id"], "question": q["text"], "category": q["category"],
+        "behaviour": q["behaviour"], "answered": None, "verdict": None,
+        "passed": 0, "failed_checks": [reason], "retrieval_score": None,
+        "judged": 0, "judge_correctness": None, "judge_groundedness": None,
+        "judge_completeness": None, "judge_citation": None, "judge_justification": None,
+        "composite": None, "latency_ms": None, "error": error,
+    }

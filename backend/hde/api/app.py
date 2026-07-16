@@ -53,6 +53,7 @@ class GoldenQuestionIn(BaseModel):
     behaviour: str = Field(default="answer", pattern="^(answer|refuse)$")
     citations: list[str] = Field(default_factory=list)
     keywords: list[str] = Field(default_factory=list)
+    golden_answer: str | None = Field(default=None, max_length=8000)
     enabled: bool = True
     notes: str | None = Field(default=None, max_length=2000)
 
@@ -63,6 +64,7 @@ class GoldenQuestionPatch(BaseModel):
     behaviour: str | None = Field(default=None, pattern="^(answer|refuse)$")
     citations: list[str] | None = None
     keywords: list[str] | None = None
+    golden_answer: str | None = Field(default=None, max_length=8000)
     enabled: bool | None = None
     notes: str | None = Field(default=None, max_length=2000)
 
@@ -283,6 +285,13 @@ def testing_delete_question(qid: int) -> dict:
     if not _engine().telemetry.delete_golden(qid):
         raise HTTPException(status_code=404, detail=f"no golden question {qid}")
     return {"ok": True, "deleted": qid}
+
+
+@app.get("/api/testing/config")
+def testing_config() -> dict:
+    """The scoring methodology: rubric dimensions, composite weights, pass
+    threshold, and which model judges (with a same-model-bias flag)."""
+    return _testing().scoring_config()
 
 
 @app.post("/api/testing/run")

@@ -72,6 +72,24 @@
 # content words). Defaults reproduce the demo's stoplist exactly.
 # domain_stopwords = ["change", "affects", "requires", "system", "new"]
 
+[eval]
+# The Testing page scores each answer with an LLM-as-judge and combines that with
+# the deterministic retrieval checks into one composite score (0-100).
+# By DEFAULT the judge reuses the answer model — but a model judging its own output
+# inflates scores, so for a real assessment point the judge at a DIFFERENT (ideally
+# stronger) model. Omit to reuse the answer model.
+# judge_backend = "anthropic"                 # mock | ollama | anthropic
+# judge_model = "claude-sonnet-4-5"
+# judge_host = "http://ollama.internal:11434" # if judge_backend = "ollama"
+# A question passes when its composite score meets this threshold.
+# pass_threshold = 60.0
+# Composite weights (should sum to ~1.0). Retrieval is the deterministic
+# find/cite-the-right-documents axis; the rest are judge rubric dimensions.
+# w_retrieval = 0.30
+# w_correctness = 0.40
+# w_groundedness = 0.20
+# w_completeness = 0.10
+
 [corpus]
 # Record-id shape used for exact-id retrieval, the gate anchor and citations.
 # Default = PREFIX-digits. A store built with a given pattern persists it and that

@@ -94,6 +94,23 @@ class Settings:
     # Domain-flavoured gate stopwords (added to the generic English stoplist).
     gate_domain_stopwords: tuple[str, ...] = field(default_factory=lambda: DEFAULT_DOMAIN_STOPWORDS)
 
+    # ── Evaluation (Testing page: LLM-as-judge + composite score) ────────────
+    # The judge scores a produced answer against its golden answer + evidence.
+    # By default it reuses the answer model; set these to judge with a DIFFERENT
+    # model — recommended, since a model judging its own output inflates scores.
+    # None here means "fall back to the answer-model equivalent".
+    eval_judge_backend: str | None = None       # mock | ollama | anthropic
+    eval_judge_model: str | None = None
+    eval_judge_host: str | None = None          # ollama host for the judge
+    # A question passes when its composite score (0-100) meets this threshold.
+    eval_pass_threshold: float = 60.0
+    # Composite weights (must sum to ~1). Retrieval is the deterministic
+    # find/cite-the-right-documents axis; the other three are judge rubric dims.
+    eval_w_retrieval: float = 0.30
+    eval_w_correctness: float = 0.40
+    eval_w_groundedness: float = 0.20
+    eval_w_completeness: float = 0.10
+
     # ── Server ─────────────────────────────────────────────────────────────
     server_port: int = 8000
     cors_origins: tuple[str, ...] = field(default_factory=lambda: ("*",))
@@ -153,6 +170,14 @@ class Settings:
             gate_cov_void=_pick_float("HDE_GATE_COV_VOID", fv("gate", "cov_void"), cls.gate_cov_void),
             gate_strong_frac=_pick_float("HDE_GATE_STRONG_FRAC", fv("gate", "strong_frac"), cls.gate_strong_frac),
             gate_domain_stopwords=domain_stopwords,
+            eval_judge_backend=_pick_optional("HDE_EVAL_JUDGE_BACKEND", fv("eval", "judge_backend"), None),
+            eval_judge_model=_pick_optional("HDE_EVAL_JUDGE_MODEL", fv("eval", "judge_model"), None),
+            eval_judge_host=_pick_optional("HDE_EVAL_JUDGE_HOST", fv("eval", "judge_host"), None),
+            eval_pass_threshold=_pick_float("HDE_EVAL_PASS_THRESHOLD", fv("eval", "pass_threshold"), cls.eval_pass_threshold),
+            eval_w_retrieval=_pick_float("HDE_EVAL_W_RETRIEVAL", fv("eval", "w_retrieval"), cls.eval_w_retrieval),
+            eval_w_correctness=_pick_float("HDE_EVAL_W_CORRECTNESS", fv("eval", "w_correctness"), cls.eval_w_correctness),
+            eval_w_groundedness=_pick_float("HDE_EVAL_W_GROUNDEDNESS", fv("eval", "w_groundedness"), cls.eval_w_groundedness),
+            eval_w_completeness=_pick_float("HDE_EVAL_W_COMPLETENESS", fv("eval", "w_completeness"), cls.eval_w_completeness),
             server_port=_pick_int("HDE_SERVER_PORT", fv("server", "port"), cls.server_port),
             cors_origins=cors,
             frontend_dist=_pick_path("HDE_FRONTEND_DIST", fv("server", "frontend_dist"), cls.frontend_dist),

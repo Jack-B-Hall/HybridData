@@ -188,16 +188,19 @@ def test_api_testing_questions_seeded_and_crud(client):
 
     created = client.post("/api/testing/questions", json={
         "text": "Custom health check?", "category": "custom", "behaviour": "answer",
-        "citations": ["ECR-214"], "keywords": ["battery"]})
+        "citations": ["ECR-214"], "keywords": ["battery"],
+        "golden_answer": "The battery chemistry changed to LiFePO4."})
     assert created.status_code == 201
     qid = created.json()["id"]
     assert created.json()["citations"] == ["ECR-214"]
+    assert created.json()["golden_answer"] == "The battery chemistry changed to LiFePO4."
 
     only = client.get("/api/testing/questions", params={"category": "custom"}).json()
     assert only["count"] == 1 and only["questions"][0]["id"] == qid
 
-    patched = client.patch(f"/api/testing/questions/{qid}", json={"enabled": False}).json()
-    assert patched["enabled"] is False
+    patched = client.patch(f"/api/testing/questions/{qid}",
+                           json={"enabled": False, "golden_answer": "revised"}).json()
+    assert patched["enabled"] is False and patched["golden_answer"] == "revised"
 
     assert client.delete(f"/api/testing/questions/{qid}").json()["ok"] is True
     assert client.get("/api/testing/questions", params={"category": "custom"}).json()["count"] == 0
@@ -206,8 +209,21 @@ def test_api_testing_questions_seeded_and_crud(client):
     assert client.delete("/api/testing/questions/999999").status_code == 404
 
 
-def test_api_testing_run_and_history(client):
-    r = client.post("/api/testing/run", json={"categories": ["negative"]})
+def test_api_testing_config_exposes_scoring(client):
+    cfg = client.get("/api/testing/config").json()
+    assert set(cfg["weights"]) == {"retrieval", "correctness", "groundedness", "completeness"}
+    assert cfg["rubric_dims"] == ["correctness", "groundedness", "completeness", "citation_quality"]
+    assert cfg["pass_threshold"] == 60.0
+    # Default judge reuses the answer model, so the bias flag is set.
+    assert cfg["judge"]["same_as_answer_model"] is True
+
+
+def test_api_testing_run_scores_and_persists(client):
+    # A lookup question with a golden answer -> the judge runs and a composite lands.
+    client.post("/api/testing/questions", json={
+        "text": "Why was the battery chemistry changed?", "category": "runcheck",
+        "behaviour": "answer", "golden_answer": "It changed to LiFePO4 after a thermal event."})
+    r = client.post("/api/testing/run", json={"categories": ["runcheck"]})
     assert r.status_code == 200
     for _ in range(400):
         st = client.get("/api/testing/run/status").json()
@@ -217,9 +233,12 @@ def test_api_testing_run_and_history(client):
     assert st["running"] is False and st["status"] == "ok"
 
     runs = client.get("/api/testing/runs").json()["runs"]
-    assert runs and runs[0]["total"] >= 1
+    assert runs and runs[0]["total"] >= 1 and runs[0]["mean_composite"] is not None
     detail = client.get(f"/api/testing/runs/{runs[0]['id']}").json()
-    assert "results" in detail and len(detail["results"]) == runs[0]["total"]
+    assert len(detail["results"]) == runs[0]["total"]
+    r0 = detail["results"][0]
+    assert r0["composite"] is not None and r0["judged"] is True
+    assert r0["judge_correctness"] is not None
     assert client.get("/api/testing/runs/999999").status_code == 404
 
 

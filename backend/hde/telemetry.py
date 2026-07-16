@@ -60,16 +60,17 @@ CREATE TABLE IF NOT EXISTS ingest_jobs (
   error       TEXT
 );
 CREATE TABLE IF NOT EXISTS golden_questions (
-  id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  text       TEXT    NOT NULL,
-  category   TEXT    NOT NULL DEFAULT 'general',
-  behaviour  TEXT    NOT NULL DEFAULT 'answer',      -- 'answer' | 'refuse'
-  citations  TEXT,                                   -- JSON list of expected artifact ids
-  keywords   TEXT,                                   -- JSON list of expected keywords/phrases
-  enabled    INTEGER NOT NULL DEFAULT 1,
-  notes      TEXT,
-  created_at TEXT    NOT NULL,
-  updated_at TEXT    NOT NULL
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  text          TEXT    NOT NULL,
+  category      TEXT    NOT NULL DEFAULT 'general',
+  behaviour     TEXT    NOT NULL DEFAULT 'answer',      -- 'answer' | 'refuse'
+  citations     TEXT,                                   -- JSON list of expected artifact ids
+  keywords      TEXT,                                   -- JSON list of expected keywords/phrases
+  golden_answer TEXT,                                   -- reference answer (optional; ANSWER questions)
+  enabled       INTEGER NOT NULL DEFAULT 1,
+  notes         TEXT,
+  created_at    TEXT    NOT NULL,
+  updated_at    TEXT    NOT NULL
 );
 CREATE TABLE IF NOT EXISTS test_runs (
   id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,27 +78,37 @@ CREATE TABLE IF NOT EXISTS test_runs (
   finished_at     TEXT,
   status          TEXT    NOT NULL,                  -- 'ok' | 'error'
   backend         TEXT,
+  judge_backend   TEXT,                              -- judge model, or null when no judge ran
   scope           TEXT,                              -- which questions ran, e.g. 'all enabled'
   total           INTEGER, passed INTEGER, failed INTEGER,
   answer_rate     REAL,                              -- correct-answer rate on ANSWER questions
   refusal_rate    REAL,                              -- correct-refusal rate on REFUSE questions
+  mean_composite  REAL,                              -- mean composite score (0-100)
   mean_latency_ms INTEGER,
   duration_ms     INTEGER,
   error           TEXT
 );
 CREATE TABLE IF NOT EXISTS test_results (
-  id            INTEGER PRIMARY KEY AUTOINCREMENT,
-  run_id        INTEGER NOT NULL,
-  question_id   INTEGER,
-  question      TEXT,
-  category      TEXT,
-  behaviour     TEXT,
-  answered      INTEGER,
-  verdict       TEXT,
-  passed        INTEGER,
-  failed_checks TEXT,                                -- JSON list of failure reasons
-  latency_ms    INTEGER,
-  error         TEXT,
+  id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id             INTEGER NOT NULL,
+  question_id        INTEGER,
+  question           TEXT,
+  category           TEXT,
+  behaviour          TEXT,
+  answered           INTEGER,
+  verdict            TEXT,
+  passed             INTEGER,
+  failed_checks      TEXT,                           -- JSON list of failure reasons
+  retrieval_score    REAL,                           -- deterministic sub-score (0-1)
+  judged             INTEGER,                         -- 1 if the judge scored this answer
+  judge_correctness  REAL,                           -- rubric dims (0-1), null when not judged
+  judge_groundedness REAL,
+  judge_completeness REAL,
+  judge_citation     REAL,
+  judge_justification TEXT,
+  composite          REAL,                           -- final per-question score (0-100)
+  latency_ms         INTEGER,
+  error              TEXT,
   FOREIGN KEY (run_id) REFERENCES test_runs(id)
 );
 CREATE INDEX IF NOT EXISTS idx_asks_ts ON asks(ts);
@@ -134,8 +145,29 @@ class Telemetry:
         self.conn = sqlite3.connect(str(self.db_path), check_same_thread=False)
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.executescript(_SCHEMA)
+        self._migrate()
         self.conn.commit()
         self._lock = threading.Lock()
+
+    def _migrate(self) -> None:
+        """Add columns introduced after a table's first release. IF NOT EXISTS on
+        CREATE won't add columns to a pre-existing table (e.g. the telemetry volume
+        that survives image rebuilds), so bring older DBs up to the current shape."""
+        additions = {
+            "golden_questions": [("golden_answer", "TEXT")],
+            "test_runs": [("judge_backend", "TEXT"), ("mean_composite", "REAL")],
+            "test_results": [
+                ("retrieval_score", "REAL"), ("judged", "INTEGER"),
+                ("judge_correctness", "REAL"), ("judge_groundedness", "REAL"),
+                ("judge_completeness", "REAL"), ("judge_citation", "REAL"),
+                ("judge_justification", "TEXT"), ("composite", "REAL"),
+            ],
+        }
+        for table, cols in additions.items():
+            existing = {r[1] for r in self.conn.execute(f"PRAGMA table_info({table})")}
+            for name, coltype in cols:
+                if name not in existing:
+                    self.conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {coltype}")
 
     def close(self) -> None:
         with self._lock:
@@ -214,7 +246,7 @@ class Telemetry:
     # ── golden-set questions (writable, survives corpus clears) ───────────────
     _GOLDEN_COLS = (
         "id", "text", "category", "behaviour", "citations", "keywords",
-        "enabled", "notes", "created_at", "updated_at",
+        "golden_answer", "enabled", "notes", "created_at", "updated_at",
     )
 
     @staticmethod
@@ -239,10 +271,11 @@ class Telemetry:
             for q in questions:
                 self.conn.execute(
                     "INSERT INTO golden_questions (text, category, behaviour, citations, "
-                    "keywords, enabled, notes, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                    "keywords, golden_answer, enabled, notes, created_at, updated_at) "
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)",
                     (q["text"], q.get("category", "general"), q.get("behaviour", "answer"),
                      json.dumps(q.get("citations", [])), json.dumps(q.get("keywords", [])),
-                     int(q.get("enabled", True)), q.get("notes"), now, now),
+                     q.get("golden_answer"), int(q.get("enabled", True)), q.get("notes"), now, now),
                 )
                 n += 1
             self.conn.commit()
@@ -278,16 +311,18 @@ class Telemetry:
         with self._lock:
             cur = self.conn.execute(
                 "INSERT INTO golden_questions (text, category, behaviour, citations, "
-                "keywords, enabled, notes, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)",
+                "keywords, golden_answer, enabled, notes, created_at, updated_at) "
+                "VALUES (?,?,?,?,?,?,?,?,?,?)",
                 (q["text"], q.get("category", "general"), q.get("behaviour", "answer"),
                  json.dumps(q.get("citations", [])), json.dumps(q.get("keywords", [])),
-                 int(q.get("enabled", True)), q.get("notes"), now, now),
+                 q.get("golden_answer"), int(q.get("enabled", True)), q.get("notes"), now, now),
             )
             self.conn.commit()
             return int(cur.lastrowid)
 
     def update_golden(self, qid: int, fields: dict) -> bool:
-        allowed = {"text", "category", "behaviour", "citations", "keywords", "enabled", "notes"}
+        allowed = {"text", "category", "behaviour", "citations", "keywords",
+                   "golden_answer", "enabled", "notes"}
         sets, params = [], []
         for k, v in fields.items():
             if k not in allowed:
@@ -314,31 +349,35 @@ class Telemetry:
             return cur.rowcount > 0
 
     # ── test runs (writable, survives corpus clears) ──────────────────────────
+    # Column order is shared by insert (minus id/run_id) and select (plus id).
+    _RUN_COLS = (
+        "started_at", "finished_at", "status", "backend", "judge_backend", "scope",
+        "total", "passed", "failed", "answer_rate", "refusal_rate", "mean_composite",
+        "mean_latency_ms", "duration_ms", "error",
+    )
+    _RESULT_COLS = (
+        "question_id", "question", "category", "behaviour", "answered", "verdict",
+        "passed", "failed_checks", "retrieval_score", "judged", "judge_correctness",
+        "judge_groundedness", "judge_completeness", "judge_citation",
+        "judge_justification", "composite", "latency_ms", "error",
+    )
+
     def log_test_run(self, run: dict, results: list[dict]) -> int | None:
-        run_cols = (
-            "started_at", "finished_at", "status", "backend", "scope", "total",
-            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
-            "duration_ms", "error",
-        )
-        res_cols = (
-            "question_id", "question", "category", "behaviour", "answered", "verdict",
-            "passed", "failed_checks", "latency_ms", "error",
-        )
         try:
             with self._lock:
                 cur = self.conn.execute(
-                    f"INSERT INTO test_runs ({', '.join(run_cols)}) "
-                    f"VALUES ({', '.join('?' * len(run_cols))})",
-                    tuple(run.get(c) for c in run_cols),
+                    f"INSERT INTO test_runs ({', '.join(self._RUN_COLS)}) "
+                    f"VALUES ({', '.join('?' * len(self._RUN_COLS))})",
+                    tuple(run.get(c) for c in self._RUN_COLS),
                 )
                 run_id = int(cur.lastrowid)
                 for res in results:
                     row = dict(res)
                     row["failed_checks"] = json.dumps(res.get("failed_checks") or [])
                     self.conn.execute(
-                        f"INSERT INTO test_results (run_id, {', '.join(res_cols)}) "
-                        f"VALUES (?, {', '.join('?' * len(res_cols))})",
-                        (run_id, *(row.get(c) for c in res_cols)),
+                        f"INSERT INTO test_results (run_id, {', '.join(self._RESULT_COLS)}) "
+                        f"VALUES (?, {', '.join('?' * len(self._RESULT_COLS))})",
+                        (run_id, *(row.get(c) for c in self._RESULT_COLS)),
                     )
                 self.conn.commit()
                 return run_id
@@ -346,11 +385,7 @@ class Telemetry:
             return None
 
     def test_runs(self, limit: int = 25) -> list[dict]:
-        cols = (
-            "id", "started_at", "finished_at", "status", "backend", "scope", "total",
-            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
-            "duration_ms", "error",
-        )
+        cols = ("id", *self._RUN_COLS)
         with self._lock:
             rows = self.conn.execute(
                 f"SELECT {', '.join(cols)} FROM test_runs ORDER BY id DESC LIMIT ?",
@@ -359,15 +394,8 @@ class Telemetry:
         return [dict(zip(cols, r)) for r in rows]
 
     def test_run(self, run_id: int) -> dict | None:
-        run_cols = (
-            "id", "started_at", "finished_at", "status", "backend", "scope", "total",
-            "passed", "failed", "answer_rate", "refusal_rate", "mean_latency_ms",
-            "duration_ms", "error",
-        )
-        res_cols = (
-            "id", "question_id", "question", "category", "behaviour", "answered",
-            "verdict", "passed", "failed_checks", "latency_ms", "error",
-        )
+        run_cols = ("id", *self._RUN_COLS)
+        res_cols = ("id", *self._RESULT_COLS)
         with self._lock:
             r = self.conn.execute(
                 f"SELECT {', '.join(run_cols)} FROM test_runs WHERE id = ?", (run_id,),
@@ -384,6 +412,7 @@ class Telemetry:
             d = dict(zip(res_cols, rr))
             d["answered"] = bool(d["answered"]) if d["answered"] is not None else None
             d["passed"] = bool(d["passed"]) if d["passed"] is not None else None
+            d["judged"] = bool(d["judged"]) if d["judged"] is not None else None
             d["failed_checks"] = json.loads(d["failed_checks"]) if d["failed_checks"] else []
             results.append(d)
         run["results"] = results
