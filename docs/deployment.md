@@ -251,19 +251,38 @@ analytics view.
 ## Testing the deployment
 
 The **Testing** page (and the `/api/testing/*` endpoints, see [api.md](api.md))
-runs a curated golden set of questions through the live app and grades them
-deterministically — answered vs refused, expected citations present, expected
-keywords present. Use it to confirm a deployment is healthy after pointing it at
-new data, changing the answer model, or recalibrating the gate.
+runs a curated golden set of questions through the live app and scores each answer
+on two axes, combined into one composite score (0-100). Use it to confirm a
+deployment is healthy after pointing it at new data, changing the answer model, or
+recalibrating the gate.
 
+- **Retrieval sub-score** (deterministic): behaviour correct (answered vs refused),
+  expected citations present, expected keywords present — "found and cited the right
+  documents".
+- **Answer quality** (LLM-as-judge): when a question has a `golden_answer`, a judge
+  model scores the produced answer against that reference and the retrieved evidence
+  on correctness, groundedness, completeness and citation quality, with a short
+  justification.
+- **Composite** = a configurable weighted blend (defaults: retrieval 30%,
+  correctness 40%, groundedness 20%, completeness 10%). It degrades gracefully to
+  the retrieval sub-score when there's no golden answer or no judge.
+
+Notes:
 - The golden set and run history live in the **telemetry** DB, so they survive
   corpus clears/rebuilds. On first start the golden set is seeded from the bundled
-  `eval/gold-qa.json` (copied into the image); edit it freely from the page after.
+  `eval/gold-qa.json` (copied into the image, with its reference answers); edit it
+  freely from the page after.
 - Runs happen in the background (one at a time) — kick one off and leave; results
-  land in the run history with per-question pass/fail and failure reasons.
-- If the answer model is offline, a run ends cleanly marked `error` rather than
-  hanging, so it's safe to trigger from health checks. For a fully offline smoke
-  test, run against `HDE_LLM_BACKEND=mock`.
+  land in the run history with per-question composite, rubric scores, and rationale.
+- **Configure the judge in `[eval]`** (see `hde.example.toml`). By default the judge
+  reuses the answer model — but a model judging its own output inflates scores, so
+  for a real assessment set `judge_backend` / `judge_model` to a different, ideally
+  stronger, model. The UI flags the same-model case. Weights and the pass threshold
+  are configurable too.
+- If the answer model (or judge) is offline, a run ends cleanly marked `error`
+  rather than hanging, so it's safe to trigger from health checks. For a fully
+  offline smoke test, run against `HDE_LLM_BACKEND=mock` (the mock judge uses
+  deterministic token-overlap heuristics).
 
 ## Operational notes
 

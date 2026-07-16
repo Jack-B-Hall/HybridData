@@ -193,24 +193,40 @@ local time.
 
 ### Testing (golden set + health test runs)
 
-A curated golden set of questions, asked through the live engine and graded
-deterministically (no LLM judge), run as a background job. The golden set and run
-history live in the telemetry DB, so they survive corpus clears/rebuilds. On first
-run the golden set is seeded from the bundled demo gold file; negative (out-of-scope)
-questions are seeded as `behaviour: "refuse"`.
+A curated golden set of questions, asked through the live engine and scored on two
+axes combined into one composite score, run as a background job. The golden set and
+run history live in the telemetry DB, so they survive corpus clears/rebuilds. On
+first run the golden set is seeded from the bundled demo gold file (with reference
+`golden_answer`s); negative (out-of-scope) questions seed as `behaviour: "refuse"`.
 
-Grading, per question:
-- **behaviour** — `answer` questions must be answered, `refuse` questions must be
-  refused (from the gate verdict).
-- **citations** — every expected artifact-id must appear in the returned citations.
-- **keywords** — every expected keyword must appear (case-insensitive) in the answer.
+**Scoring** (see also `GET /api/testing/config` and `docs/deployment.md`):
+- **Retrieval sub-score** (deterministic, 0-1) — behaviour correct (answered vs
+  refused), expected citation artifact-ids present, expected keywords present.
+- **Answer quality** — when a `golden_answer` is present and a judge is available,
+  an LLM-as-judge scores the produced answer against the golden answer + retrieved
+  evidence on a rubric: correctness, groundedness, completeness, citation quality
+  (each 0-1) plus a short justification, returned as structured JSON.
+- **Composite (0-100)** — a weighted blend of the retrieval sub-score and the
+  judge's correctness/groundedness/completeness. With no golden answer or no judge,
+  it degrades to the retrieval sub-score alone. A question passes at composite ≥
+  the configured threshold (default 60).
 
-A question passes only if all applicable checks pass.
+#### `GET /api/testing/config`
+The scoring methodology, so the UI renders it transparently.
+```json
+{ "pass_threshold": 60.0,
+  "weights": { "retrieval": 0.30, "correctness": 0.40, "groundedness": 0.20, "completeness": 0.10 },
+  "rubric_dims": ["correctness", "groundedness", "completeness", "citation_quality"],
+  "judge": { "backend": "ollama", "model": "gemma4:26b-a4b-it-qat", "same_as_answer_model": true } }
+```
+`same_as_answer_model` is `true` when the judge reuses the answer model — a
+self-judging bias that inflates scores, surfaced in the UI so it isn't mistaken for
+an independent assessment.
 
 #### `GET /api/testing/questions?category=&behaviour=&enabled=`
 ```json
 { "count": 40, "questions": [ { "id", "text", "category", "behaviour",
-  "citations": [], "keywords": [], "enabled": true, "notes",
+  "citations": [], "keywords": [], "golden_answer", "enabled": true, "notes",
   "created_at", "updated_at" } ] }
 ```
 
@@ -218,7 +234,7 @@ A question passes only if all applicable checks pass.
 ```json
 // request (only `text` is required)
 { "text", "category": "general", "behaviour": "answer",
-  "citations": [], "keywords": [], "enabled": true, "notes": null }
+  "citations": [], "keywords": [], "golden_answer": null, "enabled": true, "notes": null }
 ```
 Returns the created question. `PATCH /api/testing/questions/{id}` updates any subset
 of those fields (404 if unknown); `DELETE /api/testing/questions/{id}` removes it
@@ -231,12 +247,12 @@ status (same shape as `GET /api/testing/run/status`).
 ```json
 { "categories": ["impact", "lookup"] }   // omit or empty = all enabled
 ```
-If the answer backend is unreachable, the run ends cleanly with `status: "error"`
-and a message — it never hangs.
+If the answer backend (or a separate judge backend) is unreachable, the run ends
+cleanly with `status: "error"` and a message — it never hangs.
 
 #### `GET /api/testing/run/status`
 ```json
-{ "running": true, "stage": "asking 12/40", "started_at", "finished_at": null,
+{ "running": true, "stage": "judging 12/40", "started_at", "finished_at": null,
   "status": null, "error": null, "total": 40, "done": 11, "passed": 9,
   "failed": 2, "run_id": null }
 ```
@@ -244,16 +260,18 @@ and a message — it never hangs.
 #### `GET /api/testing/runs?limit=25`
 Persistent run history, newest first.
 ```json
-{ "runs": [ { "id", "started_at", "finished_at", "status", "backend", "scope",
-  "total", "passed", "failed", "answer_rate", "refusal_rate",
-  "mean_latency_ms", "duration_ms", "error" } ] }
+{ "runs": [ { "id", "started_at", "finished_at", "status", "backend", "judge_backend",
+  "scope", "total", "passed", "failed", "answer_rate", "refusal_rate",
+  "mean_composite", "mean_latency_ms", "duration_ms", "error" } ] }
 ```
 
 #### `GET /api/testing/runs/{id}`
 One run's summary plus its per-question results (404 if unknown).
 ```json
-{ "id", ..., "results": [ { "id", "question_id", "question", "category",
-  "behaviour", "answered", "verdict", "passed", "failed_checks": [],
+{ "id", ..., "mean_composite", "results": [ { "id", "question_id", "question",
+  "category", "behaviour", "answered", "verdict", "passed", "failed_checks": [],
+  "retrieval_score", "judged", "judge_correctness", "judge_groundedness",
+  "judge_completeness", "judge_citation", "judge_justification", "composite",
   "latency_ms", "error" } ] }
 ```
 
