@@ -374,6 +374,7 @@ export interface GoldenQuestion {
   behaviour: GoldenBehaviour;
   citations: string[];
   keywords: string[];
+  golden_answer: string | null;
   enabled: boolean;
   notes: string | null;
   created_at: string;
@@ -391,6 +392,7 @@ export interface GoldenQuestionInput {
   behaviour?: GoldenBehaviour;
   citations?: string[];
   keywords?: string[];
+  golden_answer?: string | null;
   enabled?: boolean;
   notes?: string | null;
 }
@@ -421,12 +423,14 @@ export interface TestRunSummary {
   finished_at: string | null;
   status: "ok" | "error";
   backend: string | null;
+  judge_backend: string | null;
   scope: string | null;
   total: number | null;
   passed: number | null;
   failed: number | null;
   answer_rate: number | null;
   refusal_rate: number | null;
+  mean_composite: number | null;
   mean_latency_ms: number | null;
   duration_ms: number | null;
   error: string | null;
@@ -442,6 +446,14 @@ export interface TestResult {
   verdict: string | null;
   passed: boolean | null;
   failed_checks: string[];
+  retrieval_score: number | null;
+  judged: boolean | null;
+  judge_correctness: number | null;
+  judge_groundedness: number | null;
+  judge_completeness: number | null;
+  judge_citation: number | null;
+  judge_justification: string | null;
+  composite: number | null;
   latency_ms: number | null;
   error: string | null;
 }
@@ -456,6 +468,22 @@ export interface TestRunsResponse {
 
 export interface TestRunRequest {
   categories?: string[];
+}
+
+export interface TestingConfig {
+  pass_threshold: number;
+  weights: {
+    retrieval: number;
+    correctness: number;
+    groundedness: number;
+    completeness: number;
+  };
+  rubric_dims: string[];
+  judge: {
+    backend: string;
+    model: string;
+    same_as_answer_model: boolean;
+  };
 }
 
 export class ApiError extends Error {

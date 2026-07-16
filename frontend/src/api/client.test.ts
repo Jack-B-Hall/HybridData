@@ -209,6 +209,25 @@ describe("liveApi", () => {
     );
   });
 
+  it("getTestingConfig GETs the scoring config endpoint", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({
+      pass_threshold: 60, weights: { retrieval: 0.3, correctness: 0.4, groundedness: 0.2, completeness: 0.1 },
+      rubric_dims: ["correctness"], judge: { backend: "mock", model: "mock", same_as_answer_model: true },
+    }));
+    const cfg = await liveApi.getTestingConfig();
+    expect(mockFetch).toHaveBeenCalledWith("/api/testing/config", expect.any(Object));
+    expect(cfg.weights.correctness).toBe(0.4);
+  });
+
+  it("addGoldenQuestion includes the golden_answer in the POST body", async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValueOnce(jsonResponse({ id: 6 }));
+    await liveApi.addGoldenQuestion({ text: "Q?", golden_answer: "reference" });
+    const body = JSON.parse((mockFetch.mock.calls[0]?.[1] as RequestInit).body as string);
+    expect(body.golden_answer).toBe("reference");
+  });
+
   it("startTestRun POSTs categories and getTestRun encodes the run id", async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValueOnce(jsonResponse({ running: true }));

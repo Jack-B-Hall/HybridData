@@ -4,6 +4,7 @@ import type {
   GoldenBehaviour,
   GoldenQuestion,
   GoldenQuestionInput,
+  TestingConfig,
   TestResult,
   TestRunDetail,
   TestRunStatus,
@@ -17,6 +18,7 @@ export function TestingPage() {
   const [questions, setQuestions] = useState<GoldenQuestion[]>([]);
   const [status, setStatus] = useState<TestRunStatus | null>(null);
   const [runs, setRuns] = useState<TestRunSummary[]>([]);
+  const [config, setConfig] = useState<TestingConfig | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<{ category: string; behaviour: string; enabled: string }>({
     category: "",
@@ -36,6 +38,7 @@ export function TestingPage() {
     loadQuestions();
     loadRuns();
     api.getTestRunStatus().then(setStatus).catch(() => {});
+    api.getTestingConfig().then(setConfig).catch(() => {});
   }, [loadQuestions, loadRuns]);
 
   const running = status?.running ?? false;
@@ -102,12 +105,14 @@ export function TestingPage() {
         <h1 className="font-display text-2xl font-medium tracking-tight text-ink">Testing</h1>
         <p className="mt-0.5 text-sm text-ink-muted">
           Curate a golden set of questions and run them through the live app to confirm its health.
-          Grading is deterministic, answered vs refused plus expected citations and keywords. Runs
-          happen in the background, you can kick one off and leave.
+          Each answer is scored on two axes — did it retrieve and cite the right documents, and (via
+          an LLM-as-judge against a golden answer) is the answer itself correct, grounded and
+          complete — combined into one composite score. Runs happen in the background, you can kick
+          one off and leave.
         </p>
       </div>
 
-      <HealthStrip runs={runs} />
+      <HealthStrip runs={runs} config={config} />
 
       <RunPanel
         running={running}
@@ -117,6 +122,8 @@ export function TestingPage() {
         onRunAll={() => runTests()}
         onRunCategories={(c) => runTests(c)}
       />
+
+      <ScoringExplainer config={config} />
 
       <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -164,37 +171,41 @@ export function TestingPage() {
 }
 
 // ── Health strip ─────────────────────────────────────────────────────────────
-function HealthStrip({ runs }: { runs: TestRunSummary[] }) {
+function HealthStrip({ runs, config }: { runs: TestRunSummary[]; config: TestingConfig | null }) {
   const latest = runs[0];
   const prev = runs[1];
-  const pass = (r?: TestRunSummary) =>
-    r && r.total ? (r.passed ?? 0) / r.total : null;
-  const latestPass = pass(latest);
-  const prevPass = pass(prev);
-  const delta = latestPass != null && prevPass != null ? latestPass - prevPass : null;
+  const score = (r?: TestRunSummary) => (r && r.mean_composite != null ? r.mean_composite : null);
+  const latestScore = score(latest);
+  const prevScore = score(prev);
+  const delta = latestScore != null && prevScore != null ? latestScore - prevScore : null;
+  const passRate = latest && latest.total ? (latest.passed ?? 0) / latest.total : null;
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3" data-testid="health-strip">
       <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
-        <div className="text-[11px] uppercase tracking-wide text-ink-faint">Latest pass rate</div>
-        <div className="mt-1 font-display text-[28px] font-medium leading-none text-ink" data-testid="health-pass-rate">
-          {latestPass == null ? "—" : formatPercent(latestPass)}
-        </div>
-        {latest && (
-          <div className="mt-1 text-[12px] text-ink-faint">
-            {latest.passed}/{latest.total} passed
-          </div>
-        )}
-      </div>
-      <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
-        <div className="text-[11px] uppercase tracking-wide text-ink-faint">Trend vs previous</div>
-        <div className={`mt-1 font-display text-[28px] font-medium leading-none ${
-          delta == null ? "text-ink" : delta >= 0 ? "text-tier-formal" : "text-confidence-low"
-        }`}>
-          {delta == null ? "—" : `${delta >= 0 ? "+" : ""}${formatPercent(delta)}`}
+        <div className="text-[11px] uppercase tracking-wide text-ink-faint">Composite score</div>
+        <div className="mt-1 font-display text-[28px] font-medium leading-none text-ink" data-testid="health-composite">
+          {latestScore == null ? "—" : latestScore.toFixed(1)}
         </div>
         <div className="mt-1 text-[12px] text-ink-faint">
-          {prevPass == null ? "no earlier run" : `was ${formatPercent(prevPass)}`}
+          {delta == null ? (
+            "mean of last run, out of 100"
+          ) : (
+            <span className={delta >= 0 ? "text-tier-formal" : "text-confidence-low"}>
+              {delta >= 0 ? "+" : ""}{delta.toFixed(1)} vs previous
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
+        <div className="text-[11px] uppercase tracking-wide text-ink-faint">Pass rate</div>
+        <div className="mt-1 font-display text-[28px] font-medium leading-none text-ink" data-testid="health-pass-rate">
+          {passRate == null ? "—" : formatPercent(passRate)}
+        </div>
+        <div className="mt-1 text-[12px] text-ink-faint">
+          {latest
+            ? `${latest.passed}/${latest.total} ≥ ${config ? config.pass_threshold : 60} composite`
+            : "no runs yet"}
         </div>
       </div>
       <div className="rounded-card border border-border bg-canvas-raised p-4 shadow-panel">
@@ -204,10 +215,74 @@ function HealthStrip({ runs }: { runs: TestRunSummary[] }) {
         </div>
         {latest && (
           <div className="mt-1 text-[12px] text-ink-faint">
-            {latest.backend ?? "—"} · {latest.total} questions
+            answers: {latest.backend ?? "—"}
+            {latest.judge_backend ? ` · judge: ${latest.judge_backend}` : " · no judge"}
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+// ── Scoring methodology (transparent, data-driven from /api/testing/config) ───
+function ScoringExplainer({ config }: { config: TestingConfig | null }) {
+  const [open, setOpen] = useState(false);
+  if (!config) return null;
+  const w = config.weights;
+  const pct = (x: number) => `${Math.round(x * 100)}%`;
+  return (
+    <div className="rounded-card border border-border bg-canvas-raised shadow-panel" data-testid="scoring-explainer">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center gap-2 px-4 py-3 text-left"
+      >
+        <span className="text-ink-faint" aria-hidden>{open ? "▾" : "▸"}</span>
+        <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">How this is scored</span>
+        <span className="ml-2 text-[12px] text-ink-muted">
+          composite = retrieval {pct(w.retrieval)} · correctness {pct(w.correctness)} · groundedness{" "}
+          {pct(w.groundedness)} · completeness {pct(w.completeness)}
+        </span>
+      </button>
+      {open && (
+        <div className="space-y-3 border-t border-border/60 px-4 py-3 text-sm text-ink-muted">
+          <p>
+            Every enabled question is asked through the live app. Two independent signals are combined
+            into one 0-100 composite score:
+          </p>
+          <ul className="ml-4 list-disc space-y-1">
+            <li>
+              <span className="font-medium text-ink">Retrieval sub-score</span> (deterministic): did it
+              get the behaviour right (answer vs refuse) and surface the expected citations/keywords?
+            </li>
+            <li>
+              <span className="font-medium text-ink">Answer quality</span> (LLM-as-judge, when a golden
+              answer is present): the judge scores the answer against the golden answer and the
+              retrieved evidence on correctness, groundedness, completeness and citation quality.
+            </li>
+          </ul>
+          <div className="rounded-md border border-border bg-canvas-sunken px-3 py-2 font-mono text-[12px] text-ink">
+            composite = 100 × ( {w.retrieval.toFixed(2)}·retrieval + {w.correctness.toFixed(2)}·correctness
+            + {w.groundedness.toFixed(2)}·groundedness + {w.completeness.toFixed(2)}·completeness )
+          </div>
+          <p className="text-[12px]">
+            A question passes at composite ≥ {config.pass_threshold}. Citation quality is reported for
+            transparency but not weighted here, since citations are already scored in the retrieval
+            sub-score. With no golden answer or no judge available, the composite degrades gracefully to
+            the retrieval sub-score alone.
+          </p>
+          <p className="text-[12px]">
+            Judge model: <span className="font-mono text-ink">{config.judge.backend}/{config.judge.model}</span>.
+          </p>
+          {config.judge.same_as_answer_model && (
+            <p className="rounded-md border border-tier-unverified/40 bg-tier-unverified-soft px-3 py-2 text-[12px] text-tier-unverified" data-testid="judge-bias-warning">
+              ⚠ The judge is the same model that produces the answers. A model grading its own output
+              tends to inflate scores — set a different, ideally stronger, judge model in{" "}
+              <span className="font-mono">[eval] judge_backend / judge_model</span> for an unbiased assessment.
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -412,7 +487,16 @@ function GoldenTable({
                 <td className="py-2 pr-3 text-[12px] text-ink-muted">
                   {q.citations.length > 0 && <div>cites: {q.citations.join(", ")}</div>}
                   {q.keywords.length > 0 && <div>kw: {q.keywords.join(", ")}</div>}
-                  {q.citations.length === 0 && q.keywords.length === 0 && <span>—</span>}
+                  {q.golden_answer && (
+                    <span
+                      className="inline-block rounded-full border border-accent/30 bg-accent-soft/40 px-2 py-0.5 text-[10px] font-medium text-accent"
+                      title={q.golden_answer}
+                      data-testid="golden-answer-badge"
+                    >
+                      golden answer
+                    </span>
+                  )}
+                  {q.citations.length === 0 && q.keywords.length === 0 && !q.golden_answer && <span>—</span>}
                 </td>
                 <td className="py-2 pr-3">
                   <button
@@ -500,6 +584,7 @@ function QuestionEditor({
   const [behaviour, setBehaviour] = useState<GoldenBehaviour>(initial?.behaviour ?? "answer");
   const [citations, setCitations] = useState((initial?.citations ?? []).join(", "));
   const [keywords, setKeywords] = useState((initial?.keywords ?? []).join(", "));
+  const [goldenAnswer, setGoldenAnswer] = useState(initial?.golden_answer ?? "");
   const [notes, setNotes] = useState(initial?.notes ?? "");
   const [busy, setBusy] = useState(false);
 
@@ -516,6 +601,7 @@ function QuestionEditor({
         behaviour,
         citations: split(citations),
         keywords: split(keywords),
+        golden_answer: behaviour === "refuse" ? null : goldenAnswer.trim() || null,
         notes: notes.trim() || null,
       });
     } finally {
@@ -568,6 +654,16 @@ function QuestionEditor({
           className={`${field} disabled:opacity-50`}
         />
       </div>
+      {behaviour === "answer" && (
+        <textarea
+          value={goldenAnswer}
+          onChange={(e) => setGoldenAnswer(e.target.value)}
+          placeholder="Golden answer — the reference the judge grades against (optional; leave blank for retrieval-only scoring)"
+          rows={3}
+          data-testid="editor-golden-answer"
+          className={`${field} mt-2`}
+        />
+      )}
       <input
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
@@ -636,8 +732,13 @@ function RunRow({ run }: { run: TestRunSummary }) {
         <span className="text-sm text-ink-muted">{formatDate(run.finished_at ?? run.started_at)}</span>
         {run.status === "ok" ? (
           <span className="font-mono text-[13px] text-ink">
-            {run.passed}/{run.total} passed
-            {passRate != null && <span className="text-ink-muted"> · {formatPercent(passRate)}</span>}
+            {run.mean_composite != null && (
+              <span className="font-semibold">score {run.mean_composite.toFixed(1)}</span>
+            )}
+            <span className="text-ink-muted">
+              {" · "}{run.passed}/{run.total} passed
+              {passRate != null && ` (${formatPercent(passRate)})`}
+            </span>
           </span>
         ) : (
           <span
@@ -661,9 +762,11 @@ function RunRow({ run }: { run: TestRunSummary }) {
             <p className="mb-2 text-sm text-confidence-low">{run.error}</p>
           )}
           <div className="mb-2 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-muted">
+            {run.mean_composite != null && <span>Mean composite: {run.mean_composite.toFixed(1)}/100</span>}
             {run.answer_rate != null && <span>Answer rate: {formatPercent(run.answer_rate)}</span>}
             {run.refusal_rate != null && <span>Refusal correctness: {formatPercent(run.refusal_rate)}</span>}
-            <span>Backend: {run.backend ?? "—"}</span>
+            <span>Answers: {run.backend ?? "—"}</span>
+            <span>Judge: {run.judge_backend ?? "none"}</span>
             {run.duration_ms != null && <span>Duration: {formatLatency(run.duration_ms)}</span>}
           </div>
           {detail && <CategoryBreakdown results={detail.results} />}
@@ -671,39 +774,19 @@ function RunRow({ run }: { run: TestRunSummary }) {
             <p className="text-sm text-ink-faint">Loading results…</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[640px] border-collapse text-sm">
+              <table className="w-full min-w-[720px] border-collapse text-sm">
                 <thead>
                   <tr className="border-b border-border text-left text-[11px] uppercase tracking-wide text-ink-faint">
                     <th className="py-1.5 pr-3 font-semibold">Result</th>
+                    <th className="py-1.5 pr-3 font-semibold">Composite</th>
                     <th className="py-1.5 pr-3 font-semibold">Question</th>
                     <th className="py-1.5 pr-3 font-semibold">Expected</th>
-                    <th className="py-1.5 pr-3 font-semibold">Why</th>
-                    <th className="py-1.5 pr-3 font-semibold">Latency</th>
+                    <th className="py-1.5 pr-3 font-semibold">Scores</th>
                   </tr>
                 </thead>
                 <tbody>
                   {detail.results.map((res) => (
-                    <tr key={res.id} className="border-b border-border/60 align-top" data-testid="test-result-row">
-                      <td className="py-2 pr-3">
-                        {res.passed ? (
-                          <span className="rounded-full border border-tier-formal/30 bg-tier-formal-soft px-2 py-0.5 text-[11px] font-medium text-tier-formal">
-                            pass
-                          </span>
-                        ) : (
-                          <span className="rounded-full border border-confidence-low/30 bg-confidence-low/10 px-2 py-0.5 text-[11px] font-medium text-confidence-low">
-                            fail
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-2 pr-3 text-ink">{res.question}</td>
-                      <td className="py-2 pr-3"><BehaviourBadge behaviour={res.behaviour} /></td>
-                      <td className="py-2 pr-3 text-[12px] text-ink-muted">
-                        {res.failed_checks.length ? res.failed_checks.join("; ") : res.error ? res.error : "—"}
-                      </td>
-                      <td className="py-2 pr-3 font-mono text-[12px] text-ink-faint">
-                        {res.latency_ms == null ? "—" : formatLatency(res.latency_ms)}
-                      </td>
-                    </tr>
+                    <ResultRow key={res.id} res={res} />
                   ))}
                 </tbody>
               </table>
@@ -711,6 +794,113 @@ function RunRow({ run }: { run: TestRunSummary }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function ResultRow({ res }: { res: TestResult }) {
+  const [open, setOpen] = useState(false);
+  const compColor =
+    res.composite == null
+      ? "text-ink-faint"
+      : res.composite >= 75
+        ? "text-tier-formal"
+        : res.composite >= 60
+          ? "text-ink"
+          : "text-confidence-low";
+  return (
+    <>
+      <tr
+        className="cursor-pointer border-b border-border/60 align-top hover:bg-canvas-sunken/40"
+        data-testid="test-result-row"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <td className="py-2 pr-3">
+          {res.passed ? (
+            <span className="rounded-full border border-tier-formal/30 bg-tier-formal-soft px-2 py-0.5 text-[11px] font-medium text-tier-formal">
+              pass
+            </span>
+          ) : (
+            <span className="rounded-full border border-confidence-low/30 bg-confidence-low/10 px-2 py-0.5 text-[11px] font-medium text-confidence-low">
+              fail
+            </span>
+          )}
+        </td>
+        <td className={`py-2 pr-3 font-mono text-[13px] font-semibold ${compColor}`}>
+          {res.composite == null ? "—" : res.composite.toFixed(1)}
+        </td>
+        <td className="py-2 pr-3 text-ink">
+          <span className="mr-1 text-ink-faint" aria-hidden>{open ? "▾" : "▸"}</span>
+          {res.question}
+        </td>
+        <td className="py-2 pr-3"><BehaviourBadge behaviour={res.behaviour} /></td>
+        <td className="py-2 pr-3 text-[12px] text-ink-muted">
+          {res.judged ? "rubric-graded" : "retrieval only"}
+        </td>
+      </tr>
+      {open && (
+        <tr className="border-b border-border/60" data-testid="test-result-detail">
+          <td colSpan={5} className="px-3 py-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="space-y-1.5">
+                <ScoreBar label="Retrieval sub-score" value={res.retrieval_score} />
+                {res.judged ? (
+                  <>
+                    <ScoreBar label="Correctness (vs golden)" value={res.judge_correctness} />
+                    <ScoreBar label="Groundedness" value={res.judge_groundedness} />
+                    <ScoreBar label="Completeness" value={res.judge_completeness} />
+                    <ScoreBar label="Citation quality" value={res.judge_citation} muted />
+                  </>
+                ) : (
+                  <p className="text-[12px] text-ink-faint">
+                    Not judged (no golden answer or judge unavailable) — composite is the retrieval
+                    sub-score alone.
+                  </p>
+                )}
+              </div>
+              <div className="space-y-2 text-[12px]">
+                {res.judge_justification && (
+                  <div>
+                    <div className="mb-0.5 font-semibold uppercase tracking-wide text-ink-faint">Judge rationale</div>
+                    <p className="text-ink-muted">{res.judge_justification}</p>
+                  </div>
+                )}
+                {res.failed_checks.length > 0 && (
+                  <div>
+                    <div className="mb-0.5 font-semibold uppercase tracking-wide text-ink-faint">Deterministic checks</div>
+                    <ul className="ml-4 list-disc text-confidence-low">
+                      {res.failed_checks.map((f, i) => <li key={i}>{f}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {res.error && <p className="text-confidence-low">{res.error}</p>}
+                <div className="text-ink-faint">
+                  Latency: {res.latency_ms == null ? "—" : formatLatency(res.latency_ms)}
+                  {res.verdict ? ` · gate: ${res.verdict}` : ""}
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
+function ScoreBar({ label, value, muted = false }: { label: string; value: number | null; muted?: boolean }) {
+  const v = value == null ? 0 : Math.max(0, Math.min(1, value));
+  return (
+    <div className="flex items-center gap-2">
+      <div className="w-40 shrink-0 text-[12px] text-ink-muted">{label}</div>
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-canvas-sunken">
+        <div
+          className={`h-full rounded-full ${muted ? "bg-ink-faint" : "bg-accent"}`}
+          style={{ width: `${v * 100}%` }}
+        />
+      </div>
+      <div className="w-9 shrink-0 text-right font-mono text-[12px] text-ink">
+        {value == null ? "—" : value.toFixed(2)}
+      </div>
     </div>
   );
 }

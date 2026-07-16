@@ -21,6 +21,7 @@ import type {
   GoldenQuestionFilters,
   GoldenQuestionInput,
   GoldenQuestionsResponse,
+  TestingConfig,
   TestRunDetail,
   TestRunRequest,
   TestRunStatus,
@@ -158,6 +159,8 @@ export const liveApi = {
     request<{ ok: boolean; deleted: number }>(`/api/testing/questions/${id}`, {
       method: "DELETE",
     }),
+
+  getTestingConfig: () => request<TestingConfig>("/api/testing/config"),
 
   startTestRun: (body: TestRunRequest = {}) =>
     request<TestRunStatus>("/api/testing/run", {

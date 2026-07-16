@@ -209,18 +209,24 @@ const mockGolden: { questions: GoldenQuestion[]; seq: number } = {
     {
       id: 1, text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?",
       category: "provenance", behaviour: "answer", citations: ["KES-208", "WIKI-052", "ECR-214"],
-      keywords: ["LiFePO4"], enabled: true, notes: "Seeded from the bundled demo gold set.",
+      keywords: ["LiFePO4"],
+      golden_answer:
+        "The chemistry changed to LiFePO4 after the LiPo thermal runaway event KES-208 and to meet IEC 62133-2 for maritime BVLOS operations; approved via ECR-214 / ECN-312.",
+      enabled: true, notes: "Seeded from the bundled demo gold set.",
       created_at: nowIso(), updated_at: nowIso(),
     },
     {
       id: 2, text: "If ECR-221 changes the propulsion motors, what parts and documents are affected?",
       category: "impact", behaviour: "answer", citations: ["ECR-221"], keywords: [],
+      golden_answer:
+        "ECR-221 replaces motors P-1031/P-1032 with P-1041/P-1042, impacting the ESCs, the GNC attitude tuning, and the propulsion ICD.",
       enabled: true, notes: "Seeded from the bundled demo gold set.",
       created_at: nowIso(), updated_at: nowIso(),
     },
     {
       id: 3, text: "What firmware version is currently installed on the encryption FPGA module?",
       category: "negative", behaviour: "refuse", citations: [], keywords: [],
+      golden_answer: null,
       enabled: true, notes: "Out of scope — expect a refusal.",
       created_at: nowIso(), updated_at: nowIso(),
     },
@@ -243,24 +249,56 @@ const mockTestRun: {
   seq: 0,
 };
 
+const MOCK_WEIGHTS = { retrieval: 0.3, correctness: 0.4, groundedness: 0.2, completeness: 0.1 };
+
 function finishMockTestRun(questions: GoldenQuestion[]): void {
   const now = nowIso();
-  const results: TestResult[] = questions.map((q, i) => ({
-    id: i + 1, question_id: q.id, question: q.text, category: q.category,
-    behaviour: q.behaviour, answered: q.behaviour === "answer", verdict:
-      q.behaviour === "answer" ? "sufficient" : "insufficient",
-    passed: true, failed_checks: [], latency_ms: 40 + i * 7, error: null,
-  }));
+  const results: TestResult[] = questions.map((q, i) => {
+    const answered = q.behaviour === "answer";
+    const retrieval = 1.0;
+    const judged = answered && !!q.golden_answer;
+    // Plausible, deterministic rubric scores for the demo (a real judge varies).
+    const dims = judged
+      ? { correctness: 0.86, groundedness: 0.91, completeness: 0.8, citation_quality: 0.9 }
+      : null;
+    const composite = judged
+      ? Math.round(
+          100 *
+            (MOCK_WEIGHTS.retrieval * retrieval +
+              MOCK_WEIGHTS.correctness * dims!.correctness +
+              MOCK_WEIGHTS.groundedness * dims!.groundedness +
+              MOCK_WEIGHTS.completeness * dims!.completeness) *
+            10,
+        ) / 10
+      : 100 * retrieval;
+    return {
+      id: i + 1, question_id: q.id, question: q.text, category: q.category,
+      behaviour: q.behaviour, answered, verdict: answered ? "sufficient" : "insufficient",
+      passed: composite >= 60, failed_checks: [], retrieval_score: retrieval,
+      judged, judge_correctness: dims?.correctness ?? null,
+      judge_groundedness: dims?.groundedness ?? null,
+      judge_completeness: dims?.completeness ?? null,
+      judge_citation: dims?.citation_quality ?? null,
+      judge_justification: judged
+        ? "Matches the reference on the key facts; claims are supported by the retrieved evidence."
+        : null,
+      composite, latency_ms: 40 + i * 7, error: null,
+    };
+  });
   const passed = results.filter((r) => r.passed).length;
   const answerRes = results.filter((r) => r.behaviour === "answer");
   const refuseRes = results.filter((r) => r.behaviour === "refuse");
+  const comps = results.map((r) => r.composite ?? 0);
   const runId = ++mockTestRun.seq;
   const summary: TestRunSummary = {
     id: runId, started_at: mockTestRun.status.started_at ?? now, finished_at: now,
-    status: "ok", backend: "mock/mock", scope: "all enabled", total: results.length,
+    status: "ok", backend: "mock/mock",
+    judge_backend: results.some((r) => r.judged) ? "mock/mock" : null,
+    scope: "all enabled", total: results.length,
     passed, failed: results.length - passed,
     answer_rate: answerRes.length ? answerRes.filter((r) => r.answered).length / answerRes.length : null,
     refusal_rate: refuseRes.length ? refuseRes.filter((r) => r.answered === false).length / refuseRes.length : null,
+    mean_composite: comps.length ? Math.round((comps.reduce((s, c) => s + c, 0) / comps.length) * 10) / 10 : null,
     mean_latency_ms: results.length ? Math.round(results.reduce((s, r) => s + (r.latency_ms ?? 0), 0) / results.length) : null,
     duration_ms: 900, error: null,
   };
@@ -434,8 +472,9 @@ export const mockApi: HdeApi = {
     const q: GoldenQuestion = {
       id: ++mockGolden.seq, text: body.text, category: body.category ?? "general",
       behaviour: body.behaviour ?? "answer", citations: body.citations ?? [],
-      keywords: body.keywords ?? [], enabled: body.enabled ?? true,
-      notes: body.notes ?? null, created_at: now, updated_at: now,
+      keywords: body.keywords ?? [], golden_answer: body.golden_answer ?? null,
+      enabled: body.enabled ?? true, notes: body.notes ?? null,
+      created_at: now, updated_at: now,
     };
     mockGolden.questions.push(q);
     return q;
@@ -455,6 +494,16 @@ export const mockApi: HdeApi = {
     if (idx === -1) throw new ApiError(`no golden question ${id}`, 404);
     mockGolden.questions.splice(idx, 1);
     return { ok: true, deleted: id };
+  },
+
+  getTestingConfig: async () => {
+    await delay(40);
+    return {
+      pass_threshold: 60.0,
+      weights: MOCK_WEIGHTS,
+      rubric_dims: ["correctness", "groundedness", "completeness", "citation_quality"],
+      judge: { backend: "mock", model: "mock", same_as_answer_model: true },
+    };
   },
 
   startTestRun: async (body: TestRunRequest = {}) => {

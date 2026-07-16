@@ -78,6 +78,7 @@ interface GoldenQ {
   behaviour: "answer" | "refuse";
   citations: string[];
   keywords: string[];
+  golden_answer: string | null;
   enabled: boolean;
   notes: string | null;
   created_at: string;
@@ -97,8 +98,8 @@ interface TestingState {
 function seedGolden(): GoldenQ[] {
   const now = new Date().toISOString();
   return [
-    { id: 1, text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?", category: "provenance", behaviour: "answer", citations: ["ECR-214"], keywords: [], enabled: true, notes: null, created_at: now, updated_at: now },
-    { id: 2, text: "What firmware version is on the encryption FPGA module?", category: "negative", behaviour: "refuse", citations: [], keywords: [], enabled: true, notes: null, created_at: now, updated_at: now },
+    { id: 1, text: "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?", category: "provenance", behaviour: "answer", citations: ["ECR-214"], keywords: [], golden_answer: "It changed to LiFePO4 after the KES-208 thermal event.", enabled: true, notes: null, created_at: now, updated_at: now },
+    { id: 2, text: "What firmware version is on the encryption FPGA module?", category: "negative", behaviour: "refuse", citations: [], keywords: [], golden_answer: null, enabled: true, notes: null, created_at: now, updated_at: now },
   ];
 }
 let testing: TestingState = {
@@ -122,17 +123,30 @@ function testRunStatus(): Record<string, unknown> {
     const now = new Date().toISOString();
     const runId = ++testing.runSeq;
     const enabled = testing.questions.filter((q) => q.enabled);
-    const results = enabled.slice(0, testing.ranQuestions || enabled.length).map((q, i) => ({
-      id: i + 1, question_id: q.id, question: q.text, category: q.category,
-      behaviour: q.behaviour, answered: q.behaviour === "answer",
-      verdict: q.behaviour === "answer" ? "sufficient" : "insufficient",
-      passed: true, failed_checks: [], latency_ms: 40 + i * 5, error: null,
-    }));
+    const results = enabled.slice(0, testing.ranQuestions || enabled.length).map((q, i) => {
+      const answered = q.behaviour === "answer";
+      const judged = answered && !!q.golden_answer;
+      const composite = judged ? 88.0 : 100.0;
+      return {
+        id: i + 1, question_id: q.id, question: q.text, category: q.category,
+        behaviour: q.behaviour, answered,
+        verdict: answered ? "sufficient" : "insufficient",
+        passed: composite >= 60, failed_checks: [], retrieval_score: 1.0,
+        judged, judge_correctness: judged ? 0.86 : null,
+        judge_groundedness: judged ? 0.91 : null, judge_completeness: judged ? 0.8 : null,
+        judge_citation: judged ? 0.9 : null,
+        judge_justification: judged ? "Agrees with the reference; claims supported by evidence." : null,
+        composite, latency_ms: 40 + i * 5, error: null,
+      };
+    });
     const total = results.length;
+    const comps = results.map((r) => r.composite);
     const summary = {
       id: runId, started_at: testing.startedIso, finished_at: now, status: "ok",
-      backend: "mock/mock", scope: "all enabled", total, passed: total, failed: 0,
+      backend: "mock/mock", judge_backend: results.some((r) => r.judged) ? "mock/mock" : null,
+      scope: "all enabled", total, passed: total, failed: 0,
       answer_rate: 1, refusal_rate: results.some((r) => r.behaviour === "refuse") ? 1 : null,
+      mean_composite: comps.length ? Math.round((comps.reduce((s, c) => s + c, 0) / comps.length) * 10) / 10 : null,
       mean_latency_ms: 50, duration_ms: 420, error: null,
     };
     testing.runs.unshift(summary);
@@ -468,6 +482,7 @@ export async function mockApiRoutes(page: Page): Promise<void> {
         id: ++testing.qSeq, text: body.text ?? "", category: body.category ?? "general",
         behaviour: (body.behaviour as GoldenQ["behaviour"]) ?? "answer",
         citations: body.citations ?? [], keywords: body.keywords ?? [],
+        golden_answer: body.golden_answer ?? null,
         enabled: body.enabled ?? true, notes: body.notes ?? null,
         created_at: now, updated_at: now,
       };
@@ -499,6 +514,16 @@ export async function mockApiRoutes(page: Page): Promise<void> {
         await route.fulfill({ json: { ok: true, deleted: id } });
         return;
       }
+    }
+
+    if (pathname === "/api/testing/config") {
+      await route.fulfill({ json: {
+        pass_threshold: 60.0,
+        weights: { retrieval: 0.3, correctness: 0.4, groundedness: 0.2, completeness: 0.1 },
+        rubric_dims: ["correctness", "groundedness", "completeness", "citation_quality"],
+        judge: { backend: "mock", model: "mock", same_as_answer_model: true },
+      } });
+      return;
     }
 
     if (pathname === "/api/testing/run" && request.method() === "POST") {
