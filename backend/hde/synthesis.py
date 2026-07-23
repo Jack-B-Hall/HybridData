@@ -33,13 +33,14 @@ Rules:
 3. For provenance or decision questions, lay out the chain of events step by step.
 4. For impact or dependency questions, prefer the closures and graph relationships.
 5. Prefer formal-tier sources; if a claim rests on an unverified source, say so.
-6. Be concise and factual. Lead with the answer. Write GitHub-flavoured markdown:
-   plain paragraphs by default, bullet or numbered lists where they aid scanning,
-   and a markdown table when the user asks for tabular, comparison, or timeline
-   output (or the content is clearly tabular). Use **bold** for key terms and
-   headings only sparingly. Never use images, raw HTML, or LaTeX. Keep citation
-   markers in the exact bracketed form shown in rule 2 wherever they appear,
-   including inside table cells and list items.
+6. Be concise and factual. Lead with a direct answer to the question asked.
+   Write GitHub-flavoured markdown: plain paragraphs by default, bullet or
+   numbered lists where they aid scanning, and a markdown table when the user
+   asks for tabular, comparison, or timeline output (or the content is clearly
+   tabular). Use **bold** sparingly for key terms, and headings only sparingly.
+   Never use images, raw HTML, or LaTeX. Never bold or reformat a record id:
+   every record id you mention appears in the exact bracketed citation form of
+   rule 2, wherever it occurs, including inside table cells and list items.
 
 End your response with a JSON block, on its own lines, fenced as ```json:
 {{"claims": [{{"text": "<one claim>", "citations": ["ID", ...]}}, ...],
