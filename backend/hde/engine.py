@@ -20,6 +20,7 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from . import chat as chat_mod
 from . import gate as gate_mod
 from . import ids as ids_mod
 from . import store
@@ -29,7 +30,7 @@ from .graph import KnowledgeGraph
 from .llm import LLMClient, build_llm
 from .retrieval import retrieve
 from .synthesis import stream_synthesis, synthesize
-from .telemetry import Telemetry
+from .telemetry import Telemetry, _now as _telemetry_now
 
 CONFIDENCE = {"sufficient": "high", "borderline": "medium", "insufficient": "low"}
 
@@ -325,6 +326,194 @@ class Engine:
             answer_chars=0, streamed=True, status=status, error=error,
         )
 
+    # ── chat (multi-turn conversations) ──────────────────────────────────────
+    # Per user turn: condense (message + bounded history -> one standalone
+    # question), then run the SAME pipeline as a single-shot ask against it:
+    # fresh fused retrieval, the deterministic gate, and grounded synthesis
+    # (which additionally sees the bounded history window, for continuity only).
+    # The engine lock is held only inside _prepare, exactly like ask/ask_stream;
+    # neither condensation nor the model stream ever holds it.
+
+    def create_conversation(self, title: str | None = None) -> dict:
+        return self.telemetry.create_conversation(title)
+
+    def list_conversations(self, limit: int = 100) -> list[dict]:
+        return self.telemetry.list_conversations(limit)
+
+    def get_conversation(self, cid: int) -> dict | None:
+        return self.telemetry.get_conversation(cid)
+
+    def rename_conversation(self, cid: int, title: str) -> bool:
+        return self.telemetry.rename_conversation(cid, title)
+
+    def delete_conversation(self, cid: int) -> bool:
+        return self.telemetry.delete_conversation(cid)
+
+    def _chat_window(self, cid: int) -> list[chat_mod.HistoryTurn]:
+        """The bounded history window for a conversation's next turn."""
+        turns = [
+            chat_mod.HistoryTurn(
+                message=t["message"], answer=t.get("answer") or "",
+                cited_ids=t.get("cited_ids") or [],
+                answered=bool(t.get("answered")),
+            )
+            for t in self.telemetry.recent_turns(cid, limit=max(self.settings.chat_history_turns, 1))
+        ]
+        return chat_mod.bound_history(
+            turns, self.settings.chat_history_turns, self.settings.chat_history_char_budget
+        )
+
+    def chat_turn(self, cid: int, message: str) -> dict:
+        """Run one blocking chat turn; returns the persisted turn payload.
+
+        Raises the underlying exception if synthesis fails (the API maps it to
+        a clean per-turn HTTP error)."""
+        final: dict | None = None
+        error: str | None = None
+        for event in self.chat_turn_stream(cid, message):
+            if event["type"] == "done":
+                final = event["turn"]
+            elif event["type"] == "error":
+                error = event["message"]
+        if final is None:
+            raise RuntimeError(error or "chat turn produced no result")
+        return final
+
+    def chat_turn_stream(self, cid: int, message: str):
+        """Yield one chat turn as a sequence of events for incremental UI.
+
+        Event order mirrors :meth:`ask_stream`, with one chat-specific prefix:
+
+        * ``rewrite``   the condensed standalone question this turn will
+          retrieve on (also carried in the final turn payload).
+        * ``retrieval`` sources + graph paths + gate verdict, as in ask_stream.
+        * ``token``     answer prose deltas (answerable turns only).
+        * ``done``      the persisted turn: raw message, rewrite, and a result
+          payload shaped exactly like a single-shot ask result.
+
+        The engine lock is held only across the DB phase (:meth:`_prepare`),
+        never across the model stream; a mid-generation failure is logged and
+        surfaced as a per-turn error event rather than a hang.
+        """
+        t0 = time.time()
+        window = self._chat_window(cid)
+        cond = chat_mod.condense(
+            self.llm, message, window, self.id_re,
+            timeout_s=self.settings.chat_condense_timeout_s,
+        )
+        yield {
+            "type": "rewrite",
+            "conversation_id": cid,
+            "message": message,
+            "rewritten": cond.question,
+            "rewrite_method": cond.method,
+        }
+
+        prep = self._prepare(cond.question)  # locked; released before the LLM streams
+        retrieval_ms = int((time.time() - t0) * 1000)
+        sources = [c.as_dict() for c in prep.chunks]
+
+        yield {
+            "type": "retrieval",
+            "answered": prep.answerable,
+            "verdict": prep.verdict,
+            "confidence": CONFIDENCE[prep.verdict],
+            "signals": prep.signals,
+            "backend": self.llm.name,
+            "sources": sources,
+            "graph_paths": prep.graph_paths,
+            "retrieval": prep.debug,
+        }
+
+        if not prep.answerable:
+            result = AskResult(
+                question=cond.question, answered=False, verdict=prep.verdict,
+                confidence=CONFIDENCE[prep.verdict], answer=REFUSAL_TEXT,
+                signals=prep.signals, sources=sources,
+                latency_ms=int((time.time() - t0) * 1000),
+                backend=self.llm.name, retrieval=prep.debug,
+            )
+            self._log(result, retrieval_ms=retrieval_ms, llm_ms=0, streamed=True)
+            turn = self._log_chat_turn(cid, message, cond, result)
+            yield {"type": "done", "turn": turn}
+            return
+
+        llm_t0 = time.time()
+        try:
+            stream = stream_synthesis(
+                self.llm, cond.question, prep.chunks, prep.graph_paths, prep.closures,
+                borderline=(prep.verdict == "borderline"), id_re=self.id_re,
+                history=chat_mod.render_history_block(window) if window else None,
+            )
+            while True:
+                try:
+                    piece = next(stream)
+                except StopIteration as stop:
+                    answer = stop.value
+                    break
+                yield {"type": "token", "text": piece}
+        except GeneratorExit:
+            self._log_incomplete(cond.question, prep, retrieval_ms,
+                                 int((time.time() - llm_t0) * 1000), status="abandoned")
+            raise
+        except Exception as exc:
+            self._log_incomplete(cond.question, prep, retrieval_ms,
+                                 int((time.time() - llm_t0) * 1000),
+                                 status="error", error=str(exc))
+            self.telemetry.log_chat_turn({
+                "conversation_id": cid, "message": message,
+                "rewritten": cond.question, "rewrite_method": cond.method,
+                "backend": self.llm.name, "status": "error", "error": str(exc),
+                "latency_ms": int((time.time() - t0) * 1000),
+            })
+            yield {"type": "error", "message": str(exc)}
+            return
+
+        llm_ms = int((time.time() - llm_t0) * 1000)
+        result = AskResult(
+            question=cond.question, answered=True, verdict=prep.verdict,
+            confidence=CONFIDENCE[prep.verdict], answer=answer.text,
+            signals=prep.signals,
+            claims=[c.as_dict() for c in answer.claims],
+            citations=[c.as_dict() for c in answer.citations],
+            graph_paths=answer.graph_paths, sources=sources,
+            latency_ms=int((time.time() - t0) * 1000),
+            backend=self.llm.name, retrieval=prep.debug,
+        )
+        self._log(result, retrieval_ms=retrieval_ms, llm_ms=llm_ms, streamed=True)
+        turn = self._log_chat_turn(cid, message, cond, result)
+        yield {"type": "done", "turn": turn}
+
+    def _log_chat_turn(
+        self, cid: int, message: str, cond: "chat_mod.CondensedQuestion", result: AskResult
+    ) -> dict:
+        """Persist a completed turn and return the payload the API/UI use."""
+        result_dict = result.as_dict()
+        turn = {
+            "conversation_id": cid,
+            "ts": _telemetry_now(),
+            "message": message,
+            "rewritten": cond.question,
+            "rewrite_method": cond.method,
+            "ask_id": result.ask_id or None,
+            "answered": int(result.answered),
+            "verdict": result.verdict,
+            "confidence": result.confidence,
+            "answer": result.answer,
+            "cited_ids": [c["artifact_id"] for c in result_dict["citations"]],
+            "result": result_dict,
+            "latency_ms": result.latency_ms,
+            "backend": result.backend,
+            "status": "ok",
+            "error": None,
+        }
+        turn_id = self.telemetry.log_chat_turn(turn)
+        payload = dict(turn)
+        payload["id"] = turn_id or 0
+        payload["answered"] = result.answered
+        payload["ask_id"] = result.ask_id
+        return payload
+
     # ── feedback + system health ─────────────────────────────────────────────
     def submit_feedback(self, ask_id: int, rating: str, comment: str | None = None) -> int | None:
         return self.telemetry.add_feedback(ask_id, rating, comment)
@@ -459,6 +648,9 @@ class Engine:
             "app_icon": declared.get("app_icon") or self.settings.corpus_app_icon,
             "id_pattern": id_pattern,
             "tier_labels": {str(t): provenance.label_for(t) for t in (1, 2, 3)},
+            # Per-tab enablement ([ui.tabs] in config), so the frontend can hide
+            # switched-off tabs and guard their routes.
+            "tabs": dict(self.settings.ui_tabs),
         }
 
     def corpus_stats(self) -> dict:

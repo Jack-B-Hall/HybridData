@@ -35,6 +35,10 @@ DEFAULT_DOMAIN_STOPWORDS = (
     "requires", "require", "required", "system", "new",
 )
 
+# The product tabs the frontend can show. Each can be switched off per deployment
+# via [ui.tabs] in the config file (or HDE_UI_TAB_<NAME> env vars); all default on.
+UI_TAB_NAMES = ("interface", "chat", "documents", "explorer", "ingestion", "testing")
+
 
 @dataclass(frozen=True)
 class Settings:
@@ -78,6 +82,17 @@ class Settings:
     llm_num_ctx: int = 16384
     llm_think: bool = False        # enable reasoning-model chain-of-thought (slow)
     llm_num_predict: int = 1500    # max answer tokens for ollama
+
+    # ── Chat (multi-turn conversations) ────────────────────────────────────
+    # Every chat turn condenses the new message + recent history into one
+    # standalone question, then re-runs the full retrieve -> gate -> synthesize
+    # pipeline against it. The history window sent to synthesis (continuity
+    # only, never evidence) is bounded by BOTH knobs below.
+    chat_history_turns: int = 6        # last N turns included in the window
+    chat_history_char_budget: int = 6000  # total character cap on the window
+    # The condensation rewrite is time-boxed; on timeout (or any failure) the
+    # raw message is used as-is, so a slow or down LLM host never hangs a turn.
+    chat_condense_timeout_s: int = 20
 
     # ── Retrieval / gate tuning ────────────────────────────────────────────
     top_chunks: int = 8
@@ -132,6 +147,12 @@ class Settings:
     corpus_app_name: str | None = None
     corpus_app_icon: str | None = None
 
+    # ── UI tabs ────────────────────────────────────────────────────────────
+    # Which product tabs the frontend shows, resolved as {tab_name: enabled}.
+    # All default to true; switch tabs off per deployment via [ui.tabs] in the
+    # config file or HDE_UI_TAB_<NAME> env vars (e.g. HDE_UI_TAB_TESTING=0).
+    ui_tabs: dict = field(default_factory=lambda: {name: True for name in UI_TAB_NAMES})
+
     @classmethod
     def load(cls) -> "Settings":
         """Resolve settings from defaults < config file < environment variables."""
@@ -162,6 +183,9 @@ class Settings:
             llm_num_ctx=_pick_int("HDE_LLM_NUM_CTX", fv("llm", "num_ctx"), cls.llm_num_ctx),
             llm_think=_pick_bool("HDE_LLM_THINK", fv("llm", "think"), cls.llm_think),
             llm_num_predict=_pick_int("HDE_LLM_NUM_PREDICT", fv("llm", "num_predict"), cls.llm_num_predict),
+            chat_history_turns=_pick_int("HDE_CHAT_HISTORY_TURNS", fv("chat", "history_turns"), cls.chat_history_turns),
+            chat_history_char_budget=_pick_int("HDE_CHAT_HISTORY_CHAR_BUDGET", fv("chat", "history_char_budget"), cls.chat_history_char_budget),
+            chat_condense_timeout_s=_pick_int("HDE_CHAT_CONDENSE_TIMEOUT_S", fv("chat", "condense_timeout_s"), cls.chat_condense_timeout_s),
             top_chunks=_pick_int("HDE_TOP_CHUNKS", fv("retrieval", "top_chunks"), cls.top_chunks),
             rrf_k=_pick_int("HDE_RRF_K", fv("retrieval", "rrf_k"), cls.rrf_k),
             graph_hops=_pick_int("HDE_GRAPH_HOPS", fv("retrieval", "graph_hops"), cls.graph_hops),
@@ -187,6 +211,7 @@ class Settings:
             corpus_app_name=_pick_optional("HDE_CORPUS_APP_NAME", fv("corpus", "app_name"), None),
             corpus_app_icon=_pick_optional("HDE_CORPUS_APP_ICON", fv("corpus", "app_icon"), None),
             ingest_sources=_read_ingest_sources(f.get("ingest", {})),
+            ui_tabs=_read_ui_tabs(f.get("ui", {})),
         )
 
     # Backwards-compatible alias (env + file layering happens either way).
@@ -281,6 +306,18 @@ def _read_ingest_sources(section: dict) -> tuple[tuple[str, str], ...]:
         elif isinstance(val, list):
             out.extend((kind, str(v)) for v in val if str(v))
     return tuple(out) if out else (("demo", ""),)
+
+
+def _read_ui_tabs(section: dict) -> dict:
+    """Resolve the per-tab enable map: defaults (all on) < [ui.tabs] < env vars.
+
+    Unknown keys in the file are ignored; every known tab always resolves to a
+    boolean so the frontend gets a complete map."""
+    filetabs = section.get("tabs", {}) if isinstance(section, dict) else {}
+    return {
+        name: _pick_bool(f"HDE_UI_TAB_{name.upper()}", filetabs.get(name), True)
+        for name in UI_TAB_NAMES
+    }
 
 
 def _read_starters(fileval) -> tuple[tuple[str, str], ...]:

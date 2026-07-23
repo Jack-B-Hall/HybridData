@@ -142,3 +142,62 @@ def test_config_file_app_branding_parsed(tmp_path, monkeypatch):
     s = Settings.load()
     assert s.corpus_app_name == "Acme"
     assert s.corpus_app_icon == "🚀"
+
+
+# ── [ui.tabs] per-tab enablement ─────────────────────────────────────────────
+def _clear_tab_env(monkeypatch):
+    from hde.config import UI_TAB_NAMES
+
+    for name in UI_TAB_NAMES:
+        monkeypatch.delenv(f"HDE_UI_TAB_{name.upper()}", raising=False)
+
+
+def test_ui_tabs_default_all_enabled(tmp_path, monkeypatch):
+    monkeypatch.setenv("HDE_CONFIG", str(tmp_path / "absent.toml"))
+    _clear_tab_env(monkeypatch)
+    s = Settings.load()
+    assert s.ui_tabs == {
+        "interface": True, "chat": True, "documents": True,
+        "explorer": True, "ingestion": True, "testing": True,
+    }
+
+
+def test_ui_tabs_config_file_disables_and_unknown_keys_ignored(tmp_path, monkeypatch):
+    cfg = tmp_path / "hde.toml"
+    cfg.write_text("[ui.tabs]\ntesting = false\ningestion = false\nbogus = false\n")
+    monkeypatch.setenv("HDE_CONFIG", str(cfg))
+    _clear_tab_env(monkeypatch)
+    s = Settings.load()
+    assert s.ui_tabs["testing"] is False
+    assert s.ui_tabs["ingestion"] is False
+    assert s.ui_tabs["interface"] is True and s.ui_tabs["chat"] is True
+    assert "bogus" not in s.ui_tabs
+
+
+def test_ui_tabs_env_overrides_config_file(tmp_path, monkeypatch):
+    cfg = tmp_path / "hde.toml"
+    cfg.write_text("[ui.tabs]\ntesting = false\n")
+    monkeypatch.setenv("HDE_CONFIG", str(cfg))
+    _clear_tab_env(monkeypatch)
+    monkeypatch.setenv("HDE_UI_TAB_TESTING", "1")
+    monkeypatch.setenv("HDE_UI_TAB_CHAT", "0")
+    s = Settings.load()
+    assert s.ui_tabs["testing"] is True   # env wins over the file
+    assert s.ui_tabs["chat"] is False
+
+
+def test_ui_tabs_exposed_through_corpus_meta(tmp_path):
+    settings = Settings(
+        db_path=tmp_path / "d.db", telemetry_db=tmp_path / "t.db",
+        embedder="hash", llm_backend="mock",
+        ui_tabs={"interface": True, "chat": True, "documents": True,
+                 "explorer": True, "ingestion": False, "testing": False},
+    )
+    ingest(_BareAdapter(), settings, reset=True)
+    eng = Engine(settings)
+    try:
+        tabs = eng.corpus_meta()["tabs"]
+        assert tabs["ingestion"] is False and tabs["testing"] is False
+        assert tabs["chat"] is True
+    finally:
+        eng.close()

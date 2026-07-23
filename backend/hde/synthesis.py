@@ -61,6 +61,16 @@ BORDERLINE_NOTE = (
     "found rather than guessing."
 )
 
+# Framing for the optional multi-turn history window (see hde.chat). History is
+# for reference resolution and continuity ONLY: the grounding rules above still
+# apply, so claims must come from the retrieved context, never from history.
+HISTORY_HEADER = (
+    "## Conversation history (context only)\n"
+    "Earlier turns of this conversation, provided so you can resolve references "
+    "and keep continuity. Do NOT treat the history as evidence: every claim must "
+    "be grounded in the retrieved chunks above and cited as instructed.\n"
+)
+
 
 @dataclass
 class Citation:
@@ -236,10 +246,16 @@ def build_request(
     closures: list[dict],
     *,
     borderline: bool = False,
+    history: str | None = None,
 ) -> SynthesisRequest:
-    """Assemble the grounded prompt a backend needs to answer one question."""
+    """Assemble the grounded prompt a backend needs to answer one question.
+
+    ``history`` is the optional bounded multi-turn window (chat only); when
+    None the prompt is byte-identical to the single-shot ask path."""
     context = build_context(chunks, graph_paths, closures)
     user_prompt = f"Question: {question}\n\nContext:\n{context}"
+    if history:
+        user_prompt += f"\n\n{HISTORY_HEADER}{history}"
     if borderline:
         user_prompt += BORDERLINE_NOTE
     return SynthesisRequest(
@@ -268,8 +284,11 @@ def synthesize(
     *,
     borderline: bool = False,
     id_re: "re.Pattern[str]" = ID_RE,
+    history: str | None = None,
 ) -> Answer:
-    raw = llm.synthesize(build_request(question, chunks, graph_paths, closures, borderline=borderline))
+    raw = llm.synthesize(
+        build_request(question, chunks, graph_paths, closures, borderline=borderline, history=history)
+    )
     return parse_synthesis(raw, chunks, graph_paths, id_re)
 
 
@@ -282,6 +301,7 @@ def stream_synthesis(
     *,
     borderline: bool = False,
     id_re: "re.Pattern[str]" = ID_RE,
+    history: str | None = None,
 ):
     """Generator that yields each newly-displayable slice of answer prose as the
     model streams, and *returns* the fully-parsed :class:`Answer` (accessible via
@@ -291,7 +311,9 @@ def stream_synthesis(
     the returned Answer's citations, claims, and cleaned prose are identical to
     the blocking path — streaming only changes *when* the prose becomes visible.
     """
-    request = build_request(question, chunks, graph_paths, closures, borderline=borderline)
+    request = build_request(
+        question, chunks, graph_paths, closures, borderline=borderline, history=history
+    )
     raw_parts: list[str] = []
     emitted = 0
     for piece in llm.synthesize_stream(request):

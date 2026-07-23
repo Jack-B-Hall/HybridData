@@ -11,6 +11,16 @@ Endpoints (all under ``/api``):
     GET  /api/corpus/stats                corpus + graph statistics
     GET  /api/ingest/history              ingestion run history
 
+Multi-turn chat (conversations persist server-side in the telemetry DB):
+
+    POST   /api/chat/conversations                     create a conversation
+    GET    /api/chat/conversations                     list conversations
+    GET    /api/chat/conversations/{id}                one conversation + turns
+    PATCH  /api/chat/conversations/{id}                rename
+    DELETE /api/chat/conversations/{id}                delete (with its turns)
+    POST   /api/chat/conversations/{id}/messages       run one turn (blocking)
+    POST   /api/chat/conversations/{id}/messages/stream  SSE variant
+
 The engine (and its SQLite connection) is opened once at startup and shared; the
 serving workload is read-only and guarded by a lock in the engine.
 """
@@ -40,6 +50,18 @@ class FeedbackRequest(BaseModel):
     ask_id: int = Field(..., ge=1)
     rating: str = Field(..., pattern="^(up|down)$")
     comment: str | None = Field(default=None, max_length=2000)
+
+
+class ConversationCreateRequest(BaseModel):
+    title: str | None = Field(default=None, max_length=200)
+
+
+class ConversationPatchRequest(BaseModel):
+    title: str = Field(..., min_length=1, max_length=200)
+
+
+class ChatMessageRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=1000)
 
 
 class IngestStartRequest(BaseModel):
@@ -141,6 +163,81 @@ def ask_stream(req: AskRequest) -> StreamingResponse:
     def frames() -> Iterator[str]:
         try:
             for event in eng.ask_stream(req.question):
+                yield _sse(event)
+        except Exception as exc:  # surface as a stream event, not a broken socket
+            yield _sse({"type": "error", "message": str(exc)})
+
+    return StreamingResponse(
+        frames(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
+# ── Chat (multi-turn conversations) ─────────────────────────────────────────
+@app.post("/api/chat/conversations", status_code=201)
+def chat_create_conversation(req: ConversationCreateRequest) -> dict:
+    """Create a conversation. Untitled conversations inherit their first
+    message as a display title once one lands."""
+    return _engine().create_conversation((req.title or "").strip() or None)
+
+
+@app.get("/api/chat/conversations")
+def chat_list_conversations(limit: int = Query(100, ge=1, le=500)) -> dict:
+    return {"conversations": _engine().list_conversations(limit)}
+
+
+@app.get("/api/chat/conversations/{cid}")
+def chat_get_conversation(cid: int) -> dict:
+    convo = _engine().get_conversation(cid)
+    if convo is None:
+        raise HTTPException(status_code=404, detail=f"no conversation {cid}")
+    return convo
+
+
+@app.patch("/api/chat/conversations/{cid}")
+def chat_rename_conversation(cid: int, req: ConversationPatchRequest) -> dict:
+    if not _engine().rename_conversation(cid, req.title.strip()):
+        raise HTTPException(status_code=404, detail=f"no conversation {cid}")
+    return _engine().get_conversation(cid)
+
+
+@app.delete("/api/chat/conversations/{cid}")
+def chat_delete_conversation(cid: int) -> dict:
+    if not _engine().delete_conversation(cid):
+        raise HTTPException(status_code=404, detail=f"no conversation {cid}")
+    return {"ok": True, "deleted": cid}
+
+
+@app.post("/api/chat/conversations/{cid}/messages")
+def chat_message(cid: int, req: ChatMessageRequest) -> dict:
+    """Run one blocking chat turn: condense -> retrieve -> gate -> synthesize.
+
+    An answer-model failure maps to a clean 502 for this turn only; the
+    conversation itself is unaffected."""
+    eng = _engine()
+    if not eng.telemetry.conversation_exists(cid):
+        raise HTTPException(status_code=404, detail=f"no conversation {cid}")
+    try:
+        return eng.chat_turn(cid, req.message)
+    except Exception as exc:  # answer model unreachable, malformed reply, ...
+        raise HTTPException(status_code=502, detail=f"chat turn failed: {exc}")
+
+
+@app.post("/api/chat/conversations/{cid}/messages/stream")
+def chat_message_stream(cid: int, req: ChatMessageRequest) -> StreamingResponse:
+    """Stream one chat turn as Server-Sent Events.
+
+    Emits ``rewrite`` (the condensed standalone question), then the same
+    ``retrieval`` / ``token`` / ``done`` sequence as /api/ask/stream; ``done``
+    carries the persisted turn. Failures surface as an ``error`` event."""
+    eng = _engine()
+    if not eng.telemetry.conversation_exists(cid):
+        raise HTTPException(status_code=404, detail=f"no conversation {cid}")
+
+    def frames() -> Iterator[str]:
+        try:
+            for event in eng.chat_turn_stream(cid, req.message):
                 yield _sse(event)
         except Exception as exc:  # surface as a stream event, not a broken socket
             yield _sse({"type": "error", "message": str(exc)})

@@ -11,6 +11,13 @@ Two tables:
 * ``asks``      one row per question (blocking or streamed), with a timing
                 breakdown and a terminal ``status`` (ok / error / abandoned).
 * ``feedback``  thumbs up/down (+ optional comment) tied to an ``asks`` row.
+
+Multi-turn chat conversations also live here (``chat_conversations`` +
+``chat_turns``): they are user-session state, not corpus data, so they belong in
+the writable database and survive corpus rebuilds. Every chat turn additionally
+logs a normal ``asks`` row (that is what system health and thumbs feedback key
+on); the ``chat_turns`` row carries the conversation-specific extras (raw
+message, condensed rewrite, full result payload).
 """
 from __future__ import annotations
 
@@ -111,7 +118,34 @@ CREATE TABLE IF NOT EXISTS test_results (
   error              TEXT,
   FOREIGN KEY (run_id) REFERENCES test_runs(id)
 );
+CREATE TABLE IF NOT EXISTS chat_conversations (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  created_at TEXT    NOT NULL,
+  updated_at TEXT    NOT NULL,
+  title      TEXT
+);
+CREATE TABLE IF NOT EXISTS chat_turns (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  conversation_id INTEGER NOT NULL,
+  ts              TEXT    NOT NULL,
+  message         TEXT    NOT NULL,                 -- raw user message
+  rewritten       TEXT,                             -- condensed standalone question
+  rewrite_method  TEXT,                             -- 'raw' | 'llm' | 'mock'
+  ask_id          INTEGER,                          -- the asks row logged for this turn
+  answered        INTEGER,
+  verdict         TEXT,
+  confidence      TEXT,
+  answer          TEXT,
+  cited_ids       TEXT,                             -- JSON list of cited artifact ids
+  result          TEXT,                             -- full result payload (JSON)
+  latency_ms      INTEGER,
+  backend         TEXT,
+  status          TEXT    NOT NULL DEFAULT 'ok',    -- 'ok' | 'error'
+  error           TEXT,
+  FOREIGN KEY (conversation_id) REFERENCES chat_conversations(id)
+);
 CREATE INDEX IF NOT EXISTS idx_asks_ts ON asks(ts);
+CREATE INDEX IF NOT EXISTS idx_chat_turns_conversation ON chat_turns(conversation_id);
 CREATE INDEX IF NOT EXISTS idx_feedback_ask ON feedback(ask_id);
 CREATE INDEX IF NOT EXISTS idx_test_results_run ON test_results(run_id);
 """
@@ -242,6 +276,126 @@ class Telemetry:
                 (limit,),
             ).fetchall()
         return [dict(zip(cols, r)) for r in rows]
+
+    # ── chat conversations (multi-turn, survives corpus clears) ───────────────
+    _TURN_COLS = (
+        "id", "conversation_id", "ts", "message", "rewritten", "rewrite_method",
+        "ask_id", "answered", "verdict", "confidence", "answer", "cited_ids",
+        "result", "latency_ms", "backend", "status", "error",
+    )
+
+    def create_conversation(self, title: str | None = None) -> dict:
+        now = _now()
+        with self._lock:
+            cur = self.conn.execute(
+                "INSERT INTO chat_conversations (created_at, updated_at, title) VALUES (?,?,?)",
+                (now, now, title),
+            )
+            self.conn.commit()
+            cid = int(cur.lastrowid)
+        return {"id": cid, "created_at": now, "updated_at": now, "title": title, "n_turns": 0}
+
+    def list_conversations(self, limit: int = 100) -> list[dict]:
+        with self._lock:
+            rows = self.conn.execute(
+                "SELECT c.id, c.created_at, c.updated_at, c.title, "
+                "(SELECT COUNT(*) FROM chat_turns t WHERE t.conversation_id = c.id) "
+                "FROM chat_conversations c ORDER BY c.updated_at DESC, c.id DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [
+            {"id": r[0], "created_at": r[1], "updated_at": r[2], "title": r[3], "n_turns": r[4]}
+            for r in rows
+        ]
+
+    @staticmethod
+    def _turn_row(r) -> dict:
+        d = dict(zip(Telemetry._TURN_COLS, r))
+        d["answered"] = bool(d["answered"]) if d["answered"] is not None else None
+        d["cited_ids"] = json.loads(d["cited_ids"]) if d["cited_ids"] else []
+        d["result"] = json.loads(d["result"]) if d["result"] else None
+        return d
+
+    def get_conversation(self, cid: int) -> dict | None:
+        with self._lock:
+            row = self.conn.execute(
+                "SELECT id, created_at, updated_at, title FROM chat_conversations WHERE id = ?",
+                (cid,),
+            ).fetchone()
+            if not row:
+                return None
+            turns = self.conn.execute(
+                f"SELECT {', '.join(self._TURN_COLS)} FROM chat_turns "
+                "WHERE conversation_id = ? ORDER BY id",
+                (cid,),
+            ).fetchall()
+        parsed = [self._turn_row(t) for t in turns]
+        return {
+            "id": row[0], "created_at": row[1], "updated_at": row[2], "title": row[3],
+            "n_turns": len(parsed), "turns": parsed,
+        }
+
+    def conversation_exists(self, cid: int) -> bool:
+        with self._lock:
+            return self.conn.execute(
+                "SELECT 1 FROM chat_conversations WHERE id = ?", (cid,)
+            ).fetchone() is not None
+
+    def rename_conversation(self, cid: int, title: str) -> bool:
+        with self._lock:
+            cur = self.conn.execute(
+                "UPDATE chat_conversations SET title = ?, updated_at = ? WHERE id = ?",
+                (title, _now(), cid),
+            )
+            self.conn.commit()
+            return cur.rowcount > 0
+
+    def delete_conversation(self, cid: int) -> bool:
+        with self._lock:
+            self.conn.execute("DELETE FROM chat_turns WHERE conversation_id = ?", (cid,))
+            cur = self.conn.execute("DELETE FROM chat_conversations WHERE id = ?", (cid,))
+            self.conn.commit()
+            return cur.rowcount > 0
+
+    def recent_turns(self, cid: int, limit: int = 20) -> list[dict]:
+        """The newest completed turns of a conversation, oldest first: the raw
+        material for the condensation/history window."""
+        with self._lock:
+            rows = self.conn.execute(
+                f"SELECT {', '.join(self._TURN_COLS)} FROM chat_turns "
+                "WHERE conversation_id = ? AND status = 'ok' ORDER BY id DESC LIMIT ?",
+                (cid, limit),
+            ).fetchall()
+        return [self._turn_row(r) for r in reversed(rows)]
+
+    def log_chat_turn(self, turn: dict) -> int | None:
+        """Persist one completed (or failed) chat turn and bump the conversation's
+        updated_at. Best-effort like every telemetry write. A conversation with no
+        title inherits the first message as its display title."""
+        cols = [c for c in self._TURN_COLS if c != "id"]
+        row = dict(turn)
+        row["ts"] = row.get("ts") or _now()
+        if row.get("cited_ids") is not None:
+            row["cited_ids"] = json.dumps(row["cited_ids"])
+        if row.get("result") is not None:
+            row["result"] = json.dumps(row["result"])
+        try:
+            with self._lock:
+                cur = self.conn.execute(
+                    f"INSERT INTO chat_turns ({', '.join(cols)}) "
+                    f"VALUES ({', '.join('?' * len(cols))})",
+                    tuple(row.get(c) for c in cols),
+                )
+                self.conn.execute(
+                    "UPDATE chat_conversations SET updated_at = ?, "
+                    "title = COALESCE(title, ?) WHERE id = ?",
+                    (_now(), str(row.get("message", ""))[:80] or None,
+                     row.get("conversation_id")),
+                )
+                self.conn.commit()
+                return int(cur.lastrowid)
+        except sqlite3.Error:
+            return None
 
     # ── golden-set questions (writable, survives corpus clears) ───────────────
     _GOLDEN_COLS = (

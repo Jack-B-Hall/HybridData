@@ -56,6 +56,28 @@
 # json_tree = ["source-data/parts.json"]      # hierarchical parent_id JSON
 # csv = "source-data/records.csv"             # flat CSV, one record per row
 
+[chat]
+# Multi-turn Chat tab tuning. Each turn condenses the newest message + recent
+# history into one standalone question, then re-runs fresh retrieval and the
+# deterministic gate on it (chat never answers from history alone). The history
+# window passed to synthesis is continuity context only, bounded by BOTH caps.
+# history_turns = 6                           # last N turns in the window
+# history_char_budget = 6000                  # total character cap on the window
+# The condensation rewrite is time-boxed; on timeout or failure the raw message
+# is used as-is, so a slow model host can never hang a turn.
+# condense_timeout_s = 20
+
+[ui.tabs]
+# Per-tab enablement for the frontend. Every tab defaults to true; set one to
+# false to hide it from the navigation AND redirect its routes to the first
+# enabled tab. Env override: HDE_UI_TAB_<NAME>=0|1 (e.g. HDE_UI_TAB_TESTING=0).
+# interface = true                            # single-shot Q&A page
+# chat = true                                 # multi-turn conversations
+# documents = true
+# explorer = true
+# ingestion = false                           # work: hide corpus management
+# testing = false                             # work: hide the golden-set page
+
 [retrieval]
 # top_chunks = 8
 # rrf_k = 60
