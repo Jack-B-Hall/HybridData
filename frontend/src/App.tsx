@@ -13,15 +13,22 @@ import { ChatProvider } from "@/store/chat";
 import { DrawerProvider } from "@/store/drawer";
 import { CorpusMetaProvider, useCorpusMeta } from "@/store/corpusMeta";
 import { SourceDrawer } from "@/components/SourceDrawer";
-import { firstEnabledPath, isTabEnabled, type TabKey } from "@/lib/tabs";
+import { TABS, firstEnabledPath, isTabEnabled, type TabKey } from "@/lib/tabs";
 
 /**
  * Route guard for [ui.tabs]: a deep link into a disabled tab redirects to the
- * first enabled tab instead of rendering it.
+ * first enabled tab instead of rendering it. When EVERY tab is disabled (a
+ * config mistake) the fallback path is this tab's own path for the Interface
+ * route; redirecting to ourselves would render an endless self-navigation
+ * loop, so render the tab instead.
  */
 function TabRoute({ tab, children }: { tab: TabKey; children: React.ReactNode }) {
   const { tabs } = useCorpusMeta();
-  if (!isTabEnabled(tabs, tab)) return <Navigate to={firstEnabledPath(tabs)} replace />;
+  if (!isTabEnabled(tabs, tab)) {
+    const target = firstEnabledPath(tabs);
+    const ownPath = TABS.find((t) => t.key === tab)?.path;
+    if (target !== ownPath) return <Navigate to={target} replace />;
+  }
   return <>{children}</>;
 }
 

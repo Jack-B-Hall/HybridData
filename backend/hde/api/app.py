@@ -197,7 +197,12 @@ def chat_get_conversation(cid: int) -> dict:
 
 @app.patch("/api/chat/conversations/{cid}")
 def chat_rename_conversation(cid: int, req: ConversationPatchRequest) -> dict:
-    if not _engine().rename_conversation(cid, req.title.strip()):
+    title = req.title.strip()
+    if not title:
+        # min_length=1 admits whitespace-only titles; a stored "" would render
+        # blank and, unlike NULL, block first-message titling forever.
+        raise HTTPException(status_code=422, detail="title must not be blank")
+    if not _engine().rename_conversation(cid, title):
         raise HTTPException(status_code=404, detail=f"no conversation {cid}")
     return _engine().get_conversation(cid)
 

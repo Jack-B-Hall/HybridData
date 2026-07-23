@@ -195,6 +195,26 @@ def test_conversation_crud_and_turn_logging(tmp_path):
     tel.close()
 
 
+def test_log_chat_turn_drops_write_for_deleted_conversation(tmp_path):
+    # A DELETE racing a mid-stream turn must not leave an orphan chat_turns row
+    # (SQLite FKs are not enforced without PRAGMA foreign_keys).
+    tel = Telemetry(tmp_path / "t.db")
+    cid = tel.create_conversation()["id"]
+    assert tel.delete_conversation(cid) is True
+
+    tid = tel.log_chat_turn({
+        "conversation_id": cid, "ts": None, "message": "late turn",
+        "rewritten": "late turn", "rewrite_method": "raw", "ask_id": 1,
+        "answered": 1, "verdict": "sufficient", "confidence": "high",
+        "answer": "x [1]", "cited_ids": [], "result": None, "latency_ms": 1,
+        "backend": "mock/mock", "status": "ok", "error": None,
+    })
+    assert tid is None
+    n = tel.conn.execute("SELECT COUNT(*) FROM chat_turns").fetchone()[0]
+    assert n == 0
+    tel.close()
+
+
 def test_old_telemetry_volume_gains_chat_tables(tmp_path):
     # A pre-chat telemetry DB (asks only) upgrades cleanly on open, per the
     # CREATE IF NOT EXISTS + _migrate pattern.
@@ -350,6 +370,14 @@ def test_api_conversation_crud(chat_client):
 
     assert chat_client.delete(f"/api/chat/conversations/{cid}").json()["ok"] is True
     assert chat_client.delete(f"/api/chat/conversations/{cid}").status_code == 404
+
+
+def test_api_rename_rejects_blank_title(chat_client):
+    cid = chat_client.post("/api/chat/conversations", json={}).json()["id"]
+    r = chat_client.patch(f"/api/chat/conversations/{cid}", json={"title": "   "})
+    assert r.status_code == 422
+    # Title stays NULL, so first-message titling still applies later.
+    assert chat_client.get(f"/api/chat/conversations/{cid}").json()["title"] is None
 
 
 def test_api_chat_turn_blocking_and_persisted(chat_client):

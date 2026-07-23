@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lint": "tsc --noEmit"
+    "lint": "tsc -b"
   },
   "dependencies": {
     "@fontsource/fraunces": "^5.1.0",

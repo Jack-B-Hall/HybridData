@@ -15,7 +15,10 @@ export function AppShell() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-canvas/85 backdrop-blur">
+      {/* Solid background: bg-canvas/85 compiled to nothing (the palette is
+          plain CSS vars without <alpha-value>), leaving a transparent header
+          that scrolled content bled through. */}
+      <header className="sticky top-0 z-30 border-b border-border bg-canvas">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-6 px-5">
           <div className="flex items-center gap-2.5">
             <AppIcon icon={app_icon} />

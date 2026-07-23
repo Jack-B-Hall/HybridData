@@ -20,6 +20,8 @@ type TurnPhase = "searching" | "generating" | "streaming" | "done" | "error";
 /** One thread entry: a persisted turn, or a turn currently in flight. */
 interface ThreadTurn {
   key: number;
+  /** Conversation this turn belongs to (guards merges + aborts across switches). */
+  cid: number;
   message: string;
   phase: TurnPhase;
   rewritten?: string;
@@ -44,9 +46,29 @@ export function ConversationsPage() {
   const [loadingThread, setLoadingThread] = useState(false);
   const [draft, setDraft] = useState("");
   const threadRef = useRef<HTMLDivElement>(null);
-  const controllers = useRef(new Map<number, AbortController>());
+  const controllers = useRef(new Map<number, { cid: number; controller: AbortController }>());
   const selectedRef = useRef<number | null>(null);
   selectedRef.current = selectedId;
+  // A turn is in flight in the current thread: block a second send until it
+  // lands, so the follow-up's condensation window can see the previous turn.
+  const busy = thread.some((t) => t.phase !== "done" && t.phase !== "error");
+  const busyRef = useRef(false);
+  busyRef.current = busy;
+
+  /** Abort in-flight streams, optionally only those of one conversation. */
+  const abortStreams = useCallback((onlyCid?: number) => {
+    for (const [key, entry] of controllers.current) {
+      if (onlyCid === undefined || entry.cid === onlyCid) {
+        entry.controller.abort();
+        controllers.current.delete(key);
+      }
+    }
+  }, []);
+
+  // Abort everything still streaming when the page unmounts.
+  useEffect(() => {
+    return () => abortStreams();
+  }, [abortStreams]);
 
   const refreshConversations = useCallback(async () => {
     const res = await api.getConversations();
@@ -69,32 +91,52 @@ export function ConversationsPage() {
     };
   }, [refreshConversations]);
 
-  // Load the selected conversation's turns.
+  // Load the selected conversation's turns. Streams belonging to any OTHER
+  // conversation are aborted; turns still in flight for THIS conversation are
+  // kept on top of the fetched history rather than clobbered (on first send in
+  // a just-created conversation the server has no turns yet: the turn is only
+  // persisted at the `done` event, so replacing the thread with the fetch
+  // result would wipe the streaming turn from view).
   useEffect(() => {
+    for (const [key, entry] of controllers.current) {
+      if (entry.cid !== selectedId) {
+        entry.controller.abort();
+        controllers.current.delete(key);
+      }
+    }
     if (selectedId === null) {
       setThread([]);
       return;
     }
     let cancelled = false;
     setLoadingThread(true);
+    // Local turns worth keeping: same conversation and either not yet persisted
+    // (in flight, or an unsaved error turn) or persisted but missing from the
+    // fetched snapshot (the stream finished while the fetch was in flight).
+    const keepLocal = (prev: ThreadTurn[], fetchedIds: Set<number>) =>
+      prev.filter(
+        (t) => t.cid === selectedId && (t.turn === undefined || !fetchedIds.has(t.turn.id)),
+      );
     api
       .getConversation(selectedId)
       .then((detail) => {
         if (cancelled) return;
-        setThread(
-          detail.turns
-            .filter((t) => t.status === "ok")
-            .map((t) => ({
-              key: ++nextKey,
-              message: t.message,
-              phase: "done" as const,
-              rewritten: t.rewritten,
-              streamedText: "",
-              turn: t,
-            })),
-        );
+        const ok = detail.turns.filter((t) => t.status === "ok");
+        const fetchedIds = new Set(ok.map((t) => t.id));
+        setThread((prev) => [
+          ...ok.map((t) => ({
+            key: ++nextKey,
+            cid: selectedId,
+            message: t.message,
+            phase: "done" as const,
+            rewritten: t.rewritten,
+            streamedText: "",
+            turn: t,
+          })),
+          ...keepLocal(prev, fetchedIds),
+        ]);
       })
-      .catch(() => !cancelled && setThread([]))
+      .catch(() => !cancelled && setThread((prev) => keepLocal(prev, new Set())))
       .finally(() => !cancelled && setLoadingThread(false));
     return () => {
       cancelled = true;
@@ -120,7 +162,7 @@ export function ConversationsPage() {
   const send = useCallback(
     async (message: string) => {
       const trimmed = message.trim();
-      if (!trimmed) return;
+      if (!trimmed || busyRef.current) return;
       setDraft("");
 
       let cid = selectedRef.current;
@@ -137,8 +179,8 @@ export function ConversationsPage() {
 
       const key = ++nextKey;
       const controller = new AbortController();
-      controllers.current.set(key, controller);
-      setThread((prev) => [...prev, { key, message: trimmed, phase: "searching", streamedText: "" }]);
+      controllers.current.set(key, { cid, controller });
+      setThread((prev) => [...prev, { key, cid, message: trimmed, phase: "searching", streamedText: "" }]);
 
       const finish = () => {
         controllers.current.delete(key);
@@ -203,13 +245,14 @@ export function ConversationsPage() {
       } catch {
         return;
       }
+      abortStreams(id);
       setConversations((prev) => {
         const rest = prev.filter((c) => c.id !== id);
         if (selectedRef.current === id) setSelectedId(rest[0]?.id ?? null);
         return rest;
       });
     },
-    [],
+    [abortStreams],
   );
 
   const submitFeedback = useCallback(
@@ -265,7 +308,7 @@ export function ConversationsPage() {
           }}
           className="sticky bottom-4 mx-auto mt-4 w-full max-w-[880px]"
         >
-          <div className="flex items-end gap-2 rounded-card border border-border-strong bg-canvas-raised p-2 shadow-popover focus-within:border-accent/60">
+          <div className="flex items-end gap-2 rounded-card border border-border-strong bg-canvas-raised p-2 shadow-popover focus-within:border-accent">
             <textarea
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
@@ -276,14 +319,14 @@ export function ConversationsPage() {
                 }
               }}
               rows={1}
-              placeholder="Message the corpus, follow-ups welcome…"
+              placeholder={busy ? "Waiting for the current answer…" : "Message the corpus, follow-ups welcome…"}
               data-testid="chat-composer-input"
               className="max-h-40 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none"
             />
             <button
               type="submit"
               data-testid="chat-composer-send"
-              disabled={!draft.trim()}
+              disabled={!draft.trim() || busy}
               className="flex h-9 shrink-0 items-center gap-1.5 rounded-md bg-accent px-3.5 text-sm font-semibold text-canvas-raised transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-ink-faint"
             >
               Send
@@ -378,7 +421,7 @@ function ConversationRow({
 
   if (renaming) {
     return (
-      <li className="rounded-md border border-accent/50 bg-canvas-raised p-1.5">
+      <li className="rounded-md border border-accent bg-canvas-raised p-1.5">
         <input
           autoFocus
           value={title}
@@ -485,7 +528,6 @@ function TurnView({
   const result = done?.result ?? null;
   const rewritten = done?.rewritten ?? turn.rewritten;
   const showRewrite = rewritten !== undefined && rewritten !== turn.message;
-  const answered = phase === "done" ? result?.answered ?? false : turn.retrieval?.answered ?? true;
   const refusing = phase !== "done" && turn.retrieval !== undefined && !turn.retrieval.answered;
 
   return (
@@ -511,7 +553,7 @@ function TurnView({
 
         {phase === "error" && (
           <div
-            className="rounded-card border border-confidence-low/30 bg-canvas-raised p-4 text-sm text-confidence-low"
+            className="rounded-card border border-confidence-low bg-canvas-raised p-4 text-sm text-confidence-low"
             data-testid="chat-turn-error"
           >
             {turn.error ?? "Something went wrong."} This turn was not saved; the conversation is
@@ -576,7 +618,6 @@ function TurnSources({ sources }: { sources: import("@/api/types").Source[] }) {
 
 function StageStrip({ turn, refusing }: { turn: ThreadTurn; refusing: boolean }) {
   const { phase, retrieval } = turn;
-  const searching = phase === "searching";
   const hasRetrieval = retrieval !== undefined;
   const nPassages = retrieval?.sources.length ?? 0;
   const nPaths = retrieval?.graph_paths.length ?? 0;
@@ -584,7 +625,9 @@ function StageStrip({ turn, refusing }: { turn: ThreadTurn; refusing: boolean })
 
   return (
     <ol className="space-y-2.5" data-testid="chat-stage-strip" aria-live="polite">
-      <Stage state={searching ? "active" : "done"} label="Searching the corpus" />
+      {/* Searching is over once retrieval lands, even when the gate is
+          declining and the phase deliberately stays "searching". */}
+      <Stage state={hasRetrieval ? "done" : "active"} label="Searching the corpus" />
       <Stage
         state={hasRetrieval ? "done" : "pending"}
         label={

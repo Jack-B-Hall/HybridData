@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { AskResult, ChatTurn, ChatStreamHandlers } from "@/api/types";
 import { DrawerProvider } from "@/store/drawer";
@@ -196,5 +196,74 @@ describe("ConversationsPage", () => {
         9, "Why did the chemistry change?", expect.anything(), expect.anything(),
       ),
     );
+  });
+
+  it("keeps the first streaming turn visible when the fresh conversation loads empty", async () => {
+    // Real-backend timing: the turn is persisted only at `done`, so the refetch
+    // triggered by selecting the just-created conversation returns zero turns
+    // while the answer is still streaming. It must not wipe the in-flight turn.
+    mocks.getConversations.mockResolvedValue({ conversations: [] });
+    mocks.createConversation.mockResolvedValue({
+      id: 9, created_at: "", updated_at: "", title: null, n_turns: 0,
+    });
+    mocks.getConversation.mockResolvedValue({
+      id: 9, created_at: "", updated_at: "", title: null, n_turns: 0, turns: [],
+    });
+    let finish!: () => void;
+    mocks.chatMessageStream.mockImplementation(
+      (_id: number, message: string, handlers: ChatStreamHandlers) =>
+        new Promise<void>((resolve) => {
+          handlers.onToken?.("streaming ");
+          finish = () => {
+            handlers.onDone?.(makeTurn({ id: 1, conversation_id: 9, message }));
+            resolve();
+          };
+        }),
+    );
+
+    renderPage();
+    await waitFor(() => expect(screen.getByText(/No conversations yet/)).toBeInTheDocument());
+
+    fireEvent.change(screen.getByTestId("chat-composer-input"), { target: { value: "Why did the chemistry change?" } });
+    fireEvent.click(screen.getByTestId("chat-composer-send"));
+
+    await waitFor(() => expect(mocks.getConversation).toHaveBeenCalledWith(9));
+    await act(() => Promise.resolve()); // let the (empty) refetch commit
+    expect(screen.getByTestId("chat-user-message")).toHaveTextContent("Why did the chemistry change?");
+    expect(screen.getByTestId("chat-streaming-answer")).toBeInTheDocument();
+
+    act(() => finish());
+    await waitFor(() => expect(screen.getByTestId("answer-body")).toBeInTheDocument());
+  });
+
+  it("blocks a second send while a turn is still streaming", async () => {
+    let finish!: () => void;
+    mocks.chatMessageStream.mockImplementation(
+      (_id: number, message: string, handlers: ChatStreamHandlers) =>
+        new Promise<void>((resolve) => {
+          handlers.onToken?.("streaming ");
+          finish = () => {
+            handlers.onDone?.(makeTurn({ id: 3, message }));
+            resolve();
+          };
+        }),
+    );
+
+    renderPage();
+    await waitFor(() => expect(screen.getAllByTestId("chat-assistant-turn")).toHaveLength(2));
+
+    fireEvent.change(screen.getByTestId("chat-composer-input"), { target: { value: "first question" } });
+    fireEvent.click(screen.getByTestId("chat-composer-send"));
+    await waitFor(() => expect(screen.getByTestId("chat-streaming-answer")).toBeInTheDocument());
+
+    // While streaming, the send button is disabled and Enter is a no-op, so the
+    // condensation window can always see the previous turn.
+    fireEvent.change(screen.getByTestId("chat-composer-input"), { target: { value: "second question" } });
+    expect(screen.getByTestId("chat-composer-send")).toBeDisabled();
+    fireEvent.keyDown(screen.getByTestId("chat-composer-input"), { key: "Enter" });
+    expect(mocks.chatMessageStream).toHaveBeenCalledTimes(1);
+
+    act(() => finish());
+    await waitFor(() => expect(screen.getByTestId("chat-composer-send")).not.toBeDisabled());
   });
 });

@@ -381,6 +381,15 @@ class Telemetry:
             row["result"] = json.dumps(row["result"])
         try:
             with self._lock:
+                # The conversation may have been deleted while this turn was in
+                # flight (SQLite FKs are not enforced here); re-check inside the
+                # lock and drop the write rather than leave an orphan row.
+                exists = self.conn.execute(
+                    "SELECT 1 FROM chat_conversations WHERE id = ?",
+                    (row.get("conversation_id"),),
+                ).fetchone()
+                if exists is None:
+                    return None
                 cur = self.conn.execute(
                     f"INSERT INTO chat_turns ({', '.join(cols)}) "
                     f"VALUES ({', '.join('?' * len(cols))})",

@@ -105,8 +105,9 @@ One conversation plus its `turns`, oldest first. Each turn:
 ```
 
 #### `PATCH /api/chat/conversations/{id}`
-Rename: `{ "title": string }`. `DELETE` removes the conversation and its turns.
-Both 404 on an unknown id.
+Rename: `{ "title": string }`. A blank (whitespace-only) title is rejected with
+`422` so first-message titling still applies. `DELETE` removes the conversation
+and its turns. Both 404 on an unknown id.
 
 #### `POST /api/chat/conversations/{id}/messages`
 Run one blocking turn. Body: `{ "message": string }` (1 to 1000 chars). Returns
