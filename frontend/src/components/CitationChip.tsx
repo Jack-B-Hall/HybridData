@@ -23,7 +23,7 @@ export function CitationChip({ citation }: CitationChipProps) {
       className={`mx-0.5 inline-flex h-[19px] min-w-[19px] translate-y-[-1px] items-center justify-center rounded-[5px] border px-1 font-mono text-[11px] font-medium leading-none transition-colors ${
         active
           ? "border-accent bg-accent text-canvas-raised"
-          : "border-accent/30 bg-accent-soft text-accent-ink hover:border-accent/60 hover:bg-accent/15"
+          : "border-border bg-accent-soft text-accent-ink hover:border-accent"
       }`}
     >
       {citation.marker}

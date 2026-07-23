@@ -20,7 +20,7 @@ export interface AnswerRendererProps {
 
 /**
  * Renders answer text as GitHub-flavoured markdown (paragraphs, lists, tables),
- * turning inline `[n]` markers into citation chips wherever they appear —
+ * turning inline `[n]` markers into citation chips wherever they appear,
  * including inside list items and table cells. Raw HTML in the model output is
  * never parsed as HTML (react-markdown's safe default; no rehype-raw), so
  * anything like `<script>` renders as inert text.
@@ -34,7 +34,7 @@ export function AnswerRenderer({ answer, citations, streaming = false }: AnswerR
         <span
           key={key}
           aria-hidden
-          className="mx-0.5 inline-flex h-[19px] min-w-[19px] translate-y-[-1px] items-center justify-center rounded-[5px] border bg-accent-soft px-1 font-mono text-[11px] font-medium leading-none text-accent-ink"
+          className="mx-0.5 inline-flex h-[19px] min-w-[19px] translate-y-[-1px] items-center justify-center rounded-[5px] border border-border bg-accent-soft px-1 font-mono text-[11px] font-medium leading-none text-accent-ink"
         >
           {marker}
         </span>
