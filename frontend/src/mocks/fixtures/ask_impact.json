@@ -4,7 +4,7 @@
   "answered": true,
   "verdict": "sufficient",
   "confidence": "high",
-  "answer": "Engineering Change Request ECR-221. [1] # K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042 [2] Bug KES-187. [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
+  "answer": "Engineering Change Request ECR-221. [1] K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042 [2] Bug KES-187. [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
   "signals": {
     "question_ids": [
       "ECR-221"
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "text": "# K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042 [2]",
+      "text": "K-200 Motor Qualification Test Report \u2014 P-1041 / P-1042 [2]",
       "citations": [
         "DOC-445"
       ]

@@ -4,7 +4,7 @@
   "answered": true,
   "verdict": "sufficient",
   "confidence": "high",
-  "answer": "Engineering Change Request ECR-214. [1] Engineering Change Notice ECN-312. [2] # K-200 Battery System Specification [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
+  "answer": "Engineering Change Request ECR-214. [1] Engineering Change Notice ECN-312. [2] K-200 Battery System Specification [3]\n\nRelated records are linked in the knowledge graph (40 relationship paths surfaced).",
   "signals": {
     "question_ids": [
       "K-200"
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "text": "# K-200 Battery System Specification [3]",
+      "text": "K-200 Battery System Specification [3]",
       "citations": [
         "DOC-421"
       ]

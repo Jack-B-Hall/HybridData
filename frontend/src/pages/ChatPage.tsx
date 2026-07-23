@@ -354,26 +354,18 @@ function Stage({ state, label }: { state: "pending" | "active" | "done"; label: 
 }
 
 function StreamingAnswer({ text }: { text: string }) {
+  // In-flight prose renders through the same markdown renderer as the final
+  // answer (lists and tables take shape as they stream); `[n]` markers show as
+  // inert chips until the resolved citations arrive with the final result.
   return (
     <div className="space-y-3" data-testid="streaming-answer">
-      <p className="whitespace-pre-wrap text-[15px] leading-relaxed text-ink">
-        {cleanStreaming(text)}
-        <span
-          aria-hidden
-          className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] animate-pulse bg-accent align-baseline"
-        />
-      </p>
+      <AnswerRenderer answer={text} citations={[]} streaming />
+      <span
+        aria-hidden
+        className="ml-0.5 inline-block h-[1.05em] w-[2px] animate-pulse bg-accent align-baseline"
+      />
     </div>
   );
-}
-
-/** Light, display-only tidy of in-flight prose (the final answer is cleaned server-side). */
-function cleanStreaming(text: string): string {
-  return text
-    .replace(/(^|\n)\s{0,3}#{1,6}\s+/g, "$1") // headings
-    .replace(/\*\*([^*]+)\*\*/g, "$1") // **bold**
-    .replace(/`([^`]+)`/g, "$1") // `code`
-    .replace(/(^|\n)(\s*)[*-]\s+/g, "$1$2• "); // bullets → •, matching the final answer
 }
 
 function SourcesSkeleton() {
