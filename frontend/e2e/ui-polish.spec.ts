@@ -5,10 +5,13 @@ test.beforeEach(async ({ page }) => {
   await mockApiRoutes(page);
 });
 
-test("the primary tab is labelled Interface", async ({ page }) => {
+test("the primary tab is labelled Interface, with Chat as a separate tab", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Interface", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Chat", exact: true })).toHaveCount(0);
+  const interfaceLink = page.getByRole("link", { name: "Interface", exact: true });
+  await expect(interfaceLink).toBeVisible();
+  await expect(interfaceLink).toHaveAttribute("href", "/");
+  // The multi-turn Chat tab lives at /chat; the single-shot page keeps "/".
+  await expect(page.getByRole("link", { name: "Chat", exact: true })).toHaveAttribute("href", "/chat");
 });
 
 test("a Q/A block collapses to a compact row and re-expands, surviving tab nav", async ({ page }) => {

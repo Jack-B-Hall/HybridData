@@ -242,6 +242,11 @@ export interface CorpusMeta {
   app_icon: string | null;
   id_pattern: string;
   tier_labels: Record<string, string>;
+  /**
+   * Per-tab enablement resolved from [ui.tabs] config. Optional so older
+   * backends keep working; a missing map (or key) means "enabled".
+   */
+  tabs?: Record<string, boolean>;
 }
 
 export interface CorpusStatsResponse {
@@ -276,6 +281,81 @@ export interface IngestRun {
 
 export interface IngestHistoryResponse {
   runs: IngestRun[];
+}
+
+// ── Multi-turn chat conversations ───────────────────────────────────────────
+// Conversations persist server-side (telemetry DB). Each user turn is condensed
+// into a standalone question, retrieved + gated fresh, then synthesized with a
+// bounded history window; the persisted turn carries the rewrite and a result
+// payload shaped exactly like AskResult.
+
+export type RewriteMethod = "raw" | "llm" | "mock";
+
+export interface ConversationSummary {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  title: string | null;
+  n_turns: number;
+}
+
+export interface ChatTurn {
+  id: number;
+  conversation_id: number;
+  ts: string;
+  message: string;
+  rewritten: string;
+  rewrite_method: RewriteMethod;
+  ask_id: number | null;
+  answered: boolean | null;
+  verdict: Verdict | null;
+  confidence: Confidence | null;
+  answer: string | null;
+  cited_ids: string[];
+  result: AskResult | null;
+  latency_ms: number | null;
+  backend: string | null;
+  status: "ok" | "error";
+  error: string | null;
+}
+
+export interface ConversationDetail extends ConversationSummary {
+  turns: ChatTurn[];
+}
+
+export interface ConversationsResponse {
+  conversations: ConversationSummary[];
+}
+
+export interface ChatMessageRequest {
+  message: string;
+}
+
+// Streaming (POST /api/chat/conversations/{id}/messages/stream): a `rewrite`
+// event first (the condensed standalone question), then the same retrieval /
+// token sequence as /api/ask/stream, then `done` carrying the persisted turn.
+
+export interface RewriteEvent {
+  type: "rewrite";
+  conversation_id: number;
+  message: string;
+  rewritten: string;
+  rewrite_method: RewriteMethod;
+}
+
+export interface ChatDoneEvent {
+  type: "done";
+  turn: ChatTurn;
+}
+
+export type ChatStreamEvent = RewriteEvent | RetrievalEvent | TokenEvent | ChatDoneEvent | ErrorEvent;
+
+export interface ChatStreamHandlers {
+  onRewrite?: (event: RewriteEvent) => void;
+  onRetrieval?: (event: RetrievalEvent) => void;
+  onToken?: (delta: string) => void;
+  onDone?: (turn: ChatTurn) => void;
+  onError?: (message: string) => void;
 }
 
 // ── Feedback + system-health telemetry ──────────────────────────────────────

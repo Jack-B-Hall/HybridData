@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 import { ChatPage } from "@/pages/ChatPage";
+import { ConversationsPage } from "@/pages/ConversationsPage";
 import { DocumentsPage } from "@/pages/DocumentsPage";
 import { ExplorerLayout } from "@/pages/explorer/ExplorerLayout";
 import { ExplorerGraphTab } from "@/pages/explorer/ExplorerGraphTab";
@@ -10,8 +11,19 @@ import { IngestionPage } from "@/pages/IngestionPage";
 import { TestingPage } from "@/pages/TestingPage";
 import { ChatProvider } from "@/store/chat";
 import { DrawerProvider } from "@/store/drawer";
-import { CorpusMetaProvider } from "@/store/corpusMeta";
+import { CorpusMetaProvider, useCorpusMeta } from "@/store/corpusMeta";
 import { SourceDrawer } from "@/components/SourceDrawer";
+import { firstEnabledPath, isTabEnabled, type TabKey } from "@/lib/tabs";
+
+/**
+ * Route guard for [ui.tabs]: a deep link into a disabled tab redirects to the
+ * first enabled tab instead of rendering it.
+ */
+function TabRoute({ tab, children }: { tab: TabKey; children: React.ReactNode }) {
+  const { tabs } = useCorpusMeta();
+  if (!isTabEnabled(tabs, tab)) return <Navigate to={firstEnabledPath(tabs)} replace />;
+  return <>{children}</>;
+}
 
 export function App() {
   // Providers live above the router so chat history and the source drawer
@@ -22,17 +34,18 @@ export function App() {
         <DrawerProvider>
         <Routes>
           <Route element={<AppShell />}>
-            <Route path="/" element={<ChatPage />} />
-            <Route path="/documents" element={<DocumentsPage />} />
-            <Route path="/documents/:id" element={<DocumentsPage />} />
-            <Route path="/explorer" element={<ExplorerLayout />}>
+            <Route path="/" element={<TabRoute tab="interface"><ChatPage /></TabRoute>} />
+            <Route path="/chat" element={<TabRoute tab="chat"><ConversationsPage /></TabRoute>} />
+            <Route path="/documents" element={<TabRoute tab="documents"><DocumentsPage /></TabRoute>} />
+            <Route path="/documents/:id" element={<TabRoute tab="documents"><DocumentsPage /></TabRoute>} />
+            <Route path="/explorer" element={<TabRoute tab="explorer"><ExplorerLayout /></TabRoute>}>
               <Route index element={<Navigate to="graph" replace />} />
               <Route path="graph" element={<ExplorerGraphTab />} />
               <Route path="table" element={<ExplorerTableTab />} />
               <Route path="analytics" element={<ExplorerAnalyticsTab />} />
             </Route>
-            <Route path="/ingestion" element={<IngestionPage />} />
-            <Route path="/testing" element={<TestingPage />} />
+            <Route path="/ingestion" element={<TabRoute tab="ingestion"><IngestionPage /></TabRoute>} />
+            <Route path="/testing" element={<TabRoute tab="testing"><TestingPage /></TabRoute>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

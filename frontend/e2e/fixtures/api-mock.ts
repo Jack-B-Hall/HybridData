@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 import type { Page } from "@playwright/test";
 import type {
   AskResult,
+  ChatTurn,
+  ConversationDetail,
   CorpusStatsResponse,
   DocumentDetail,
   DocumentListResponse,
@@ -61,6 +63,123 @@ interface RecordedAsk {
 let askSeq = 0;
 let recordedAsks: RecordedAsk[] = [];
 
+// ── Multi-turn chat conversations (in-memory, reset per test) ───────────────
+// The rewrite mirrors the backend's deterministic mock condensation: follow-ups
+// containing a reference word are anchored to the previous turn's cited ids.
+const REFERENCE_WORDS = new Set([
+  "it", "its", "that", "this", "those", "these", "they", "them", "their",
+  "he", "she", "him", "her", "his", "hers", "there", "one", "ones", "same",
+  "again", "more", "else", "previous", "earlier", "above", "former", "latter",
+]);
+const CHAT_ID_RE = /\b[A-Z]{1,6}-\d+\b/;
+
+interface ChatState {
+  conversations: ConversationDetail[];
+  seq: number;
+  turnSeq: number;
+}
+let chat: ChatState = { conversations: [], seq: 0, turnSeq: 0 };
+
+function chatCondense(message: string, turns: ChatTurn[]): { rewritten: string; method: ChatTurn["rewrite_method"] } {
+  const msg = message.trim().replace(/\s+/g, " ");
+  const words = msg.toLowerCase().match(/[a-z']+/g) ?? [];
+  const needsRewrite =
+    !CHAT_ID_RE.test(msg) && (words.some((w) => REFERENCE_WORDS.has(w)) || words.length < 4);
+  if (!needsRewrite || turns.length === 0) return { rewritten: msg, method: "raw" };
+  for (let i = turns.length - 1; i >= 0; i -= 1) {
+    const ids = turns[i]!.cited_ids;
+    if (ids.length > 0) {
+      return { rewritten: `${msg} (context: ${ids.slice(0, 3).join(", ")})`, method: "mock" };
+    }
+  }
+  return { rewritten: msg, method: "raw" };
+}
+
+/** Chat fixture pick: a condensed follow-up routes by the anchored ids. */
+function pickChatAsk(rewritten: string): AskResult {
+  const q = rewritten.toLowerCase();
+  if (/\(context:.*(ecr-221|doc-445|kes-187)/.test(q)) return fixtures.askImpact;
+  if (/\(context:.*(ecr-214|ecn-312|doc-421)/.test(q)) return fixtures.askSufficient;
+  return pickAsk(rewritten);
+}
+
+function buildChatTurn(convo: ConversationDetail, message: string): ChatTurn {
+  const { rewritten, method } = chatCondense(message, convo.turns);
+  const base = pickChatAsk(rewritten);
+  const result = recordAsk({ ...base, question: rewritten }, true);
+  return {
+    id: ++chat.turnSeq,
+    conversation_id: convo.id,
+    ts: new Date().toISOString(),
+    message,
+    rewritten,
+    rewrite_method: method,
+    ask_id: result.ask_id,
+    answered: result.answered,
+    verdict: result.verdict,
+    confidence: result.confidence,
+    answer: result.answer,
+    cited_ids: result.citations.map((c) => c.artifact_id),
+    result,
+    latency_ms: result.latency_ms,
+    backend: result.backend,
+    status: "ok",
+    error: null,
+  };
+}
+
+function commitChatTurn(convo: ConversationDetail, turn: ChatTurn): void {
+  convo.turns.push(turn);
+  convo.n_turns = convo.turns.length;
+  convo.updated_at = new Date().toISOString();
+  if (!convo.title) convo.title = turn.message.slice(0, 80);
+}
+
+function conversationSummary(convo: ConversationDetail) {
+  return {
+    id: convo.id,
+    created_at: convo.created_at,
+    updated_at: convo.updated_at,
+    title: convo.title,
+    n_turns: convo.turns.length,
+  };
+}
+
+/** SSE body for one chat turn: rewrite, retrieval, tokens, then done. */
+function chatStreamBody(turn: ChatTurn): string {
+  const frame = (obj: unknown) => `data: ${JSON.stringify(obj)}\n\n`;
+  const result = turn.result!;
+  const parts: string[] = [
+    frame({
+      type: "rewrite",
+      conversation_id: turn.conversation_id,
+      message: turn.message,
+      rewritten: turn.rewritten,
+      rewrite_method: turn.rewrite_method,
+    }),
+    frame({
+      type: "retrieval",
+      answered: result.answered,
+      verdict: result.verdict,
+      confidence: result.confidence,
+      signals: result.signals,
+      backend: result.backend,
+      sources: result.sources,
+      graph_paths: result.graph_paths,
+      retrieval: result.retrieval,
+    }),
+  ];
+  if (result.answered) {
+    const words = result.answer.split(" ");
+    for (let i = 0; i < words.length; i += 3) {
+      const piece = words.slice(i, i + 3).join(" ");
+      parts.push(frame({ type: "token", text: i === 0 ? piece : " " + piece }));
+    }
+  }
+  parts.push(frame({ type: "done", turn }));
+  return parts.join("");
+}
+
 interface IngestState {
   running: boolean;
   action: string | null;
@@ -110,6 +229,7 @@ let testing: TestingState = {
 function resetTelemetry(): void {
   askSeq = 0;
   recordedAsks = [];
+  chat = { conversations: [], seq: 0, turnSeq: 0 };
   ingest = { running: false, action: null, startedAt: 0, startedIso: null, jobs: [], seq: 0 };
   testing = {
     questions: seedGolden(), qSeq: 2, running: false, startedAt: 0, startedIso: null,
@@ -273,12 +393,21 @@ function askStreamBody(result: AskResult): string {
   return parts.join("");
 }
 
+export interface MockApiOptions {
+  /** Per-tab enablement served in /api/corpus/meta (defaults to all enabled). */
+  tabs?: Record<string, boolean>;
+}
+
 /**
  * Intercepts every `/api/**` request the app makes and answers from the
  * committed fixtures — no live backend is ever contacted during e2e runs.
  */
-export async function mockApiRoutes(page: Page): Promise<void> {
+export async function mockApiRoutes(page: Page, options: MockApiOptions = {}): Promise<void> {
   resetTelemetry();
+  const tabs = options.tabs ?? {
+    interface: true, chat: true, documents: true,
+    explorer: true, ingestion: true, testing: true,
+  };
   // A glob like "**/api/**" would also match Vite's dev-server module URL
   // for our own src/api/*.ts modules — match on the request pathname
   // starting with the real backend prefix instead.
@@ -324,6 +453,70 @@ export async function mockApiRoutes(page: Page): Promise<void> {
 
     if (pathname === "/api/telemetry/health") {
       await route.fulfill({ json: mockHealth() });
+      return;
+    }
+
+    // ── Chat conversations ───────────────────────────────────────────────────
+    if (pathname === "/api/chat/conversations" && request.method() === "POST") {
+      const body = (request.postDataJSON() ?? {}) as { title?: string };
+      const now = new Date().toISOString();
+      const convo: ConversationDetail = {
+        id: ++chat.seq, created_at: now, updated_at: now,
+        title: body.title ?? null, n_turns: 0, turns: [],
+      };
+      chat.conversations.unshift(convo);
+      await route.fulfill({ status: 201, json: conversationSummary(convo) });
+      return;
+    }
+
+    if (pathname === "/api/chat/conversations" && request.method() === "GET") {
+      const sorted = [...chat.conversations].sort((a, b) => b.updated_at.localeCompare(a.updated_at));
+      await route.fulfill({ json: { conversations: sorted.map(conversationSummary) } });
+      return;
+    }
+
+    const convoMatch = /^\/api\/chat\/conversations\/(\d+)$/.exec(pathname);
+    if (convoMatch) {
+      const convo = chat.conversations.find((c) => c.id === Number(convoMatch[1]));
+      if (!convo) {
+        await route.fulfill({ status: 404, json: { detail: `no conversation ${convoMatch[1]}` } });
+        return;
+      }
+      if (request.method() === "PATCH") {
+        const body = request.postDataJSON() as { title: string };
+        convo.title = body.title;
+        convo.updated_at = new Date().toISOString();
+        await route.fulfill({ json: { ...conversationSummary(convo), turns: convo.turns } });
+        return;
+      }
+      if (request.method() === "DELETE") {
+        chat.conversations = chat.conversations.filter((c) => c.id !== convo.id);
+        await route.fulfill({ json: { ok: true, deleted: convo.id } });
+        return;
+      }
+      await route.fulfill({ json: { ...conversationSummary(convo), turns: convo.turns } });
+      return;
+    }
+
+    const msgMatch = /^\/api\/chat\/conversations\/(\d+)\/messages(\/stream)?$/.exec(pathname);
+    if (msgMatch && request.method() === "POST") {
+      const convo = chat.conversations.find((c) => c.id === Number(msgMatch[1]));
+      if (!convo) {
+        await route.fulfill({ status: 404, json: { detail: `no conversation ${msgMatch[1]}` } });
+        return;
+      }
+      const body = request.postDataJSON() as { message: string };
+      const turn = buildChatTurn(convo, body.message);
+      commitChatTurn(convo, turn);
+      if (msgMatch[2]) {
+        await route.fulfill({
+          status: 200,
+          headers: { "content-type": "text/event-stream" },
+          body: chatStreamBody(turn),
+        });
+      } else {
+        await route.fulfill({ json: turn });
+      }
       return;
     }
 
@@ -418,6 +611,7 @@ export async function mockApiRoutes(page: Page): Promise<void> {
           app_icon: null,
           id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
           tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
+          tabs,
         },
       });
       return;

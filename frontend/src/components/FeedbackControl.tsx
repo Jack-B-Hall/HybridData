@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useChat, type Turn } from "@/store/chat";
+import { useChat, type Turn, type TurnFeedback } from "@/store/chat";
+import type { FeedbackRating } from "@/api/types";
 
 export interface FeedbackControlProps {
   turn: Turn;
@@ -13,32 +14,54 @@ export interface FeedbackControlProps {
  */
 export function FeedbackControl({ turn, className = "" }: FeedbackControlProps) {
   const { submitFeedback } = useChat();
-  const [commenting, setCommenting] = useState(false);
-  const [comment, setComment] = useState("");
 
   const askId = turn.result?.ask_id ?? 0;
   if (askId <= 0) return null; // not logged → nothing to attach feedback to
 
-  const rating = turn.feedback?.rating;
+  return (
+    <FeedbackButtons
+      feedback={turn.feedback}
+      onRate={(rating, comment) => submitFeedback(turn.id, rating, comment)}
+      className={className}
+    />
+  );
+}
+
+export interface FeedbackButtonsProps {
+  feedback?: TurnFeedback;
+  onRate: (rating: FeedbackRating, comment?: string) => void;
+  className?: string;
+}
+
+/**
+ * The presentational thumbs control, decoupled from the Interface tab's chat
+ * store so the multi-turn Chat page reuses the exact same UI. The wrapper
+ * above keeps the original single-shot behaviour untouched.
+ */
+export function FeedbackButtons({ feedback, onRate, className = "" }: FeedbackButtonsProps) {
+  const [commenting, setCommenting] = useState(false);
+  const [comment, setComment] = useState("");
+
+  const rating = feedback?.rating;
 
   function chooseUp() {
     setCommenting(false);
-    submitFeedback(turn.id, "up");
+    onRate("up");
   }
 
   function chooseDown() {
-    setComment(turn.feedback?.comment ?? "");
+    setComment(feedback?.comment ?? "");
     setCommenting(true);
   }
 
   function sendDown() {
-    submitFeedback(turn.id, "down", comment);
+    onRate("down", comment);
     setCommenting(false);
   }
 
   return (
     <div className={`relative flex items-center gap-1 ${className}`} data-testid="feedback-control">
-      {turn.feedback?.saved && !commenting && (
+      {feedback?.saved && !commenting && (
         <span className="mr-1 text-[11px] text-ink-faint" data-testid="feedback-thanks">
           Thanks
         </span>

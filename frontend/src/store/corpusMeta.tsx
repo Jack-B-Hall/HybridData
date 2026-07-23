@@ -12,6 +12,8 @@ const FALLBACK: CorpusMeta = {
   app_icon: null,
   id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
   tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
+  // All tabs enabled until the resolved [ui.tabs] map arrives.
+  tabs: undefined,
 };
 
 const CorpusMetaContext = createContext<CorpusMeta>(FALLBACK);

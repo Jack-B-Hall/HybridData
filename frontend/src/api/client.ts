@@ -2,6 +2,11 @@ import { ApiError } from "./types";
 import type {
   AskResult,
   AskStreamHandlers,
+  ChatStreamHandlers,
+  ChatTurn,
+  ConversationDetail,
+  ConversationsResponse,
+  ConversationSummary,
   CorpusMeta,
   CorpusStatsResponse,
   IngestJobsResponse,
@@ -27,7 +32,7 @@ import type {
   TestRunStatus,
   TestRunsResponse,
 } from "./types";
-import { consumeSseStream } from "@/lib/sse";
+import { consumeChatSseStream, consumeSseStream } from "@/lib/sse";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -85,6 +90,65 @@ export const liveApi = {
     }
     try {
       await consumeSseStream(res.body, handlers);
+    } catch (err) {
+      if ((err as Error)?.name === "AbortError") return;
+      handlers.onError?.(err instanceof Error ? err.message : "Stream interrupted");
+    }
+  },
+
+  // ── Multi-turn chat conversations ─────────────────────────────────────────
+  createConversation: (title?: string) =>
+    request<ConversationSummary>("/api/chat/conversations", {
+      method: "POST",
+      body: JSON.stringify(title ? { title } : {}),
+    }),
+
+  getConversations: () => request<ConversationsResponse>("/api/chat/conversations"),
+
+  getConversation: (id: number) => request<ConversationDetail>(`/api/chat/conversations/${id}`),
+
+  renameConversation: (id: number, title: string) =>
+    request<ConversationDetail>(`/api/chat/conversations/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title }),
+    }),
+
+  deleteConversation: (id: number) =>
+    request<{ ok: boolean; deleted: number }>(`/api/chat/conversations/${id}`, {
+      method: "DELETE",
+    }),
+
+  sendChatMessage: (id: number, message: string) =>
+    request<ChatTurn>(`/api/chat/conversations/${id}/messages`, {
+      method: "POST",
+      body: JSON.stringify({ message }),
+    }),
+
+  chatMessageStream: async (
+    id: number,
+    message: string,
+    handlers: ChatStreamHandlers,
+    signal?: AbortSignal,
+  ) => {
+    let res: Response;
+    try {
+      res = await fetch(`/api/chat/conversations/${id}/messages/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
+        body: JSON.stringify({ message }),
+        signal,
+      });
+    } catch (err) {
+      if ((err as Error)?.name === "AbortError") return;
+      handlers.onError?.(err instanceof Error ? err.message : "Network error");
+      return;
+    }
+    if (!res.ok || !res.body) {
+      handlers.onError?.(`Stream failed (${res.status})`);
+      return;
+    }
+    try {
+      await consumeChatSseStream(res.body, handlers);
     } catch (err) {
       if ((err as Error)?.name === "AbortError") return;
       handlers.onError?.(err instanceof Error ? err.message : "Stream interrupted");

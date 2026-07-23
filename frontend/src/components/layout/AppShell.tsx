@@ -3,19 +3,15 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { useMocks } from "@/api";
 import { useCorpusMeta } from "@/store/corpusMeta";
-
-const NAV_ITEMS = [
-  { to: "/", label: "Interface", end: true },
-  { to: "/documents", label: "Documents", end: false },
-  { to: "/explorer", label: "Data Explorer", end: false },
-  { to: "/ingestion", label: "Ingestion", end: false },
-  { to: "/testing", label: "Testing", end: false },
-];
+import { TABS, isTabEnabled } from "@/lib/tabs";
 
 export function AppShell() {
   const { theme, toggle } = useTheme();
-  const { app_name, app_icon } = useCorpusMeta();
+  const { app_name, app_icon, tabs } = useCorpusMeta();
   useBranding(app_name, app_icon);
+  // Tabs switched off via [ui.tabs] disappear from the nav (their routes
+  // additionally redirect, see App.tsx).
+  const navItems = TABS.filter((tab) => isTabEnabled(tabs, tab.key));
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -37,10 +33,10 @@ export function AppShell() {
           </div>
 
           <nav className="flex items-center gap-1" aria-label="Primary">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <NavLink
-                key={item.to}
-                to={item.to}
+                key={item.path}
+                to={item.path}
                 end={item.end}
                 className={({ isActive }) =>
                   `rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${

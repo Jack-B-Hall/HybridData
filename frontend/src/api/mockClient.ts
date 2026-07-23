@@ -2,6 +2,10 @@ import { ApiError } from "./types";
 import type {
   AskResult,
   AskStreamHandlers,
+  ChatStreamHandlers,
+  ChatTurn,
+  ConversationDetail,
+  ConversationSummary,
   DocumentDetail,
   DocumentListParams,
   DocumentListResponse,
@@ -199,6 +203,98 @@ function logMockAsk(result: AskResult, streamed: boolean): number {
   return id;
 }
 
+// In-memory chat conversations so the Chat tab works offline. The rewrite
+// mirrors the backend's deterministic mock condensation: a follow-up that
+// contains a reference word is anchored to the previous turn's cited ids.
+const REFERENCE_WORDS = new Set([
+  "it", "its", "that", "this", "those", "these", "they", "them", "their",
+  "he", "she", "him", "her", "his", "hers", "there", "one", "ones", "same",
+  "again", "more", "else", "previous", "earlier", "above", "former", "latter",
+]);
+const MOCK_ID_RE = /\b[A-Z]{1,6}-\d+\b/;
+
+function mockCondense(message: string, turns: ChatTurn[]): { rewritten: string; method: ChatTurn["rewrite_method"] } {
+  const msg = message.trim().replace(/\s+/g, " ");
+  const words = msg.toLowerCase().match(/[a-z']+/g) ?? [];
+  const needsRewrite =
+    !MOCK_ID_RE.test(msg) && (words.some((w) => REFERENCE_WORDS.has(w)) || words.length < 4);
+  if (!needsRewrite || turns.length === 0) return { rewritten: msg, method: "raw" };
+  for (let i = turns.length - 1; i >= 0; i -= 1) {
+    const ids = turns[i]!.cited_ids;
+    if (ids.length > 0) {
+      return { rewritten: `${msg} (context: ${ids.slice(0, 3).join(", ")})`, method: "mock" };
+    }
+  }
+  return { rewritten: msg, method: "raw" };
+}
+
+const mockChat: { conversations: ConversationDetail[]; seq: number; turnSeq: number } = {
+  conversations: [],
+  seq: 0,
+  turnSeq: 0,
+};
+
+function findConversation(id: number): ConversationDetail {
+  const convo = mockChat.conversations.find((c) => c.id === id);
+  if (!convo) throw new ApiError(`no conversation ${id}`, 404);
+  return convo;
+}
+
+function summarize(convo: ConversationDetail): ConversationSummary {
+  return {
+    id: convo.id,
+    created_at: convo.created_at,
+    updated_at: convo.updated_at,
+    title: convo.title,
+    n_turns: convo.turns.length,
+  };
+}
+
+/**
+ * Fixture pick for a chat turn: a condensed follow-up carries the previous
+ * turn's cited ids, so route by those ids first (mirrors real retrieval, where
+ * the appended ids anchor exact-id lookup back to the same records).
+ */
+function pickChatFixture(rewritten: string): AskResult {
+  const q = rewritten.toLowerCase();
+  if (/\(context:.*(ecr-221|doc-445|kes-187)/.test(q)) return pickAskFixture(fixtureImpactQuestion);
+  if (/\(context:.*(ecr-214|ecn-312|doc-421)/.test(q)) return pickAskFixture(fixtureSufficientQuestion);
+  return pickAskFixture(rewritten);
+}
+const fixtureSufficientQuestion = "Why was the K-200 battery chemistry changed from LiPo to LiFePO4?";
+const fixtureImpactQuestion = "If ECR-221 changes the propulsion motors, what parts and documents are affected?";
+
+function buildMockTurn(convo: ConversationDetail, message: string): ChatTurn {
+  const { rewritten, method } = mockCondense(message, convo.turns);
+  const base = pickChatFixture(rewritten);
+  const result: AskResult = { ...base, question: rewritten, ask_id: logMockAsk(base, true) };
+  return {
+    id: ++mockChat.turnSeq,
+    conversation_id: convo.id,
+    ts: new Date().toISOString(),
+    message,
+    rewritten,
+    rewrite_method: method,
+    ask_id: result.ask_id,
+    answered: result.answered,
+    verdict: result.verdict,
+    confidence: result.confidence,
+    answer: result.answer,
+    cited_ids: result.citations.map((c) => c.artifact_id),
+    result,
+    latency_ms: result.latency_ms,
+    backend: result.backend,
+    status: "ok",
+    error: null,
+  };
+}
+
+function commitMockTurn(convo: ConversationDetail, turn: ChatTurn): void {
+  convo.turns.push(turn);
+  convo.updated_at = new Date().toISOString();
+  if (!convo.title) convo.title = turn.message.slice(0, 80);
+}
+
 // In-memory golden set + test-run state so the Testing page works offline / e2e.
 function nowIso(): string {
   return new Date().toISOString();
@@ -360,6 +456,108 @@ export const mockApi: HdeApi = {
     handlers.onDone?.(result);
   },
 
+  // ── Multi-turn chat conversations (in-memory) ────────────────────────────
+  createConversation: async (title?: string) => {
+    await delay(60);
+    const now = new Date().toISOString();
+    const convo: ConversationDetail = {
+      id: ++mockChat.seq, created_at: now, updated_at: now,
+      title: title ?? null, n_turns: 0, turns: [],
+    };
+    mockChat.conversations.unshift(convo);
+    return summarize(convo);
+  },
+
+  getConversations: async () => {
+    await delay(50);
+    const sorted = [...mockChat.conversations].sort((a, b) =>
+      b.updated_at.localeCompare(a.updated_at),
+    );
+    return { conversations: sorted.map(summarize) };
+  },
+
+  getConversation: async (id: number) => {
+    await delay(60);
+    const convo = findConversation(id);
+    return { ...summarize(convo), turns: convo.turns };
+  },
+
+  renameConversation: async (id: number, title: string) => {
+    await delay(60);
+    const convo = findConversation(id);
+    convo.title = title;
+    convo.updated_at = new Date().toISOString();
+    return { ...summarize(convo), turns: convo.turns };
+  },
+
+  deleteConversation: async (id: number) => {
+    await delay(60);
+    const idx = mockChat.conversations.findIndex((c) => c.id === id);
+    if (idx === -1) throw new ApiError(`no conversation ${id}`, 404);
+    mockChat.conversations.splice(idx, 1);
+    return { ok: true, deleted: id };
+  },
+
+  sendChatMessage: async (id: number, message: string) => {
+    await delay(220);
+    const convo = findConversation(id);
+    const turn = buildMockTurn(convo, message);
+    commitMockTurn(convo, turn);
+    return turn;
+  },
+
+  chatMessageStream: async (
+    id: number,
+    message: string,
+    handlers: ChatStreamHandlers,
+    signal?: AbortSignal,
+  ) => {
+    const aborted = () => signal?.aborted ?? false;
+    const convo = findConversation(id);
+    const turn = buildMockTurn(convo, message);
+    const result = turn.result!;
+
+    await delay(120);
+    if (aborted()) return;
+    handlers.onRewrite?.({
+      type: "rewrite",
+      conversation_id: id,
+      message,
+      rewritten: turn.rewritten,
+      rewrite_method: turn.rewrite_method,
+    });
+
+    await delay(180);
+    if (aborted()) return;
+    handlers.onRetrieval?.({
+      type: "retrieval",
+      answered: result.answered,
+      verdict: result.verdict,
+      confidence: result.confidence,
+      signals: result.signals,
+      backend: result.backend,
+      sources: result.sources,
+      graph_paths: result.graph_paths,
+      retrieval: result.retrieval,
+    });
+
+    if (result.answered) {
+      await delay(180);
+      const words = result.answer.split(" ");
+      for (let i = 0; i < words.length; i += 3) {
+        if (aborted()) return;
+        const piece = words.slice(i, i + 3).join(" ");
+        handlers.onToken?.(i === 0 ? piece : " " + piece);
+        await delay(40);
+      }
+    }
+
+    if (aborted()) return;
+    await delay(60);
+    commitMockTurn(convo, turn);
+    handlers.onDone?.(turn);
+  },
+
   getDocuments: async (params: DocumentListParams = {}) => {
     await delay(90);
     const filtered = filterDocuments(params);
@@ -405,6 +603,10 @@ export const mockApi: HdeApi = {
       app_icon: null,
       id_pattern: "\\b[A-Z]{1,6}-\\d+\\b",
       tier_labels: { "1": "formal", "2": "unverified", "3": "informal" },
+      tabs: {
+        interface: true, chat: true, documents: true,
+        explorer: true, ingestion: true, testing: true,
+      },
     };
   },
 
