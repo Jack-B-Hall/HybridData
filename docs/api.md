@@ -74,6 +74,56 @@ carries an `ask_id`; feedback attaches to it. Streams are logged on `done`, and
 also on error or client disconnect (`status` = `error` / `abandoned`), so
 abandoned streams are visible in system health.
 
+### Multi-turn chat (conversations)
+
+The Chat tab's API (design in [chat.md](chat.md)). Conversations persist in the
+writable telemetry DB; every turn condenses the message + recent history into a
+standalone question, then runs the same retrieve -> gate -> synthesize pipeline
+as `/api/ask` against it.
+
+#### `POST /api/chat/conversations` → `201`
+Create a conversation. Body: `{ "title": string? }` (untitled conversations
+inherit their first message as a display title). Returns
+`{ id, created_at, updated_at, title, n_turns }`.
+
+#### `GET /api/chat/conversations?limit=100`
+`{ "conversations": [ { id, created_at, updated_at, title, n_turns }, ... ] }`,
+newest activity first.
+
+#### `GET /api/chat/conversations/{id}`
+One conversation plus its `turns`, oldest first. Each turn:
+
+```
+{ "id", "conversation_id", "ts",
+  "message": string,             // the raw user message
+  "rewritten": string,           // the condensed standalone question retrieval ran on
+  "rewrite_method": "raw" | "llm" | "mock",
+  "ask_id": number,              // the telemetry asks row (feedback attaches here)
+  "answered", "verdict", "confidence", "answer", "cited_ids",
+  "result": AskResult,           // full payload: citations, sources, signals, ...
+  "latency_ms", "backend", "status": "ok" | "error", "error" }
+```
+
+#### `PATCH /api/chat/conversations/{id}`
+Rename: `{ "title": string }`. `DELETE` removes the conversation and its turns.
+Both 404 on an unknown id.
+
+#### `POST /api/chat/conversations/{id}/messages`
+Run one blocking turn. Body: `{ "message": string }` (1 to 1000 chars). Returns
+the persisted turn above. An answer-model failure returns a clean `502` for
+that turn only; the conversation remains usable.
+
+#### `POST /api/chat/conversations/{id}/messages/stream`
+The SSE variant, mirroring `/api/ask/stream` with one extra leading event:
+
+| `type` | payload | emitted |
+|---|---|---|
+| `rewrite` | `{ conversation_id, message, rewritten, rewrite_method }` | once, before retrieval |
+| `retrieval` | as `/api/ask/stream` | once |
+| `token` | `{ text }` | zero or more (answerable turns only) |
+| `done` | `{ turn }` (the persisted turn) | once |
+| `error` | `{ message }` | on failure, in place of `done` |
+
 ### `POST /api/feedback`
 Attach thumbs feedback to a logged ask. Body:
 
