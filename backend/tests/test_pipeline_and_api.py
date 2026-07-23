@@ -273,12 +273,64 @@ def test_inline_rewrite_splits_numeric_groups_and_clamps():
     assert "[1]" in out and "[4]" not in out
 
 
-def test_clean_markup_strips_markdown_and_latex():
+def test_clean_markup_preserves_markdown_and_normalises_latex():
+    """Answers render as GFM in the UI: markdown structure must survive the
+    server-side clean, while LaTeX arrows and blank-line runs are normalised."""
     from hde.synthesis import _clean_markup
 
-    raw = "## Summary\n**ECR-214** changes chemistry `LiFePO4` $\\rightarrow$ done.\n* item one\n* item two"
+    raw = ("## Summary\n**ECR-214** changes chemistry `LiFePO4` $\\rightarrow$ done.\n"
+           "* item one\n* item two\n\n\n\n| Date | Event [1] |\n|---|---|\n| 2024-11 | approved |")
     out = _clean_markup(raw)
-    assert "**" not in out and "`" not in out and "##" not in out
-    assert "$" not in out and "→" in out
-    assert "ECR-214" in out and "LiFePO4" in out
-    assert "• item one" in out
+    assert "## Summary" in out and "**ECR-214**" in out and "`LiFePO4`" in out
+    assert "* item one" in out
+    assert "| Date | Event [1] |" in out            # tables pass through intact
+    assert "$" not in out and "→" in out            # LaTeX arrow normalised
+    assert "\n\n\n" not in out                      # blank-line runs collapsed
+
+
+def test_system_prompt_allows_markdown_and_keeps_citation_form():
+    """The synthesis prompt invites GFM (lists/tables) but keeps the bracketed
+    inline citation format the UI resolves into chips, and keeps grounding."""
+    from hde.synthesis import _system_prompt
+
+    prompt = _system_prompt([])
+    assert "markdown" in prompt and "table" in prompt
+    assert "plain prose" not in prompt
+    assert "[RECORD-1]" in prompt                   # bracketed citation example intact
+    assert "Use ONLY the provided context" in prompt  # grounding rule untouched
+    assert "table cells and list items" in prompt   # markers required inside GFM blocks
+
+
+def test_mock_first_sentence_strips_spliced_heading_marker():
+    """The mock splices a markdown chunk's opening '# Title' line mid-sentence;
+    the literal heading marker must not leak into the rendered answer."""
+    from hde.llm import _first_sentence
+
+    assert _first_sentence("# K-200 Battery System Specification\nBody text.", "t") \
+        == "K-200 Battery System Specification"
+
+
+def test_parse_synthesis_keeps_markdown_table_and_rewrites_cell_citations():
+    """A live model answering in a GFM table keeps the table, and bracketed ids
+    inside table cells still become the numeric [n] chip markers."""
+    from hde.retrieval import RetrievedChunk
+    from hde.synthesis import parse_synthesis
+
+    def chunk(aid):
+        return RetrievedChunk(
+            rowid=1, artifact_id=aid, source="plm", art_kind="change",
+            title=aid, prov_tier=1, tier_label="formal", chunk_idx=0,
+            char_start=0, char_end=10, body="Body.", score=1.0, legs=["fts"],
+        )
+
+    raw = ("The timeline is:\n\n"
+           "| Date | Event |\n|---|---|\n"
+           "| 2024-11 | ECR raised [ECR-214] |\n"
+           "| 2024-12 | ECN approved [ECN-312] |\n\n"
+           '```json\n{"claims": [], "citations": ["ECR-214", "ECN-312"], "graph_paths": []}\n```')
+    answer = parse_synthesis(raw, [chunk("ECR-214"), chunk("ECN-312")], [])
+    assert "| Date | Event |" in answer.text        # table survives the clean
+    assert "| 2024-11 | ECR raised [1] |" in answer.text
+    assert "| 2024-12 | ECN approved [2] |" in answer.text
+    assert [c.marker for c in answer.citations] == [1, 2]
+    assert all(c.grounded for c in answer.citations)

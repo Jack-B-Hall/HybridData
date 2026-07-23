@@ -21,6 +21,7 @@ context. Both return a string in the same format.
 from __future__ import annotations
 
 import json
+import re
 import urllib.request
 from dataclasses import dataclass, field
 from typing import Iterator, Protocol
@@ -132,6 +133,10 @@ def _first_sentence(body: str, title: str) -> str:
         text = ln
         break
     text = text or (lines[0] if lines else title)
+    # A markdown-source chunk often opens with its "# Title" heading line; the
+    # mock splices that mid-sentence, where a literal heading marker is noise
+    # in the rendered answer, so drop the marker (keeping the words).
+    text = re.sub(r"^\s{0,3}#{1,6}\s+", "", text)
     # First sentence, capped.
     for stop in (". ", "! ", "? ", "\n"):
         idx = text.find(stop)

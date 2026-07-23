@@ -33,8 +33,13 @@ Rules:
 3. For provenance or decision questions, lay out the chain of events step by step.
 4. For impact or dependency questions, prefer the closures and graph relationships.
 5. Prefer formal-tier sources; if a claim rests on an unverified source, say so.
-6. Be concise and factual. Lead with the answer. Write in plain prose sentences —
-   do NOT use markdown headings, bold, bullet lists, tables, or LaTeX.
+6. Be concise and factual. Lead with the answer. Write GitHub-flavoured markdown:
+   plain paragraphs by default, bullet or numbered lists where they aid scanning,
+   and a markdown table when the user asks for tabular, comparison, or timeline
+   output (or the content is clearly tabular). Use **bold** for key terms and
+   headings only sparingly. Never use images, raw HTML, or LaTeX. Keep citation
+   markers in the exact bracketed form shown in rule 2 wherever they appear,
+   including inside table cells and list items.
 
 End your response with a JSON block, on its own lines, fenced as ```json:
 {{"claims": [{{"text": "<one claim>", "citations": ["ID", ...]}}, ...],
@@ -161,22 +166,17 @@ def _strip_reasoning(raw: str) -> str:
 
 
 def _clean_markup(text: str) -> str:
-    """Normalise a model's markdown/LaTeX into clean plain text.
+    """Normalise a model's raw markup for the markdown answer view.
 
-    The answer view renders plain prose, but real models emit markdown headings,
-    bold, code spans and the odd LaTeX arrow regardless of instructions. Strip the
-    markup (keeping the words) so nothing renders as literal ``**`` or ``$\\to$``.
-    Record ids like ``P-1062`` are untouched — only paired/leading markers go.
+    Answers render as GitHub-flavoured markdown in the UI, so markdown structure
+    (lists, tables, bold, the occasional heading) is preserved as written. Only
+    non-markdown noise is normalised: the LaTeX arrows small models like to emit
+    become the plain unicode arrow, and runs of blank lines are collapsed so the
+    rendered spacing stays tight. Record ids like ``P-1062`` are untouched.
     """
     for a, b in (("$\\rightarrow$", "→"), ("\\rightarrow", "→"),
                  ("$\\to$", "→"), ("\\to", "→"), ("$\\times$", "×")):
         text = text.replace(a, b)
-    text = re.sub(r"`([^`]*)`", r"\1", text)              # inline code spans
-    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)        # **bold**
-    text = re.sub(r"__([^_]+)__", r"\1", text)            # __bold__
-    text = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", text)     # # headings
-    text = re.sub(r"(?m)^(\s*)[*\-]\s+", r"\1• ", text)   # bullets -> •
-    text = re.sub(r"\$([^$\n]*)\$", r"\1", text)          # stray inline math
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
