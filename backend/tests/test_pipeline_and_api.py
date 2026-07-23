@@ -334,3 +334,31 @@ def test_parse_synthesis_keeps_markdown_table_and_rewrites_cell_citations():
     assert "| 2024-12 | ECN approved [2] |" in answer.text
     assert [c.marker for c in answer.citations] == [1, 2]
     assert all(c.grounded for c in answer.citations)
+
+
+def test_split_meta_keeps_answer_code_fence_and_strips_metadata():
+    """A code fence a model emits mid-answer (against the prompt) must not
+    truncate the answer; only the trailing json metadata block is stripped."""
+    from hde.synthesis import _split_meta
+
+    raw = ("Check membership with:\n\n```\nSELECT id FROM records WHERE tier = 1\n```\n\n"
+           "That query lists the formal records.\n\n"
+           '```json\n{"claims": [], "citations": ["ECR-214"], "graph_paths": []}\n```')
+    prose, tail = _split_meta(raw)
+    assert "SELECT id FROM records" in prose        # answer-body fence survives
+    assert "formal records." in prose               # nothing after the fence lost
+    assert "claims" not in prose                    # metadata never shown
+    assert '"citations"' in tail
+
+
+def test_split_meta_cuts_bare_fenced_json_metadata():
+    """The safety net for a sloppily fenced metadata block: a bare ``` fence
+    followed by a JSON object still cuts, even when the keys are mangled so the
+    string markers miss them."""
+    from hde.synthesis import _split_meta
+
+    raw = ("The change was approved in November.\n\n"
+           "```\n{'Claims': [], 'Citations': ['ECR-214']}\n```")
+    prose, tail = _split_meta(raw)
+    assert prose == "The change was approved in November."
+    assert "Citations" in tail

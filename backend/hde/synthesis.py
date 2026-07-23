@@ -38,7 +38,9 @@ Rules:
    numbered lists where they aid scanning, and a markdown table when the user
    asks for tabular, comparison, or timeline output (or the content is clearly
    tabular). Use **bold** sparingly for key terms, and headings only sparingly.
-   Never use images, raw HTML, or LaTeX. Never bold or reformat a record id:
+   Never use images, raw HTML, LaTeX, or fenced code blocks in the answer
+   body (inline `code` spans are fine); the only fenced block in your whole
+   response is the final json block below. Never bold or reformat a record id:
    every record id you mention appears in the exact bracketed citation form of
    rule 2, wherever it occurs, including inside table cells and list items.
 
@@ -153,7 +155,16 @@ _THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL | re.IGNORECASE)
 
 # Markers that introduce the trailing metadata block. Small models are
 # inconsistent about fencing it, so we split on the earliest of any of these.
-_META_MARKERS = ("```json", "```", '{"claims"', '"claims"', "claims\"", '{"citations"', '"citations"')
+# A bare ``` fence is deliberately NOT a marker: answers may legitimately never
+# contain code fences per the prompt, but if a model emits one anyway we must
+# not truncate the answer there. A bare fence only counts as metadata when it
+# is followed by a JSON object opener (see _FENCED_JSON_RE).
+_META_MARKERS = ("```json", '{"claims"', '"claims"', "claims\"", '{"citations"', '"citations"')
+
+# Bare (or json-tagged) fence immediately followed by a JSON object: the
+# metadata block with its keys mangled badly enough that the string markers
+# above would miss it.
+_FENCED_JSON_RE = re.compile(r"```[ \t]*(?:json)?\s*\{")
 
 # citations/claims arrays, tolerant of missing fences/braces from small models.
 _CITATIONS_ARR = re.compile(r'"?citations"?\s*:\s*\[(.*?)\]', re.DOTALL)
@@ -196,12 +207,17 @@ def _split_meta(raw: str) -> tuple[str, str]:
 
     Robust to an unfenced or malformed metadata block: we cut at the earliest
     metadata marker so the JSON never leaks into the answer shown to the user.
+    A bare ``` fence alone does not cut (a model may disobey the prompt and put
+    a code block in the answer body); it cuts only when a JSON object follows.
     """
     cut = len(raw)
     for marker in _META_MARKERS:
         i = raw.find(marker)
         if i != -1:
             cut = min(cut, i)
+    fenced = _FENCED_JSON_RE.search(raw)
+    if fenced is not None:
+        cut = min(cut, fenced.start())
     return raw[:cut].rstrip().rstrip("`").rstrip(), raw[cut:]
 
 
