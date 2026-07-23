@@ -111,6 +111,39 @@ describe("ConversationsPage", () => {
     expect(screen.getAllByTestId("answer-body")).toHaveLength(2);
   });
 
+  it("collapses graph paths and sources behind independent toggles", async () => {
+    mocks.getConversation.mockResolvedValue({
+      id: 1, created_at: "", updated_at: "", title: "Battery thread", n_turns: 1,
+      turns: [
+        makeTurn({
+          result: makeResult({ graph_paths: ["KES-208 -TRIGGERS-> ECR-214"] }),
+        }),
+      ],
+    });
+    renderPage();
+
+    await waitFor(() => expect(screen.getAllByTestId("chat-assistant-turn")).toHaveLength(1));
+
+    // Both sections start collapsed behind their counts.
+    const pathsToggle = screen.getByTestId("graph-paths-toggle");
+    const sourcesToggle = screen.getByTestId("sources-toggle");
+    expect(pathsToggle).toHaveTextContent("1 graph path");
+    expect(screen.queryByTestId("graph-paths")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sources-panel")).not.toBeInTheDocument();
+
+    // Opening graph paths leaves sources alone.
+    fireEvent.click(pathsToggle);
+    expect(screen.getByTestId("graph-paths")).toBeInTheDocument();
+    expect(screen.queryByTestId("sources-panel")).not.toBeInTheDocument();
+
+    // And vice versa: sources opens independently, paths can close again.
+    fireEvent.click(sourcesToggle);
+    expect(screen.getByTestId("sources-panel")).toBeInTheDocument();
+    fireEvent.click(pathsToggle);
+    expect(screen.queryByTestId("graph-paths")).not.toBeInTheDocument();
+    expect(screen.getByTestId("sources-panel")).toBeInTheDocument();
+  });
+
   it("streams a new message and lands the done turn", async () => {
     mocks.chatMessageStream.mockImplementation(
       async (_id: number, message: string, handlers: ChatStreamHandlers) => {

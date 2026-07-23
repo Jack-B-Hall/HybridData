@@ -575,7 +575,7 @@ function TurnView({
               )}
             </div>
             <AnswerRenderer answer={result.answer} citations={result.citations} />
-            <GraphPathsList paths={result.graph_paths} />
+            <TurnGraphPaths paths={result.graph_paths} />
             <TurnSources sources={result.sources} />
           </div>
         )}
@@ -587,6 +587,31 @@ function TurnView({
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/** Per-turn graph paths, collapsed behind a count so the thread stays scannable. */
+function TurnGraphPaths({ paths }: { paths: string[] }) {
+  const [open, setOpen] = useState(false);
+  if (paths.length === 0) return null;
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        data-testid="graph-paths-toggle"
+        className="flex items-center gap-1.5 rounded-md px-1.5 py-1 text-xs font-medium text-ink-faint transition-colors hover:bg-canvas-raised hover:text-ink"
+      >
+        <ChevronIcon open={open} />
+        {paths.length} {paths.length === 1 ? "graph path" : "graph paths"}
+      </button>
+      {open && (
+        <div className="mt-3">
+          <GraphPathsList paths={paths} />
+        </div>
+      )}
     </div>
   );
 }
