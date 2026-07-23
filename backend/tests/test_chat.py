@@ -35,6 +35,13 @@ def test_needs_rewrite_standalone_question():
     assert chat.needs_rewrite("why was the battery chemistry changed to LiFePO4?", ID_RE) is False
 
 
+def test_needs_rewrite_representation_request():
+    # A re-presentation request reworks the previous answer, so it is a
+    # follow-up even with no pronoun and enough words to look standalone.
+    assert chat.needs_rewrite("can you put the timeline into a table format", ID_RE) is True
+    assert chat.needs_rewrite("summarise the key changes as bullets please", ID_RE) is True
+
+
 def test_needs_rewrite_id_anchored_message():
     # A record id anchors the message even when it also contains a pronoun.
     assert chat.needs_rewrite("what does ECR-214 change and why does it matter?", ID_RE) is False

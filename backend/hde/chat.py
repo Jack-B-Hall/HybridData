@@ -39,6 +39,18 @@ REFERENCE_WORDS = frozenset({
     "again", "more", "else", "previous", "earlier", "above", "former", "latter",
 })
 
+#: Words that mark a re-presentation request ("put the timeline into a table
+#: format", "summarise as bullets"). Such a message operates on the previous
+#: answer, so it implicitly references earlier turns even when it contains no
+#: pronoun and is long enough to look standalone. False positives are safe:
+#: an unnecessary rewrite keeps the user's intent and still faces the same
+#: fresh retrieval and deterministic gate.
+REPHRASE_WORDS = frozenset({
+    "table", "tabular", "format", "reformat", "rephrase", "reword",
+    "summarise", "summarize", "summary", "shorten", "shorter", "simplify",
+    "bullet", "bullets", "condense",
+})
+
 CONDENSE_SYSTEM_PROMPT = (
     "You rewrite the user's newest chat message into ONE standalone question "
     "that can be understood without the conversation. Resolve pronouns and "
@@ -79,16 +91,18 @@ def needs_rewrite(message: str, id_re: "re.Pattern[str]") -> bool:
     """Heuristic: does this message likely depend on earlier turns?
 
     A message that names a record id is anchored and needs no rewrite. Any
-    reference word marks it as a follow-up. A short elliptical message ("and
-    the motors?") is also treated as a follow-up even without a pronoun. The
-    heuristic is conservative in the safe direction: an unnecessary rewrite of
-    a standalone question costs one model call, while the rewritten question
-    still faces the same fresh retrieval and the same deterministic gate.
+    reference word marks it as a follow-up, as does a re-presentation request
+    ("put the timeline into a table format"), which by nature reworks the
+    previous answer. A short elliptical message ("and the motors?") is also
+    treated as a follow-up even without a pronoun. The heuristic is
+    conservative in the safe direction: an unnecessary rewrite of a standalone
+    question costs one model call, while the rewritten question still faces
+    the same fresh retrieval and the same deterministic gate.
     """
     if id_re.search(message):
         return False
     words = re.findall(r"[a-z']+", message.lower())
-    if any(w in REFERENCE_WORDS for w in words):
+    if any(w in REFERENCE_WORDS or w in REPHRASE_WORDS for w in words):
         return True
     return len(words) < 4
 

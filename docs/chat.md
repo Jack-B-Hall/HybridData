@@ -37,7 +37,9 @@ as a subtle "searched for: ..." line, so the behaviour is never hidden.
 
 * A message that is already standalone (names a record id, or is a full
   question with no reference words like *it / that / them*) passes through
-  untouched (`rewrite_method: "raw"`).
+  untouched (`rewrite_method: "raw"`). Re-presentation requests ("put the
+  timeline into a table format", "summarise as bullets") count as follow-ups
+  even without a pronoun, since they rework the previous answer.
 * With a real backend (`ollama` / `anthropic`) the rewrite is produced by the
   configured answer model, time-boxed by `chat.condense_timeout_s`. On timeout
   or any failure the raw message is used as-is: the fallback is safe because
